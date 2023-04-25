@@ -16,5 +16,15 @@
       "name": "Svetlana",
       "role": "User"
     }
+  },
+  {
+    "chatId": 484518144,
+    "enableNotifications": false,
+
+    "userInfo": {
+      "name": "???",
+      "role": "User"
+    }
   }
 ]
+

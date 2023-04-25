@@ -1,6 +1,6 @@
 package com.company.app.telegram.component;
 
-import com.company.app.telegram.component.api.TelegramService;
+import com.company.app.telegram.component.api.TelegramDistributionHub;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,9 +8,13 @@ import org.springframework.stereotype.Component;
 public class TelegramFacade {
 
 	@Autowired
-	private TelegramService telegramService;
+	private TelegramDistributionHub telegramDistributionHub;
 
-	public void write(Object message) {
-		telegramService.write(message);
+	public void writeToEveryone(Object message) {
+		telegramDistributionHub.writeToEveryone(message);
+	}
+
+	public void writeToTargetChat(Long chatId, Object message) {
+		telegramDistributionHub.writeToTargetChat(chatId, message);
 	}
 }

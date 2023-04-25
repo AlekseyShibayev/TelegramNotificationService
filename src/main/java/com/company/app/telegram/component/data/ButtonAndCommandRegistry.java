@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * todo: а пока так
+ * todo: сделать солидно, а пока так
  */
 public class ButtonAndCommandRegistry {
 
@@ -20,7 +20,7 @@ public class ButtonAndCommandRegistry {
 
 	private static final InlineKeyboardButton TG_BUTTON = new InlineKeyboardButton("Отключить уведомления");
 	private static final InlineKeyboardButton WB_BUTTON = new InlineKeyboardButton("Добавить лоты wildberries (в разработке)");
-	private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Текущий курс aliexpress");
+	private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс aliexpress");
 
 	public static InlineKeyboardMarkup inlineMarkup() {
 		TG_BUTTON.setCallbackData("TG");

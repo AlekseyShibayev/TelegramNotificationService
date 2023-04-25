@@ -22,13 +22,21 @@ public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
 	ChatService chatService;
 
 	@Override
-	public void work(Object message) {
-		log.debug("Пишу в телеграм: [{}].", message);
+	public void writeToEveryone(Object message) {
+		log.debug("Пробую написать в телеграм: [{}].", message);
 
 		chatService.getAll().stream()
 				.filter(Chat::isEnableNotifications)
 				.peek(chat -> historyService.save(chat, String.valueOf(message)))
 				.map(chat -> SendMessage.builder().text(message.toString()).chatId(chat.getChatId().toString()).build())
 				.forEach(telegramBotConfig::write);
+	}
+
+	@Override
+	public void writeToTargetChat(Long chatId, Object message) {
+		log.debug("Пробую написать в телеграм [{}]: [{}].", chatId, message);
+		historyService.save(chatId, String.valueOf(message));
+
+		telegramBotConfig.write(SendMessage.builder().text(message.toString()).chatId(chatId).build());
 	}
 }

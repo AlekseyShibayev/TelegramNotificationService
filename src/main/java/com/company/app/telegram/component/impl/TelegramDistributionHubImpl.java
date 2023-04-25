@@ -2,13 +2,13 @@ package com.company.app.telegram.component.impl;
 
 import com.company.app.telegram.component.api.IncomingMessageHandler;
 import com.company.app.telegram.component.api.OutgoingMessageHandler;
-import com.company.app.telegram.component.api.TelegramService;
+import com.company.app.telegram.component.api.TelegramDistributionHub;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
-public class TelegramServiceImpl implements TelegramService {
+public class TelegramDistributionHubImpl implements TelegramDistributionHub {
 
 	@Autowired
 	IncomingMessageHandler incomingMessageHandler;
@@ -21,7 +21,12 @@ public class TelegramServiceImpl implements TelegramService {
 	}
 
 	@Override
-	public void write(Object message) {
-		outgoingMessageHandler.work(message);
+	public void writeToEveryone(Object message) {
+		outgoingMessageHandler.writeToEveryone(message);
+	}
+
+	@Override
+	public void writeToTargetChat(Long chatId, Object message) {
+		outgoingMessageHandler.writeToTargetChat(chatId, message);
 	}
 }

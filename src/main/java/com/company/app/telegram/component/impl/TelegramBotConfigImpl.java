@@ -1,7 +1,7 @@
 package com.company.app.telegram.component.impl;
 
 import com.company.app.telegram.component.api.TelegramBotConfig;
-import com.company.app.telegram.component.api.TelegramService;
+import com.company.app.telegram.component.api.TelegramDistributionHub;
 import com.company.app.telegram.component.data.ButtonAndCommandRegistry;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 	private String token;
 
 	@Autowired
-	private TelegramService telegramService;
+	private TelegramDistributionHub telegramService;
 
 	@EventListener({ContextRefreshedEvent.class})
 	public void init() throws TelegramApiException {

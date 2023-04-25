@@ -54,13 +54,13 @@ public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
 		log.debug("Читаю из чата [{}] сообщение [{}].", chatId, text);
 		historyService.save(chat, text);
 
-		chatActivationService.fullActivate(chat);
+		chatActivationService.doFullActivate(chat);
 	}
 
 	private void showCommands(Update update) {
 		SendMessage sendMessage = new SendMessage();
 		sendMessage.setChatId(update.getMessage().getChatId());
-		sendMessage.setText("Выбирай:");
+		sendMessage.setText("Доступны следующие команды:");
 		sendMessage.setReplyMarkup(ButtonAndCommandRegistry.inlineMarkup());
 		telegramBotConfig.write(sendMessage);
 	}

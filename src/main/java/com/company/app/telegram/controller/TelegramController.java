@@ -1,12 +1,10 @@
 package com.company.app.telegram.controller;
 
 import com.company.app.telegram.component.TelegramFacade;
+import com.company.app.telegram.dto.TargetMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/telegram")
@@ -20,7 +18,13 @@ public class TelegramController {
 	 */
 	@GetMapping(value = "/say", produces = "application/json")
 	public ResponseEntity<Boolean> say(@RequestParam String message) {
-		telegramFacade.write(message);
+		telegramFacade.writeToEveryone(message);
+		return ResponseEntity.ok(true);
+	}
+
+	@PostMapping(value = "/say", produces = "application/json")
+	public ResponseEntity<Boolean> say(@RequestBody TargetMessage targetMessage) {
+		telegramFacade.writeToTargetChat(targetMessage.getChatId(), targetMessage.getMessage());
 		return ResponseEntity.ok(true);
 	}
 }

@@ -1,12 +1,15 @@
 package com.company.app.telegram.component.impl;
 
+import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.telegram.component.api.Binder;
 import com.company.app.telegram.component.data.BinderContainer;
 import com.company.app.telegram.entity.Chat;
 import com.company.app.telegram.service.api.ChatService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class TelegramBinder implements Binder {
 
@@ -14,6 +17,8 @@ public class TelegramBinder implements Binder {
 
 	@Autowired
 	ChatService chatService;
+	@Autowired
+	TelegramFacade telegramFacade;
 
 	@Override
 	public String getType() {
@@ -24,7 +29,18 @@ public class TelegramBinder implements Binder {
 	public void bind(BinderContainer binderContainer) {
 		Chat chat = binderContainer.getChat();
 		chat.setEnableNotifications(false);
+
 		chatService.update(chat);
+
+		notify(chat);
+	}
+
+	private void notify(Chat chat) {
+		String message = "Отключение уведомлений выполнено.";
+		if (log.isDebugEnabled()) {
+			log.debug("[{}]: Отключение уведомлений выполнено.", chat.getChatId());
+		}
+		telegramFacade.writeToTargetChat(chat.getChatId(), message);
 	}
 
 //	@Override

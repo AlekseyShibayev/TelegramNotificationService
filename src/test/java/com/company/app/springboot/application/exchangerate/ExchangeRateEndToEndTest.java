@@ -75,7 +75,7 @@ class ExchangeRateEndToEndTest extends ApplicationSpringBootTestContext {
 
 	private static BinderContainer createBinderContainer() {
 		return BinderContainer.builder()
-				.chat(Chat.builder().chatId(1L).build())
+				.chat(Chat.builder().chatId(653606407L).build())
 				.message("EX")
 				.build();
 	}

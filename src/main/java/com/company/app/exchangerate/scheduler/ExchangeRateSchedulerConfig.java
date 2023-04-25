@@ -26,6 +26,6 @@ public class ExchangeRateSchedulerConfig {
 		if (log.isDebugEnabled()) {
 			log.debug("Определён курс: [{}].", notification);
 		}
-		telegramFacade.write(notification);
+		telegramFacade.writeToEveryone(notification);
 	}
 }

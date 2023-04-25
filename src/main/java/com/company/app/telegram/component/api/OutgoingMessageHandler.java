@@ -5,5 +5,7 @@ package com.company.app.telegram.component.api;
  */
 public interface OutgoingMessageHandler {
 
-	void work(Object message);
+	void writeToEveryone(Object message);
+
+	void writeToTargetChat(Long chatId, Object message);
 }

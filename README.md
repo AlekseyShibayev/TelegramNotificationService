@@ -1,8 +1,9 @@
 # Учебно-прикладной проект TelegramNotificationService
 
-  * [Ссылка на себя](https://github.com/AlekseyShibayev/TelegramNotificationService)
+  * [Ссылка на этот проект](https://github.com/AlekseyShibayev/TelegramNotificationService)
   * Проект использует: [telegram-bot-spring-boot-starter](https://github.com/AlekseyShibayev/telegram-bot-spring-boot-starter)
-  * Ссылка на различные обучающие курсы: [TODO]
+  * [Ссылка на различные обучающие курсы:](https://github.com/AlekseyShibayev/additional-education-info)
+  * как пользоваться? найти бота https://t.me/fixeers_bot или @fixeers_bot и написать ему что-нибудь
 
 ## Цели проекта:
 ### 1. Учебная:
@@ -34,9 +35,6 @@
   * есть возможность запуска в Docker
   * перешел с JUnit4 на JUnit5
 
-## Как запустить/пользоваться?
-  * если приложение уже запущено, то найти бота https://t.me/fixeers_bot или @fixeers_bot и написать ему любую строку
-
 ## Вечно забываемые команды docker:
 1. docker build --tag "app:0" .
 2. docker save -o app.tar app:0
@@ -45,6 +43,9 @@
 
 ## Маленькая jira (todo'шки, мысли):
 1. Простые:
+
+  - добавить управление подписками
+  - добавить добавление лотов вб
 
   - использовать бд PostgreSQL, H2 использовать в тестах
   - прикрутить flyway, делать DDL не авто, а скриптами

@@ -2,9 +2,11 @@ package com.company.app.telegram.component.api;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public interface TelegramService {
+public interface TelegramDistributionHub {
 
 	void read(Update update);
 
-	void write(Object message);
+	void writeToEveryone(Object message);
+
+	void writeToTargetChat(Long chatId, Object message);
 }

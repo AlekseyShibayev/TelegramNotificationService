@@ -49,7 +49,7 @@ class SmokeTest extends ApplicationSpringBootTestContext {
 
 	@Test
 	void notificationServiceSmokeTest() {
-		telegramFacade.write("1. Тестовое приложение поднялось.");
+		telegramFacade.writeToEveryone("1. Тестовое приложение поднялось.");
 
 		List<History> all = historyRepository.findAll();
 		Assertions.assertNotNull(all);

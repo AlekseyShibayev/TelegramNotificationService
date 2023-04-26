@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -17,8 +18,10 @@ import java.net.http.HttpResponse;
 @Component
 public class AliexpressReceiverImpl implements AliexpressReceiver {
 
+	@Value("${exchangeRate.aliexpressUrl}")
+	private String url;
+
 	private static final String FILE_NAME = "exchangerate/aliexpress_mock.json";
-	private static final String URL = "https://aliexpress.ru/aer-jsonapi/bx/recommendations/recommend";
 
 	@Autowired
 	DataExtractorTool dataExtractorTool;
@@ -29,7 +32,7 @@ public class AliexpressReceiverImpl implements AliexpressReceiver {
 		HttpClient client = HttpClient.newHttpClient();
 		String mockAsString = dataExtractorTool.getFileAsString(FILE_NAME);
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(URL))
+				.uri(URI.create(url))
 				.POST(HttpRequest.BodyPublishers.ofString(mockAsString))
 				.build();
 		HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());

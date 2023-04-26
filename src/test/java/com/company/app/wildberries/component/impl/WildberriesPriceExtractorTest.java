@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class WildberriesPriceExtractorTest {
 
-	private static final String FILE_NAME = "wildberries/WildberriesHtmlResponseExample.html";
+	private static final String FILE_NAME = "wildberries/response_example.json";
 
 	private WildberriesPriceExtractorImpl wildberriesPriceExtractor;
 	private DataExtractorToolImpl dataExtractorService;

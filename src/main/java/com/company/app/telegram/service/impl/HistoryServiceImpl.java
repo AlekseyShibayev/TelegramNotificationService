@@ -21,6 +21,12 @@ public class HistoryServiceImpl implements HistoryService {
 
 	@Transactional
 	@Override
+	public void save(History history) {
+		historyRepository.save(history);
+	}
+
+	@Transactional
+	@Override
 	public void save(String text) {
 		historyRepository.save(History.builder()
 				.message(text)

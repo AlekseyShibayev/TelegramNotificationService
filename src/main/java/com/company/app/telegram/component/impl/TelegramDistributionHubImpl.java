@@ -17,16 +17,16 @@ public class TelegramDistributionHubImpl implements TelegramDistributionHub {
 
 	@Override
 	public void read(Update update) {
-		incomingMessageHandler.work(update);
+		incomingMessageHandler.process(update);
 	}
 
 	@Override
 	public void writeToEveryone(Object message) {
-		outgoingMessageHandler.writeToEveryone(message);
+		outgoingMessageHandler.sendToEveryone(message);
 	}
 
 	@Override
 	public void writeToTargetChat(Long chatId, Object message) {
-		outgoingMessageHandler.writeToTargetChat(chatId, message);
+		outgoingMessageHandler.sendToTargetChat(chatId, message);
 	}
 }

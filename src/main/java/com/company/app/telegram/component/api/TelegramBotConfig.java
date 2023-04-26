@@ -5,4 +5,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 public interface TelegramBotConfig {
 
 	void write(SendMessage sendMessage);
+
+	String getName();
 }

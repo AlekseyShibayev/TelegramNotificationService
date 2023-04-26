@@ -59,4 +59,9 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 	public void write(SendMessage sendMessage) {
 		this.execute(sendMessage);
 	}
+
+	@Override
+	public String getName() {
+		return this.getBotUsername();
+	}
 }

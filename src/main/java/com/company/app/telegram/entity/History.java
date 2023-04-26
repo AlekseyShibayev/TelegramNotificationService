@@ -20,13 +20,19 @@ public class History {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
+	@ManyToOne
+	@JoinColumn(name = "CHAT_ID", nullable = false)
+	private Chat chat;
+
+	@Column(name = "SOURCE")
+	private String source;
+
+	@Column(name = "TARGET")
+	private String target;
+
 	@Column(name = "MESSAGE")
 	private String message;
 
 	@Column(name = "DATE")
 	private Date date;
-
-	@ManyToOne
-	@JoinColumn(name = "CHAT_ID", nullable = false)
-	private Chat chat;
 }

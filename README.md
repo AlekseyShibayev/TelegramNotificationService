@@ -65,3 +65,12 @@
   - в core, сделать админку для сброса спринг кеш
   - прикрутить kafka + ELK
   - посмотреть Debezium(конфиги) + Redis(кеш)
+
+## селекты для бд
+select * from CHAT;
+select * from HISTORY;
+select * from USER_INFO;
+select * from CHATS_SUBSCRIPTIONS;
+select * from SUBSCRIPTION;
+select * from LOT;
+select * from EXCHANGE_RATE;

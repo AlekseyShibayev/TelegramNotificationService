@@ -44,11 +44,6 @@ public class ChatActivationServiceImpl implements ChatActivationService {
 	private void notify(Chat chat, Set<Subscription> subscriptions) {
 		String message = String.format("Полная активация выполнена. Чат [%s] подписан на следующие рассылки: [%s].",
 				chat.getChatId(), subscriptions.stream().map(Subscription::getType).collect(Collectors.toList()));
-
-		if (log.isDebugEnabled()) {
-			log.debug(message);
-		}
-
 		telegramFacade.writeToTargetChat(chat.getChatId(), message);
 	}
 }

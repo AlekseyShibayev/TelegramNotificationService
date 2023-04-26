@@ -1,6 +1,7 @@
 package com.company.app.exchangerate.component.impl;
 
 import com.company.app.core.tool.api.DataExtractorTool;
+import com.company.app.exchangerate.component.api.AliexpressExchangeRateExtractor;
 import com.company.app.exchangerate.component.api.ExchangeRateExtractor;
 import com.company.app.exchangerate.entity.ExchangeRate;
 import com.company.app.exchangerate.service.ExchangeRateService;
@@ -29,12 +30,14 @@ public class ExchangeRateExtractorImpl implements ExchangeRateExtractor {
 	private DataExtractorTool dataExtractorTool;
 	@Autowired
 	private ExchangeRateService exchangeRateService;
+	@Autowired
+	private AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
 
 	@SneakyThrows
 	@Override
 	public ExchangeRate extract() {
 		ExchangeRate exchange = ExchangeRate.builder()
-				.aliexpressExchangeRate(getExchangeRate(dataExtractorTool.getHtmlResponse(aliexpressUrl)))
+				.aliexpressExchangeRate(aliexpressExchangeRateExtractor.extract())
 				.creationDate(new Date())
 				.build();
 		exchangeRateService.create(exchange);

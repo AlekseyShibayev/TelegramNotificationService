@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class ExchangeRateExtractorImplTest {
 
-	private static final String FILE_NAME = "exchangeRate/AliexpressUsdResponseExample.html";
+	private static final String FILE_NAME = "exchangerate/AliexpressUsdResponseExample.html";
 
 	private ExchangeRateExtractorImpl exchangeExtractorService;
 	private DataExtractorToolImpl dataExtractorService;

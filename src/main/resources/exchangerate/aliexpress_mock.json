@@ -1,0 +1,10 @@
+{
+  "scenario": "pcDetailBottomMoreThisSeller",
+  "pageSize": 9,
+  "pageIndex": 0,
+  "scenarioParams": {
+    "sellerId": "239723938",
+    "productId": "1005001763324443",
+    "currentItemList": "1005001763324443"
+  }
+}

@@ -1,6 +1,8 @@
 package com.company.app.wildberries.component.impl;
 
 import com.company.app.core.tool.impl.DataExtractorToolImpl;
+import com.company.app.core.tool.impl.JsonSerializationToolImpl;
+import com.company.app.wildberries.component.data.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +18,18 @@ class WildberriesPriceExtractorTest {
 	public void init() {
 		wildberriesPriceExtractor = new WildberriesPriceExtractorImpl();
 		dataExtractorService = new DataExtractorToolImpl();
-		wildberriesPriceExtractor.setDataExtractorService(dataExtractorService);
 	}
 
 	@Test
 	void extract() {
-		String fileAsString = dataExtractorService.getFileAsString(FILE_NAME);
-		Assertions.assertEquals("109900", wildberriesPriceExtractor.extract(fileAsString, "43409221"));
+		WildberriesPriceExtractorImpl wildberriesPriceExtractor = new WildberriesPriceExtractorImpl();
+		DataExtractorToolImpl dataExtractorTool = new DataExtractorToolImpl();
+		JsonSerializationToolImpl<Response> responseJsonSerializationTool = new JsonSerializationToolImpl<>();
+		wildberriesPriceExtractor.setJsonSerializationTool(responseJsonSerializationTool);
+
+		String fileAsString = dataExtractorTool.getFileAsString(FILE_NAME);
+		String price = wildberriesPriceExtractor.extract(fileAsString, "43409221");
+
+		Assertions.assertEquals("109900", price);
 	}
 }

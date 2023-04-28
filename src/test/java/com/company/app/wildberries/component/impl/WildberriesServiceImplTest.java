@@ -4,6 +4,7 @@ import com.company.app.core.tool.api.DataExtractorTool;
 import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.core.tool.impl.DataExtractorToolImpl;
 import com.company.app.core.tool.impl.JsonSerializationToolImpl;
+import com.company.app.wildberries.component.data.Response;
 import com.company.app.wildberries.entity.Lot;
 import com.company.app.wildberries.repository.LotRepository;
 import org.junit.jupiter.api.Assertions;
@@ -30,13 +31,15 @@ class WildberriesServiceImplTest {
 
 		dataExtractorService = new DataExtractorToolImpl();
 		wildberriesPriceExtractor = new WildberriesPriceExtractorImpl();
+		JsonSerializationToolImpl<Response> responseJsonSerializationTool = new JsonSerializationToolImpl<>();
+		wildberriesPriceExtractor.setJsonSerializationTool(responseJsonSerializationTool);
+
 		lotRepository = Mockito.mock(LotRepository.class);
 
 		wildberriesService.setDataExtractorTool(dataExtractorService);
 		wildberriesService.setWildberriesPriceExtractor(wildberriesPriceExtractor);
 		wildberriesService.setLotRepository(lotRepository);
 
-		wildberriesPriceExtractor.setDataExtractorService(dataExtractorService);
 		serializationService = new JsonSerializationToolImpl<>();
 	}
 

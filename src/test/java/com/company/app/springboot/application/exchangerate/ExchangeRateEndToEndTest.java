@@ -1,12 +1,12 @@
 package com.company.app.springboot.application.exchangerate;
 
-import com.company.app.exchangerate.component.api.ExchangeRateBinder;
+import com.company.app.telegram.component.binder.api.ExchangeRateBinder;
 import com.company.app.exchangerate.controller.ExchangeRateController;
 import com.company.app.exchangerate.entity.ExchangeRate;
 import com.company.app.exchangerate.repository.ExchangeRepository;
 import com.company.app.exchangerate.service.ExchangeRateService;
 import com.company.app.springboot.application.ApplicationSpringBootTestContext;
-import com.company.app.telegram.component.data.BinderContainer;
+import com.company.app.telegram.component.binder.BinderContainer;
 import com.company.app.telegram.entity.Chat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

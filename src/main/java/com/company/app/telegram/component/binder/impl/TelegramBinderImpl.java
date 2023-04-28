@@ -1,8 +1,8 @@
-package com.company.app.telegram.component.impl;
+package com.company.app.telegram.component.binder.impl;
 
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.component.api.Binder;
-import com.company.app.telegram.component.data.BinderContainer;
+import com.company.app.telegram.component.binder.BinderContainer;
+import com.company.app.telegram.component.binder.api.TelegramBinder;
 import com.company.app.telegram.entity.Chat;
 import com.company.app.telegram.service.api.ChatService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class TelegramBinder implements Binder {
+public class TelegramBinderImpl implements TelegramBinder {
 
 	private static final String TYPE = "TG";
 

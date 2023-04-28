@@ -1,9 +1,9 @@
-package com.company.app.exchangerate.component.impl;
+package com.company.app.telegram.component.binder.impl;
 
-import com.company.app.exchangerate.component.api.ExchangeRateBinder;
 import com.company.app.exchangerate.entity.ExchangeRate;
 import com.company.app.exchangerate.service.ExchangeRateService;
-import com.company.app.telegram.component.data.BinderContainer;
+import com.company.app.telegram.component.binder.BinderContainer;
+import com.company.app.telegram.component.binder.api.ExchangeRateBinder;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.dto.TargetMessage;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
-package com.company.app.wildberries.component.impl;
+package com.company.app.telegram.component.binder.impl;
 
 import com.company.app.core.tool.api.JsonSerializationTool;
-import com.company.app.telegram.component.data.BinderContainer;
-import com.company.app.wildberries.component.api.WildberriesBinder;
+import com.company.app.telegram.component.binder.BinderContainer;
+import com.company.app.telegram.component.binder.api.WildberriesBinder;
 import com.company.app.wildberries.entity.Lot;
 import com.company.app.wildberries.repository.LotRepository;
 import lombok.extern.slf4j.Slf4j;

@@ -11,7 +11,7 @@ class ApplicationTest extends ApplicationSpringBootTestContext {
 	ApplicationContext applicationContext;
 
 	@Test
-	void context_mustRise() {
+	void context_must_be_test() {
 		Assertions.assertNotNull(applicationContext);
 	}
 }

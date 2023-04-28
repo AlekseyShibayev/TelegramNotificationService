@@ -13,14 +13,16 @@ import java.util.List;
 public class ButtonAndCommandRegistry {
 
 	public static final List<BotCommand> LIST_OF_COMMANDS = List.of(
-			new BotCommand("/tg", "TG"),
-			new BotCommand("/wb", "WB"),
-			new BotCommand("/ex", "EX")
+			new BotCommand("/tg", "TG")
+			, new BotCommand("/wb", "WB")
+			, new BotCommand("/ex", "EX")
+			, new BotCommand("/test", "TEST")
 	);
 
 	private static final InlineKeyboardButton TG_BUTTON = new InlineKeyboardButton("Отключить уведомления");
 	private static final InlineKeyboardButton WB_BUTTON = new InlineKeyboardButton("Добавить лоты wildberries (в разработке)");
 	private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс aliexpress");
+
 
 	public static InlineKeyboardMarkup inlineMarkup() {
 		TG_BUTTON.setCallbackData("TG");

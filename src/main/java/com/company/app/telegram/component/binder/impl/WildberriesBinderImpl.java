@@ -40,6 +40,7 @@ public class WildberriesBinderImpl implements WildberriesBinder {
 		} else {
 			String message = foundItemDtoList.stream()
 					.map(FoundItemDto::getLink)
+					.distinct()
 					.reduce((s, s2) -> s + "\n" + s2)
 					.orElseThrow();
 			telegramFacade.writeToTargetChat(chat.getChatId(), message);

@@ -12,8 +12,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -37,6 +38,9 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 		TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
 		botsApi.registerBot(this);
 		log.info("**********     телеграм бот создан     **********");
+
+//		this.execute(GetUpdates.builder().build()); // пока не ясно о каких updates идет речь
+//		log.info("**********     обновления получены     **********");
 	}
 
 	@Override
@@ -56,8 +60,8 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 
 	@SneakyThrows
 	@Override
-	public void write(SendMessage sendMessage) {
-		this.execute(sendMessage);
+	public void write(BotApiMethod botApiMethod) {
+		this.execute(botApiMethod);
 	}
 
 	@Override

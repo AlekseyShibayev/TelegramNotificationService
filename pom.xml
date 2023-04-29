@@ -70,6 +70,11 @@
 			<artifactId>telegrambotsextensions</artifactId>
 			<version>${telegram.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.pengrad</groupId>
+			<artifactId>java-telegram-bot-api</artifactId>
+			<version>6.7.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.json</groupId>

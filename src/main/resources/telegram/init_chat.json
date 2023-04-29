@@ -7,24 +7,6 @@
       "name": "Aleksey",
       "role": "Owner"
     }
-  },
-  {
-    "chatId": 1974712519,
-    "enableNotifications": false,
-
-    "userInfo": {
-      "name": "Svetlana",
-      "role": "User"
-    }
-  },
-  {
-    "chatId": 484518144,
-    "enableNotifications": false,
-
-    "userInfo": {
-      "name": "???",
-      "role": "User"
-    }
   }
 ]
 

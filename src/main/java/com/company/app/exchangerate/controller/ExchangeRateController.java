@@ -22,4 +22,12 @@ public class ExchangeRateController {
 	public ResponseEntity<ExchangeRate> get() {
 		return ResponseEntity.ok(exchangeRateFacade.extract());
 	}
+
+	/**
+	 * пример запроса: http://localhost:8080/exchangeRate/get
+	 */
+	@GetMapping(value = "/getLast", produces = "application/json")
+	public ResponseEntity<ExchangeRate> getLast() {
+		return ResponseEntity.ok(exchangeRateFacade.getLast());
+	}
 }

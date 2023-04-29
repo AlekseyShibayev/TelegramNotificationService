@@ -41,8 +41,6 @@ public class BinderExecutorImpl implements BinderExecutor {
 
 	@Override
 	public void execute(Chat chat, String text) {
-//		String binderType = Arrays.stream(text.split(" ")).findFirst().orElseThrow();
-
 		Binder binder = Optional.ofNullable(binders.get(text))
 				.orElseThrow(() -> new IllegalArgumentException(String.format("Не смог вытащить тип binderType из [%s].", text)));
 

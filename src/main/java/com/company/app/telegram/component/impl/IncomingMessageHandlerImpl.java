@@ -4,7 +4,7 @@ import com.company.app.telegram.component.api.BinderExecutor;
 import com.company.app.telegram.component.api.ChatActivationService;
 import com.company.app.telegram.component.api.IncomingMessageHandler;
 import com.company.app.telegram.component.api.TelegramBotConfig;
-import com.company.app.telegram.component.data.ButtonAndCommandRegistry;
+import com.company.app.telegram.component.data.ButtonFactory;
 import com.company.app.telegram.entity.Chat;
 import com.company.app.telegram.entity.History;
 import com.company.app.telegram.service.api.ChatService;
@@ -57,14 +57,14 @@ public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
 		Long chatId = message.getChatId();
 		Chat chat = chatService.getChatOrCreateIfNotExist(chatId);
 		saveHistory(chat, message.getText());
-		chatActivationService.doFullActivate(chat);
+		chatActivationService.activate(chat);
 	}
 
 	private void showCommands(Update update) {
 		SendMessage sendMessage = new SendMessage();
 		sendMessage.setChatId(update.getMessage().getChatId());
 		sendMessage.setText("Доступны следующие команды:");
-		sendMessage.setReplyMarkup(ButtonAndCommandRegistry.inlineMarkup());
+		sendMessage.setReplyMarkup(ButtonFactory.inlineMarkup());
 		telegramBotConfig.write(sendMessage);
 	}
 

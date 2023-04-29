@@ -7,5 +7,7 @@ import com.company.app.telegram.entity.Chat;
  */
 public interface ChatActivationService {
 
-	void doFullActivate(Chat chat);
+	void activate(Chat chat);
+
+	void deactivate(Chat chat);
 }

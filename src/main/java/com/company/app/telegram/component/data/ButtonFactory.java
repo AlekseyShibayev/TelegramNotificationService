@@ -1,34 +1,27 @@
 package com.company.app.telegram.component.data;
 
-import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * todo: сделать солидно, а пока так
- */
-public class ButtonAndCommandRegistry {
+public class ButtonFactory {
 
-	public static final List<BotCommand> LIST_OF_COMMANDS = List.of(
-			new BotCommand("/tg", "TG"),
-			new BotCommand("/wb", "WB"),
-			new BotCommand("/ex", "EX")
-	);
-
-	private static final InlineKeyboardButton TG_BUTTON = new InlineKeyboardButton("Отключить уведомления");
+	private static final InlineKeyboardButton TG_OFF_BUTTON = new InlineKeyboardButton("Отключить уведомления");
+	private static final InlineKeyboardButton TG_ON_BUTTON = new InlineKeyboardButton("Включить уведомления");
 	private static final InlineKeyboardButton WB_BUTTON = new InlineKeyboardButton("Добавить лоты wildberries (в разработке)");
-	private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс aliexpress");
+	private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс");
 
 	public static InlineKeyboardMarkup inlineMarkup() {
-		TG_BUTTON.setCallbackData("TG");
+		TG_OFF_BUTTON.setCallbackData("TG_OFF");
+		TG_ON_BUTTON.setCallbackData("TG_ON");
 		WB_BUTTON.setCallbackData("WB");
 		ER_BUTTON.setCallbackData("EX");
 
 		List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-		rowsInLine.add(List.of(TG_BUTTON));
+		rowsInLine.add(List.of(TG_OFF_BUTTON));
+		rowsInLine.add(List.of(TG_ON_BUTTON));
 		rowsInLine.add(List.of(WB_BUTTON));
 		rowsInLine.add(List.of(ER_BUTTON));
 

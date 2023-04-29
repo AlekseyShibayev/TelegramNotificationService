@@ -2,7 +2,6 @@ package com.company.app.telegram.component.impl;
 
 import com.company.app.telegram.component.api.TelegramBotConfig;
 import com.company.app.telegram.component.api.TelegramDistributionHub;
-import com.company.app.telegram.component.data.ButtonAndCommandRegistry;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,13 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
+import java.io.Serializable;
 
 @Slf4j
 @Component
@@ -34,13 +34,11 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 
 	@EventListener({ContextRefreshedEvent.class})
 	public void init() throws TelegramApiException {
-		this.execute(new SetMyCommands(ButtonAndCommandRegistry.LIST_OF_COMMANDS, new BotCommandScopeDefault(), null));
+//		this.execute(new SetMyCommands(LIST_OF_COMMANDS, new BotCommandScopeDefault(), null));
 		TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
 		botsApi.registerBot(this);
 		log.info("**********     телеграм бот создан     **********");
-
 //		this.execute(GetUpdates.builder().build()); // пока не ясно о каких updates идет речь
-//		log.info("**********     обновления получены     **********");
 	}
 
 	@Override
@@ -60,7 +58,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 
 	@SneakyThrows
 	@Override
-	public void write(BotApiMethod botApiMethod) {
+	public void write(BotApiMethod<? extends Serializable> botApiMethod) {
 		this.execute(botApiMethod);
 	}
 

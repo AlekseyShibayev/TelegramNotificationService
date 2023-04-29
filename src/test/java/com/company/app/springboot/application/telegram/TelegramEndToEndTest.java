@@ -2,7 +2,7 @@ package com.company.app.springboot.application.telegram;
 
 import com.company.app.springboot.application.ApplicationSpringBootTestContext;
 import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.impl.TelegramBinderImpl;
+import com.company.app.telegram.component.binder.impl.TelegramOffBinderImpl;
 import com.company.app.telegram.controller.ChatController;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.dto.ChatDto;
@@ -30,7 +30,7 @@ class TelegramEndToEndTest extends ApplicationSpringBootTestContext {
 	@Autowired
 	ChatService chatService;
 	@Autowired
-	TelegramBinderImpl telegramBinder;
+	TelegramOffBinderImpl telegramBinder;
 	@Autowired
 	ChatRepository chatRepository;
 

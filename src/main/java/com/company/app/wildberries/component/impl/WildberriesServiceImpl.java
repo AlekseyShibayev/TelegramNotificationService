@@ -4,14 +4,18 @@ import com.company.app.core.aop.logging.util.LogUtils;
 import com.company.app.core.tool.api.DataExtractorTool;
 import com.company.app.wildberries.component.api.WildberriesPriceExtractor;
 import com.company.app.wildberries.component.api.WildberriesService;
+import com.company.app.wildberries.entity.FoundItem;
 import com.company.app.wildberries.entity.Lot;
 import com.company.app.wildberries.repository.LotRepository;
+import com.company.app.wildberries.service.api.FoundItemsService;
 import com.company.app.wildberries.util.WBUtils;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,14 +29,19 @@ public class WildberriesServiceImpl implements WildberriesService {
 	private DataExtractorTool dataExtractorTool;
 	@Autowired
 	private LotRepository lotRepository;
+	@Autowired
+	private FoundItemsService foundItemsService;
 
-	public List<Lot> getDesiredLots() {
+	public List<FoundItem> getDesiredLots() {
 		List<Lot> lots = lotRepository.findAll();
 		String url = WBUtils.getUrlForPriceSearch(lots);
 		String htmlResponse = dataExtractorTool.getHtmlResponse(url);
-		return lots.stream()
+		List<FoundItem> items = lots.stream()
 				.filter(lot -> isDesireLot(htmlResponse, lot))
+				.map(lot -> FoundItem.builder().article(lot.getArticle()).creationDate(new Date()).build())
 				.collect(Collectors.toList());
+		foundItemsService.saveAll(items);
+		return items;
 	}
 
 	private boolean isDesireLot(String htmlResponse, Lot lot) {

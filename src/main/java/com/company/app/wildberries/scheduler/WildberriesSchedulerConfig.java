@@ -2,6 +2,7 @@ package com.company.app.wildberries.scheduler;
 
 import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.wildberries.component.WildberriesFacade;
+import com.company.app.wildberries.entity.FoundItem;
 import com.company.app.wildberries.entity.Lot;
 import com.company.app.wildberries.util.WBUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +26,14 @@ public class WildberriesSchedulerConfig {
 
 	@Scheduled(fixedDelayString = "${wildberries.timeout}")
 	public void searchWildberriesLots() {
-		List<Lot> desiredLots = wildberriesFacade.getDesiredLots();
+		List<FoundItem> desiredLots = wildberriesFacade.getDesiredLots();
 
 		if (log.isDebugEnabled()) {
 			log.debug("Определены желаемые лоты вб, в количестве: [{}].", desiredLots.size());
 		}
 
 		if (CollectionHelper.isNotEmpty(desiredLots)) {
-			desiredLots.forEach(lot -> telegramFacade.writeToEveryone(WBUtils.getUrlForResponse(lot.getArticle())));
+			desiredLots.forEach(foundItem -> telegramFacade.writeToEveryone(WBUtils.getUrlForResponse(foundItem.getArticle())));
 		}
 	}
 }

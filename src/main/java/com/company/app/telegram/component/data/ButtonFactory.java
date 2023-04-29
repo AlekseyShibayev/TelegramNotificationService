@@ -12,8 +12,8 @@ public class ButtonFactory {
 
 	private static final InlineKeyboardButton TG_OFF_BUTTON = new InlineKeyboardButton("Отключить уведомления");
 	private static final InlineKeyboardButton TG_ON_BUTTON = new InlineKeyboardButton("Включить уведомления");
-	private static final InlineKeyboardButton WB_BUTTON = new InlineKeyboardButton("Добавить лоты wildberries (в разработке)");
-	private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс");
+	private static final InlineKeyboardButton WB_BUTTON = new InlineKeyboardButton("Покажи что нашел на wildberries");
+	private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Покажи последний найденный курс");
 
 	public static InlineKeyboardMarkup inlineMarkup() {
 		TG_OFF_BUTTON.setCallbackData("TG_OFF");

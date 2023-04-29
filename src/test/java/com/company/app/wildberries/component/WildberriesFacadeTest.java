@@ -30,7 +30,6 @@ class WildberriesFacadeTest extends ApplicationSpringBootTestContext {
 		List<Lot> lots = jsonSerializationTool.load(file, Lot.class);
 		Mockito.when(lotRepository.findAll()).thenReturn(lots);
 
-		List<Lot> desiredLots = wildberriesFacade.getDesiredLots();
-		Assertions.assertEquals(1, desiredLots.size());
+		Assertions.assertEquals(1, wildberriesFacade.getDesiredLots().size());
 	}
 }

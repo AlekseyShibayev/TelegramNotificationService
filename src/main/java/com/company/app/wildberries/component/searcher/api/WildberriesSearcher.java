@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface WildberriesSearcher {
 
-	List<WildberriesLinkDto> search();
+	List<WildberriesLinkDto> search(String footSize, String gender);
 }

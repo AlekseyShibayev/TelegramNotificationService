@@ -14,6 +14,7 @@ public interface ChatRepository extends CrudRepository<Chat, Long> {
 
 	boolean existsChatByChatId(Long chatId);
 
+	@EntityGraph(value = "Chat.all")
 	Optional<Chat> findFirstByChatId(Long chatId);
 
 	@EntityGraph(value = "Chat.all")

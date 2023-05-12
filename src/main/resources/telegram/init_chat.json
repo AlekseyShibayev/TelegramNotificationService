@@ -5,7 +5,9 @@
 
     "userInfo": {
       "name": "Aleksey",
-      "role": "Owner"
+      "role": "Owner",
+      "footSize": "45",
+      "gender": "male"
     }
   }
 ]

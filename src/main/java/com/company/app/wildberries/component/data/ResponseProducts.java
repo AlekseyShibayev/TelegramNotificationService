@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -15,14 +16,16 @@ import java.util.List;
 @Builder
 public class ResponseProducts {
 
-	Integer id;
-	String name;
-	Integer salePriceU;
-	List<Size> sizes;
+	private Integer id;
+	private String name;
+	private Integer salePriceU;
+	private List<Size> sizes;
 
 	public WildberriesLinkDto to() {
+		String price = StringUtils.removeEnd(this.salePriceU.toString(), "00");
 		return WildberriesLinkDto.builder()
-				.link(WBUtils.getUrlForResponse(id.toString()))
+				.price(price)
+				.link(WBUtils.getUrlForResponse(this.id.toString()))
 				.build();
 	}
 }

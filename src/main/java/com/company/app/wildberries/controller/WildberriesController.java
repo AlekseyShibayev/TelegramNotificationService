@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,7 +26,8 @@ public class WildberriesController {
 	}
 
 	@GetMapping(value = "/search", produces = "application/json")
-	public ResponseEntity<List<WildberriesLinkDto>> search() {
-		return ResponseEntity.ok(wildberriesFacade.search());
+	public ResponseEntity<List<WildberriesLinkDto>> search(@RequestParam String footSize,
+														   @RequestParam String gender) {
+		return ResponseEntity.ok(wildberriesFacade.search(footSize, gender));
 	}
 }

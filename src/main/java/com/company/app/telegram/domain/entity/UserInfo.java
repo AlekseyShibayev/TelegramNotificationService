@@ -27,4 +27,10 @@ public class UserInfo {
 
 	@Column(name = "ROLE")
 	private String role;
+
+	@Column(name = "GENDER")
+	private String gender;
+
+	@Column(name = "FOOT_SIZE")
+	private String footSize;
 }

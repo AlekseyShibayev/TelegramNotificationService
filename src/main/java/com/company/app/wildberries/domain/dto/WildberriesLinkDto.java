@@ -9,5 +9,6 @@ import lombok.*;
 @Builder
 public class WildberriesLinkDto {
 
+	private String price;
 	private String link;
 }

@@ -34,7 +34,7 @@ public class WildberriesFacade {
 	}
 
 	@PerformanceLogAnnotation
-	public List<WildberriesLinkDto> search() {
-		return wildberriesSearcher.search();
+	public List<WildberriesLinkDto> search(String footSize, String gender) {
+		return wildberriesSearcher.search(footSize, gender);
 	}
 }

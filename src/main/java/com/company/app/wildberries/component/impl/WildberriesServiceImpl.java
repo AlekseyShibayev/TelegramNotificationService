@@ -4,17 +4,16 @@ import com.company.app.core.aop.logging.util.LogUtils;
 import com.company.app.core.tool.api.DataExtractorTool;
 import com.company.app.wildberries.component.api.WildberriesPriceExtractor;
 import com.company.app.wildberries.component.api.WildberriesService;
+import com.company.app.wildberries.component.util.WBUtils;
 import com.company.app.wildberries.domain.entity.FoundItem;
 import com.company.app.wildberries.domain.entity.Lot;
 import com.company.app.wildberries.domain.repository.LotRepository;
 import com.company.app.wildberries.domain.service.api.FoundItemsService;
-import com.company.app.wildberries.component.util.WBUtils;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

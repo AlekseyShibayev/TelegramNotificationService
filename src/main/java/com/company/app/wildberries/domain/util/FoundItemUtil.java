@@ -1,8 +1,8 @@
 package com.company.app.wildberries.domain.util;
 
+import com.company.app.wildberries.component.util.WBUtils;
 import com.company.app.wildberries.domain.dto.FoundItemDto;
 import com.company.app.wildberries.domain.entity.FoundItem;
-import com.company.app.wildberries.component.util.WBUtils;
 import lombok.experimental.UtilityClass;
 import org.springframework.beans.BeanUtils;
 

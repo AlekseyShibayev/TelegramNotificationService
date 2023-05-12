@@ -1,8 +1,8 @@
 package com.company.app.telegram.controller;
 
-import com.company.app.telegram.dto.ChatDto;
-import com.company.app.telegram.entity.Chat;
-import com.company.app.telegram.service.api.ChatService;
+import com.company.app.telegram.domain.dto.ChatDto;
+import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.service.api.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.company.app.telegram.dto;
+package com.company.app.telegram.domain.dto;
 
 import lombok.Builder;
 import lombok.Data;

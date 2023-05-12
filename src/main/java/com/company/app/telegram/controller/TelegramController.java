@@ -1,7 +1,7 @@
 package com.company.app.telegram.controller;
 
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.dto.TargetMessage;
+import com.company.app.telegram.domain.dto.TargetMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

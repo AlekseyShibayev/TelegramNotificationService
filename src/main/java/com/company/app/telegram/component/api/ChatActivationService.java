@@ -1,6 +1,6 @@
 package com.company.app.telegram.component.api;
 
-import com.company.app.telegram.entity.Chat;
+import com.company.app.telegram.domain.entity.Chat;
 
 /**
  * Отвечает за активацию чата.

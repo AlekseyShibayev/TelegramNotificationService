@@ -1,10 +1,10 @@
-package com.company.app.telegram.service.impl;
+package com.company.app.telegram.domain.service.impl;
 
-import com.company.app.telegram.entity.Chat;
-import com.company.app.telegram.entity.History;
-import com.company.app.telegram.repository.HistoryRepository;
-import com.company.app.telegram.service.api.ChatService;
-import com.company.app.telegram.service.api.HistoryService;
+import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.entity.History;
+import com.company.app.telegram.domain.repository.HistoryRepository;
+import com.company.app.telegram.domain.service.api.ChatService;
+import com.company.app.telegram.domain.service.api.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

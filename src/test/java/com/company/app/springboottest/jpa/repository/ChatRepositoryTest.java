@@ -1,7 +1,7 @@
 package com.company.app.springboottest.jpa.repository;
 
 import com.company.app.springboottest.jpa.DataJpaSpringBootTestContext;
-import com.company.app.telegram.repository.ChatRepository;
+import com.company.app.telegram.domain.repository.ChatRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

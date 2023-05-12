@@ -1,6 +1,6 @@
-package com.company.app.telegram.repository;
+package com.company.app.telegram.domain.repository;
 
-import com.company.app.telegram.entity.Chat;
+import com.company.app.telegram.domain.entity.Chat;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 

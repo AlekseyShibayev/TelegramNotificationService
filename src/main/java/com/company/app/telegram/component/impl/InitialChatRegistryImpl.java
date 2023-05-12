@@ -2,8 +2,8 @@ package com.company.app.telegram.component.impl;
 
 import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.telegram.component.api.InitialChatRegistry;
-import com.company.app.telegram.entity.Chat;
-import com.company.app.telegram.repository.ChatRepository;
+import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.repository.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;

@@ -1,7 +1,7 @@
-package com.company.app.telegram.service.api;
+package com.company.app.telegram.domain.service.api;
 
-import com.company.app.telegram.dto.ChatDto;
-import com.company.app.telegram.entity.Chat;
+import com.company.app.telegram.domain.dto.ChatDto;
+import com.company.app.telegram.domain.entity.Chat;
 
 import java.util.List;
 

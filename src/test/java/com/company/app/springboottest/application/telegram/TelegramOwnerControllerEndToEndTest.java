@@ -4,9 +4,9 @@ import com.company.app.springboottest.application.ApplicationSpringBootTestConte
 import com.company.app.telegram.component.api.InitialChatRegistry;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.controller.TelegramOwnerController;
-import com.company.app.telegram.dto.ChatDto;
-import com.company.app.telegram.entity.History;
-import com.company.app.telegram.repository.ChatRepository;
+import com.company.app.telegram.domain.dto.ChatDto;
+import com.company.app.telegram.domain.entity.History;
+import com.company.app.telegram.domain.repository.ChatRepository;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

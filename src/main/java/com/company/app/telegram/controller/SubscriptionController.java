@@ -1,7 +1,7 @@
 package com.company.app.telegram.controller;
 
-import com.company.app.telegram.entity.Subscription;
-import com.company.app.telegram.service.api.SubscriptionService;
+import com.company.app.telegram.domain.entity.Subscription;
+import com.company.app.telegram.domain.service.api.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
-package com.company.app.telegram.service.api;
+package com.company.app.telegram.domain.service.api;
 
-import com.company.app.telegram.entity.Chat;
-import com.company.app.telegram.entity.History;
+import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.entity.History;
 
 public interface HistoryService {
 

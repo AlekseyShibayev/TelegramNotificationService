@@ -1,4 +1,4 @@
-package com.company.app.telegram.entity;
+package com.company.app.telegram.domain.entity;
 
 import lombok.*;
 

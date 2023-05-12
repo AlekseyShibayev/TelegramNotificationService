@@ -1,8 +1,8 @@
-package com.company.app.telegram.service.impl;
+package com.company.app.telegram.domain.service.impl;
 
-import com.company.app.telegram.entity.Subscription;
-import com.company.app.telegram.repository.SubscriptionRepository;
-import com.company.app.telegram.service.api.SubscriptionService;
+import com.company.app.telegram.domain.entity.Subscription;
+import com.company.app.telegram.domain.repository.SubscriptionRepository;
+import com.company.app.telegram.domain.service.api.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

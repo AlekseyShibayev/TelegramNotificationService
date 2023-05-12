@@ -1,6 +1,6 @@
-package com.company.app.telegram.service.api;
+package com.company.app.telegram.domain.service.api;
 
-import com.company.app.telegram.entity.Subscription;
+import com.company.app.telegram.domain.entity.Subscription;
 
 import java.util.Set;
 

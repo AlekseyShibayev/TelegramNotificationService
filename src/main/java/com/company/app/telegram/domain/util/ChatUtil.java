@@ -1,7 +1,7 @@
-package com.company.app.telegram.util;
+package com.company.app.telegram.domain.util;
 
-import com.company.app.telegram.dto.ChatDto;
-import com.company.app.telegram.entity.Chat;
+import com.company.app.telegram.domain.dto.ChatDto;
+import com.company.app.telegram.domain.entity.Chat;
 import lombok.experimental.UtilityClass;
 import org.springframework.beans.BeanUtils;
 

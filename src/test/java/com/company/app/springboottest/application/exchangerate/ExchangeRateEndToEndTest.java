@@ -7,7 +7,7 @@ import com.company.app.exchangerate.domain.repository.ExchangeRepository;
 import com.company.app.exchangerate.domain.service.api.ExchangeRateService;
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
 import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.entity.Chat;
+import com.company.app.telegram.domain.entity.Chat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

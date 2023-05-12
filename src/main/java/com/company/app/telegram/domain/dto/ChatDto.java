@@ -1,8 +1,8 @@
-package com.company.app.telegram.dto;
+package com.company.app.telegram.domain.dto;
 
-import com.company.app.telegram.entity.History;
-import com.company.app.telegram.entity.Subscription;
-import com.company.app.telegram.entity.UserInfo;
+import com.company.app.telegram.domain.entity.History;
+import com.company.app.telegram.domain.entity.Subscription;
+import com.company.app.telegram.domain.entity.UserInfo;
 import lombok.*;
 
 import java.util.List;

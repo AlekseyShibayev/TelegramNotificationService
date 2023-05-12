@@ -1,10 +1,10 @@
-package com.company.app.telegram.service.impl;
+package com.company.app.telegram.domain.service.impl;
 
-import com.company.app.telegram.dto.ChatDto;
-import com.company.app.telegram.entity.Chat;
-import com.company.app.telegram.repository.ChatRepository;
-import com.company.app.telegram.service.api.ChatService;
-import com.company.app.telegram.util.ChatUtil;
+import com.company.app.telegram.domain.dto.ChatDto;
+import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.repository.ChatRepository;
+import com.company.app.telegram.domain.service.api.ChatService;
+import com.company.app.telegram.domain.util.ChatUtil;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

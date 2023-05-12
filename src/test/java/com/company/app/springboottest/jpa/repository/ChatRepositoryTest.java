@@ -1,6 +1,6 @@
-package com.company.app.springboot.jpa.repository;
+package com.company.app.springboottest.jpa.repository;
 
-import com.company.app.springboot.jpa.DataJpaSpringBootTestContext;
+import com.company.app.springboottest.jpa.DataJpaSpringBootTestContext;
 import com.company.app.telegram.repository.ChatRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;

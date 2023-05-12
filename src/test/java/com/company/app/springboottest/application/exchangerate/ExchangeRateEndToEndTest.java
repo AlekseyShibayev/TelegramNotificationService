@@ -1,11 +1,11 @@
-package com.company.app.springboot.application.exchangerate;
+package com.company.app.springboottest.application.exchangerate;
 
 import com.company.app.telegram.component.binder.api.ExchangeRateBinder;
 import com.company.app.exchangerate.controller.ExchangeRateController;
-import com.company.app.exchangerate.entity.ExchangeRate;
-import com.company.app.exchangerate.repository.ExchangeRepository;
-import com.company.app.exchangerate.service.ExchangeRateService;
-import com.company.app.springboot.application.ApplicationSpringBootTestContext;
+import com.company.app.exchangerate.domain.entity.ExchangeRate;
+import com.company.app.exchangerate.domain.repository.ExchangeRepository;
+import com.company.app.exchangerate.domain.service.api.ExchangeRateService;
+import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
 import com.company.app.telegram.component.binder.BinderContainer;
 import com.company.app.telegram.entity.Chat;
 import org.junit.jupiter.api.Assertions;
@@ -40,7 +40,7 @@ class ExchangeRateEndToEndTest extends ApplicationSpringBootTestContext {
 
 	@Test
 	void controller_test() {
-		ExchangeRate exchangeRate = exchangeRateController.get().getBody();
+		ExchangeRate exchangeRate = exchangeRateController.extract().getBody();
 		Assertions.assertNotNull(exchangeRate);
 		Assertions.assertNotNull(exchangeRate.getCreationDate());
 		Assertions.assertNotNull(exchangeRate.getAliexpressExchangeRate());
@@ -68,7 +68,7 @@ class ExchangeRateEndToEndTest extends ApplicationSpringBootTestContext {
 
 	@Test
 	void binder_success_test() {
-		ExchangeRate exchangeRate = exchangeRateController.get().getBody();
+		ExchangeRate exchangeRate = exchangeRateController.extract().getBody();
 		BinderContainer binderContainer = createBinderContainer();
 		Assertions.assertDoesNotThrow(() -> exchangeRateBinder.bind(binderContainer));
 	}

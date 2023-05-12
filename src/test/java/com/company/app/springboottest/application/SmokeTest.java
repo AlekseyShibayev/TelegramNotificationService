@@ -1,4 +1,4 @@
-package com.company.app.springboot.application;
+package com.company.app.springboottest.application;
 
 import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.telegram.component.api.InitialChatRegistry;

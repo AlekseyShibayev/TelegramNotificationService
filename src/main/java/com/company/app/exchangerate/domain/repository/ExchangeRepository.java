@@ -1,6 +1,6 @@
-package com.company.app.exchangerate.repository;
+package com.company.app.exchangerate.domain.repository;
 
-import com.company.app.exchangerate.entity.ExchangeRate;
+import com.company.app.exchangerate.domain.entity.ExchangeRate;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

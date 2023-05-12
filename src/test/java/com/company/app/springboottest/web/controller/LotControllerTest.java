@@ -1,6 +1,6 @@
-package com.company.app.springboot.web.controller;
+package com.company.app.springboottest.web.controller;
 
-import com.company.app.springboot.web.WebMvcSpringBootTestContext;
+import com.company.app.springboottest.web.WebMvcSpringBootTestContext;
 import com.company.app.wildberries.dto.LotDto;
 import com.company.app.wildberries.entity.Lot;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package com.company.app.telegram.component.binder.impl;
 
 import com.company.app.exchangerate.controller.ExchangeRateController;
-import com.company.app.exchangerate.entity.ExchangeRate;
+import com.company.app.exchangerate.domain.entity.ExchangeRate;
 import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.telegram.component.binder.BinderContainer;
 import com.company.app.telegram.component.binder.api.ExchangeRateBinder;

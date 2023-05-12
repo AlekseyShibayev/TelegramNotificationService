@@ -1,7 +1,8 @@
-package com.company.app.exchangerate.service;
+package com.company.app.exchangerate.domain.service.impl;
 
-import com.company.app.exchangerate.entity.ExchangeRate;
-import com.company.app.exchangerate.repository.ExchangeRepository;
+import com.company.app.exchangerate.domain.entity.ExchangeRate;
+import com.company.app.exchangerate.domain.repository.ExchangeRepository;
+import com.company.app.exchangerate.domain.service.api.ExchangeRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,17 +14,13 @@ import java.util.Optional;
 public class ExchangeRateServiceImpl implements ExchangeRateService {
 
 	@Autowired
-	ExchangeRepository exchangeRepository;
+	private ExchangeRepository exchangeRepository;
 
 	@Transactional
 	@Override
 	public ExchangeRate getLast() {
 		Optional<ExchangeRate> optional = exchangeRepository.findFirstByOrderByCreationDateDesc();
-		if (optional.isPresent()) {
-			return optional.get();
-		} else {
-			throw new NoSuchElementException("Курса еще нет.");
-		}
+		return optional.orElseThrow(() -> new NoSuchElementException("Курса еще нет."));
 	}
 
 	@Transactional

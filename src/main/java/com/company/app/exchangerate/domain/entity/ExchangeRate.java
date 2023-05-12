@@ -1,4 +1,4 @@
-package com.company.app.exchangerate.entity;
+package com.company.app.exchangerate.domain.entity;
 
 import lombok.*;
 

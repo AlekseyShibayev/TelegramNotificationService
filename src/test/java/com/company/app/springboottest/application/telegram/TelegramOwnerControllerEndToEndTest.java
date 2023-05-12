@@ -1,6 +1,6 @@
-package com.company.app.springboot.application.telegram;
+package com.company.app.springboottest.application.telegram;
 
-import com.company.app.springboot.application.ApplicationSpringBootTestContext;
+import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
 import com.company.app.telegram.component.api.InitialChatRegistry;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.controller.TelegramOwnerController;

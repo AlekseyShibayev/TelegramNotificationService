@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * 2. Component test. С использованием SpringBootComponentScanStopper. Example:
  * {@link com.company.app.exchangerate.component.ExchangeRateFacadeTest}
  * 3. Full application test. Example:
- * {@link com.company.app.springboot.application.ApplicationTest}
+ * {@link com.company.app.springboottest.application.ApplicationTest}
  */
 @Slf4j
 //@EnableCaching

@@ -2,8 +2,8 @@ package com.company.app.exchangerate.component.impl;
 
 import com.company.app.exchangerate.component.api.AliexpressExchangeRateExtractor;
 import com.company.app.exchangerate.component.api.ExchangeRateExtractor;
-import com.company.app.exchangerate.entity.ExchangeRate;
-import com.company.app.exchangerate.service.ExchangeRateService;
+import com.company.app.exchangerate.domain.entity.ExchangeRate;
+import com.company.app.exchangerate.domain.service.api.ExchangeRateService;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

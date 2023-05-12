@@ -1,7 +1,7 @@
 package com.company.app.exchangerate.scheduler;
 
 import com.company.app.exchangerate.component.ExchangeRateFacade;
-import com.company.app.exchangerate.entity.ExchangeRate;
+import com.company.app.exchangerate.domain.entity.ExchangeRate;
 import com.company.app.telegram.component.TelegramFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

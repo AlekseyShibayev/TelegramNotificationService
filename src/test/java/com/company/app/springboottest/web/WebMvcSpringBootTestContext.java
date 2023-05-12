@@ -1,4 +1,4 @@
-package com.company.app.springboot.web;
+package com.company.app.springboottest.web;
 
 import com.company.app.wildberries.service.api.LotService;
 import com.fasterxml.jackson.databind.ObjectMapper;

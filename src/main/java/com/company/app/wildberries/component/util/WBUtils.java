@@ -1,6 +1,6 @@
-package com.company.app.wildberries.util;
+package com.company.app.wildberries.component.util;
 
-import com.company.app.wildberries.entity.Lot;
+import com.company.app.wildberries.domain.entity.Lot;
 
 import java.util.List;
 

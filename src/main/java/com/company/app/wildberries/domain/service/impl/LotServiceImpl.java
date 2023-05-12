@@ -1,9 +1,9 @@
-package com.company.app.wildberries.service.impl;
+package com.company.app.wildberries.domain.service.impl;
 
-import com.company.app.wildberries.dto.LotDto;
-import com.company.app.wildberries.entity.Lot;
-import com.company.app.wildberries.repository.LotRepository;
-import com.company.app.wildberries.service.api.LotService;
+import com.company.app.wildberries.domain.dto.LotDto;
+import com.company.app.wildberries.domain.entity.Lot;
+import com.company.app.wildberries.domain.repository.LotRepository;
+import com.company.app.wildberries.domain.service.api.LotService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class LotServiceImpl implements LotService {
 
 	@Autowired
-	LotRepository lotRepository;
+	private LotRepository lotRepository;
 
 	@Override
 	public Long create(LotDto lotDto) {

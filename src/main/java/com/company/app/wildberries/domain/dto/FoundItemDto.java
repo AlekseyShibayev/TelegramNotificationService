@@ -1,4 +1,4 @@
-package com.company.app.wildberries.dto;
+package com.company.app.wildberries.domain.dto;
 
 import lombok.*;
 

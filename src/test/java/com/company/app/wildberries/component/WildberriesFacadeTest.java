@@ -2,8 +2,8 @@ package com.company.app.wildberries.component;
 
 import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
-import com.company.app.wildberries.entity.Lot;
-import com.company.app.wildberries.repository.LotRepository;
+import com.company.app.wildberries.domain.entity.Lot;
+import com.company.app.wildberries.domain.repository.LotRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

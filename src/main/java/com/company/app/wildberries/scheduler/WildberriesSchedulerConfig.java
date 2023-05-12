@@ -2,9 +2,8 @@ package com.company.app.wildberries.scheduler;
 
 import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.wildberries.component.WildberriesFacade;
-import com.company.app.wildberries.entity.FoundItem;
-import com.company.app.wildberries.entity.Lot;
-import com.company.app.wildberries.util.WBUtils;
+import com.company.app.wildberries.domain.entity.FoundItem;
+import com.company.app.wildberries.component.util.WBUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.internal.util.collections.CollectionHelper;
 import org.springframework.beans.factory.annotation.Autowired;

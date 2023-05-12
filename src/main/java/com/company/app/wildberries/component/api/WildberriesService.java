@@ -1,7 +1,6 @@
 package com.company.app.wildberries.component.api;
 
-import com.company.app.wildberries.entity.FoundItem;
-import com.company.app.wildberries.entity.Lot;
+import com.company.app.wildberries.domain.entity.FoundItem;
 
 import java.util.List;
 

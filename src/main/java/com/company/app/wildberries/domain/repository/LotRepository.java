@@ -1,6 +1,6 @@
-package com.company.app.wildberries.repository;
+package com.company.app.wildberries.domain.repository;
 
-import com.company.app.wildberries.entity.Lot;
+import com.company.app.wildberries.domain.entity.Lot;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

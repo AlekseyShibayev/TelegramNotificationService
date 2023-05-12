@@ -5,7 +5,7 @@ import com.company.app.telegram.component.binder.BinderContainer;
 import com.company.app.telegram.component.binder.api.WildberriesBinder;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries.controller.WildberriesController;
-import com.company.app.wildberries.dto.FoundItemDto;
+import com.company.app.wildberries.domain.dto.FoundItemDto;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

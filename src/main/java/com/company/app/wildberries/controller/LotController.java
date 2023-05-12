@@ -1,8 +1,8 @@
 package com.company.app.wildberries.controller;
 
-import com.company.app.wildberries.dto.LotDto;
-import com.company.app.wildberries.entity.Lot;
-import com.company.app.wildberries.service.api.LotService;
+import com.company.app.wildberries.domain.dto.LotDto;
+import com.company.app.wildberries.domain.entity.Lot;
+import com.company.app.wildberries.domain.service.api.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

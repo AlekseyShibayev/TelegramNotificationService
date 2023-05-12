@@ -1,6 +1,6 @@
 package com.company.app.springboottest.web;
 
-import com.company.app.wildberries.service.api.LotService;
+import com.company.app.wildberries.domain.service.api.LotService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

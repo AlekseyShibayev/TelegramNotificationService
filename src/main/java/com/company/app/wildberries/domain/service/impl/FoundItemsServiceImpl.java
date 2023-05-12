@@ -1,8 +1,8 @@
-package com.company.app.wildberries.service.impl;
+package com.company.app.wildberries.domain.service.impl;
 
-import com.company.app.wildberries.entity.FoundItem;
-import com.company.app.wildberries.repository.FoundItemRepository;
-import com.company.app.wildberries.service.api.FoundItemsService;
+import com.company.app.wildberries.domain.entity.FoundItem;
+import com.company.app.wildberries.domain.repository.FoundItemRepository;
+import com.company.app.wildberries.domain.service.api.FoundItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import java.util.List;
 public class FoundItemsServiceImpl implements FoundItemsService {
 
 	@Autowired
-	FoundItemRepository foundItemRepository;
+	private FoundItemRepository foundItemRepository;
 
 	@Transactional
 	@Override

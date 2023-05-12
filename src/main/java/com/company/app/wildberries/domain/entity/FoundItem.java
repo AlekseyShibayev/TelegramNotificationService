@@ -1,4 +1,4 @@
-package com.company.app.wildberries.entity;
+package com.company.app.wildberries.domain.entity;
 
 import lombok.*;
 

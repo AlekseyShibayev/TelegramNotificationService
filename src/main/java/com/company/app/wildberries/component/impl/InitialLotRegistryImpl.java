@@ -2,8 +2,8 @@ package com.company.app.wildberries.component.impl;
 
 import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.wildberries.component.api.InitialLotRegistry;
-import com.company.app.wildberries.entity.Lot;
-import com.company.app.wildberries.repository.LotRepository;
+import com.company.app.wildberries.domain.entity.Lot;
+import com.company.app.wildberries.domain.repository.LotRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

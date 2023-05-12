@@ -1,8 +1,8 @@
 package com.company.app.wildberries.controller;
 
 import com.company.app.wildberries.component.WildberriesFacade;
-import com.company.app.wildberries.dto.FoundItemDto;
-import com.company.app.wildberries.util.FoundItemUtil;
+import com.company.app.wildberries.domain.dto.FoundItemDto;
+import com.company.app.wildberries.domain.util.FoundItemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

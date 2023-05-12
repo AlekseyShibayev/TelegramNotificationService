@@ -1,7 +1,7 @@
-package com.company.app.wildberries.service.api;
+package com.company.app.wildberries.domain.service.api;
 
-import com.company.app.wildberries.dto.LotDto;
-import com.company.app.wildberries.entity.Lot;
+import com.company.app.wildberries.domain.dto.LotDto;
+import com.company.app.wildberries.domain.entity.Lot;
 
 import java.util.List;
 

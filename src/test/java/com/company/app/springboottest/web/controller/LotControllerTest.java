@@ -1,8 +1,8 @@
 package com.company.app.springboottest.web.controller;
 
 import com.company.app.springboottest.web.WebMvcSpringBootTestContext;
-import com.company.app.wildberries.dto.LotDto;
-import com.company.app.wildberries.entity.Lot;
+import com.company.app.wildberries.domain.dto.LotDto;
+import com.company.app.wildberries.domain.entity.Lot;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;

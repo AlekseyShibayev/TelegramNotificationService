@@ -1,24 +1,57 @@
 package com.company.app.wildberries.component.searcher;
 
+import com.google.common.collect.ImmutableMap;
 import lombok.experimental.UtilityClass;
+
+import java.util.Map;
 
 @UtilityClass
 public class WildberriesSearcherUrlCreator {
+
+	private static final Map<String, String> WILDBERRIES_FOOT_SIZE_MAPPING = ImmutableMap.<String, String>builder()
+			.put("36", "31512")
+			.put("36.5", "56141")
+			.put("37", "32494")
+			.put("37.5", "56142")
+			.put("38", "33476")
+			.put("38.5", "56144")
+			.put("39", "34458")
+			.put("39.5", "56139")
+			.put("40", "35440")
+			.put("40.5", "56151")
+			.put("41", "36422")
+			.put("41.5", "56157")
+			.put("42", "37404")
+			.put("42.5", "56158")
+			.put("43", "38386")
+			.put("43.5", "56167")
+			.put("44", "39368")
+			.put("44.5", "56168")
+			.put("45", "40350")
+			.put("45.5", "56177")
+			.put("46", "41332")
+			.build();
 
 	private static final String URL = "https://search.wb.ru/exactmatch/ru/male/v4/search?" +
 			"appType=1&curr=rub&dest=-3827418&fbrand=21;61;671;60361" +
 			"&regions=80,64,38,4,115,83,33,68,30,86,40,1,66,48,110,31,22,114" +
 			"&resultset=catalog&sort=popular&spp=22&suppressSpellcheck=false&xsubject=105";
 
-	public static String create(String gender) {
-		String withGender = withGender(gender);
+	public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {
+		String withGender = withGender(wildberriesSearcherContainer.getGender());
+		String withFootSize = withFootSize(wildberriesSearcherContainer.getFootSize());
 		String page = "&page=%s";
 		String query = "&query=кроссовки";
-		return URL + withGender + query + page;
+		return URL + withGender + withFootSize + query + page;
 	}
 
 	private static String withGender(String gender) {
 		int i = gender.equals("male") ? 1 : 2;
 		return "&fkind=" + i;
+	}
+
+	private static String withFootSize(String footSize) {
+		String urlSubstring = "&fsize=%s";
+		return String.format(urlSubstring, WILDBERRIES_FOOT_SIZE_MAPPING.get(footSize));
 	}
 }

@@ -5,6 +5,7 @@ import com.company.app.telegram.controller.TelegramController;
 import com.company.app.wildberries.component.data.Response;
 import com.company.app.wildberries.component.data.ResponseProducts;
 import com.company.app.wildberries.component.data.Size;
+import com.company.app.wildberries.component.searcher.WildberriesSearcherContainer;
 import com.company.app.wildberries.component.searcher.WildberriesSearcherUrlCreator;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
@@ -30,11 +31,12 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 	private TelegramController telegramController;
 
 	@Override
-	public List<WildberriesLinkDto> search(String footSize, String gender) {
-		String url = WildberriesSearcherUrlCreator.create(gender);
+	public List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer) {
+		String url = WildberriesSearcherUrlCreator.createUrl(wildberriesSearcherContainer);
+
 		List<ResponseProducts> products = getAllProducts(url);
 		return products.stream()
-				.filter(responseProducts -> filterOne(responseProducts, footSize))
+				.filter(responseProducts -> filterOne(responseProducts, wildberriesSearcherContainer.getFootSize()))
 				.map(responseProducts -> responseProducts.to())
 				.distinct()
 				.collect(Collectors.toList());

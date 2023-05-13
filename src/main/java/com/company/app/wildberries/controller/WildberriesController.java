@@ -1,6 +1,7 @@
 package com.company.app.wildberries.controller;
 
 import com.company.app.wildberries.component.WildberriesFacade;
+import com.company.app.wildberries.component.searcher.WildberriesSearcherContainer;
 import com.company.app.wildberries.domain.dto.FoundItemDto;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries.domain.util.FoundItemUtil;
@@ -26,8 +27,7 @@ public class WildberriesController {
 	}
 
 	@GetMapping(value = "/search", produces = "application/json")
-	public ResponseEntity<List<WildberriesLinkDto>> search(@RequestParam String footSize,
-														   @RequestParam String gender) {
-		return ResponseEntity.ok(wildberriesFacade.search(footSize, gender));
+	public ResponseEntity<List<WildberriesLinkDto>> search(@RequestParam WildberriesSearcherContainer wildberriesSearcherContainer) {
+		return ResponseEntity.ok(wildberriesFacade.search(wildberriesSearcherContainer));
 	}
 }

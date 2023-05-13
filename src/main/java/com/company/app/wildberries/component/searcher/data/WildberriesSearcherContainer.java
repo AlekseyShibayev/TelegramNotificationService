@@ -1,4 +1,4 @@
-package com.company.app.wildberries.component.searcher;
+package com.company.app.wildberries.component.searcher.data;
 
 import lombok.Builder;
 import lombok.Data;

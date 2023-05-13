@@ -1,7 +1,7 @@
 package com.company.app.springboottest.application.wildberries.searcher;
 
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
-import com.company.app.wildberries.component.searcher.WildberriesSearcherContainer;
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import org.junit.jupiter.api.Assertions;

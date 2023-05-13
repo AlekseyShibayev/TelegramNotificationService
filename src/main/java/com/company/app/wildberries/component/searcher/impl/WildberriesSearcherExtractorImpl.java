@@ -1,9 +1,11 @@
 package com.company.app.wildberries.component.searcher.impl;
 
+import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.tool.api.JsonSerializationTool;
+import com.company.app.core.tool.impl.JsonSerializationToolImpl;
 import com.company.app.wildberries.component.data.Response;
 import com.company.app.wildberries.component.data.ResponseProducts;
-import com.company.app.wildberries.component.data.Size;
+import com.company.app.wildberries.component.data.price_history.PriceHistory;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherExtractor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +27,17 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
 	@Autowired
 	private JsonSerializationTool<Response> jsonSerializationTool;
 
+	@PerformanceLogAnnotation
 	@Override
-	public List<ResponseProducts> extract(String url) {
+	public List<ResponseProducts> extractResponseProducts(String url) {
 		return getAllProducts(url);
+	}
+
+	@Override
+	public List<PriceHistory> extractPriceHistory(String url) {
+		String htmlResponse = getHtmlResponse(url);
+		JsonSerializationToolImpl<PriceHistory> priceHistoryJsonSerializationTool = new JsonSerializationToolImpl<>();
+		return priceHistoryJsonSerializationTool.load(htmlResponse, PriceHistory.class);
 	}
 
 	private List<ResponseProducts> getAllProducts(String url) {

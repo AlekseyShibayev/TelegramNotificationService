@@ -1,8 +1,8 @@
 package com.company.app.telegram.component.impl;
 
-import com.company.app.telegram.component.api.BinderExecutor;
 import com.company.app.telegram.binder.BinderContainer;
 import com.company.app.telegram.binder.api.Binder;
+import com.company.app.telegram.component.api.BinderExecutor;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;

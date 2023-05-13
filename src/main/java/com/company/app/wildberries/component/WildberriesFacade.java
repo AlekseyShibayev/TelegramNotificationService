@@ -2,7 +2,7 @@ package com.company.app.wildberries.component;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.wildberries.component.api.WildberriesService;
-import com.company.app.wildberries.component.searcher.WildberriesSearcherContainer;
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries.domain.entity.FoundItem;

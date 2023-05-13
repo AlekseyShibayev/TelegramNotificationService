@@ -1,5 +1,6 @@
-package com.company.app.wildberries.component.searcher;
+package com.company.app.wildberries.component.searcher.util;
 
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
 import com.google.common.collect.ImmutableMap;
 import lombok.experimental.UtilityClass;
 

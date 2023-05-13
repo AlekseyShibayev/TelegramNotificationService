@@ -1,11 +1,11 @@
 package com.company.app.telegram.binder.impl;
 
-import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.telegram.binder.BinderContainer;
 import com.company.app.telegram.binder.api.WildberriesBinder;
+import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.UserInfo;
-import com.company.app.wildberries.component.searcher.WildberriesSearcherContainer;
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries.controller.WildberriesController;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.company.app.wildberries.controller;
 
 import com.company.app.wildberries.component.WildberriesFacade;
-import com.company.app.wildberries.component.searcher.WildberriesSearcherContainer;
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries.domain.dto.FoundItemDto;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries.domain.util.FoundItemUtil;

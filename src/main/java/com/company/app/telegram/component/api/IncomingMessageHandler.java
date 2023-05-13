@@ -3,7 +3,7 @@ package com.company.app.telegram.component.api;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 /**
- * Обрабатывает сообщения, отправленные в телеграм бота.
+ * Обрабатывает сообщения, отправленные пользователем в телеграм бота.
  */
 public interface IncomingMessageHandler {
 

@@ -3,7 +3,6 @@ package com.company.app.telegram.component.impl;
 import com.company.app.telegram.component.api.OutgoingMessageHandler;
 import com.company.app.telegram.component.api.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.service.api.ChatService;
 import com.company.app.telegram.domain.service.api.HistoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,18 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-import java.util.Date;
-
 @Slf4j
 @Component
 public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
 
 	@Autowired
-	HistoryService historyService;
+	private HistoryService historyService;
 	@Autowired
-	TelegramBotConfig telegramBotConfig;
+	private TelegramBotConfig telegramBotConfig;
 	@Autowired
-	ChatService chatService;
+	private ChatService chatService;
 
 	@Override
 	public void sendToEveryone(Object message) {
@@ -39,20 +36,7 @@ public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
 	}
 
 	private void sendOneMessage(SendMessage sendMessage) {
-		saveHistory(sendMessage);
+		historyService.saveHistory(sendMessage);
 		telegramBotConfig.write(sendMessage);
-	}
-
-	private void saveHistory(SendMessage sendMessage) {
-		log.debug("Пробую написать в телеграм [{}]: [{}].", sendMessage.getChatId(), sendMessage.getText());
-		String chatId = sendMessage.getChatId();
-		History history = History.builder()
-				.chat(chatService.getChatOrCreateIfNotExist(Long.valueOf(chatId)))
-				.message(sendMessage.getText())
-				.source(telegramBotConfig.getName())
-				.target(chatId)
-				.date(new Date())
-				.build();
-		historyService.save(history);
 	}
 }

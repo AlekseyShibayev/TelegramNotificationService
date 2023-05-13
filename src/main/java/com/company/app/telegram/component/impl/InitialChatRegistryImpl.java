@@ -3,7 +3,7 @@ package com.company.app.telegram.component.impl;
 import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.telegram.component.api.InitialChatRegistry;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.domain.repository.ChatRepository;
+import com.company.app.telegram.domain.service.api.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -20,13 +20,13 @@ public class InitialChatRegistryImpl implements InitialChatRegistry {
 	private Resource resource;
 
 	@Autowired
-	JsonSerializationTool<Chat> jsonSerializationTool;
+	private JsonSerializationTool<Chat> jsonSerializationTool;
 	@Autowired
-	ChatRepository chatRepository;
+	private ChatService chatService;
 
 	@PostConstruct
 	public void init() throws TelegramApiException {
 		List<Chat> list = jsonSerializationTool.load(resource, Chat.class);
-		chatRepository.saveAll(list);
+		chatService.saveAll(list);
 	}
 }

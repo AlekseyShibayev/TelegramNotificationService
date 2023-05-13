@@ -20,4 +20,6 @@ public interface ChatService {
 	Chat getChatOrCreateIfNotExist(Long chatId);
 
 	List<Chat> getAll();
+
+	void saveAll(List<Chat> list);
 }

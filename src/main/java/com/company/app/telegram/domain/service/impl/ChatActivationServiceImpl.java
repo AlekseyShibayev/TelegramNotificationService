@@ -1,15 +1,16 @@
-package com.company.app.telegram.component.impl;
+package com.company.app.telegram.domain.service.impl;
 
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.component.api.ChatActivationService;
 import com.company.app.telegram.controller.SubscriptionController;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
+import com.company.app.telegram.domain.service.api.ChatActivationService;
 import com.company.app.telegram.domain.service.api.ChatService;
 import lombok.extern.slf4j.Slf4j;
 import org.glassfish.jersey.internal.guava.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -18,12 +19,13 @@ import java.util.Set;
 public class ChatActivationServiceImpl implements ChatActivationService {
 
 	@Autowired
-	SubscriptionController subscriptionController;
+	private SubscriptionController subscriptionController;
 	@Autowired
-	ChatService chatService;
+	private ChatService chatService;
 	@Autowired
-	TelegramFacade telegramFacade;
+	private TelegramFacade telegramFacade;
 
+	@Transactional
 	@Override
 	public void activate(Chat chat) {
 		if (isChatNotActive(chat)) {
@@ -38,6 +40,7 @@ public class ChatActivationServiceImpl implements ChatActivationService {
 		}
 	}
 
+	@Transactional
 	@Override
 	public void deactivate(Chat chat) {
 		if (!isChatNotActive(chat)) {

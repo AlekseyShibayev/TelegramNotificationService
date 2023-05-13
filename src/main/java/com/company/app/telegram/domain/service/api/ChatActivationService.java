@@ -1,4 +1,4 @@
-package com.company.app.telegram.component.api;
+package com.company.app.telegram.domain.service.api;
 
 import com.company.app.telegram.domain.entity.Chat;
 

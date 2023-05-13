@@ -36,6 +36,7 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 		UserInfo userInfo = chat.getUserInfo();
 
 		WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
+				.chatId(chat.getChatId().toString())
 				.dressSize(userInfo.getDressSize())
 				.footSize(userInfo.getFootSize())
 				.gender(userInfo.getGender())

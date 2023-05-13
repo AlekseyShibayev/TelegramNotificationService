@@ -7,7 +7,7 @@ import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherExtractor;
 import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
-import com.company.app.wildberries.component.searcher.util.WildberriesSearcherUrlCreator;
+import com.company.app.wildberries.component.searcher.util.WildberriesSearcherProductsUrlCreator;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 
 	@Override
 	public List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer) {
-		String url = WildberriesSearcherUrlCreator.createUrl(wildberriesSearcherContainer);
+		String url = WildberriesSearcherProductsUrlCreator.createUrl(wildberriesSearcherContainer);
 		List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);
 
 		List<ResponseProducts> preparedProducts = products.stream()
@@ -39,13 +39,12 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 				.filter(this::withFeedbacks)
 				.filter(responseProducts -> withContainsSize(responseProducts, wildberriesSearcherContainer))
 				.collect(Collectors.toList());
-		log.debug("Запускаю фильтрацию для [{}] шт.", preparedProducts.size());
+		log.debug("[{}]: Запускаю фильтрацию для [{}] шт.", wildberriesSearcherContainer.getChatId(), preparedProducts.size());
 
 		return preparedProducts.stream()
 				.filter(responseProducts -> withGoodPrice(responseProducts, wildberriesSearcherContainer))
 				.map(ResponseProducts::to)
 				.distinct()
-				.limit(10)
 				.collect(Collectors.toList());
 	}
 
@@ -75,14 +74,20 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 		try {
 			BigDecimal averagePrice = new BigDecimal(wildberriesSearcherAveragePriceExtractor.getAveragePrice(responseProducts));
 			BigDecimal currentPrice = new BigDecimal(responseProducts.getSalePriceU());
-			log.debug("Цена: текущая*[{}]: [{}] < средняя: [{}] ?", TEMP_NAME, currentPrice, averagePrice);
 			currentPrice = currentPrice.multiply(new BigDecimal(TEMP_NAME));
-			log.debug("Цена: текущая*[{}]: [{}] < средняя: [{}] ?", TEMP_NAME, currentPrice, averagePrice);
+			doLog(wildberriesSearcherContainer, averagePrice, currentPrice);
 			int i = currentPrice.compareTo(averagePrice);
 			return i < 0;
 		} catch (Exception exception) {
-			LogUtils.doExceptionLog(exception, String.format("Проблема с %s", responseProducts.getId()));
+			LogUtils.doExceptionLog(exception, String.format("[%s] Проблема с [%s]:", wildberriesSearcherContainer.getChatId(), responseProducts.getId()));
 			return false;
+		}
+	}
+
+	private void doLog(WildberriesSearcherContainer wildberriesSearcherContainer, BigDecimal averagePrice, BigDecimal currentPrice) {
+		if (log.isDebugEnabled()) {
+			log.debug("[{}]: Цена: текущая*[{}]: [{}] < средняя: [{}] ?",
+					wildberriesSearcherContainer.getChatId(), TEMP_NAME, currentPrice, averagePrice);
 		}
 	}
 }

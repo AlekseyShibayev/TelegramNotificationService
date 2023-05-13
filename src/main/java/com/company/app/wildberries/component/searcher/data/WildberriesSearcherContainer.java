@@ -7,6 +7,7 @@ import lombok.Data;
 @Builder
 public class WildberriesSearcherContainer {
 
+	String chatId;
 	String footSize;
 	String dressSize;
 	String gender;

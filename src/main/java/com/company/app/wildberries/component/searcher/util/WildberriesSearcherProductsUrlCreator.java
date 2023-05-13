@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 import java.util.Map;
 
 @UtilityClass
-public class WildberriesSearcherUrlCreator {
+public class WildberriesSearcherProductsUrlCreator {
 
 	private static final Map<String, String> WILDBERRIES_SIZE_MAPPING = ImmutableMap.<String, String>builder()
 			.put("36", "31512")

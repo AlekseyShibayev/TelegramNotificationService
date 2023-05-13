@@ -10,6 +10,7 @@ import com.company.app.wildberries.component.searcher.WildberriesSearcherUrlCrea
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class WildberriesSearcherImpl implements WildberriesSearcher {
 
@@ -33,7 +35,6 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 	@Override
 	public List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		String url = WildberriesSearcherUrlCreator.createUrl(wildberriesSearcherContainer);
-
 		List<ResponseProducts> products = getAllProducts(url);
 		return products.stream()
 				.filter(responseProducts -> filterOne(responseProducts, wildberriesSearcherContainer.getFootSize()))
@@ -52,6 +53,7 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 			Response response = jsonSerializationTool.loadOne(htmlResponse, Response.class);
 			List<ResponseProducts> products = response.getData().getProducts();
 			if (products.isEmpty()) {
+				log.debug("в ходе поиска было [{}] запросов к ВБ.", i);
 				return result;
 			} else {
 				result.addAll(products);
@@ -61,6 +63,11 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 	}
 
 	private boolean filterOne(ResponseProducts responseProducts, String footSize) {
+		String rating = responseProducts.getRating();
+		String feedbacks = responseProducts.getFeedbacks();
+		if (Integer.parseInt(rating) < 4 || Integer.parseInt(feedbacks) < 10) {
+			return false;
+		}
 		List<Size> sizes = responseProducts.getSizes();
 		if (sizes.size() != 1) {
 			return false;

@@ -19,6 +19,8 @@ public class ResponseProducts {
 	private Integer id;
 	private String name;
 	private Integer salePriceU;
+	private String rating;
+	private String feedbacks;
 	private List<Size> sizes;
 
 	public WildberriesLinkDto to() {

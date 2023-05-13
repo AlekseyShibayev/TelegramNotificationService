@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 @Component
 public class WildberriesSearcherImpl implements WildberriesSearcher {
 
+	private static final String TEMP_NAME = "1.20";
+
 	@Autowired
 	private WildberriesSearcherExtractor wildberriesSearcherExtractor;
 	@Autowired
@@ -33,26 +35,31 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 		List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);
 
 		List<ResponseProducts> preparedProducts = products.stream()
-				.filter(responseProducts -> filterOne1(responseProducts, wildberriesSearcherContainer))
-				.filter(responseProducts -> filterOne2(responseProducts, wildberriesSearcherContainer))
+				.filter(this::withRating)
+				.filter(this::withFeedbacks)
+				.filter(responseProducts -> withContainsSize(responseProducts, wildberriesSearcherContainer))
 				.collect(Collectors.toList());
 		log.debug("Запускаю фильтрацию для [{}] шт.", preparedProducts.size());
 
 		return preparedProducts.stream()
-				.filter(responseProducts -> filterOne3(responseProducts, wildberriesSearcherContainer))
+				.filter(responseProducts -> withGoodPrice(responseProducts, wildberriesSearcherContainer))
 				.map(ResponseProducts::to)
 				.distinct()
 				.limit(10)
 				.collect(Collectors.toList());
 	}
 
-	private boolean filterOne1(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+	private boolean withRating(ResponseProducts responseProducts) {
 		String rating = responseProducts.getRating();
-		String feedbacks = responseProducts.getFeedbacks();
-		return Integer.parseInt(rating) >= 4 && Integer.parseInt(feedbacks) >= 10;
+		return Integer.parseInt(rating) >= 4;
 	}
 
-	private boolean filterOne2(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+	private boolean withFeedbacks(ResponseProducts responseProducts) {
+		String feedbacks = responseProducts.getFeedbacks();
+		return Integer.parseInt(feedbacks) >= 10;
+	}
+
+	private boolean withContainsSize(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
 		Optional<Size> optional = getUserSize(responseProducts, wildberriesSearcherContainer.getDressSize());
 		return optional.isPresent();
 	}
@@ -64,12 +71,13 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 				.findAny();
 	}
 
-	private boolean filterOne3(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+	private boolean withGoodPrice(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
 		try {
 			BigDecimal averagePrice = new BigDecimal(wildberriesSearcherAveragePriceExtractor.getAveragePrice(responseProducts));
 			BigDecimal currentPrice = new BigDecimal(responseProducts.getSalePriceU());
-//		averagePrice = averagePrice.multiply(new BigDecimal("1.20"));
-			log.debug("Цена: текущая: [{}] средняя: [{}]", currentPrice, averagePrice);
+			log.debug("Цена: текущая*[{}]: [{}] < средняя: [{}] ?", TEMP_NAME, currentPrice, averagePrice);
+			currentPrice = currentPrice.multiply(new BigDecimal(TEMP_NAME));
+			log.debug("Цена: текущая*[{}]: [{}] < средняя: [{}] ?", TEMP_NAME, currentPrice, averagePrice);
 			int i = currentPrice.compareTo(averagePrice);
 			return i < 0;
 		} catch (Exception exception) {

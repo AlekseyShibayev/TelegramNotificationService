@@ -1,6 +1,6 @@
 package com.company.app.telegram.component.data;
 
-import com.company.app.telegram.component.binder.BinderContainer;
+import com.company.app.telegram.binder.BinderContainer;
 import com.google.common.collect.Lists;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ForceReplyKeyboard;

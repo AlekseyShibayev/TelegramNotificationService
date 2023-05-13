@@ -7,7 +7,19 @@
       "name": "Aleksey",
       "role": "Owner",
       "footSize": "45",
+      "dressSize": "50",
       "gender": "male"
+    }
+  },
+  {
+    "chatId": 484518144,
+    "enableNotifications": false,
+    "userInfo": {
+      "name": "Uliana",
+      "role": "User",
+      "footSize": "40",
+      "dressSize": "46",
+      "gender": "female"
     }
   }
 ]

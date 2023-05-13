@@ -1,8 +1,8 @@
-package com.company.app.telegram.component.binder.impl;
+package com.company.app.telegram.binder.impl;
 
+import com.company.app.telegram.binder.BinderContainer;
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.WildberriesBinder;
+import com.company.app.telegram.binder.api.WildberriesBinder;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries.controller.WildberriesController;
 import com.company.app.wildberries.domain.dto.FoundItemDto;

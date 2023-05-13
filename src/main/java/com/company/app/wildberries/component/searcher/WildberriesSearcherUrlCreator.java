@@ -8,7 +8,7 @@ import java.util.Map;
 @UtilityClass
 public class WildberriesSearcherUrlCreator {
 
-	private static final Map<String, String> WILDBERRIES_FOOT_SIZE_MAPPING = ImmutableMap.<String, String>builder()
+	private static final Map<String, String> WILDBERRIES_SIZE_MAPPING = ImmutableMap.<String, String>builder()
 			.put("36", "31512")
 			.put("36.5", "56141")
 			.put("37", "32494")
@@ -30,19 +30,27 @@ public class WildberriesSearcherUrlCreator {
 			.put("45", "40350")
 			.put("45.5", "56177")
 			.put("46", "41332")
+			.put("48", "43296")
+			.put("50", "45260")
+			.put("51", "56206")
+			.put("52", "56208")
+			.put("54", "56218")
 			.build();
 
-	private static final String URL = "https://search.wb.ru/exactmatch/ru/male/v4/search?" +
-			"appType=1&curr=rub&dest=-3827418&fbrand=21;61;671;60361" +
+	private static final String TOM_TAILOR_URL = "https://catalog.wb.ru/sellers/catalog?" +
+			"appType=1" +
+			"&curr=rub" +
+			"&dest=-3827418" +
 			"&regions=80,64,38,4,115,83,33,68,30,86,40,1,66,48,110,31,22,114" +
-			"&resultset=catalog&sort=popular&spp=22&suppressSpellcheck=false&xsubject=105";
+			"&sort=popular" +
+			"&spp=22" +
+			"&supplier=5472";
 
 	public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		String withGender = withGender(wildberriesSearcherContainer.getGender());
-		String withFootSize = withFootSize(wildberriesSearcherContainer.getFootSize());
-		String page = "&page=%s";
-		String query = "&query=кроссовки";
-		return URL + withGender + withFootSize + query + page;
+		String withSize = withFootSize(wildberriesSearcherContainer.getDressSize());
+		String withPage = withPage();
+		return TOM_TAILOR_URL + withGender + withSize + withPage;
 	}
 
 	private static String withGender(String gender) {
@@ -52,6 +60,10 @@ public class WildberriesSearcherUrlCreator {
 
 	private static String withFootSize(String footSize) {
 		String urlSubstring = "&fsize=%s";
-		return String.format(urlSubstring, WILDBERRIES_FOOT_SIZE_MAPPING.get(footSize));
+		return String.format(urlSubstring, WILDBERRIES_SIZE_MAPPING.get(footSize));
+	}
+
+	private static String withPage() {
+		return "&page=%s";
 	}
 }

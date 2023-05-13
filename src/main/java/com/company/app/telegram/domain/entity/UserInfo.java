@@ -33,4 +33,7 @@ public class UserInfo {
 
 	@Column(name = "FOOT_SIZE")
 	private String footSize;
+
+	@Column(name = "DRESS_SIZE")
+	private String dressSize;
 }

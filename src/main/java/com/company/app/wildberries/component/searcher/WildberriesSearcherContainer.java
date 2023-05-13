@@ -8,5 +8,6 @@ import lombok.Data;
 public class WildberriesSearcherContainer {
 
 	String footSize;
+	String dressSize;
 	String gender;
 }

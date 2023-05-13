@@ -1,10 +1,10 @@
-package com.company.app.telegram.component.binder.impl;
+package com.company.app.telegram.binder.impl;
 
 import com.company.app.exchangerate.controller.ExchangeRateController;
 import com.company.app.exchangerate.domain.entity.ExchangeRate;
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.ExchangeRateBinder;
+import com.company.app.telegram.binder.BinderContainer;
+import com.company.app.telegram.binder.api.ExchangeRateBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

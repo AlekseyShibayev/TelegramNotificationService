@@ -37,7 +37,7 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 		String url = WildberriesSearcherUrlCreator.createUrl(wildberriesSearcherContainer);
 		List<ResponseProducts> products = getAllProducts(url);
 		return products.stream()
-				.filter(responseProducts -> filterOne(responseProducts, wildberriesSearcherContainer.getFootSize()))
+				.filter(responseProducts -> filterOne(responseProducts, wildberriesSearcherContainer.getDressSize()))
 				.map(responseProducts -> responseProducts.to())
 				.distinct()
 				.collect(Collectors.toList());
@@ -53,7 +53,7 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 			Response response = jsonSerializationTool.loadOne(htmlResponse, Response.class);
 			List<ResponseProducts> products = response.getData().getProducts();
 			if (products.isEmpty()) {
-				log.debug("в ходе поиска было [{}] запросов к ВБ.", i);
+				log.debug("В ходе поиска было [{}] запросов к ВБ.", i);
 				return result;
 			} else {
 				result.addAll(products);

@@ -1,4 +1,4 @@
-package com.company.app.telegram.component.binder.api;
+package com.company.app.telegram.binder.api;
 
 public interface ExchangeRateBinder extends Binder {
 }

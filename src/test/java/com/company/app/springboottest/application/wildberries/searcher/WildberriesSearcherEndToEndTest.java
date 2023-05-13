@@ -20,6 +20,7 @@ class WildberriesSearcherEndToEndTest extends ApplicationSpringBootTestContext {
 		WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
 				.gender("male")
 				.footSize("45")
+				.dressSize("50")
 				.build();
 
 		List<WildberriesLinkDto> dtos = wildberriesSearcher.search(wildberriesSearcherContainer);

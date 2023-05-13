@@ -1,8 +1,8 @@
-package com.company.app.telegram.component.binder.impl;
+package com.company.app.telegram.binder.impl;
 
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.WildberriesBinder;
+import com.company.app.telegram.binder.BinderContainer;
+import com.company.app.telegram.binder.api.WildberriesBinder;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.UserInfo;
 import com.company.app.wildberries.component.searcher.WildberriesSearcherContainer;
@@ -36,6 +36,7 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 		UserInfo userInfo = chat.getUserInfo();
 
 		WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
+				.dressSize(userInfo.getDressSize())
 				.footSize(userInfo.getFootSize())
 				.gender(userInfo.getGender())
 				.build();

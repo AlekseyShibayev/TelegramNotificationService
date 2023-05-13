@@ -1,7 +1,7 @@
-package com.company.app.telegram.component.binder.impl;
+package com.company.app.telegram.binder.impl;
 
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.TelegramBinder;
+import com.company.app.telegram.binder.BinderContainer;
+import com.company.app.telegram.binder.api.TelegramBinder;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.api.ChatActivationService;
 import lombok.extern.slf4j.Slf4j;

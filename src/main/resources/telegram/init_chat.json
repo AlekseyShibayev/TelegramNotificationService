@@ -2,7 +2,6 @@
   {
     "chatId": 653606407,
     "enableNotifications": true,
-
     "userInfo": {
       "name": "Aleksey",
       "role": "Owner",
@@ -16,7 +15,7 @@
     "enableNotifications": false,
     "userInfo": {
       "name": "Uliana",
-      "role": "User",
+      "role": "Admin",
       "footSize": "40",
       "dressSize": "46",
       "gender": "female"

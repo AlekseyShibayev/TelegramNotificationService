@@ -4,6 +4,7 @@ import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
 import com.google.common.collect.ImmutableMap;
 import lombok.experimental.UtilityClass;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @UtilityClass
@@ -59,9 +60,14 @@ public class WildberriesSearcherProductsUrlCreator {
 		return "&fkind=" + i;
 	}
 
-	private static String withFootSize(String footSize) {
+	private static String withFootSize(String sizes) {
+		String preparedSizes = Arrays.stream(sizes.split(";"))
+				.map(WILDBERRIES_SIZE_MAPPING::get)
+				.reduce((s1, s2) -> s1 + ";" + s2)
+				.orElseThrow();
+
 		String urlSubstring = "&fsize=%s";
-		return String.format(urlSubstring, WILDBERRIES_SIZE_MAPPING.get(footSize));
+		return String.format(urlSubstring, preparedSizes);
 	}
 
 	private static String withPage() {

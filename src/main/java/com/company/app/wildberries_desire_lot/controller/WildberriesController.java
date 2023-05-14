@@ -1,10 +1,10 @@
 package com.company.app.wildberries_desire_lot.controller;
 
 import com.company.app.wildberries_desire_lot.component.WildberriesFacade;
-import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries_desire_lot.domain.dto.FoundItemDto;
 import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries_desire_lot.domain.util.FoundItemUtil;
+import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

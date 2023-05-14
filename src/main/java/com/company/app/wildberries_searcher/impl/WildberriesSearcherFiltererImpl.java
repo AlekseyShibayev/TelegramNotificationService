@@ -2,11 +2,12 @@ package com.company.app.wildberries_searcher.impl;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.aop.logging.util.LogUtils;
-import com.company.app.wildberries_searcher.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries_desire_lot.component.data.ResponseProducts;
 import com.company.app.wildberries_desire_lot.component.data.Size;
+import com.company.app.wildberries_searcher.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries_searcher.api.WildberriesSearcherFilterer;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
+import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,13 +15,14 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilterer {
 
-	private static final String GREED_INDEX = "1.30";
+	private static final String GREED_INDEX = "1.40";
 
 	@Autowired
 	private WildberriesSearcherAveragePriceExtractor wildberriesSearcherAveragePriceExtractor;
@@ -55,10 +57,11 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
 		return optional.isPresent();
 	}
 
-	private Optional<Size> getUserSize(ResponseProducts responseProducts, String userSize) {
-		List<Size> sizes = responseProducts.getSizes();
-		return sizes.stream()
-				.filter(size -> size.getName().equals(userSize))
+	Optional<Size> getUserSize(ResponseProducts responseProducts, String userSizes) {
+		List<Size> productSizes = responseProducts.getSizes();
+		Set<String> userSizesSet = Sets.newHashSet(userSizes.split(";"));
+		return productSizes.stream()
+				.filter(size -> userSizesSet.contains(size.getName()))
 				.findAny();
 	}
 

@@ -17,7 +17,7 @@
       "name": "Uliana",
       "role": "Admin",
       "footSize": "40",
-      "dressSize": "46",
+      "dressSize": "46;48",
       "gender": "female"
     }
   }

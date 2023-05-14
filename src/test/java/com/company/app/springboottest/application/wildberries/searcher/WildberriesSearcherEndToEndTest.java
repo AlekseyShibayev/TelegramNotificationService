@@ -25,14 +25,18 @@ class WildberriesSearcherEndToEndTest extends ApplicationSpringBootTestContext {
 	@Test
 	void searcher_can_search() {
 		WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
-				.gender("male")
+				.gender("female")
 				.footSize("45")
-				.dressSize("50")
+				.dressSize("46;48")
 				.build();
 
 		ResponseProducts mock = ResponseProducts.builder()
 				.id(101304613)
-				.sizes(List.of(Size.builder().name("50").build()))
+				.sizes(List.of(
+						Size.builder().name("46").build(),
+						Size.builder().name("48").build(),
+						Size.builder().name("50").build()
+						))
 				.rating("5")
 				.feedbacks("20")
 				.salePriceU(100)

@@ -1,10 +1,10 @@
 package com.company.app.springboottest.application.exchangerate;
 
 import com.company.app.telegram.binder.api.ExchangeRateBinder;
-import com.company.app.exchangerate.controller.ExchangeRateController;
-import com.company.app.exchangerate.domain.entity.ExchangeRate;
-import com.company.app.exchangerate.domain.repository.ExchangeRepository;
-import com.company.app.exchangerate.domain.service.api.ExchangeRateService;
+import com.company.app.exchange_rate.controller.ExchangeRateController;
+import com.company.app.exchange_rate.domain.entity.ExchangeRate;
+import com.company.app.exchange_rate.domain.repository.ExchangeRepository;
+import com.company.app.exchange_rate.domain.service.api.ExchangeRateService;
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
 import com.company.app.telegram.binder.BinderContainer;
 import com.company.app.telegram.domain.entity.Chat;

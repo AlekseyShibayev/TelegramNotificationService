@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * Тесты:
  * 1. JUnit
  * 2. Component test. С использованием SpringBootComponentScanStopper. Example:
- * {@link com.company.app.exchangerate.component.ExchangeRateFacadeTest}
+ * {@link com.company.app.exchange_rate.component.ExchangeRateFacadeTest}
  * 3. Full application test. Example:
  * {@link com.company.app.springboottest.application.ApplicationTest}
  */

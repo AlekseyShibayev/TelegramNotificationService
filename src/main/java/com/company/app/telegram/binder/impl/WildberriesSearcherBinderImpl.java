@@ -8,6 +8,7 @@ import com.company.app.telegram.domain.entity.UserInfo;
 import com.company.app.wildberries_desire_lot.controller.WildberriesController;
 import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.data.WildberriesSearcherResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -42,12 +43,15 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 				.gender(userInfo.getGender())
 				.build();
 
-		List<WildberriesLinkDto> dtos = wildberriesController.search(wildberriesSearcherContainer).getBody();
+		WildberriesSearcherResult result = wildberriesController.search(wildberriesSearcherContainer).getBody();
 
-		if (CollectionUtils.isEmpty(dtos)) {
+		if (result.isNotSuccess()) {
+			telegramFacade.writeToTargetChat(chat.getChatId(), "Что-то не так");
+		} else if (result.isSuccess() && result.getWildberriesLinkDtoList().isEmpty()) {
 			telegramFacade.writeToTargetChat(chat.getChatId(), "Пусто");
 		} else {
-			List<String> list = dtos.stream()
+			List<WildberriesLinkDto> dtoList = result.getWildberriesLinkDtoList();
+			List<String> list = dtoList.stream()
 					.map(dto -> dto.getPrice() + ": " + dto.getLink())
 					.distinct()
 					.collect(Collectors.toList());

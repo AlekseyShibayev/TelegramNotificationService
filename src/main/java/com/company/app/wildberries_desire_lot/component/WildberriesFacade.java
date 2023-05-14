@@ -2,11 +2,11 @@ package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.wildberries_desire_lot.component.api.WildberriesService;
-import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import com.company.app.wildberries_desire_lot.domain.service.api.FoundItemsService;
 import com.company.app.wildberries_searcher.api.WildberriesSearcher;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.data.WildberriesSearcherResult;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class WildberriesFacade {
 	}
 
 	@PerformanceLogAnnotation
-	public List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer) {
+	public WildberriesSearcherResult search(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		return wildberriesSearcher.search(wildberriesSearcherContainer);
 	}
 }

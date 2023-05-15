@@ -36,25 +36,16 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
 
 	@Override
 	public WildberriesSearcherResult process(WildberriesSearcherContainer wildberriesSearcherContainer) {
-		if (executorService.isShutdown()) {
-			return getResult(false);
-		} else {
-			return startNewAsyncSearch(wildberriesSearcherContainer);
-		}
-	}
-
-	@SneakyThrows
-	private WildberriesSearcherResult startNewAsyncSearch(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		if (semaphore.tryAcquire()) {
-			start(wildberriesSearcherContainer);
-			semaphore.release();
+			startNewAsyncSearch(wildberriesSearcherContainer);
 			return getResult(true);
 		} else {
 			return getResult(false);
 		}
 	}
 
-	private void start(WildberriesSearcherContainer wildberriesSearcherContainer) {
+	@SneakyThrows
+	private void startNewAsyncSearch(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		log.debug("Запускаю поиск для [{}].", wildberriesSearcherContainer);
 		executorService.submit(WildberriesSearcherTask.builder()
 				.wildberriesSearcherContainer(wildberriesSearcherContainer)
@@ -62,11 +53,10 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
 				.wildberriesSearcher(wildberriesSearcher)
 				.callBack(this::callback)
 				.build());
-		executorService.shutdown();
 	}
 
 	private void callback() {
-		executorService = Executors.newSingleThreadExecutor();
+		semaphore.release();
 	}
 
 	private WildberriesSearcherResult getResult(boolean isSuccess) {

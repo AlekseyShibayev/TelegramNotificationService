@@ -22,16 +22,21 @@ public class WildberriesSearcherTask implements Runnable {
 
 	@Override
 	public void run() {
+		try {
+			doWork();
+		} finally {
+			callBack.callback();
+		}
+	}
+
+	private void doWork() {
 		List<WildberriesLinkDto> result = getAllProducts();
 		telegramController.say(createTargetMessage(String.format("Завершен поиск: %s", wildberriesSearcherContainer)));
-
 		result.stream()
 				.map(this::createMessage)
 				.distinct()
 				.map(this::createTargetMessage)
 				.forEach(targetMessage -> telegramController.say(targetMessage));
-
-		callBack.callback();
 	}
 
 	private List<WildberriesLinkDto> getAllProducts() {

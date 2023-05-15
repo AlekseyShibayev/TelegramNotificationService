@@ -3,27 +3,23 @@ package com.company.app.wildberries_searcher.impl;
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.aop.logging.util.LogUtils;
 import com.company.app.wildberries_desire_lot.component.data.ResponseProducts;
-import com.company.app.wildberries_desire_lot.component.data.Size;
 import com.company.app.wildberries_searcher.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries_searcher.api.WildberriesSearcherFilterer;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
-import com.google.common.collect.Sets;
+import com.company.app.wildberries_searcher.data.filter.WildberriesSearcherFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilterer {
 
-	private static final String GREED_INDEX = "1.30";
-	private static final int MAX_PRICE = 5000_00;
+	private static final String GREED_INDEX = "1.40";
 
 	/**
 	 * Нужно для логов. Будет только один поток, гарантирую.
@@ -33,15 +29,14 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
 
 	@Autowired
 	private WildberriesSearcherAveragePriceExtractor wildberriesSearcherAveragePriceExtractor;
+	@Autowired
+	private List<WildberriesSearcherFilter> wildberriesSearcherFilterList;
 
 	@PerformanceLogAnnotation
 	@Override
 	public List<ResponseProducts> filter(List<ResponseProducts> products, WildberriesSearcherContainer wildberriesSearcherContainer) {
 		List<ResponseProducts> preparedProducts = products.stream()
-				.filter(this::withRating)
-				.filter(this::withFeedbacks)
-				.filter(this::withMaxPrice)
-				.filter(responseProducts -> withContainsSize(responseProducts, wildberriesSearcherContainer))
+				.filter(responseProducts -> filterAll(responseProducts, wildberriesSearcherContainer))
 				.collect(Collectors.toList());
 
 		if (log.isDebugEnabled()) {
@@ -51,39 +46,23 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
 		}
 
 		return preparedProducts.stream()
-				.filter(responseProducts -> withGoodPrice(responseProducts, wildberriesSearcherContainer))
+				.filter(responseProducts -> currentPriceLesserThanAveragePrice(responseProducts, wildberriesSearcherContainer))
 				.collect(Collectors.toList());
 	}
 
-	private boolean withMaxPrice(ResponseProducts responseProducts) {
-		Integer price = responseProducts.getSalePriceU();
-		return price <= MAX_PRICE;
+	private boolean filterAll(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+		for (WildberriesSearcherFilter filter : wildberriesSearcherFilterList) {
+			if (filter.isPreFilter()) {
+				boolean result = filter.doFilter(responseProducts, wildberriesSearcherContainer);
+				if (!result) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
-	private boolean withRating(ResponseProducts responseProducts) {
-		String rating = responseProducts.getRating();
-		return Integer.parseInt(rating) >= 4;
-	}
-
-	private boolean withFeedbacks(ResponseProducts responseProducts) {
-		String feedbacks = responseProducts.getFeedbacks();
-		return Integer.parseInt(feedbacks) >= 10;
-	}
-
-	private boolean withContainsSize(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
-		Optional<Size> optional = getUserSize(responseProducts, wildberriesSearcherContainer.getDressSize());
-		return optional.isPresent();
-	}
-
-	Optional<Size> getUserSize(ResponseProducts responseProducts, String userSizes) {
-		List<Size> productSizes = responseProducts.getSizes();
-		Set<String> userSizesSet = Sets.newHashSet(userSizes.split(";"));
-		return productSizes.stream()
-				.filter(size -> userSizesSet.contains(size.getName()))
-				.findAny();
-	}
-
-	private boolean withGoodPrice(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+	private boolean currentPriceLesserThanAveragePrice(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
 		try {
 			BigDecimal averagePrice = new BigDecimal(wildberriesSearcherAveragePriceExtractor.getAveragePrice(responseProducts));
 			BigDecimal currentPrice = new BigDecimal(responseProducts.getSalePriceU());

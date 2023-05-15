@@ -1,4 +1,4 @@
-package com.company.app.wildberries_searcher.impl;
+package com.company.app.wildberries_searcher.data.filter;
 
 import com.company.app.wildberries_desire_lot.component.data.ResponseProducts;
 import com.company.app.wildberries_desire_lot.component.data.Size;
@@ -9,20 +9,20 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-class WildberriesSearcherFiltererImplTest {
+class WildberriesSearcherContainsSizeFilterTest {
 
-	private WildberriesSearcherFiltererImpl filterer;
+	private WildberriesSearcherContainsSizeFilter filter;
 
 	@BeforeEach
 	public void init() {
-		filterer = new WildberriesSearcherFiltererImpl();
+		filter = new WildberriesSearcherContainsSizeFilter();
 	}
 
 	@Test
 	void getUserSize_positive_test() {
 		ResponseProducts responseProducts = createResponseProducts();
 
-		Optional<Size> userSize = filterer.getUserSize(responseProducts, "50;52");
+		Optional<Size> userSize = filter.getUserSize(responseProducts, "50;52");
 
 		Assertions.assertTrue(userSize.isPresent());
 	}
@@ -31,7 +31,7 @@ class WildberriesSearcherFiltererImplTest {
 	void getUserSize_negative_test() {
 		ResponseProducts responseProducts = createResponseProducts();
 
-		Optional<Size> userSize = filterer.getUserSize(responseProducts, "52;54");
+		Optional<Size> userSize = filter.getUserSize(responseProducts, "52;54");
 
 		Assertions.assertTrue(userSize.isEmpty());
 	}

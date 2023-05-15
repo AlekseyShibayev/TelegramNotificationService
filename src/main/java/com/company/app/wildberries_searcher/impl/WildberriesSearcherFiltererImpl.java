@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Component
 public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilterer {
 
-	private static final String GREED_INDEX = "1.00";
+	private static final String GREED_INDEX = "1.30";
 	private static final int MAX_PRICE = 5000_00;
 
 	/**
@@ -52,7 +52,6 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
 
 		return preparedProducts.stream()
 				.filter(responseProducts -> withGoodPrice(responseProducts, wildberriesSearcherContainer))
-				.limit(1)
 				.collect(Collectors.toList());
 	}
 

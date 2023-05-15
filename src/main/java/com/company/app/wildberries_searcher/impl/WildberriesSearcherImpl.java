@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,18 +25,6 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 
 	@Override
 	public List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer) {
-		List<WildberriesLinkDto> result = new ArrayList<>();
-
-		Arrays.stream(wildberriesSearcherContainer.getSupplier().split(";"))
-				.forEach(supplier -> {
-					wildberriesSearcherContainer.setSupplier(supplier);
-					result.addAll(searchForOneSupplier(wildberriesSearcherContainer));
-				});
-
-		return result;
-	}
-
-	private List<WildberriesLinkDto> searchForOneSupplier(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		String url = WildberriesSearcherProductsUrlCreator.createUrl(wildberriesSearcherContainer);
 		List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);
 		List<ResponseProducts> filteredProducts = wildberriesSearcherFilterer.filter(products, wildberriesSearcherContainer);

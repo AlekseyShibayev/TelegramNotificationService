@@ -3,7 +3,6 @@ package com.company.app.wildberries_searcher.impl;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.wildberries_searcher.api.WildberriesSearcher;
 import com.company.app.wildberries_searcher.api.WildberriesSearcherHandler;
-import com.company.app.wildberries_searcher.data.WildberriesSearcherCallback;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherResult;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherTask;

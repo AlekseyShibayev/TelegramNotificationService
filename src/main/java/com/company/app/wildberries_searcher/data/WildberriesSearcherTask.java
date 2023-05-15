@@ -7,6 +7,8 @@ import com.company.app.wildberries_searcher.api.WildberriesSearcher;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -20,16 +22,26 @@ public class WildberriesSearcherTask implements Runnable {
 
 	@Override
 	public void run() {
-		List<WildberriesLinkDto> dtoList = wildberriesSearcher.search(this.wildberriesSearcherContainer);
+		List<WildberriesLinkDto> result = getAllProducts();
 		telegramController.say(createTargetMessage(String.format("Завершен поиск: %s", wildberriesSearcherContainer)));
 
-		dtoList.stream()
+		result.stream()
 				.map(this::createMessage)
 				.distinct()
 				.map(this::createTargetMessage)
 				.forEach(targetMessage -> telegramController.say(targetMessage));
 
 		callBack.callback();
+	}
+
+	private List<WildberriesLinkDto> getAllProducts() {
+		List<WildberriesLinkDto> result = new ArrayList<>();
+		Arrays.stream(wildberriesSearcherContainer.getSupplier().split(";"))
+				.forEach(supplier -> {
+					wildberriesSearcherContainer.setSupplier(supplier);
+					result.addAll(wildberriesSearcher.search(this.wildberriesSearcherContainer));
+				});
+		return result;
 	}
 
 	private String createMessage(WildberriesLinkDto dto) {

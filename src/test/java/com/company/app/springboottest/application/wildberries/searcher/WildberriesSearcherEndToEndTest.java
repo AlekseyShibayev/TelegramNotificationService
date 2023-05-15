@@ -28,6 +28,7 @@ class WildberriesSearcherEndToEndTest extends ApplicationSpringBootTestContext {
 				.gender("female")
 				.footSize("45")
 				.dressSize("46;48")
+				.supplier("any_supplier_name_or_id")
 				.build();
 
 		ResponseProducts mock = ResponseProducts.builder()

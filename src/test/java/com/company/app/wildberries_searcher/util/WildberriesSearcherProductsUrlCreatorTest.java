@@ -19,7 +19,6 @@ class WildberriesSearcherProductsUrlCreatorTest {
 		Assertions.assertEquals(1, StringUtils.countMatches(url, "%s"));
 	}
 
-
 	@Test
 	void can_work_with_many_size_test() {
 		WildberriesSearcherContainer container = WildberriesSearcherContainer.builder()

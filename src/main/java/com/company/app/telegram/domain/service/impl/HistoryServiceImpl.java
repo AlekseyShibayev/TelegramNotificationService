@@ -53,7 +53,7 @@ public class HistoryServiceImpl implements HistoryService {
 	@Transactional
 	@Override
 	public void save(Long chatId, String text) {
-		Chat chat = chatService.getChatOrCreateIfNotExist(chatId);
+		Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
 		historyRepository.save(History.builder()
 				.chat(chat)
 				.message(text)
@@ -64,11 +64,11 @@ public class HistoryServiceImpl implements HistoryService {
 	@Transactional
 	@Override
 	public void saveHistory(Chat chat, String text) {
-		log.debug("Читаю из чата [{}] сообщение [{}].", chat.getChatId(), text);
+		log.debug("Читаю из чата [{}] сообщение [{}].", chat.getChatName(), text);
 		History history = History.builder()
 				.chat(chat)
 				.message(text)
-				.source(chat.getChatId().toString())
+				.source(chat.getChatName().toString())
 				.target(telegramBotConfig.getName())
 				.date(new Date())
 				.build();
@@ -81,7 +81,7 @@ public class HistoryServiceImpl implements HistoryService {
 		log.debug("Пробую написать в телеграм [{}]: [{}].", sendMessage.getChatId(), sendMessage.getText());
 		String chatId = sendMessage.getChatId();
 		History history = History.builder()
-				.chat(chatService.getChatOrCreateIfNotExist(Long.valueOf(chatId)))
+				.chat(chatService.getChatOrCreateIfNotExist(chatId))
 				.message(sendMessage.getText())
 				.source(telegramBotConfig.getName())
 				.target(chatId)

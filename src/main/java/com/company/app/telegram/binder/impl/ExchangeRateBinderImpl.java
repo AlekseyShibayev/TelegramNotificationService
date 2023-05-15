@@ -26,6 +26,6 @@ public class ExchangeRateBinderImpl implements ExchangeRateBinder {
 	@Override
 	public void bind(BinderContainer binderContainer) {
 		ExchangeRate last = exchangeRateController.getLast().getBody();
-		telegramFacade.writeToTargetChat(binderContainer.getChat().getChatId(), last.getAliexpressExchangeRate());
+		telegramFacade.writeToTargetChat(binderContainer.getChat().getChatName(), last.getAliexpressExchangeRate());
 	}
 }

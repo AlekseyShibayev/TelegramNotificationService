@@ -4,7 +4,7 @@ import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.wildberries_desire_lot.component.api.WildberriesService;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import com.company.app.wildberries_desire_lot.domain.service.api.FoundItemsService;
-import com.company.app.wildberries_searcher.api.WildberriesSearcher;
+import com.company.app.wildberries_searcher.api.WildberriesSearcherHandler;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherResult;
 import lombok.Setter;
@@ -22,7 +22,7 @@ public class WildberriesFacade {
 	@Autowired
 	private FoundItemsService foundItemsService;
 	@Autowired
-	private WildberriesSearcher wildberriesSearcher;
+	private WildberriesSearcherHandler wildberriesSearcherHandler;
 
 	@PerformanceLogAnnotation
 	public List<FoundItem> getDesiredLots() {
@@ -36,6 +36,6 @@ public class WildberriesFacade {
 
 	@PerformanceLogAnnotation
 	public WildberriesSearcherResult search(WildberriesSearcherContainer wildberriesSearcherContainer) {
-		return wildberriesSearcher.search(wildberriesSearcherContainer);
+		return wildberriesSearcherHandler.process(wildberriesSearcherContainer);
 	}
 }

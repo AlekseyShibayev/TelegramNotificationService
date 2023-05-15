@@ -28,7 +28,7 @@ public class ChatServiceImpl implements ChatService {
 	@Transactional
 	@Override
 	public Long create(ChatDto chatDto) {
-		Optional<Chat> optional = chatRepository.findFirstByChatId(chatDto.getChatId());
+		Optional<Chat> optional = chatRepository.findFirstByChatName(chatDto.getChatName());
 		if (optional.isPresent()) {
 			return optional.get().getId();
 		} else {
@@ -72,16 +72,16 @@ public class ChatServiceImpl implements ChatService {
 
 	@Transactional
 	@Override
-	public Chat getChatOrCreateIfNotExist(Long chatId) {
-		if (chatRepository.existsChatByChatId(chatId)) {
-			return chatRepository.findFirstByChatId(chatId).get();
+	public Chat getChatOrCreateIfNotExist(String chatId) {
+		if (chatRepository.existsChatByChatName(chatId)) {
+			return chatRepository.findFirstByChatName(chatId).get();
 		} else {
 			return save(chatId);
 		}
 	}
 
-	private Chat save(Long chatId) {
-		Chat chat = Chat.builder().chatId(chatId).build();
+	private Chat save(String chatId) {
+		Chat chat = Chat.builder().chatName(chatId).build();
 		return chatRepository.save(chat);
 	}
 

@@ -32,7 +32,7 @@ public class PrepareChatToWorkServiceImpl implements PrepareChatToWorkService {
 	}
 
 	private void doDomainLogic(Message message, Long chatId) {
-		Chat chat = chatService.getChatOrCreateIfNotExist(chatId);
+		Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
 		historyService.saveHistory(chat, message.getText());
 		chatActivationService.activate(chat);
 	}

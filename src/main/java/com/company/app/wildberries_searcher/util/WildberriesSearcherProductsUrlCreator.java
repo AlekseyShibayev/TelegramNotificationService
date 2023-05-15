@@ -3,10 +3,12 @@ package com.company.app.wildberries_searcher.util;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
 import com.google.common.collect.ImmutableMap;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.Map;
 
+@Slf4j
 @UtilityClass
 public class WildberriesSearcherProductsUrlCreator {
 
@@ -39,20 +41,28 @@ public class WildberriesSearcherProductsUrlCreator {
 			.put("54", "56218")
 			.build();
 
-	private static final String TOM_TAILOR_URL = "https://catalog.wb.ru/sellers/catalog?" +
+	private static final String URL = "https://catalog.wb.ru/sellers/catalog?" +
 			"appType=1" +
 			"&curr=rub" +
 			"&dest=-3827418" +
 			"&regions=80,64,38,4,115,83,33,68,30,86,40,1,66,48,110,31,22,114" +
 			"&sort=popular" +
 			"&spp=22" +
-			"&supplier=5472";
+			"&supplier=8905";
+
+	/**
+	 * 32496 - остин
+	 * 5472 - том тейлор
+	 * 8905 - oodji
+	 */
 
 	public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		String withGender = withGender(wildberriesSearcherContainer.getGender());
 		String withSize = withFootSize(wildberriesSearcherContainer.getDressSize());
 		String withPage = withPage();
-		return TOM_TAILOR_URL + withGender + withSize + withPage;
+		String url = URL + withGender + withSize + withPage;
+		log.debug("[{}]: Сформирована ссылка:\n[{}].", wildberriesSearcherContainer.getChatId(), url);
+		return url;
 	}
 
 	private static String withGender(String gender) {

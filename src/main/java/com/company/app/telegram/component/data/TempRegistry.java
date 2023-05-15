@@ -59,7 +59,7 @@ public class TempRegistry {
 		InlineKeyboardMarkup inlineKeyboardMarkup = getInlineKeyboardMarkup();
 
 		return SendPoll.builder()
-				.chatId(binderContainer.getChat().getChatId())
+				.chatId(binderContainer.getChat().getChatName())
 				.question("Вопрос такой-то?")
 				.options(Lists.newArrayList("Первый ответ", "Второй ответ", "Третий ответ"))
 				.type("regular")

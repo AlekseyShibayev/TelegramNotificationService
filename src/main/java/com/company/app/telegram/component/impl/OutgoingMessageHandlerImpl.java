@@ -25,13 +25,13 @@ public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
 	public void sendToEveryone(Object message) {
 		chatService.getAll().stream()
 				.filter(Chat::isEnableNotifications)
-				.map(chat -> SendMessage.builder().text(message.toString()).chatId(chat.getChatId().toString()).build())
+				.map(chat -> SendMessage.builder().text(message.toString()).chatId(chat.getChatName().toString()).build())
 				.forEach(this::sendOneMessage);
 	}
 
 	@Override
-	public void sendToTargetChat(Long chatId, Object message) {
-		SendMessage sendMessage = SendMessage.builder().text(message.toString()).chatId(chatId).build();
+	public void sendToTargetChat(String chatId, Object message) {
+		SendMessage sendMessage = SendMessage.builder().chatId(chatId).text(message.toString()).build();
 		sendOneMessage(sendMessage);
 	}
 

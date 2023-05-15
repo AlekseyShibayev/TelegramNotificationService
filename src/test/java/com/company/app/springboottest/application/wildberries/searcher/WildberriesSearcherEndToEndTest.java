@@ -3,11 +3,10 @@ package com.company.app.springboottest.application.wildberries.searcher;
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
 import com.company.app.wildberries_desire_lot.component.data.ResponseProducts;
 import com.company.app.wildberries_desire_lot.component.data.Size;
+import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries_searcher.api.WildberriesSearcher;
 import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
-import com.company.app.wildberries_searcher.data.WildberriesSearcherResult;
 import com.company.app.wildberries_searcher.impl.WildberriesSearcherExtractorImpl;
-import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -46,10 +45,8 @@ class WildberriesSearcherEndToEndTest extends ApplicationSpringBootTestContext {
 		Mockito.when(wildberriesSearcherExtractor.extractResponseProducts(Mockito.anyString())).thenReturn(List.of(mock));
 		Mockito.when(wildberriesSearcherExtractor.extractPriceHistory(Mockito.anyString())).thenCallRealMethod();
 
-		WildberriesSearcherResult result = wildberriesSearcher.search(wildberriesSearcherContainer);
+		List<WildberriesLinkDto> dtoList = wildberriesSearcher.search(wildberriesSearcherContainer);
 
-		Assertions.assertNotNull(result);
-		Assertions.assertTrue(result.isSuccess());
-		Assertions.assertTrue(result.getWildberriesLinkDtoList().size() > 0);
+		Assertions.assertTrue(dtoList.size() > 0);
 	}
 }

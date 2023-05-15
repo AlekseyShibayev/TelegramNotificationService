@@ -22,7 +22,14 @@ import java.util.stream.Collectors;
 @Component
 public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilterer {
 
-	private static final String GREED_INDEX = "1.40";
+	private static final String GREED_INDEX = "1.30";
+	private static final int MAX_PRICE = 5000_00;
+
+	/**
+	 * Нужно для логов. Будет только один поток, гарантирую.
+	 */
+	private int preparedProductsSize;
+	private int filterPosition;
 
 	@Autowired
 	private WildberriesSearcherAveragePriceExtractor wildberriesSearcherAveragePriceExtractor;
@@ -33,13 +40,24 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
 		List<ResponseProducts> preparedProducts = products.stream()
 				.filter(this::withRating)
 				.filter(this::withFeedbacks)
+				.filter(this::withMaxPrice)
 				.filter(responseProducts -> withContainsSize(responseProducts, wildberriesSearcherContainer))
 				.collect(Collectors.toList());
-		log.debug("[{}]: После предварительной фильтрации осталось [{}] шт.", wildberriesSearcherContainer.getChatId(), preparedProducts.size());
+
+		if (log.isDebugEnabled()) {
+			log.debug("[{}]: После предварительной фильтрации осталось [{}] шт.", wildberriesSearcherContainer.getChatId(), preparedProducts.size());
+			preparedProductsSize = preparedProducts.size();
+			filterPosition = 0;
+		}
 
 		return preparedProducts.stream()
 				.filter(responseProducts -> withGoodPrice(responseProducts, wildberriesSearcherContainer))
 				.collect(Collectors.toList());
+	}
+
+	private boolean withMaxPrice(ResponseProducts responseProducts) {
+		Integer price = responseProducts.getSalePriceU();
+		return price <= MAX_PRICE;
 	}
 
 	private boolean withRating(ResponseProducts responseProducts) {
@@ -81,8 +99,9 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
 
 	private void doLog(WildberriesSearcherContainer wildberriesSearcherContainer, ResponseProducts responseProducts, BigDecimal averagePrice, BigDecimal currentPrice) {
 		if (log.isDebugEnabled()) {
-			log.debug("[{}]: [{}]: Цена: текущая*[{}]: [{}] < средняя: [{}] ?",
-					wildberriesSearcherContainer.getChatId(), responseProducts.getId(), GREED_INDEX, currentPrice, averagePrice);
+			log.debug("[{}]: [{}]: Цена: текущая*[{}]: [{}] < средняя: [{}] ? [{}/{}]",
+					wildberriesSearcherContainer.getChatId(), responseProducts.getId(), GREED_INDEX, currentPrice, averagePrice, filterPosition, preparedProductsSize);
+			filterPosition++;
 		}
 	}
 }

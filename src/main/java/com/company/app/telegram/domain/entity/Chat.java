@@ -35,8 +35,8 @@ public class Chat {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@Column(name = "CHAT_ID")
-	private Long chatId;
+	@Column(name = "CHAT_NAME")
+	private String chatName;
 
 	@Column(name = "ENABLE_NOTIFICATIONS")
 	private boolean enableNotifications;

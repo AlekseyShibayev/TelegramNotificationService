@@ -17,7 +17,7 @@ public interface ChatService {
 
 	Boolean delete(Long id);
 
-	Chat getChatOrCreateIfNotExist(Long chatId);
+	Chat getChatOrCreateIfNotExist(String chatId);
 
 	List<Chat> getAll();
 

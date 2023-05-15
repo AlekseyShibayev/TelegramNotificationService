@@ -7,5 +7,5 @@ public interface OutgoingMessageHandler {
 
 	void sendToEveryone(Object message);
 
-	void sendToTargetChat(Long chatId, Object message);
+	void sendToTargetChat(String chatId, Object message);
 }

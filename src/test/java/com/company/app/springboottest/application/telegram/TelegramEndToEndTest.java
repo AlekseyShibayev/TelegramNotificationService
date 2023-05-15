@@ -42,7 +42,7 @@ class TelegramEndToEndTest extends ApplicationSpringBootTestContext {
 	@Test
 	void telegram_chat_history_test() {
 		ResponseEntity<Long> chatId = chatController.create(ChatDto.builder()
-				.chatId(653606407L)
+				.chatName("653606407")
 				.enableNotifications(true)
 				.build());
 		telegramController.say("test_text");
@@ -57,7 +57,7 @@ class TelegramEndToEndTest extends ApplicationSpringBootTestContext {
 
 	@Test
 	void chatController_crud_test() {
-		ChatDto chatDto = ChatDto.builder().chatId(653606407L).build();
+		ChatDto chatDto = ChatDto.builder().chatName("653606407").build();
 		Long id = chatController.create(chatDto).getBody();
 		Assertions.assertEquals(1, chatRepository.findAll().size());
 
@@ -75,7 +75,7 @@ class TelegramEndToEndTest extends ApplicationSpringBootTestContext {
 
 	@Test
 	void history_list_is_empty_if_enableNotifications_false() {
-		ChatDto chatDto = ChatDto.builder().chatId(653606407L).build();
+		ChatDto chatDto = ChatDto.builder().chatName("653606407").build();
 		Long id = chatController.create(chatDto).getBody();
 
 		telegramController.say("test_text");
@@ -85,30 +85,12 @@ class TelegramEndToEndTest extends ApplicationSpringBootTestContext {
 		Assertions.assertEquals(0, historyList.size());
 	}
 
-//	@Test
-//	void enableNotifications_true_test() {
-//		ChatDto chatDto = ChatDto.builder().chatId(653606407L).build();
-//		Long id = chatController.create(chatDto).getBody();
-//		Chat before = ChatUtil.of(id, chatDto);
-//
-//		telegramBinder.bind(BinderContainer.builder()
-//				.chat(before)
-//				.message("TG +")
-//				.build());
-//
-//		Chat after = chatController.read(id).getBody();
-//
-//		List<Chat> chats = chatRepository.findAll();
-//		Assertions.assertEquals(1, chats.size());
-//		Assertions.assertTrue(after.isEnableNotifications());
-//	}
-
 	@Test
 	void telegram_binder_can_deactivate_notifications() {
 		List<Chat> all = chatRepository.findAll();
 		Assertions.assertEquals(0, all.size());
 
-		ChatDto chatDto = ChatDto.builder().chatId(653606407L).enableNotifications(true).build();
+		ChatDto chatDto = ChatDto.builder().chatName("653606407").enableNotifications(true).build();
 		Long id = chatController.create(chatDto).getBody();
 		Chat chat = ChatUtil.of(chatDto);
 		chat.setId(id);

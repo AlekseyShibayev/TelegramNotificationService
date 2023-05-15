@@ -36,14 +36,14 @@ public class WildberriesBinderImpl implements WildberriesBinder {
 		Chat chat = binderContainer.getChat();
 		List<FoundItemDto> foundItemDtoList = wildberriesController.getAllFoundItems().getBody();
 		if (CollectionUtils.isEmpty(foundItemDtoList)) {
-			telegramFacade.writeToTargetChat(chat.getChatId(), "Пусто");
+			telegramFacade.writeToTargetChat(chat.getChatName(), "Пусто");
 		} else {
 			String message = foundItemDtoList.stream()
 					.map(FoundItemDto::getLink)
 					.distinct()
 					.reduce((s, s2) -> s + "\n" + s2)
 					.orElseThrow();
-			telegramFacade.writeToTargetChat(chat.getChatId(), message);
+			telegramFacade.writeToTargetChat(chat.getChatName(), message);
 		}
 	}
 }

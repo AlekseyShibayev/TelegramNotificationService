@@ -1,12 +1,12 @@
 package com.company.app.springboottest.application.exchangerate;
 
-import com.company.app.telegram.binder.api.ExchangeRateBinder;
 import com.company.app.exchange_rate.controller.ExchangeRateController;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import com.company.app.exchange_rate.domain.repository.ExchangeRepository;
 import com.company.app.exchange_rate.domain.service.api.ExchangeRateService;
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
 import com.company.app.telegram.binder.BinderContainer;
+import com.company.app.telegram.binder.api.ExchangeRateBinder;
 import com.company.app.telegram.domain.entity.Chat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,7 +75,7 @@ class ExchangeRateEndToEndTest extends ApplicationSpringBootTestContext {
 
 	private static BinderContainer createBinderContainer() {
 		return BinderContainer.builder()
-				.chat(Chat.builder().chatId(653606407L).build())
+				.chat(Chat.builder().chatName(String.valueOf(653606407L)).build())
 				.message("EX")
 				.build();
 	}

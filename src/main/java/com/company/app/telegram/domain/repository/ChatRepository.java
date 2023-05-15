@@ -12,10 +12,10 @@ public interface ChatRepository extends CrudRepository<Chat, Long> {
 	@EntityGraph(value = "Chat.all")
 	List<Chat> findAll();
 
-	boolean existsChatByChatId(Long chatId);
+	boolean existsChatByChatName(String chatName);
 
 	@EntityGraph(value = "Chat.all")
-	Optional<Chat> findFirstByChatId(Long chatId);
+	Optional<Chat> findFirstByChatName(String chatName);
 
 	@EntityGraph(value = "Chat.all")
 	Optional<Chat> findById(Long id);

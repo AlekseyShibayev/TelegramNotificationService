@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class TargetMessage {
 
-	Long chatId;
+	String chatId;
 	String message;
 }

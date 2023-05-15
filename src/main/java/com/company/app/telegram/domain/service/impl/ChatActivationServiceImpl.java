@@ -35,8 +35,8 @@ public class ChatActivationServiceImpl implements ChatActivationService {
 
 			chatService.update(chat);
 
-			String message = String.format("Для чата [%s] уведомления включены.", chat.getChatId());
-			telegramFacade.writeToTargetChat(chat.getChatId(), message);
+			String message = String.format("Для чата [%s] уведомления включены.", chat.getChatName());
+			telegramFacade.writeToTargetChat(chat.getChatName(), message);
 		}
 	}
 
@@ -49,8 +49,8 @@ public class ChatActivationServiceImpl implements ChatActivationService {
 
 			chatService.update(chat);
 
-			String message = String.format("Для чата [%s] уведомления отключены.", chat.getChatId());
-			telegramFacade.writeToTargetChat(chat.getChatId(), message);
+			String message = String.format("Для чата [%s] уведомления отключены.", chat.getChatName());
+			telegramFacade.writeToTargetChat(chat.getChatName(), message);
 		}
 	}
 

@@ -67,7 +67,7 @@ public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
 		CallbackQuery callbackQuery = update.getCallbackQuery();
 		Long chatId = callbackQuery.getMessage().getChatId();
 		String text = callbackQuery.getData();
-		Chat chat = chatService.getChatOrCreateIfNotExist(chatId);
+		Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
 		historyService.saveHistory(chat, text);
 		binderExecutor.execute(chat, text);
 	}

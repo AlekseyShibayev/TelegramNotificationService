@@ -14,7 +14,7 @@ public class TelegramFacade {
 		telegramDistributionHub.writeToEveryone(message);
 	}
 
-	public void writeToTargetChat(Long chatId, Object message) {
+	public void writeToTargetChat(String chatId, Object message) {
 		telegramDistributionHub.writeToTargetChat(chatId, message);
 	}
 }

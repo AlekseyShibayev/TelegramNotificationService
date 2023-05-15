@@ -1,6 +1,6 @@
 [
   {
-    "chatId": 653606407,
+    "chatName": "653606407",
     "enableNotifications": true,
     "userInfo": {
       "name": "Aleksey",
@@ -11,7 +11,7 @@
     }
   },
   {
-    "chatId": 484518144,
+    "chatName": "484518144",
     "enableNotifications": false,
     "userInfo": {
       "name": "Uliana",

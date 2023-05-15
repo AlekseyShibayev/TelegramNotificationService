@@ -48,7 +48,7 @@ public class WildberriesSearcherProductsUrlCreator {
 			"&regions=80,64,38,4,115,83,33,68,30,86,40,1,66,48,110,31,22,114" +
 			"&sort=popular" +
 			"&spp=22" +
-			"&supplier=8905";
+			"&supplier=5472";
 
 	/**
 	 * 32496 - остин

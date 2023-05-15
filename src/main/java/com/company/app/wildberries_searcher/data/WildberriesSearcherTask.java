@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 @Data
 @Builder
@@ -17,17 +16,20 @@ public class WildberriesSearcherTask implements Runnable {
 	private WildberriesSearcherContainer wildberriesSearcherContainer;
 	private WildberriesSearcher wildberriesSearcher;
 	private TelegramController telegramController;
-	private ExecutorService executorService;
+	private WildberriesSearcherCallback callBack;
 
 	@Override
 	public void run() {
 		List<WildberriesLinkDto> dtoList = wildberriesSearcher.search(this.wildberriesSearcherContainer);
+		telegramController.say(createTargetMessage(String.format("Завершен поиск: %s", wildberriesSearcherContainer)));
+
 		dtoList.stream()
 				.map(this::createMessage)
 				.distinct()
 				.map(this::createTargetMessage)
 				.forEach(targetMessage -> telegramController.say(targetMessage));
-		executorService.shutdown();
+
+		callBack.callback();
 	}
 
 	private String createMessage(WildberriesLinkDto dto) {

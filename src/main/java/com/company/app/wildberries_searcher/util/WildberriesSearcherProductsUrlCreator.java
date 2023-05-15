@@ -47,8 +47,7 @@ public class WildberriesSearcherProductsUrlCreator {
 			"&dest=-3827418" +
 			"&regions=80,64,38,4,115,83,33,68,30,86,40,1,66,48,110,31,22,114" +
 			"&sort=popular" +
-			"&spp=22" +
-			"&supplier=5472";
+			"&spp=22";
 
 	/**
 	 * 32496 - остин
@@ -58,9 +57,10 @@ public class WildberriesSearcherProductsUrlCreator {
 
 	public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		String withGender = withGender(wildberriesSearcherContainer.getGender());
-		String withSize = withFootSize(wildberriesSearcherContainer.getDressSize());
+		String withSize = withSize(wildberriesSearcherContainer.getDressSize());
+		String supplier = withSupplier(wildberriesSearcherContainer.getSupplier());
 		String withPage = withPage();
-		String url = URL + withGender + withSize + withPage;
+		String url = URL + withGender + withSize + supplier + withPage;
 		log.debug("[{}]: Сформирована ссылка:\n[{}].", wildberriesSearcherContainer.getChatId(), url);
 		return url;
 	}
@@ -70,7 +70,11 @@ public class WildberriesSearcherProductsUrlCreator {
 		return "&fkind=" + i;
 	}
 
-	private static String withFootSize(String sizes) {
+	private static String withSupplier(String supplier) {
+		return "&supplier=" + supplier;
+	}
+
+	private static String withSize(String sizes) {
 		String preparedSizes = Arrays.stream(sizes.split(";"))
 				.map(WILDBERRIES_SIZE_MAPPING::get)
 				.reduce((s1, s2) -> s1 + ";" + s2)

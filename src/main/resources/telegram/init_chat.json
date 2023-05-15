@@ -7,7 +7,8 @@
       "role": "Owner",
       "footSize": "45",
       "dressSize": "50",
-      "gender": "male"
+      "gender": "male",
+      "supplier": "5472"
     }
   },
   {
@@ -18,7 +19,8 @@
       "role": "Admin",
       "footSize": "40",
       "dressSize": "46;48",
-      "gender": "female"
+      "gender": "female",
+      "supplier": "5472"
     }
   }
 ]

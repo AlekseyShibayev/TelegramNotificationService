@@ -36,6 +36,7 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 				.dressSize(userInfo.getDressSize())
 				.footSize(userInfo.getFootSize())
 				.gender(userInfo.getGender())
+				.supplier(userInfo.getSupplier())
 				.build();
 
 		WildberriesSearcherResult result = wildberriesController.search(wildberriesSearcherContainer).getBody();

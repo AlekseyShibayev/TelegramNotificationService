@@ -2,7 +2,7 @@ package com.company.app.wildberries.component.desire_lot.impl;
 
 import com.company.app.core.tool.impl.DataExtractorToolImpl;
 import com.company.app.core.tool.impl.JsonSerializationToolImpl;
-import com.company.app.wildberries.component.desire_lot.data.Response;
+import com.company.app.wildberries.component.common.data.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

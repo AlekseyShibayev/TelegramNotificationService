@@ -1,7 +1,7 @@
 package com.company.app.wildberries.component.searcher.impl;
 
-import com.company.app.wildberries.component.desire_lot.data.ResponseProducts;
-import com.company.app.wildberries.component.desire_lot.data.price_history.PriceHistory;
+import com.company.app.wildberries.component.common.data.ResponseProducts;
+import com.company.app.wildberries.component.common.data.price_history.PriceHistory;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherExtractor;
 import com.company.app.wildberries.component.searcher.util.WildberriesSearcherPriceHistoryUrlCreator;

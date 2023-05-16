@@ -3,21 +3,15 @@ package com.company.app.wildberries.component.searcher.impl;
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.core.tool.impl.JsonSerializationToolImpl;
-import com.company.app.core.util.CaptchaFighter;
-import com.company.app.wildberries.component.desire_lot.data.Response;
-import com.company.app.wildberries.component.desire_lot.data.ResponseProducts;
-import com.company.app.wildberries.component.desire_lot.data.price_history.PriceHistory;
+import com.company.app.wildberries.component.common.GetRequestHandler;
+import com.company.app.wildberries.component.common.data.Response;
+import com.company.app.wildberries.component.common.data.ResponseProducts;
+import com.company.app.wildberries.component.common.data.price_history.PriceHistory;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherExtractor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +19,8 @@ import java.util.List;
 @Component
 public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtractor {
 
+	@Autowired
+	private GetRequestHandler getRequestHandler;
 	@Autowired
 	private JsonSerializationTool<Response> jsonSerializationTool;
 
@@ -36,7 +32,7 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
 
 	@Override
 	public List<PriceHistory> extractPriceHistory(String url) {
-		String htmlResponse = getHtmlResponse(url);
+		String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
 		JsonSerializationToolImpl<PriceHistory> priceHistoryJsonSerializationTool = new JsonSerializationToolImpl<>();
 		return priceHistoryJsonSerializationTool.load(htmlResponse, PriceHistory.class);
 	}
@@ -47,7 +43,7 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
 		int i = 1;
 		while (true) {
 			String pageUrl = String.format(url, i);
-			String htmlResponse = getHtmlResponse(pageUrl);
+			String htmlResponse = getRequestHandler.getResponseBodyAsString(pageUrl);
 			Response response = jsonSerializationTool.loadOne(htmlResponse, Response.class);
 			List<ResponseProducts> products = response.getData().getProducts();
 			if (products.isEmpty()) {
@@ -58,18 +54,5 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
 				i++;
 			}
 		}
-	}
-
-	@SneakyThrows
-	private String getHtmlResponse(String url) {
-		CaptchaFighter.fight(3_000, 10_000);
-
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(url))
-				.GET()
-				.build();
-		HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-		return httpResponse.statusCode() == 200 ? httpResponse.body() : StringUtils.EMPTY;
 	}
 }

@@ -1,4 +1,4 @@
-package com.company.app.wildberries.component.desire_lot.data.price_history;
+package com.company.app.wildberries.component.common.data.price_history;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.AllArgsConstructor;

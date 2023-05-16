@@ -1,8 +1,8 @@
 package com.company.app.wildberries.component.searcher.data;
 
 import com.company.app.telegram.controller.TelegramController;
+import com.company.app.telegram.domain.dto.TargetMessage;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
-import com.company.app.wildberries.component.searcher.util.WildberriesSearcherUtils;
 import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +32,10 @@ public class WildberriesSearcherTask implements Runnable {
 	private void doWork() {
 		List<WildberriesLinkDto> result = getAllProducts();
 		String endMessage = String.format("Поиск завершен. Найдено: [%s].", result.size());
-		telegramController.say(WildberriesSearcherUtils.createTargetMessage(wildberriesSearcherContainer.getChatName(), endMessage));
+		telegramController.say(TargetMessage.builder()
+				.chatName(wildberriesSearcherContainer.getChatName())
+				.message(endMessage)
+				.build());
 	}
 
 	private List<WildberriesLinkDto> getAllProducts() {

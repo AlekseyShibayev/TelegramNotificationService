@@ -1,7 +1,7 @@
 package com.company.app.wildberries.component.searcher.data.filter;
 
-import com.company.app.wildberries.component.desire_lot.data.ResponseProducts;
-import com.company.app.wildberries.component.desire_lot.data.Size;
+import com.company.app.wildberries.component.common.data.ResponseProducts;
+import com.company.app.wildberries.component.common.data.Size;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

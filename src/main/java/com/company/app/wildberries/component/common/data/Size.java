@@ -1,4 +1,4 @@
-package com.company.app.wildberries.component.desire_lot.data.price_history;
+package com.company.app.wildberries.component.common.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PriceHistory {
+public class Size {
 
-	String dt;
-	Price price;
+	String name;
 }

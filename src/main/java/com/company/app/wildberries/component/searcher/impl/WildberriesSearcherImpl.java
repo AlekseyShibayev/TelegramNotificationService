@@ -1,6 +1,6 @@
 package com.company.app.wildberries.component.searcher.impl;
 
-import com.company.app.wildberries.component.desire_lot.data.ResponseProducts;
+import com.company.app.wildberries.component.common.data.ResponseProducts;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherExtractor;
 import com.company.app.wildberries.component.searcher.api.WildberriesSearcherFilterer;
@@ -29,7 +29,7 @@ public class WildberriesSearcherImpl implements WildberriesSearcher {
 		List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);
 		List<ResponseProducts> filteredProducts = wildberriesSearcherFilterer.filter(products, wildberriesSearcherContainer);
 		return filteredProducts.stream()
-				.map(ResponseProducts::to)
+				.map(ResponseProducts::toLinkDto)
 				.distinct()
 				.collect(Collectors.toList());
 	}

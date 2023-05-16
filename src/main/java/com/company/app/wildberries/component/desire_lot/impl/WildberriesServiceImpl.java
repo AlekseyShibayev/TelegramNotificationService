@@ -1,7 +1,7 @@
 package com.company.app.wildberries.component.desire_lot.impl;
 
 import com.company.app.core.aop.logging.util.LogUtils;
-import com.company.app.core.tool.api.DataExtractorTool;
+import com.company.app.wildberries.component.common.GetRequestHandler;
 import com.company.app.wildberries.component.desire_lot.api.WildberriesPriceExtractor;
 import com.company.app.wildberries.component.desire_lot.api.WildberriesService;
 import com.company.app.wildberries.component.desire_lot.util.WBUtils;
@@ -25,7 +25,7 @@ public class WildberriesServiceImpl implements WildberriesService {
 	@Autowired
 	private WildberriesPriceExtractor wildberriesPriceExtractor;
 	@Autowired
-	private DataExtractorTool dataExtractorTool;
+	private GetRequestHandler getRequestHandler;
 	@Autowired
 	private LotRepository lotRepository;
 	@Autowired
@@ -34,7 +34,7 @@ public class WildberriesServiceImpl implements WildberriesService {
 	public List<FoundItem> getDesiredLots() {
 		List<Lot> lots = lotRepository.findAll();
 		String url = WBUtils.getUrlForPriceSearch(lots);
-		String htmlResponse = dataExtractorTool.getHtmlResponse(url);
+		String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
 		List<FoundItem> items = lots.stream()
 				.filter(lot -> isDesireLot(htmlResponse, lot))
 				.map(lot -> FoundItem.builder().article(lot.getArticle()).creationDate(new Date()).build())

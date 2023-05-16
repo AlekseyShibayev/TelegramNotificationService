@@ -11,4 +11,8 @@ public class WildberriesLinkDto {
 
 	private String price;
 	private String link;
+
+	public String toMessage() {
+		return this.price + ": " + this.link;
+	}
 }

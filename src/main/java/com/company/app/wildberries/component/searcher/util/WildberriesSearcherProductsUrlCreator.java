@@ -54,6 +54,7 @@ public class WildberriesSearcherProductsUrlCreator {
 	 * 5472 - том тейлор - 1,40
 	 * 8905 - oodji - 1,40
 	 * 5359 - ТВОЕ - 1,80
+	 * 16769 - envylab -
 	 */
 
 	public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {

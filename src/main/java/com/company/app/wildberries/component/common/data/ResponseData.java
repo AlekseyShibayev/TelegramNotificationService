@@ -1,15 +1,17 @@
-package com.company.app.wildberries.component.desire_lot.data;
+package com.company.app.wildberries.component.common.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Response {
+public class ResponseData {
 
-	ResponseData data;
+	List<ResponseProducts> products;
 }

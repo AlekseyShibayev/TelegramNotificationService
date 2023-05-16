@@ -1,4 +1,4 @@
-package com.company.app.wildberries.component.desire_lot.data;
+package com.company.app.wildberries.component.common.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Size {
+public class Response {
 
-	String name;
+	ResponseData data;
 }

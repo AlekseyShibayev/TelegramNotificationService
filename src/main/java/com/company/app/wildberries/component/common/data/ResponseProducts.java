@@ -1,4 +1,4 @@
-package com.company.app.wildberries.component.desire_lot.data;
+package com.company.app.wildberries.component.common.data;
 
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries.component.desire_lot.util.WBUtils;
@@ -23,7 +23,7 @@ public class ResponseProducts {
 	private String feedbacks;
 	private List<Size> sizes;
 
-	public WildberriesLinkDto to() {
+	public WildberriesLinkDto toLinkDto() {
 		return WildberriesLinkDto.builder()
 				.price(Strings.cutEnd(this.salePriceU.toString(), 2))
 				.link(WBUtils.getUrlForResponse(this.id.toString()))

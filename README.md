@@ -26,8 +26,10 @@
 ### Модули:
   * модуль core - содержит удобные штуковины, которые будут нужны в каждом микросервисе (вынесены в [telegram-bot-spring-boot-starter](https://github.com/AlekseyShibayev/telegram-bot-spring-boot-starter))
   * модуль telegram - телеграм бот, управление подписками и модулями
-  * модуль exchangerate - отслеживает курс доллара aliexpress
-  * модуль wildberries - отслеживает желаемые лоты wildberries
+  * модуль exchange_rate - отслеживает курс доллара aliexpress
+  * модуль wildberries: 
+  - desire_lot - отслеживает желаемые лоты wildberries, по конкретному лоту
+  - searcher - отслеживает желаемые лоты wildberries, массовым поиском по бренду
 ### Технологии:
   * java 11 + spring boot + maven
   * бд использую H2, потому что давно хотел. Вот консоль её: http://localhost:8080/h2-console

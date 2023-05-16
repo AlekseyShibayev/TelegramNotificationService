@@ -6,7 +6,6 @@ import com.company.app.wildberries.component.searcher.api.WildberriesSearcherHan
 import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
 import com.company.app.wildberries.component.searcher.data.WildberriesSearcherResult;
 import com.company.app.wildberries.component.searcher.data.WildberriesSearcherTask;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,7 +43,6 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
 		}
 	}
 
-	@SneakyThrows
 	private void startNewAsyncSearch(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		log.debug("Запускаю поиск для [{}].", wildberriesSearcherContainer);
 		executorService.submit(WildberriesSearcherTask.builder()

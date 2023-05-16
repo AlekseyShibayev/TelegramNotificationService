@@ -5,9 +5,9 @@ import com.company.app.telegram.binder.api.WildberriesBinder;
 import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.UserInfo;
-import com.company.app.wildberries_desire_lot.controller.WildberriesController;
-import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
-import com.company.app.wildberries_searcher.data.WildberriesSearcherResult;
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherResult;
+import com.company.app.wildberries.controller.WildberriesController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,11 +32,12 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 		UserInfo userInfo = chat.getUserInfo();
 
 		WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
-				.chatId(chat.getChatName())
+				.chatName(chat.getChatName())
 				.dressSize(userInfo.getDressSize())
 				.footSize(userInfo.getFootSize())
 				.gender(userInfo.getGender())
 				.supplier(userInfo.getSupplier())
+				.greedIndex(userInfo.getGreedIndex())
 				.build();
 
 		WildberriesSearcherResult result = wildberriesController.search(wildberriesSearcherContainer).getBody();

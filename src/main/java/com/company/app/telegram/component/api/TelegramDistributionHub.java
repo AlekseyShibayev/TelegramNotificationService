@@ -8,5 +8,5 @@ public interface TelegramDistributionHub {
 
 	void writeToEveryone(Object message);
 
-	void writeToTargetChat(String chatId, Object message);
+	void writeToTargetChat(String chatName, Object message);
 }

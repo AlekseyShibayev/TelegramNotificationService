@@ -26,7 +26,7 @@ public class TelegramDistributionHubImpl implements TelegramDistributionHub {
 	}
 
 	@Override
-	public void writeToTargetChat(String chatId, Object message) {
-		outgoingMessageHandler.sendToTargetChat(chatId, message);
+	public void writeToTargetChat(String chatName, Object message) {
+		outgoingMessageHandler.sendToTargetChat(chatName, message);
 	}
 }

@@ -1,12 +1,12 @@
 package com.company.app.springboottest.application.wildberries.searcher;
 
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
-import com.company.app.wildberries_desire_lot.component.data.ResponseProducts;
-import com.company.app.wildberries_desire_lot.component.data.Size;
-import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
-import com.company.app.wildberries_searcher.api.WildberriesSearcher;
-import com.company.app.wildberries_searcher.data.WildberriesSearcherContainer;
-import com.company.app.wildberries_searcher.impl.WildberriesSearcherExtractorImpl;
+import com.company.app.wildberries.component.desire_lot.data.ResponseProducts;
+import com.company.app.wildberries.component.desire_lot.data.Size;
+import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
+import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
+import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
+import com.company.app.wildberries.component.searcher.impl.WildberriesSearcherExtractorImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,10 +25,12 @@ class WildberriesSearcherEndToEndTest extends ApplicationSpringBootTestContext {
 	@Test
 	void searcher_can_search() {
 		WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
+				.chatName("653606407")
 				.gender("female")
 				.footSize("45")
 				.dressSize("46;48")
 				.supplier("any_supplier_name_or_id")
+				.greedIndex("1.00")
 				.build();
 
 		ResponseProducts mock = ResponseProducts.builder()

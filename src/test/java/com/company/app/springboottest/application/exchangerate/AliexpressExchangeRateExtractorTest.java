@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 class AliexpressExchangeRateExtractorTest extends ApplicationSpringBootTestContext {
 
 	@Autowired
-	AliexpressReceiver aliexpressReceiver;
+	private AliexpressReceiver aliexpressReceiver;
 	@Autowired
-	AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
+	private AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
 
 	@Test
 	void aliexpress_receiver_can_get_html_response_test() {

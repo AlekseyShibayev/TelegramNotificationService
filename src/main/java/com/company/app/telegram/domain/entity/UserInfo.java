@@ -39,4 +39,7 @@ public class UserInfo {
 
 	@Column(name = "SUPPLIER")
 	private String supplier;
+
+	@Column(name = "GREED_INDEX")
+	private String greedIndex;
 }

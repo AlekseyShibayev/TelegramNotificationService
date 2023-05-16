@@ -30,8 +30,8 @@ public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
 	}
 
 	@Override
-	public void sendToTargetChat(String chatId, Object message) {
-		SendMessage sendMessage = SendMessage.builder().chatId(chatId).text(message.toString()).build();
+	public void sendToTargetChat(String chatName, Object message) {
+		SendMessage sendMessage = SendMessage.builder().chatId(chatName).text(message.toString()).build();
 		sendOneMessage(sendMessage);
 	}
 

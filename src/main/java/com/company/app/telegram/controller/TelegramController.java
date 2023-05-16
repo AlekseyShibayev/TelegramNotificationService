@@ -24,7 +24,7 @@ public class TelegramController {
 
 	@PostMapping(value = "/say", produces = "application/json")
 	public ResponseEntity<Boolean> say(@RequestBody TargetMessage targetMessage) {
-		telegramFacade.writeToTargetChat(targetMessage.getChatId(), targetMessage.getMessage());
+		telegramFacade.writeToTargetChat(targetMessage.getChatName(), targetMessage.getMessage());
 		return ResponseEntity.ok(true);
 	}
 }

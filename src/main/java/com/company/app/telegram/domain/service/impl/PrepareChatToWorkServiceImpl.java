@@ -1,6 +1,5 @@
 package com.company.app.telegram.domain.service.impl;
 
-import com.company.app.telegram.component.api.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.api.ChatActivationService;
 import com.company.app.telegram.domain.service.api.ChatService;
@@ -17,8 +16,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 public class PrepareChatToWorkServiceImpl implements PrepareChatToWorkService {
 
 	@Autowired
-	private TelegramBotConfig telegramBotConfig;
-	@Autowired
 	private HistoryService historyService;
 	@Autowired
 	private ChatService chatService;
@@ -27,13 +24,10 @@ public class PrepareChatToWorkServiceImpl implements PrepareChatToWorkService {
 
 	@Transactional
 	@Override
-	public void prepareToWork(Message message, Long chatId) {
-		doDomainLogic(message, chatId);
-	}
-
-	private void doDomainLogic(Message message, Long chatId) {
+	public Chat getPreparedToWorkChat(Message message, Long chatId) {
 		Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
 		historyService.saveHistory(chat, message.getText());
 		chatActivationService.activate(chat);
+		return chat;
 	}
 }

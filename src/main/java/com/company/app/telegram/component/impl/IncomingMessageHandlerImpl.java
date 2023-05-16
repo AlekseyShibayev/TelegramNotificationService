@@ -34,7 +34,7 @@ public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
 	@Override
 	public void process(Update update) {
 		if (isIncomingMessage(update)) {
-			prepareToWork(update);
+			prepareChatToWork(update);
 			showCommands(update);
 		} else if (isCallback(update)) {
 			handle(update);
@@ -49,10 +49,10 @@ public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
 		return update.getMessage() != null;
 	}
 
-	private void prepareToWork(Update update) {
+	private void prepareChatToWork(Update update) {
 		Message message = update.getMessage();
 		Long chatId = message.getChatId();
-		prepareChatToWorkService.prepareToWork(message, chatId);
+		prepareChatToWorkService.getPreparedToWorkChat(message, chatId);
 	}
 
 	private void showCommands(Update update) {

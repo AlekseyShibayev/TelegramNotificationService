@@ -1,5 +1,6 @@
 package com.company.app.telegram.domain.service.api;
 
+import com.company.app.telegram.domain.entity.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 /**
@@ -7,5 +8,5 @@ import org.telegram.telegrambots.meta.api.objects.Message;
  */
 public interface PrepareChatToWorkService {
 
-	void prepareToWork(Message message, Long chatId);
+	Chat getPreparedToWorkChat(Message message, Long chatId);
 }

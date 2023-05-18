@@ -55,6 +55,7 @@ public class WildberriesSearcherProductsUrlCreator {
 	 * 8905 - oodji - 1,40
 	 * 5359 - ТВОЕ - 1,80
 	 * 16769 - envylab -
+	 * 286755 - eazyway
 	 */
 
 	public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {

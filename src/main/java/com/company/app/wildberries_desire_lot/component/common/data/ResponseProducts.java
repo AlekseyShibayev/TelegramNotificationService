@@ -2,7 +2,7 @@ package com.company.app.wildberries_desire_lot.component.common.data;
 
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.component.desire_lot.util.WBUtils;
-import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
+import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

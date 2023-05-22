@@ -2,7 +2,7 @@ package com.company.app.wildberries_searcher.component.data;
 
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
-import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
+import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
 import lombok.Builder;
 import lombok.Data;

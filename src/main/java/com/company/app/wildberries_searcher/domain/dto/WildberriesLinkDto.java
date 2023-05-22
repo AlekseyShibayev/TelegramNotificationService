@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.domain.dto;
+package com.company.app.wildberries_searcher.domain.dto;
 
 import lombok.*;
 

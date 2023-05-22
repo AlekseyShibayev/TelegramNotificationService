@@ -30,16 +30,4 @@ public class UserInfo {
 
 	@Column(name = "GENDER")
 	private String gender;
-
-	@Column(name = "FOOT_SIZE")
-	private String footSize;
-
-	@Column(name = "DRESS_SIZE")
-	private String dressSize;
-
-	@Column(name = "SUPPLIER")
-	private String supplier;
-
-	@Column(name = "GREED_INDEX")
-	private String greedIndex;
 }

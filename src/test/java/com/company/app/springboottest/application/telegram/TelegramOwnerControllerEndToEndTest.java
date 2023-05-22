@@ -1,7 +1,7 @@
 package com.company.app.springboottest.application.telegram;
 
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
-import com.company.app.telegram.component.api.InitialChatRegistry;
+import com.company.app.telegram.domain.service.api.InitialChatRegistry;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.controller.TelegramOwnerController;
 import com.company.app.telegram.domain.dto.ChatDto;

@@ -5,11 +5,7 @@
     "userInfo": {
       "name": "Aleksey",
       "role": "Owner",
-      "footSize": "45",
-      "dressSize": "50",
-      "gender": "male",
-      "supplier": "16769",
-      "greedIndex": "1.40"
+      "gender": "male"
     }
   },
   {
@@ -18,11 +14,7 @@
     "userInfo": {
       "name": "Uliana",
       "role": "Admin",
-      "footSize": "40",
-      "dressSize": "46;48",
-      "gender": "female",
-      "supplier": "5472",
-      "greedIndex": "1.40"
+      "gender": "female"
     }
   }
 ]

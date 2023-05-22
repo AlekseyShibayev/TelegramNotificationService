@@ -1,14 +1,14 @@
 package com.company.app.springboottest.application.wildberries.searcher;
 
 import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
-import com.company.app.wildberries.component.common.data.ResponseProducts;
-import com.company.app.wildberries.component.common.data.Size;
-import com.company.app.wildberries.component.common.data.price_history.Price;
-import com.company.app.wildberries.component.common.data.price_history.PriceHistory;
-import com.company.app.wildberries.component.searcher.api.WildberriesSearcher;
-import com.company.app.wildberries.component.searcher.api.WildberriesSearcherExtractor;
-import com.company.app.wildberries.component.searcher.data.WildberriesSearcherContainer;
-import com.company.app.wildberries.domain.dto.WildberriesLinkDto;
+import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
+import com.company.app.wildberries_desire_lot.component.common.data.Size;
+import com.company.app.wildberries_desire_lot.component.common.data.price_history.Price;
+import com.company.app.wildberries_desire_lot.component.common.data.price_history.PriceHistory;
+import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
+import com.company.app.wildberries_searcher.component.api.WildberriesSearcherExtractor;
+import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_desire_lot.domain.dto.WildberriesLinkDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -1,7 +1,7 @@
 package com.company.app.springboottest.application;
 
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.component.api.InitialChatRegistry;
+import com.company.app.telegram.domain.service.api.InitialChatRegistry;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.repository.HistoryRepository;

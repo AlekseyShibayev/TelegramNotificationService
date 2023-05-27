@@ -1,5 +1,6 @@
 package com.company.app.wildberries_searcher.component.data.filter;
 
+import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
 import com.company.app.wildberries_desire_lot.component.common.data.Size;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
@@ -37,7 +38,7 @@ public class WildberriesSearcherContainsSizeFilter implements WildberriesSearche
 
 	Optional<Size> getUserSize(ResponseProducts responseProducts, String userSizes) {
 		List<Size> productSizes = responseProducts.getSizes();
-		Set<String> userSizesSet = Sets.newHashSet(userSizes.split(";"));
+		Set<String> userSizesSet = Sets.newHashSet(userSizes.split(Strings.DEFAULT_DELIMITER));
 		return productSizes.stream()
 				.filter(size -> userSizesSet.contains(size.getName()))
 				.findAny();

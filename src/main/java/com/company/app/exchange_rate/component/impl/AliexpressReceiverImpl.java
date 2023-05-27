@@ -24,7 +24,7 @@ public class AliexpressReceiverImpl implements AliexpressReceiver {
 	private static final String FILE_NAME = "exchangerate/aliexpress_mock.json";
 
 	@Autowired
-	DataExtractorTool dataExtractorTool;
+	private DataExtractorTool dataExtractorTool;
 
 	@SneakyThrows
 	@Override

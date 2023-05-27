@@ -30,6 +30,7 @@
   * модуль wildberries: 
   - desire_lot - отслеживает желаемые лоты wildberries, по конкретному лоту
   - searcher - отслеживает желаемые лоты wildberries, массовым поиском по производителю
+  - knowledge - содержит справочную информацию
 ### Технологии:
   * java 11 + spring boot + maven
   * бд использую H2, потому что давно хотел. Вот консоль её: http://localhost:8080/h2-console

@@ -15,7 +15,7 @@ public class TelegramOnBinderImpl implements TelegramBinder {
 	private static final String TYPE = "TG_ON";
 
 	@Autowired
-	ChatActivationService chatActivationService;
+	private ChatActivationService chatActivationService;
 
 	@Override
 	public String getType() {

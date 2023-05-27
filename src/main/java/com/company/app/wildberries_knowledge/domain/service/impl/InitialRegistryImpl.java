@@ -24,8 +24,8 @@ public class InitialRegistryImpl implements InitialRegistry {
 	@Autowired
 	private SupplierService supplierService;
 
-	@Override
 	@EventListener({ContextRefreshedEvent.class})
+	@Override
 	public void init() {
 		List<Supplier> list = jsonSerializationTool.load(resource, Supplier.class);
 		supplierService.saveAll(list);

@@ -48,12 +48,11 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
 	}
 
 	private void startNewAsyncSearch(WildberriesSearcherContainer wildberriesSearcherContainer) {
-		log.debug("Запускаю поиск для [{}].", wildberriesSearcherContainer);
-
 		String chatName = wildberriesSearcherContainer.getChatName();
 		SearchData searchData = searchDataService.getSearchData(chatName);
 		WildberriesSearcherContainer container = WildberriesSearcherContainer.of(wildberriesSearcherContainer, searchData);
 
+		log.debug("Запускаю поиск для [{}].", wildberriesSearcherContainer);
 		executorService.submit(WildberriesSearcherTask.builder()
 				.wildberriesSearcherContainer(container)
 				.telegramController(telegramController)

@@ -14,9 +14,9 @@ public class ExchangeRateBinderImpl implements ExchangeRateBinder {
 	private static final String TYPE = "EX";
 
 	@Autowired
-	ExchangeRateController exchangeRateController;
+	private ExchangeRateController exchangeRateController;
 	@Autowired
-	TelegramFacade telegramFacade;
+	private TelegramFacade telegramFacade;
 
 	@Override
 	public String getType() {

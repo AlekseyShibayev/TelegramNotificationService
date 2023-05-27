@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/wildberries_knowledge/supplier")
-public class SupplierController {
+@RequestMapping("/wildberries/supplier")
+public class WildberriesSupplierController {
 
 	@Autowired
 	private SupplierService supplierService;

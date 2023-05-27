@@ -25,7 +25,7 @@ public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
 	public void sendToEveryone(Object message) {
 		chatService.getAll().stream()
 				.filter(Chat::isEnableNotifications)
-				.map(chat -> SendMessage.builder().text(message.toString()).chatId(chat.getChatName().toString()).build())
+				.map(chat -> SendMessage.builder().text(message.toString()).chatId(chat.getChatName()).build())
 				.forEach(this::sendOneMessage);
 	}
 

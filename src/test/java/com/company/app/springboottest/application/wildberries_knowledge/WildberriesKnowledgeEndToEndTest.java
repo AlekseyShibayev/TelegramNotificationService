@@ -1,7 +1,7 @@
 package com.company.app.springboottest.application.wildberries_knowledge;
 
 import com.company.app.springboottest.application.SpringBootTestApplicationContext;
-import com.company.app.wildberries_knowledge.controller.SupplierController;
+import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import java.util.List;
 class WildberriesKnowledgeEndToEndTest extends SpringBootTestApplicationContext {
 
 	@Autowired
-	private SupplierController supplierController;
+	private WildberriesSupplierController supplierController;
 
 	@Test
 	void supplier_initialRegistry_can_init_test() {

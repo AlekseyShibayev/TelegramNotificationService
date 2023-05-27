@@ -7,6 +7,8 @@ import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
@@ -32,11 +34,15 @@ public class BinderExecutorImpl implements BinderExecutor {
 
 	@PostConstruct
 	void init() {
-		binders = binderList.stream().collect(Collectors.toMap(Binder::getType, Function.identity()));
+		binders = binderList.stream()
+				.collect(Collectors.toMap(Binder::getType, Function.identity()));
 		if (binderList.size() != binders.keySet().size()) {
 			throw new DuplicateKeyException("ты конечно красиво написал, но дубли не проверил!");
 		}
+	}
 
+	@EventListener({ContextRefreshedEvent.class})
+	void saveSubscriptions() {
 		List<Subscription> subscriptionList = binders.keySet().stream()
 				.map(binderType -> Subscription.builder().type(binderType).build())
 				.collect(Collectors.toList());

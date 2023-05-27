@@ -1,5 +1,6 @@
 package com.company.app.telegram.component.api;
 
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public interface TelegramDistributionHub {
@@ -9,4 +10,6 @@ public interface TelegramDistributionHub {
 	void writeToEveryone(Object message);
 
 	void writeToTargetChat(String chatName, Object message);
+
+	void writeToTargetChat(SendMessage sendMessage);
 }

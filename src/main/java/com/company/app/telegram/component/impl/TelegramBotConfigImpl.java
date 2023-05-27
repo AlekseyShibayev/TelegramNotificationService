@@ -28,7 +28,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 	private String token;
 
 	@Autowired
-	private TelegramDistributionHub telegramService;
+	private TelegramDistributionHub telegramDistributionHub;
 
 	@EventListener({ContextRefreshedEvent.class})
 	public void init() throws TelegramApiException {
@@ -51,7 +51,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 
 	@Override
 	public void processNonCommandUpdate(Update update) {
-		telegramService.read(update);
+		telegramDistributionHub.read(update);
 	}
 
 	@SneakyThrows

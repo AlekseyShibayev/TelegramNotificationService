@@ -3,9 +3,8 @@ package com.company.app.telegram.binder.impl;
 import com.company.app.telegram.binder.BinderContainer;
 import com.company.app.telegram.binder.api.WildberriesBinder;
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.component.api.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.wildberries_knowledge.controller.SupplierController;
+import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherResult;
@@ -25,13 +24,11 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 	private static final String TYPE = "WB_SEARCH";
 
 	@Autowired
-	private WildberriesSearcherController wildberriesSearcherController;
-	@Autowired
 	private TelegramFacade telegramFacade;
 	@Autowired
-	private TelegramBotConfig telegramBotConfig;
+	private WildberriesSearcherController wildberriesSearcherController;
 	@Autowired
-	private SupplierController supplierController;
+	private WildberriesSupplierController wildberriesSupplierController;
 
 	@Override
 	public String getType() {
@@ -46,12 +43,12 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 		if (isFirstTimeHere(incomingMessage)) {
 			showButtonsWithSuppliers(chat);
 		} else {
-			trySearch(chat, incomingMessage);
+			tryStartSearch(chat, incomingMessage);
 		}
 	}
 
-	private void trySearch(Chat chat, String incomingMessage) {
-		String supplierId = getSupplier(incomingMessage);
+	private void tryStartSearch(Chat chat, String incomingMessage) {
+		String supplierId = getSupplierId(incomingMessage);
 
 		WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
 				.chatName(chat.getChatName())
@@ -60,12 +57,12 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 
 		WildberriesSearcherResult result = wildberriesSearcherController.search(wildberriesSearcherContainer).getBody();
 
-		if (result.isNotSuccess()) {
-			String message = "Занято! Вы что 5 лет в разработке и ни разу не использовали семафор???";
-			telegramFacade.writeToTargetChat(chat.getChatName(), message);
-		} else if (result.isSuccess()) {
-			Supplier supplier = supplierController.getBySupplierId(supplierId).getBody();
+		if (result.isSuccess()) {
+			Supplier supplier = wildberriesSupplierController.getBySupplierId(supplierId).getBody();
 			String message = String.format("Поисковая задача успешно запущена. [%s]", supplier.getSupplierName());
+			telegramFacade.writeToTargetChat(chat.getChatName(), message);
+		} else {
+			String message = "Занято! Вы что 5 лет в разработке и ни разу не использовали семафор???";
 			telegramFacade.writeToTargetChat(chat.getChatName(), message);
 		}
 	}
@@ -74,7 +71,7 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 		return !incomingMessage.contains(BINDER_DELIMITER);
 	}
 
-	private String getSupplier(String incomingMessage) {
+	private String getSupplierId(String incomingMessage) {
 		String[] split = incomingMessage.split(BINDER_DELIMITER);
 		return split[1];
 	}
@@ -84,11 +81,11 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 		sendMessage.setChatId(chat.getChatName());
 		sendMessage.setText("Выберите производителя:");
 		sendMessage.setReplyMarkup(getButtons());
-		telegramBotConfig.write(sendMessage);
+		telegramFacade.writeToTargetChat(sendMessage);
 	}
 
 	private InlineKeyboardMarkup getButtons() {
-		List<Supplier> supplierList = supplierController.getAll().getBody();
+		List<Supplier> supplierList = wildberriesSupplierController.getAll().getBody();
 		InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
 		markupInline.setKeyboard(getRowsInLine(supplierList));
 		return markupInline;

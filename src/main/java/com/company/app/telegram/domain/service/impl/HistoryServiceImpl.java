@@ -31,50 +31,6 @@ public class HistoryServiceImpl implements HistoryService {
 
 	@Transactional
 	@Override
-	public void save(History history) {
-		if (isHistoryEnable) {
-			historyRepository.save(history);
-		}
-	}
-
-	@Transactional
-	@Override
-	public void save(String text) {
-		if (isHistoryEnable) {
-			historyRepository.save(History.builder()
-					.message(text)
-					.date(new Date())
-					.build());
-		}
-	}
-
-	@Transactional
-	@Override
-	public void save(Chat chat, String text) {
-		if (isHistoryEnable) {
-			historyRepository.save(History.builder()
-					.chat(chat)
-					.message(text)
-					.date(new Date())
-					.build());
-		}
-	}
-
-	@Transactional
-	@Override
-	public void save(Long chatId, String text) {
-		if (isHistoryEnable) {
-			Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
-			historyRepository.save(History.builder()
-					.chat(chat)
-					.message(text)
-					.date(new Date())
-					.build());
-		}
-	}
-
-	@Transactional
-	@Override
 	public void saveHistory(Chat chat, String text) {
 		if (isHistoryEnable) {
 			log.debug("Читаю из чата [{}] сообщение [{}].", chat.getChatName(), text);
@@ -85,7 +41,7 @@ public class HistoryServiceImpl implements HistoryService {
 					.target(telegramBotConfig.getName())
 					.date(new Date())
 					.build();
-			save(history);
+			historyRepository.save(history);
 		}
 	}
 
@@ -102,7 +58,7 @@ public class HistoryServiceImpl implements HistoryService {
 					.target(chatId)
 					.date(new Date())
 					.build();
-			save(history);
+			historyRepository.save(history);
 		}
 	}
 }

@@ -32,8 +32,8 @@ public class HistoryServiceImpl implements HistoryService {
 	@Transactional
 	@Override
 	public void saveHistory(Chat chat, String text) {
+		log.debug("Читаю из чата [{}] сообщение [{}].", chat.getChatName(), text);
 		if (isHistoryEnable) {
-			log.debug("Читаю из чата [{}] сообщение [{}].", chat.getChatName(), text);
 			History history = History.builder()
 					.chat(chat)
 					.message(text)
@@ -48,8 +48,8 @@ public class HistoryServiceImpl implements HistoryService {
 	@Transactional
 	@Override
 	public void saveHistory(SendMessage sendMessage) {
+		log.debug("Пробую написать в телеграм [{}]: [{}].", sendMessage.getChatId(), sendMessage.getText());
 		if (isHistoryEnable) {
-			log.debug("Пробую написать в телеграм [{}]: [{}].", sendMessage.getChatId(), sendMessage.getText());
 			String chatId = sendMessage.getChatId();
 			History history = History.builder()
 					.chat(chatService.getChatOrCreateIfNotExist(chatId))

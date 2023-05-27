@@ -26,4 +26,10 @@ public class SupplierServiceImpl implements SupplierService {
 	public List<Supplier> getAll() {
 		return supplierRepository.findAll();
 	}
+
+	@Transactional
+	@Override
+	public Supplier getBySupplierId(String supplierId) {
+		return supplierRepository.findBySupplierId(supplierId);
+	}
 }

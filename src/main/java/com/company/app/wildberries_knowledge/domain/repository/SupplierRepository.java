@@ -9,4 +9,6 @@ public interface SupplierRepository extends CrudRepository<Supplier, Long> {
 
 	@Override
 	List<Supplier> findAll();
+
+	Supplier findBySupplierId(String supplierId);
 }

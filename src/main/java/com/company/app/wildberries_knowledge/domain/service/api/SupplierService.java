@@ -9,4 +9,6 @@ public interface SupplierService {
 	void saveAll(List<Supplier> list);
 
 	List<Supplier> getAll();
+
+	Supplier getBySupplierId(String supplierId);
 }

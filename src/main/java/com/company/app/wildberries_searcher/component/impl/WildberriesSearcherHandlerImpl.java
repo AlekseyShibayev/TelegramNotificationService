@@ -52,7 +52,7 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
 
 		String chatName = wildberriesSearcherContainer.getChatName();
 		SearchData searchData = searchDataService.getSearchData(chatName);
-		WildberriesSearcherContainer container = WildberriesSearcherContainer.of(searchData);
+		WildberriesSearcherContainer container = WildberriesSearcherContainer.of(wildberriesSearcherContainer, searchData);
 
 		executorService.submit(WildberriesSearcherTask.builder()
 				.wildberriesSearcherContainer(container)

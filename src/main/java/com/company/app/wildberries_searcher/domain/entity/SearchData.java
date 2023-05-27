@@ -31,9 +31,6 @@ public class SearchData {
 	@Column(name = "DRESS_SIZE")
 	private String dressSize;
 
-	@Column(name = "SUPPLIER")
-	private String supplier;
-
 	@Column(name = "GREED_INDEX")
 	private String greedIndex;
 }

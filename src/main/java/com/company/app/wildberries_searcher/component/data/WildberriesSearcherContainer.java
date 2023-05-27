@@ -25,4 +25,9 @@ public class WildberriesSearcherContainer {
 		BeanUtils.copyProperties(searchData, container);
 		return container;
 	}
+
+	public static WildberriesSearcherContainer of(WildberriesSearcherContainer wildberriesSearcherContainer, SearchData searchData) {
+		BeanUtils.copyProperties(searchData, wildberriesSearcherContainer);
+		return wildberriesSearcherContainer;
+	}
 }

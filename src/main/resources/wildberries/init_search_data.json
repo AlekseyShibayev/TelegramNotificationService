@@ -4,7 +4,6 @@
     "footSize": "45",
     "dressSize": "50",
     "gender": "male",
-    "supplier": "32496;5472;8905;16769",
     "greedIndex": "1.40"
   },
   {
@@ -12,7 +11,6 @@
     "footSize": "40",
     "dressSize": "46;48",
     "gender": "female",
-    "supplier": "32496;5472;8905;16769;286755",
     "greedIndex": "1.40"
   }
 ]

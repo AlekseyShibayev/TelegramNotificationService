@@ -11,20 +11,24 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.company.app.telegram.binder.api.Binder.BINDER_DELIMITER;
+
 @Component
 public class BinderExecutorImpl implements BinderExecutor {
 
+	private Map<String, Binder> binders;
+
 	@Autowired
-	SubscriptionRepository subscriptionRepository;
+	private SubscriptionRepository subscriptionRepository;
 	@Autowired
-	List<Binder> binderList;
-	Map<String, Binder> binders;
+	private List<Binder> binderList;
 
 	@PostConstruct
 	void init() {
@@ -41,7 +45,9 @@ public class BinderExecutorImpl implements BinderExecutor {
 
 	@Override
 	public void execute(Chat chat, String text) {
-		Binder binder = Optional.ofNullable(binders.get(text))
+		Optional<String> first = Arrays.stream(text.split(BINDER_DELIMITER)).findFirst();
+
+		Binder binder = Optional.ofNullable(binders.get(first.get()))
 				.orElseThrow(() -> new IllegalArgumentException(String.format("Не смог вытащить тип binderType из [%s].", text)));
 
 		BinderContainer binderContainer = BinderContainer.builder()

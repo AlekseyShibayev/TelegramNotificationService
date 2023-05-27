@@ -6,11 +6,12 @@ import com.company.app.telegram.domain.service.api.ChatService;
 import com.company.app.telegram.domain.service.api.InitialChatRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
@@ -24,7 +25,8 @@ public class InitialChatRegistryImpl implements InitialChatRegistry {
 	@Autowired
 	private ChatService chatService;
 
-	@PostConstruct
+	@EventListener({ContextRefreshedEvent.class})
+	@Override
 	public void init() throws TelegramApiException {
 		List<Chat> list = jsonSerializationTool.load(resource, Chat.class);
 		chatService.saveAll(list);

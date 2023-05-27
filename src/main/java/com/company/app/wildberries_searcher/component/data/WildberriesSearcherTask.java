@@ -2,8 +2,8 @@ package com.company.app.wildberries_searcher.component.data;
 
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
-import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
+import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

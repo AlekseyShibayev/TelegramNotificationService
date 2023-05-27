@@ -1,16 +1,16 @@
 package com.company.app.springboottest.application.wildberries.searcher;
 
-import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
+import com.company.app.springboottest.application.SpringBootTestApplicationContext;
 import org.junit.jupiter.api.Test;
 
-class WildberriesSearcherFilterTest extends ApplicationSpringBootTestContext {
+class WildberriesSearcherFilterTest extends SpringBootTestApplicationContext {
 
 	/**
 	 * все классы, которые
 	 * implements WildberriesSearcherFilter
 	 * должны быть помечены
-	 * @Component
-	 * или
+	 *
+	 * @Component или
 	 * @Service
 	 */
 	@Test

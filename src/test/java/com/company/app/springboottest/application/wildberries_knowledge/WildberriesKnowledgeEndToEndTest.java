@@ -1,0 +1,24 @@
+package com.company.app.springboottest.application.wildberries_knowledge;
+
+import com.company.app.springboottest.application.SpringBootTestApplicationContext;
+import com.company.app.wildberries_knowledge.controller.SupplierController;
+import com.company.app.wildberries_knowledge.domain.entity.Supplier;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
+class WildberriesKnowledgeEndToEndTest extends SpringBootTestApplicationContext {
+
+	@Autowired
+	private SupplierController supplierController;
+
+	@Test
+	void supplier_initialRegistry_can_init_test() {
+		List<Supplier> supplierList = supplierController.getAll().getBody();
+
+		Assertions.assertNotNull(supplierList);
+		Assertions.assertTrue(supplierList.size() > 1);
+	}
+}

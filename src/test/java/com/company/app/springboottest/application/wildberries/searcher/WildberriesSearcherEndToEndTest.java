@@ -1,6 +1,6 @@
 package com.company.app.springboottest.application.wildberries.searcher;
 
-import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
+import com.company.app.springboottest.application.SpringBootTestApplicationContext;
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
 import com.company.app.wildberries_desire_lot.component.common.data.Size;
 import com.company.app.wildberries_desire_lot.component.common.data.price_history.Price;
@@ -17,7 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
-class WildberriesSearcherEndToEndTest extends ApplicationSpringBootTestContext {
+class WildberriesSearcherEndToEndTest extends SpringBootTestApplicationContext {
 
 	@Autowired
 	private WildberriesSearcher wildberriesSearcher;

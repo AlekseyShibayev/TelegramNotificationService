@@ -1,6 +1,6 @@
 package com.company.app.springboottest.application.telegram;
 
-import com.company.app.springboottest.application.ApplicationSpringBootTestContext;
+import com.company.app.springboottest.application.SpringBootTestApplicationContext;
 import com.company.app.telegram.binder.BinderContainer;
 import com.company.app.telegram.binder.impl.TelegramOffBinderImpl;
 import com.company.app.telegram.controller.ChatController;
@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-class TelegramEndToEndTest extends ApplicationSpringBootTestContext {
+class TelegramEndToEndTest extends SpringBootTestApplicationContext {
 
 	@Autowired
 	TelegramController telegramController;

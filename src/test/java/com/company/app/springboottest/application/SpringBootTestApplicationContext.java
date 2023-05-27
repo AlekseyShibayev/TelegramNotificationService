@@ -32,10 +32,10 @@ import javax.annotation.PostConstruct;
 @ExtendWith(OutputCaptureExtension.class)
 @TestPropertySource("/test.properties")
 @SpringBootTest(
-		classes = ApplicationSpringBootTestConfiguration.class,
+		classes = SpringBootTestApplicationConfiguration.class,
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
-public abstract class ApplicationSpringBootTestContext {
+public abstract class SpringBootTestApplicationContext {
 
 	@PostConstruct
 	void init() {

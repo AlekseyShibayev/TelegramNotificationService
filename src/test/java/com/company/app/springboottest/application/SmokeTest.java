@@ -1,11 +1,11 @@
 package com.company.app.springboottest.application;
 
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.telegram.domain.service.api.InitialChatRegistry;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.repository.HistoryRepository;
 import com.company.app.telegram.domain.service.api.ChatService;
+import com.company.app.telegram.domain.service.api.InitialChatRegistry;
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-class SmokeTest extends ApplicationSpringBootTestContext {
+class SmokeTest extends SpringBootTestApplicationContext {
 
 	@LocalServerPort
 	Integer port;

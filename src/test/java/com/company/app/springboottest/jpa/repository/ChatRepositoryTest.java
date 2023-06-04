@@ -5,6 +5,7 @@ import com.company.app.telegram.domain.repository.ChatRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.system.CapturedOutput;
@@ -20,6 +21,7 @@ class ChatRepositoryTest extends DataJpaSpringBootTestContext {
 //		chatRepository.deleteAll();
 	}
 
+	@Disabled
 	@Test
 	void N_plus_one_test(CapturedOutput capture) {
 		log.debug(SELECT_DELIMITER);

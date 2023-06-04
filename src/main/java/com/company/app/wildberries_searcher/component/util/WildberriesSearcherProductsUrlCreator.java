@@ -49,16 +49,6 @@ public class WildberriesSearcherProductsUrlCreator {
 			"&sort=popular" +
 			"&spp=22";
 
-	/**
-	 * 32496 - остин - 1,40
-	 * 5472 - том тейлор - 1,40
-	 * 8905 - oodji - 1,40
-	 * 5359 - ТВОЕ - 1,80
-	 * 16769 - envylab -
-	 * 286755 - eazyway
-	 * 32496;5472;8905;16769;286755
-	 */
-
 	public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {
 		String withGender = withGender(wildberriesSearcherContainer.getGender());
 		String withSize = withSize(wildberriesSearcherContainer.getDressSize());

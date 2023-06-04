@@ -62,8 +62,7 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
 			String message = String.format("Поисковая задача успешно запущена. [%s]", supplier.getSupplierName());
 			telegramFacade.writeToTargetChat(chat.getChatName(), message);
 		} else {
-			String message = "Занято! Вы что 5 лет в разработке и ни разу не использовали семафор???";
-			telegramFacade.writeToTargetChat(chat.getChatName(), message);
+			telegramFacade.writeToTargetChat(chat.getChatName(), result.getMessage());
 		}
 	}
 

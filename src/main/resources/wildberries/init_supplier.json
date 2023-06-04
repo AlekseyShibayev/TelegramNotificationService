@@ -1,18 +1,6 @@
 [
-  {
-    "supplierName": "tom tailor",
-    "supplierId": "5472"
-  },
-  {
-    "supplierName": "envylab",
-    "supplierId": "16769"
-  },
-  {
-    "supplierName": "eazyway",
-    "supplierId": "286755"
-  },
-  {
-    "supplierName": "ostin",
-    "supplierId": "32496"
-  }
+  {"supplierName": "tom tailor", "supplierId": "5472"},
+  {"supplierName": "envylab", "supplierId": "16769"},
+  {"supplierName": "eazyway", "supplierId": "286755"},
+  {"supplierName": "ostin", "supplierId": "32496"}
 ]

@@ -17,7 +17,7 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 <!--		<telegram.version>5.0.1</telegram.version>-->
 		<telegram.version>6.5.0</telegram.version>
 		<jacoco.version>0.8.8</jacoco.version>

@@ -33,14 +33,14 @@ import javax.annotation.PostConstruct;
 @ExtendWith(OutputCaptureExtension.class)
 @TestPropertySource("/test.properties")
 @SpringBootTest(
-		classes = SpringBootTestApplicationConfiguration.class,
-		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+        classes = SpringBootTestApplicationConfiguration.class,
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class SpringBootTestApplicationContext {
 
-	@PostConstruct
-	void init() {
-		log.debug("**********     запущена группа тестов всего приложения     **********");
-	}
+    @PostConstruct
+    void init() {
+        log.debug("**********     запущена группа тестов всего приложения     **********");
+    }
 }

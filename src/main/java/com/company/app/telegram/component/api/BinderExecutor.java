@@ -7,5 +7,5 @@ import com.company.app.telegram.domain.entity.Chat;
  */
 public interface BinderExecutor {
 
-	void execute(Chat chat, String text);
+    void execute(Chat chat, String text);
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface WildberriesSearcher {
 
-	List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer);
+    List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer);
 }

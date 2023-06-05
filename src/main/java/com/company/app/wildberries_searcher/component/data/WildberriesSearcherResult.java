@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class WildberriesSearcherResult {
 
-	private boolean isSuccess;
-	private String message;
+    private boolean isSuccess;
+    private String message;
 }

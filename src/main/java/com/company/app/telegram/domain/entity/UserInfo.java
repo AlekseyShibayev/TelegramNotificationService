@@ -14,20 +14,20 @@ import javax.persistence.*;
 @Table(name = "USER_INFO")
 public class UserInfo {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID", nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
-	@OneToOne(mappedBy = "userInfo")
-	private Chat chat;
+    @OneToOne(mappedBy = "userInfo")
+    private Chat chat;
 
-	@Column(name = "NAME")
-	private String name;
+    @Column(name = "NAME")
+    private String name;
 
-	@Column(name = "ROLE")
-	private String role;
+    @Column(name = "ROLE")
+    private String role;
 
-	@Column(name = "GENDER")
-	private String gender;
+    @Column(name = "GENDER")
+    private String gender;
 }

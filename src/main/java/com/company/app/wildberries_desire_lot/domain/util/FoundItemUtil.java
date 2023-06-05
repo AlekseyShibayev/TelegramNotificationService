@@ -12,17 +12,17 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class FoundItemUtil {
 
-	public static FoundItemDto of(FoundItem foundItem) {
-		FoundItemDto foundItemDto = new FoundItemDto();
-		BeanUtils.copyProperties(foundItem, foundItemDto);
-		return foundItemDto;
-	}
+    public static FoundItemDto of(FoundItem foundItem) {
+        FoundItemDto foundItemDto = new FoundItemDto();
+        BeanUtils.copyProperties(foundItem, foundItemDto);
+        return foundItemDto;
+    }
 
-	public static List<FoundItemDto> of(List<FoundItem> foundItems) {
-		List<FoundItemDto> result = foundItems.stream()
-				.map(FoundItemUtil::of)
-				.collect(Collectors.toList());
-		result.forEach(foundItemDto -> foundItemDto.setLink(WBUtils.getUrlForResponse(foundItemDto.getArticle())));
-		return result;
-	}
+    public static List<FoundItemDto> of(List<FoundItem> foundItems) {
+        List<FoundItemDto> result = foundItems.stream()
+                .map(FoundItemUtil::of)
+                .collect(Collectors.toList());
+        result.forEach(foundItemDto -> foundItemDto.setLink(WBUtils.getUrlForResponse(foundItemDto.getArticle())));
+        return result;
+    }
 }

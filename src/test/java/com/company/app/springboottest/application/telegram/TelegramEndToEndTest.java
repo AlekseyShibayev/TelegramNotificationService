@@ -23,84 +23,84 @@ import java.util.List;
 
 class TelegramEndToEndTest extends SpringBootTestApplicationContext {
 
-	@Autowired
-	TelegramController telegramController;
-	@Autowired
-	ChatController chatController;
-	@Autowired
-	ChatService chatService;
-	@Autowired
-	TelegramOffBinderImpl telegramBinder;
-	@Autowired
-	ChatRepository chatRepository;
+    @Autowired
+    TelegramController telegramController;
+    @Autowired
+    ChatController chatController;
+    @Autowired
+    ChatService chatService;
+    @Autowired
+    TelegramOffBinderImpl telegramBinder;
+    @Autowired
+    ChatRepository chatRepository;
 
-	@BeforeEach
-	void init() {
-		chatRepository.deleteAll();
-	}
+    @BeforeEach
+    void init() {
+        chatRepository.deleteAll();
+    }
 
-	@Test
-	void telegram_chat_history_test() {
-		ResponseEntity<Long> chatId = chatController.create(ChatDto.builder()
-				.chatName("653606407")
-				.enableNotifications(true)
-				.build());
-		telegramController.say("test_text");
+    @Test
+    void telegram_chat_history_test() {
+        ResponseEntity<Long> chatId = chatController.create(ChatDto.builder()
+                .chatName("653606407")
+                .enableNotifications(true)
+                .build());
+        telegramController.say("test_text");
 
-		Chat chat = chatService.read(chatId.getBody());
-		List<History> historyList = chat.getHistoryList();
+        Chat chat = chatService.read(chatId.getBody());
+        List<History> historyList = chat.getHistoryList();
 
-		Assertions.assertNotNull(historyList);
-		Assertions.assertEquals(1, historyList.size());
-		Assertions.assertEquals("test_text", historyList.get(0).getMessage());
-	}
+        Assertions.assertNotNull(historyList);
+        Assertions.assertEquals(1, historyList.size());
+        Assertions.assertEquals("test_text", historyList.get(0).getMessage());
+    }
 
-	@Test
-	void chatController_crud_test() {
-		ChatDto chatDto = ChatDto.builder().chatName("653606407").build();
-		Long id = chatController.create(chatDto).getBody();
-		Assertions.assertEquals(1, chatRepository.findAll().size());
+    @Test
+    void chatController_crud_test() {
+        ChatDto chatDto = ChatDto.builder().chatName("653606407").build();
+        Long id = chatController.create(chatDto).getBody();
+        Assertions.assertEquals(1, chatRepository.findAll().size());
 
-		chatDto.setUserInfo(UserInfo.builder().role("Test_Role").build());
-		chatController.update(id, chatDto);
-		Assertions.assertEquals(1, chatRepository.findAll().size());
+        chatDto.setUserInfo(UserInfo.builder().role("Test_Role").build());
+        chatController.update(id, chatDto);
+        Assertions.assertEquals(1, chatRepository.findAll().size());
 
-		Chat after = chatController.read(id).getBody();
-		Assertions.assertEquals("Test_Role", after.getUserInfo().getRole());
+        Chat after = chatController.read(id).getBody();
+        Assertions.assertEquals("Test_Role", after.getUserInfo().getRole());
 
-		chatController.delete(id);
-		Assertions.assertEquals(0, chatRepository.findAll().size());
-		Assertions.assertThrows(ObjectNotFoundException.class, () -> chatController.read(id));
-	}
+        chatController.delete(id);
+        Assertions.assertEquals(0, chatRepository.findAll().size());
+        Assertions.assertThrows(ObjectNotFoundException.class, () -> chatController.read(id));
+    }
 
-	@Test
-	void history_list_is_empty_if_enableNotifications_false() {
-		ChatDto chatDto = ChatDto.builder().chatName("653606407").build();
-		Long id = chatController.create(chatDto).getBody();
+    @Test
+    void history_list_is_empty_if_enableNotifications_false() {
+        ChatDto chatDto = ChatDto.builder().chatName("653606407").build();
+        Long id = chatController.create(chatDto).getBody();
 
-		telegramController.say("test_text");
-		Chat chat = chatController.read(id).getBody();
+        telegramController.say("test_text");
+        Chat chat = chatController.read(id).getBody();
 
-		List<History> historyList = chat.getHistoryList();
-		Assertions.assertEquals(0, historyList.size());
-	}
+        List<History> historyList = chat.getHistoryList();
+        Assertions.assertEquals(0, historyList.size());
+    }
 
-	@Test
-	void telegram_binder_can_deactivate_notifications() {
-		List<Chat> all = chatRepository.findAll();
-		Assertions.assertEquals(0, all.size());
+    @Test
+    void telegram_binder_can_deactivate_notifications() {
+        List<Chat> all = chatRepository.findAll();
+        Assertions.assertEquals(0, all.size());
 
-		ChatDto chatDto = ChatDto.builder().chatName("653606407").enableNotifications(true).build();
-		Long id = chatController.create(chatDto).getBody();
-		Chat chat = ChatUtil.of(chatDto);
-		chat.setId(id);
+        ChatDto chatDto = ChatDto.builder().chatName("653606407").enableNotifications(true).build();
+        Long id = chatController.create(chatDto).getBody();
+        Chat chat = ChatUtil.of(chatDto);
+        chat.setId(id);
 
-		telegramBinder.bind(BinderContainer.builder()
-				.chat(chat)
-				.message("TG")
-				.build());
+        telegramBinder.bind(BinderContainer.builder()
+                .chat(chat)
+                .message("TG")
+                .build());
 
-		Chat after = chatController.read(id).getBody();
-		Assertions.assertFalse(after.isEnableNotifications());
-	}
+        Chat after = chatController.read(id).getBody();
+        Assertions.assertFalse(after.isEnableNotifications());
+    }
 }

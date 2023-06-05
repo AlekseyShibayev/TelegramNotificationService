@@ -5,5 +5,5 @@ import com.company.app.wildberries_searcher.component.data.WildberriesSearcherRe
 
 public interface WildberriesSearcherHandler {
 
-	WildberriesSearcherResult process(WildberriesSearcherContainer wildberriesSearcherContainer);
+    WildberriesSearcherResult process(WildberriesSearcherContainer wildberriesSearcherContainer);
 }

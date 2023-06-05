@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class TargetMessage {
 
-	String chatName;
-	String message;
+    String chatName;
+    String message;
 }

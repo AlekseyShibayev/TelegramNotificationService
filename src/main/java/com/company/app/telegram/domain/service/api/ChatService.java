@@ -7,19 +7,19 @@ import java.util.List;
 
 public interface ChatService {
 
-	Long create(ChatDto chatDto);
+    Long create(ChatDto chatDto);
 
-	Chat read(Long id);
+    Chat read(Long id);
 
-	Boolean update(Long id, ChatDto chatDto);
+    Boolean update(Long id, ChatDto chatDto);
 
-	Boolean update(Chat chat);
+    Boolean update(Chat chat);
 
-	Boolean delete(Long id);
+    Boolean delete(Long id);
 
-	Chat getChatOrCreateIfNotExist(String chatId);
+    Chat getChatOrCreateIfNotExist(String chatId);
 
-	List<Chat> getAll();
+    List<Chat> getAll();
 
-	void saveAll(List<Chat> list);
+    void saveAll(List<Chat> list);
 }

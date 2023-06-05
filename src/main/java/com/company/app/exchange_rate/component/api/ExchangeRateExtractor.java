@@ -4,5 +4,5 @@ import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 
 public interface ExchangeRateExtractor {
 
-	ExchangeRate extract();
+    ExchangeRate extract();
 }

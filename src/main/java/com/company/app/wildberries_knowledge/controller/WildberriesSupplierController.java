@@ -15,16 +15,16 @@ import java.util.List;
 @RequestMapping("/wildberries/supplier")
 public class WildberriesSupplierController {
 
-	@Autowired
-	private SupplierService supplierService;
+    @Autowired
+    private SupplierService supplierService;
 
-	@GetMapping(value = "/getAll", produces = "application/json")
-	public ResponseEntity<List<Supplier>> getAll() {
-		return ResponseEntity.ok(supplierService.getAll());
-	}
+    @GetMapping(value = "/getAll", produces = "application/json")
+    public ResponseEntity<List<Supplier>> getAll() {
+        return ResponseEntity.ok(supplierService.getAll());
+    }
 
-	@GetMapping(value = "/getBySupplierId", produces = "application/json")
-	public ResponseEntity<Supplier> getBySupplierId(@RequestParam String supplierId) {
-		return ResponseEntity.ok(supplierService.getBySupplierId(supplierId));
-	}
+    @GetMapping(value = "/getBySupplierId", produces = "application/json")
+    public ResponseEntity<Supplier> getBySupplierId(@RequestParam String supplierId) {
+        return ResponseEntity.ok(supplierService.getBySupplierId(supplierId));
+    }
 }

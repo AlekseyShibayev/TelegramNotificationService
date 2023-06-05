@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ExchangeRepository extends CrudRepository<ExchangeRate, Long> {
 
-	Optional<ExchangeRate> findFirstByOrderByCreationDateDesc();
+    Optional<ExchangeRate> findFirstByOrderByCreationDateDesc();
 
-	List<ExchangeRate> findAll();
+    List<ExchangeRate> findAll();
 }

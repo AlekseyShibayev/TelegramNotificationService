@@ -16,14 +16,14 @@ import java.util.Date;
 @Table(name = "FOUND_ITEM")
 public class FoundItem {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID", nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
-	@Column(name = "ARTICLE")
-	private String article;
+    @Column(name = "ARTICLE")
+    private String article;
 
-	@Column(name = "CREATION_DATE")
-	private Date creationDate;
+    @Column(name = "CREATION_DATE")
+    private Date creationDate;
 }

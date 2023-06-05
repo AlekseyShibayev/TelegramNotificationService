@@ -22,46 +22,46 @@ import java.io.Serializable;
 @Component
 public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot implements TelegramBotConfig {
 
-	@Value("${telegram.name}")
-	private String name;
-	@Value("${telegram.token}")
-	private String token;
+    @Value("${telegram.name}")
+    private String name;
+    @Value("${telegram.token}")
+    private String token;
 
-	@Autowired
-	private TelegramDistributionHub telegramDistributionHub;
+    @Autowired
+    private TelegramDistributionHub telegramDistributionHub;
 
-	@EventListener({ContextRefreshedEvent.class})
-	public void init() throws TelegramApiException {
+    @EventListener({ContextRefreshedEvent.class})
+    public void init() throws TelegramApiException {
 //		this.execute(new SetMyCommands(LIST_OF_COMMANDS, new BotCommandScopeDefault(), null));
-		TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-		botsApi.registerBot(this);
-		log.info("**********     телеграм бот создан     **********");
+        TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+        botsApi.registerBot(this);
+        log.info("**********     телеграм бот создан     **********");
 //		this.execute(GetUpdates.builder().build()); // пока не ясно о каких updates идет речь
-	}
+    }
 
-	@Override
-	public String getBotUsername() {
-		return name;
-	}
+    @Override
+    public String getBotUsername() {
+        return name;
+    }
 
-	@Override
-	public String getBotToken() {
-		return token;
-	}
+    @Override
+    public String getBotToken() {
+        return token;
+    }
 
-	@Override
-	public void processNonCommandUpdate(Update update) {
-		telegramDistributionHub.read(update);
-	}
+    @Override
+    public void processNonCommandUpdate(Update update) {
+        telegramDistributionHub.read(update);
+    }
 
-	@SneakyThrows
-	@Override
-	public void write(BotApiMethod<? extends Serializable> botApiMethod) {
-		this.execute(botApiMethod);
-	}
+    @SneakyThrows
+    @Override
+    public void write(BotApiMethod<? extends Serializable> botApiMethod) {
+        this.execute(botApiMethod);
+    }
 
-	@Override
-	public String getName() {
-		return this.getBotUsername();
-	}
+    @Override
+    public String getName() {
+        return this.getBotUsername();
+    }
 }

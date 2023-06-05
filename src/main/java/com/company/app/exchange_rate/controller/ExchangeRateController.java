@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/exchangeRate")
 public class ExchangeRateController {
 
-	@Autowired
-	private ExchangeRateFacade exchangeRateFacade;
+    @Autowired
+    private ExchangeRateFacade exchangeRateFacade;
 
-	/**
-	 * пример запроса: http://localhost:8080/exchangeRate/get
-	 */
-	@GetMapping(value = "/extract", produces = "application/json")
-	public ResponseEntity<ExchangeRate> extract() {
-		return ResponseEntity.ok(exchangeRateFacade.extract());
-	}
+    /**
+     * пример запроса: http://localhost:8080/exchangeRate/get
+     */
+    @GetMapping(value = "/extract", produces = "application/json")
+    public ResponseEntity<ExchangeRate> extract() {
+        return ResponseEntity.ok(exchangeRateFacade.extract());
+    }
 
-	/**
-	 * пример запроса: http://localhost:8080/exchangeRate/get
-	 */
-	@GetMapping(value = "/getLast", produces = "application/json")
-	public ResponseEntity<ExchangeRate> getLast() {
-		return ResponseEntity.ok(exchangeRateFacade.getLast());
-	}
+    /**
+     * пример запроса: http://localhost:8080/exchangeRate/get
+     */
+    @GetMapping(value = "/getLast", produces = "application/json")
+    public ResponseEntity<ExchangeRate> getLast() {
+        return ResponseEntity.ok(exchangeRateFacade.getLast());
+    }
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface WildberriesService {
 
-	List<FoundItem> getDesiredLots();
+    List<FoundItem> getDesiredLots();
 }

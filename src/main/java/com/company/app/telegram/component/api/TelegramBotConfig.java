@@ -17,7 +17,7 @@ public interface TelegramBotConfig {
 //			new BotCommand("/ex", "Последний найденный курс")
 //	);
 
-	void write(BotApiMethod<? extends Serializable> botApiMethod);
+    void write(BotApiMethod<? extends Serializable> botApiMethod);
 
-	String getName();
+    String getName();
 }

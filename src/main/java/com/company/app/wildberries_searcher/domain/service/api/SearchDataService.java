@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SearchDataService {
 
-	void saveAll(List<SearchData> list);
+    void saveAll(List<SearchData> list);
 
-	SearchData getSearchData(String chatName);
+    SearchData getSearchData(String chatName);
 }

@@ -15,14 +15,14 @@ import java.util.Set;
 @Table(name = "SUBSCRIPTION")
 public class Subscription {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID", nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
-	@Column(name = "TYPE")
-	private String type;
+    @Column(name = "TYPE")
+    private String type;
 
-	@ManyToMany(mappedBy = "subscriptions")
-	private Set<Chat> chats;
+    @ManyToMany(mappedBy = "subscriptions")
+    private Set<Chat> chats;
 }

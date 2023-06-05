@@ -7,9 +7,9 @@ import com.company.app.telegram.binder.BinderContainer;
  */
 public interface Binder {
 
-	String BINDER_DELIMITER = "::";
+    String BINDER_DELIMITER = "::";
 
-	String getType();
+    String getType();
 
-	void bind(BinderContainer binderContainer);
+    void bind(BinderContainer binderContainer);
 }

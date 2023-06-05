@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface SupplierService {
 
-	void saveAll(List<Supplier> list);
+    void saveAll(List<Supplier> list);
 
-	List<Supplier> getAll();
+    List<Supplier> getAll();
 
-	Supplier getBySupplierId(String supplierId);
+    Supplier getBySupplierId(String supplierId);
 }

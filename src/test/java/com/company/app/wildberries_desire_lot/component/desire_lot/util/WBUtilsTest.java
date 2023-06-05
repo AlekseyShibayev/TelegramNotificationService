@@ -9,20 +9,20 @@ import java.util.List;
 
 class WBUtilsTest {
 
-	@Test
-	void getUrlForPriceSearch() {
-		String urlForPriceSearch = WBUtils.getUrlForPriceSearch(createLots());
-		String manualCreated = WBUtils.URL_BONE + "43409221;" + "15694225;";
-		Assertions.assertEquals(urlForPriceSearch, manualCreated);
-	}
+    @Test
+    void getUrlForPriceSearch() {
+        String urlForPriceSearch = WBUtils.getUrlForPriceSearch(createLots());
+        String manualCreated = WBUtils.URL_BONE + "43409221;" + "15694225;";
+        Assertions.assertEquals(urlForPriceSearch, manualCreated);
+    }
 
-	private List<Lot> createLots() {
-		return ImmutableList.<Lot>builder()
-				.add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
-				.add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
-				.add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
-				.add(Lot.builder().article("15694225").desiredPrice("5500").discount("0.17").build())
-				.add(Lot.builder().article("15694225").desiredPrice("5500").discount("0.17").build())
-				.build();
-	}
+    private List<Lot> createLots() {
+        return ImmutableList.<Lot>builder()
+                .add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
+                .add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
+                .add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
+                .add(Lot.builder().article("15694225").desiredPrice("5500").discount("0.17").build())
+                .add(Lot.builder().article("15694225").desiredPrice("5500").discount("0.17").build())
+                .build();
+    }
 }

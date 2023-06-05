@@ -15,20 +15,20 @@ import java.util.Date;
 @Setter
 public class ExchangeRateExtractorImpl implements ExchangeRateExtractor {
 
-	@Autowired
-	private ExchangeRateService exchangeRateService;
-	@Autowired
-	private AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
+    @Autowired
+    private ExchangeRateService exchangeRateService;
+    @Autowired
+    private AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
 
-	@SneakyThrows
-	@Override
-	public ExchangeRate extract() {
-		ExchangeRate exchange = ExchangeRate.builder()
-				.aliexpressExchangeRate(aliexpressExchangeRateExtractor.extract())
-				.creationDate(new Date())
-				.build();
-		exchangeRateService.create(exchange);
+    @SneakyThrows
+    @Override
+    public ExchangeRate extract() {
+        ExchangeRate exchange = ExchangeRate.builder()
+                .aliexpressExchangeRate(aliexpressExchangeRateExtractor.extract())
+                .creationDate(new Date())
+                .build();
+        exchangeRateService.create(exchange);
 
-		return exchange;
-	}
+        return exchange;
+    }
 }

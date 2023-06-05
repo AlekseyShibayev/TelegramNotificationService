@@ -12,18 +12,18 @@ import java.util.List;
 @Service
 public class SearchDataServiceImpl implements SearchDataService {
 
-	@Autowired
-	private SearchDataRepository searchDataRepository;
+    @Autowired
+    private SearchDataRepository searchDataRepository;
 
-	@Override
-	@Transactional
-	public void saveAll(List<SearchData> list) {
-		searchDataRepository.saveAll(list);
-	}
+    @Override
+    @Transactional
+    public void saveAll(List<SearchData> list) {
+        searchDataRepository.saveAll(list);
+    }
 
-	@Override
-	@Transactional
-	public SearchData getSearchData(String chatName) {
-		return searchDataRepository.findByChatName(chatName);
-	}
+    @Override
+    @Transactional
+    public SearchData getSearchData(String chatName) {
+        return searchDataRepository.findByChatName(chatName);
+    }
 }

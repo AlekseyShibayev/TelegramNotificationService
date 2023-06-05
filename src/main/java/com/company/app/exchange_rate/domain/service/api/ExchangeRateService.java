@@ -4,7 +4,7 @@ import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 
 public interface ExchangeRateService {
 
-	ExchangeRate getLast();
+    ExchangeRate getLast();
 
-	boolean create(ExchangeRate exchangeRate);
+    boolean create(ExchangeRate exchangeRate);
 }

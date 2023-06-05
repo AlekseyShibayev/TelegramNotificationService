@@ -11,16 +11,16 @@ import java.util.Set;
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
 
-	@Autowired
-	SubscriptionRepository subscriptionRepository;
+    @Autowired
+    SubscriptionRepository subscriptionRepository;
 
-	@Override
-	public Subscription read(Long id) {
-		return subscriptionRepository.findById(id).get();
-	}
+    @Override
+    public Subscription read(Long id) {
+        return subscriptionRepository.findById(id).get();
+    }
 
-	@Override
-	public Set<Subscription> getAll() {
-		return subscriptionRepository.findAll();
-	}
+    @Override
+    public Set<Subscription> getAll() {
+        return subscriptionRepository.findAll();
+    }
 }

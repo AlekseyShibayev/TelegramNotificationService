@@ -8,6 +8,6 @@ import lombok.Data;
 @Builder
 public class BinderContainer {
 
-	private Chat chat;
-	private String message;
+    private Chat chat;
+    private String message;
 }

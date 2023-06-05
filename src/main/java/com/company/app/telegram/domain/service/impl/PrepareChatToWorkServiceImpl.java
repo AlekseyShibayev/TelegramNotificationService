@@ -15,19 +15,19 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 @Service
 public class PrepareChatToWorkServiceImpl implements PrepareChatToWorkService {
 
-	@Autowired
-	private HistoryService historyService;
-	@Autowired
-	private ChatService chatService;
-	@Autowired
-	private ChatActivationService chatActivationService;
+    @Autowired
+    private HistoryService historyService;
+    @Autowired
+    private ChatService chatService;
+    @Autowired
+    private ChatActivationService chatActivationService;
 
-	@Transactional
-	@Override
-	public Chat getPreparedToWorkChat(Message message, Long chatId) {
-		Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
-		historyService.saveHistory(chat, message.getText());
-		chatActivationService.activate(chat);
-		return chat;
-	}
+    @Transactional
+    @Override
+    public Chat getPreparedToWorkChat(Message message, Long chatId) {
+        Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
+        historyService.saveHistory(chat, message.getText());
+        chatActivationService.activate(chat);
+        return chat;
+    }
 }

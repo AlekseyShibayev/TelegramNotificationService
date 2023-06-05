@@ -22,19 +22,19 @@ import javax.annotation.PostConstruct;
 @DataJpaTest
 public abstract class DataJpaSpringBootTestContext {
 
-	protected static final String SELECT_DELIMITER = "Если ты учел все проблемы hibernate, то после этого сообщения будет только один select:";
+    protected static final String SELECT_DELIMITER = "Если ты учел все проблемы hibernate, то после этого сообщения будет только один select:";
 
-	@Autowired
-	public TestEntityManager testEntityManager;
+    @Autowired
+    public TestEntityManager testEntityManager;
 
-	@PostConstruct
-	void init() {
-		log.debug("**********     запущена группа тестов data jpa     **********");
-	}
+    @PostConstruct
+    void init() {
+        log.debug("**********     запущена группа тестов data jpa     **********");
+    }
 
-	protected int getSelectCount(CapturedOutput capture) {
-		String[] split = capture.getAll().split(SELECT_DELIMITER);
-		String queryMessages = split[1];
-		return StringUtils.countMatches(queryMessages, "select");
-	}
+    protected int getSelectCount(CapturedOutput capture) {
+        String[] split = capture.getAll().split(SELECT_DELIMITER);
+        String queryMessages = split[1];
+        return StringUtils.countMatches(queryMessages, "select");
+    }
 }

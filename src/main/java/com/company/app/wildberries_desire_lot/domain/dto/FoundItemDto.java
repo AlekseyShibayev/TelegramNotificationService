@@ -11,7 +11,7 @@ import java.util.Date;
 @Builder
 public class FoundItemDto {
 
-	private String article;
-	private Date creationDate;
-	private String link;
+    private String article;
+    private Date creationDate;
+    private String link;
 }

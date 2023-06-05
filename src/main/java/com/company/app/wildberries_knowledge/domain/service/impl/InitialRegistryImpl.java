@@ -16,18 +16,18 @@ import java.util.List;
 @Service
 public class InitialRegistryImpl implements InitialRegistry {
 
-	@Value("classpath:wildberries/init_supplier.json")
-	private Resource resource;
+    @Value("classpath:wildberries/init_supplier.json")
+    private Resource resource;
 
-	@Autowired
-	private JsonSerializationTool<Supplier> jsonSerializationTool;
-	@Autowired
-	private SupplierService supplierService;
+    @Autowired
+    private JsonSerializationTool<Supplier> jsonSerializationTool;
+    @Autowired
+    private SupplierService supplierService;
 
-	@EventListener({ContextRefreshedEvent.class})
-	@Override
-	public void init() {
-		List<Supplier> list = jsonSerializationTool.load(resource, Supplier.class);
-		supplierService.saveAll(list);
-	}
+    @EventListener({ContextRefreshedEvent.class})
+    @Override
+    public void init() {
+        List<Supplier> list = jsonSerializationTool.load(resource, Supplier.class);
+        supplierService.saveAll(list);
+    }
 }

@@ -16,18 +16,18 @@ import java.util.List;
 @Component
 public class InitialLotRegistryImpl implements InitialLotRegistry {
 
-	@Value("classpath:wildberries/init_lot.json")
-	private Resource resource;
+    @Value("classpath:wildberries/init_lot.json")
+    private Resource resource;
 
-	@Autowired
-	private LotRepository lotRepository;
-	@Autowired
-	private JsonSerializationTool<Lot> jsonSerializationTool;
+    @Autowired
+    private LotRepository lotRepository;
+    @Autowired
+    private JsonSerializationTool<Lot> jsonSerializationTool;
 
-	@SneakyThrows
-	@PostConstruct
-	public void init() {
-		List<Lot> lots = jsonSerializationTool.load(resource, Lot.class);
-		lotRepository.saveAll(lots);
-	}
+    @SneakyThrows
+    @PostConstruct
+    public void init() {
+        List<Lot> lots = jsonSerializationTool.load(resource, Lot.class);
+        lotRepository.saveAll(lots);
+    }
 }

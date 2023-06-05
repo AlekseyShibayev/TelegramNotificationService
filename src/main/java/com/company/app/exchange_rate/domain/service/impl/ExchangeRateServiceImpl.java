@@ -13,20 +13,20 @@ import java.util.Optional;
 @Service
 public class ExchangeRateServiceImpl implements ExchangeRateService {
 
-	@Autowired
-	private ExchangeRepository exchangeRepository;
+    @Autowired
+    private ExchangeRepository exchangeRepository;
 
-	@Transactional
-	@Override
-	public ExchangeRate getLast() {
-		Optional<ExchangeRate> optional = exchangeRepository.findFirstByOrderByCreationDateDesc();
-		return optional.orElseThrow(() -> new NoSuchElementException("Курса еще нет."));
-	}
+    @Transactional
+    @Override
+    public ExchangeRate getLast() {
+        Optional<ExchangeRate> optional = exchangeRepository.findFirstByOrderByCreationDateDesc();
+        return optional.orElseThrow(() -> new NoSuchElementException("Курса еще нет."));
+    }
 
-	@Transactional
-	@Override
-	public boolean create(ExchangeRate exchangeRate) {
-		exchangeRepository.save(exchangeRate);
-		return true;
-	}
+    @Transactional
+    @Override
+    public boolean create(ExchangeRate exchangeRate) {
+        exchangeRepository.save(exchangeRate);
+        return true;
+    }
 }

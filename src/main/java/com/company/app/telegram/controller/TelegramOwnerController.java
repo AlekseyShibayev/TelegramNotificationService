@@ -16,16 +16,16 @@ import java.util.List;
 @RequestMapping("/telegram/owner")
 public class TelegramOwnerController {
 
-	@Autowired
-	ChatService chatService;
+    @Autowired
+    ChatService chatService;
 
-	/**
-	 * пример запроса: http://localhost:8080/telegram/owner/getAllTelegramSettingsAsJson
-	 */
-	@GetMapping(value = "/getAllTelegramSettingsAsJson", produces = "application/json")
-	public ResponseEntity<List<ChatDto>> getAllTelegramSettingsAsJson() {
-		List<Chat> chatList = chatService.getAll();
-		List<ChatDto> dtoList = ChatUtil.of(chatList);
-		return ResponseEntity.ok(dtoList);
-	}
+    /**
+     * пример запроса: http://localhost:8080/telegram/owner/getAllTelegramSettingsAsJson
+     */
+    @GetMapping(value = "/getAllTelegramSettingsAsJson", produces = "application/json")
+    public ResponseEntity<List<ChatDto>> getAllTelegramSettingsAsJson() {
+        List<Chat> chatList = chatService.getAll();
+        List<ChatDto> dtoList = ChatUtil.of(chatList);
+        return ResponseEntity.ok(dtoList);
+    }
 }

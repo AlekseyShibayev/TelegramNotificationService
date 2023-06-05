@@ -12,19 +12,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class TelegramOnBinderImpl implements TelegramBinder {
 
-	private static final String TYPE = "TG_ON";
+    private static final String TYPE = "TG_ON";
 
-	@Autowired
-	private ChatActivationService chatActivationService;
+    @Autowired
+    private ChatActivationService chatActivationService;
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-	@Override
-	public void bind(BinderContainer binderContainer) {
-		Chat chat = binderContainer.getChat();
-		chatActivationService.activate(chat);
-	}
+    @Override
+    public void bind(BinderContainer binderContainer) {
+        Chat chat = binderContainer.getChat();
+        chatActivationService.activate(chat);
+    }
 }

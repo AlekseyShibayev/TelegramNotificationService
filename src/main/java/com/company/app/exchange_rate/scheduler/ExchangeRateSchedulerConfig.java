@@ -14,18 +14,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 @ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
 public class ExchangeRateSchedulerConfig {
 
-	@Autowired
-	private TelegramFacade telegramFacade;
-	@Autowired
-	private ExchangeRateFacade exchangeRateFacade;
+    @Autowired
+    private TelegramFacade telegramFacade;
+    @Autowired
+    private ExchangeRateFacade exchangeRateFacade;
 
-	@Scheduled(fixedDelayString = "${exchangeRate.timeout}")
-	public void writeExchange() {
-		ExchangeRate exchangeRate = exchangeRateFacade.extract();
-		String notification = exchangeRate.getAliexpressExchangeRate() + " (курс али)";
-		if (log.isDebugEnabled()) {
-			log.debug("Определён курс: [{}].", notification);
-		}
-		telegramFacade.writeToEveryone(notification);
-	}
+    @Scheduled(fixedDelayString = "${exchangeRate.timeout}")
+    public void writeExchange() {
+        ExchangeRate exchangeRate = exchangeRateFacade.extract();
+        String notification = exchangeRate.getAliexpressExchangeRate() + " (курс али)";
+        if (log.isDebugEnabled()) {
+            log.debug("Определён курс: [{}].", notification);
+        }
+        telegramFacade.writeToEveryone(notification);
+    }
 }

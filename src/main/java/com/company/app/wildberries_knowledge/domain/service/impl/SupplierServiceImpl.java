@@ -12,24 +12,24 @@ import java.util.List;
 @Service
 public class SupplierServiceImpl implements SupplierService {
 
-	@Autowired
-	private SupplierRepository supplierRepository;
+    @Autowired
+    private SupplierRepository supplierRepository;
 
-	@Transactional
-	@Override
-	public void saveAll(List<Supplier> list) {
-		supplierRepository.saveAll(list);
-	}
+    @Transactional
+    @Override
+    public void saveAll(List<Supplier> list) {
+        supplierRepository.saveAll(list);
+    }
 
-	@Transactional
-	@Override
-	public List<Supplier> getAll() {
-		return supplierRepository.findAll();
-	}
+    @Transactional
+    @Override
+    public List<Supplier> getAll() {
+        return supplierRepository.findAll();
+    }
 
-	@Transactional
-	@Override
-	public Supplier getBySupplierId(String supplierId) {
-		return supplierRepository.findBySupplierId(supplierId);
-	}
+    @Transactional
+    @Override
+    public Supplier getBySupplierId(String supplierId) {
+        return supplierRepository.findBySupplierId(supplierId);
+    }
 }

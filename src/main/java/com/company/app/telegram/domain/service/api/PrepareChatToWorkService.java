@@ -8,5 +8,5 @@ import org.telegram.telegrambots.meta.api.objects.Message;
  */
 public interface PrepareChatToWorkService {
 
-	Chat getPreparedToWorkChat(Message message, Long chatId);
+    Chat getPreparedToWorkChat(Message message, Long chatId);
 }

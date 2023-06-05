@@ -15,13 +15,13 @@ import java.util.List;
 @RequestMapping("/wildberries")
 public class WildberriesController {
 
-	@Autowired
-	WildberriesFacade wildberriesFacade;
+    @Autowired
+    WildberriesFacade wildberriesFacade;
 
-	@GetMapping(value = "/getAllFoundItems", produces = "application/json")
-	public ResponseEntity<List<FoundItemDto>> getAllFoundItems() {
-		return ResponseEntity.ok(FoundItemUtil.of(wildberriesFacade.getAllFoundItems()));
-	}
+    @GetMapping(value = "/getAllFoundItems", produces = "application/json")
+    public ResponseEntity<List<FoundItemDto>> getAllFoundItems() {
+        return ResponseEntity.ok(FoundItemUtil.of(wildberriesFacade.getAllFoundItems()));
+    }
 
 
 }

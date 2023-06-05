@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class WildberriesSearcherFacade {
 
-	@Autowired
-	private WildberriesSearcherHandler wildberriesSearcherHandler;
+    @Autowired
+    private WildberriesSearcherHandler wildberriesSearcherHandler;
 
-	@PerformanceLogAnnotation
-	public WildberriesSearcherResult search(WildberriesSearcherContainer wildberriesSearcherContainer) {
-		return wildberriesSearcherHandler.process(wildberriesSearcherContainer);
-	}
+    @PerformanceLogAnnotation
+    public WildberriesSearcherResult search(WildberriesSearcherContainer wildberriesSearcherContainer) {
+        return wildberriesSearcherHandler.process(wildberriesSearcherContainer);
+    }
 }

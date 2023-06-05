@@ -18,43 +18,43 @@ import java.util.Set;
 @Component
 public class ChatActivationServiceImpl implements ChatActivationService {
 
-	@Autowired
-	private SubscriptionController subscriptionController;
-	@Autowired
-	private ChatService chatService;
-	@Autowired
-	private TelegramFacade telegramFacade;
+    @Autowired
+    private SubscriptionController subscriptionController;
+    @Autowired
+    private ChatService chatService;
+    @Autowired
+    private TelegramFacade telegramFacade;
 
-	@Transactional
-	@Override
-	public void activate(Chat chat) {
-		if (isChatNotActive(chat)) {
-			chat.setEnableNotifications(true);
-			Set<Subscription> subscriptions = subscriptionController.readAll().getBody();
-			chat.setSubscriptions(subscriptions);
+    @Transactional
+    @Override
+    public void activate(Chat chat) {
+        if (isChatNotActive(chat)) {
+            chat.setEnableNotifications(true);
+            Set<Subscription> subscriptions = subscriptionController.readAll().getBody();
+            chat.setSubscriptions(subscriptions);
 
-			chatService.update(chat);
+            chatService.update(chat);
 
-			String message = String.format("Для чата [%s] уведомления включены.", chat.getChatName());
-			telegramFacade.writeToTargetChat(chat.getChatName(), message);
-		}
-	}
+            String message = String.format("Для чата [%s] уведомления включены.", chat.getChatName());
+            telegramFacade.writeToTargetChat(chat.getChatName(), message);
+        }
+    }
 
-	@Transactional
-	@Override
-	public void deactivate(Chat chat) {
-		if (!isChatNotActive(chat)) {
-			chat.setEnableNotifications(false);
-			chat.setSubscriptions(Sets.newHashSet());
+    @Transactional
+    @Override
+    public void deactivate(Chat chat) {
+        if (!isChatNotActive(chat)) {
+            chat.setEnableNotifications(false);
+            chat.setSubscriptions(Sets.newHashSet());
 
-			chatService.update(chat);
+            chatService.update(chat);
 
-			String message = String.format("Для чата [%s] уведомления отключены.", chat.getChatName());
-			telegramFacade.writeToTargetChat(chat.getChatName(), message);
-		}
-	}
+            String message = String.format("Для чата [%s] уведомления отключены.", chat.getChatName());
+            telegramFacade.writeToTargetChat(chat.getChatName(), message);
+        }
+    }
 
-	private boolean isChatNotActive(Chat chat) {
-		return !chat.isEnableNotifications();
-	}
+    private boolean isChatNotActive(Chat chat) {
+        return !chat.isEnableNotifications();
+    }
 }

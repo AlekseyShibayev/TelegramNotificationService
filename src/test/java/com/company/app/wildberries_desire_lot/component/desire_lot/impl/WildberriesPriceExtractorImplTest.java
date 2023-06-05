@@ -9,27 +9,27 @@ import org.junit.jupiter.api.Test;
 
 class WildberriesPriceExtractorImplTest {
 
-	private static final String FILE_NAME = "wildberries/response_example.json";
+    private static final String FILE_NAME = "wildberries/response_example.json";
 
-	private WildberriesPriceExtractorImpl wildberriesPriceExtractor;
-	private DataExtractorToolImpl dataExtractorService;
+    private WildberriesPriceExtractorImpl wildberriesPriceExtractor;
+    private DataExtractorToolImpl dataExtractorService;
 
-	@BeforeEach
-	public void init() {
-		wildberriesPriceExtractor = new WildberriesPriceExtractorImpl();
-		dataExtractorService = new DataExtractorToolImpl();
-	}
+    @BeforeEach
+    public void init() {
+        wildberriesPriceExtractor = new WildberriesPriceExtractorImpl();
+        dataExtractorService = new DataExtractorToolImpl();
+    }
 
-	@Test
-	void extract() {
-		WildberriesPriceExtractorImpl wildberriesPriceExtractor = new WildberriesPriceExtractorImpl();
-		DataExtractorToolImpl dataExtractorTool = new DataExtractorToolImpl();
-		JsonSerializationToolImpl<Response> responseJsonSerializationTool = new JsonSerializationToolImpl<>();
-		wildberriesPriceExtractor.setJsonSerializationTool(responseJsonSerializationTool);
+    @Test
+    void extract() {
+        WildberriesPriceExtractorImpl wildberriesPriceExtractor = new WildberriesPriceExtractorImpl();
+        DataExtractorToolImpl dataExtractorTool = new DataExtractorToolImpl();
+        JsonSerializationToolImpl<Response> responseJsonSerializationTool = new JsonSerializationToolImpl<>();
+        wildberriesPriceExtractor.setJsonSerializationTool(responseJsonSerializationTool);
 
-		String fileAsString = dataExtractorTool.getFileAsString(FILE_NAME);
-		String price = wildberriesPriceExtractor.extract(fileAsString, "43409221");
+        String fileAsString = dataExtractorTool.getFileAsString(FILE_NAME);
+        String price = wildberriesPriceExtractor.extract(fileAsString, "43409221");
 
-		Assertions.assertEquals("109900", price);
-	}
+        Assertions.assertEquals("109900", price);
+    }
 }

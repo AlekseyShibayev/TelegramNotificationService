@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface SubscriptionService {
 
-	Subscription read(Long id);
+    Subscription read(Long id);
 
-	Set<Subscription> getAll();
+    Set<Subscription> getAll();
 }

@@ -18,21 +18,21 @@ import java.util.List;
 @ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
 public class WildberriesSchedulerConfig {
 
-	@Autowired
-	private TelegramFacade telegramFacade;
-	@Autowired
-	private WildberriesFacade wildberriesFacade;
+    @Autowired
+    private TelegramFacade telegramFacade;
+    @Autowired
+    private WildberriesFacade wildberriesFacade;
 
-	@Scheduled(fixedDelayString = "${wildberries.timeout}")
-	public void searchWildberriesLots() {
-		List<FoundItem> desiredLots = wildberriesFacade.getDesiredLots();
+    @Scheduled(fixedDelayString = "${wildberries.timeout}")
+    public void searchWildberriesLots() {
+        List<FoundItem> desiredLots = wildberriesFacade.getDesiredLots();
 
-		if (log.isDebugEnabled()) {
-			log.debug("Определены желаемые лоты вб, в количестве: [{}].", desiredLots.size());
-		}
+        if (log.isDebugEnabled()) {
+            log.debug("Определены желаемые лоты вб, в количестве: [{}].", desiredLots.size());
+        }
 
-		if (CollectionHelper.isNotEmpty(desiredLots)) {
-			desiredLots.forEach(foundItem -> telegramFacade.writeToEveryone(WBUtils.getUrlForResponse(foundItem.getArticle())));
-		}
-	}
+        if (CollectionHelper.isNotEmpty(desiredLots)) {
+            desiredLots.forEach(foundItem -> telegramFacade.writeToEveryone(WBUtils.getUrlForResponse(foundItem.getArticle())));
+        }
+    }
 }

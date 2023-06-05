@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class WildberriesSearcherNotificatorImpl implements WildberriesSearcherNotificator {
 
-	@Autowired
-	private TelegramController telegramController;
+    @Autowired
+    private TelegramController telegramController;
 
-	@Override
-	public void notify(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
-		WildberriesLinkDto dto = responseProducts.toLinkDto();
-		telegramController.say(TargetMessage.builder()
-				.chatName(wildberriesSearcherContainer.getChatName())
-				.message(dto.toMessage())
-				.build());
-	}
+    @Override
+    public void notify(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+        WildberriesLinkDto dto = responseProducts.toLinkDto();
+        telegramController.say(TargetMessage.builder()
+                .chatName(wildberriesSearcherContainer.getChatName())
+                .message(dto.toMessage())
+                .build());
+    }
 }

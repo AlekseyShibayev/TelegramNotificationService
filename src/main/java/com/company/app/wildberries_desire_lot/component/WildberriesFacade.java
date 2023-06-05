@@ -14,18 +14,18 @@ import java.util.List;
 @Component
 public class WildberriesFacade {
 
-	@Autowired
-	private WildberriesService wildberriesService;
-	@Autowired
-	private FoundItemsService foundItemsService;
+    @Autowired
+    private WildberriesService wildberriesService;
+    @Autowired
+    private FoundItemsService foundItemsService;
 
-	@PerformanceLogAnnotation
-	public List<FoundItem> getDesiredLots() {
-		return wildberriesService.getDesiredLots();
-	}
+    @PerformanceLogAnnotation
+    public List<FoundItem> getDesiredLots() {
+        return wildberriesService.getDesiredLots();
+    }
 
-	@PerformanceLogAnnotation
-	public List<FoundItem> getAllFoundItems() {
-		return foundItemsService.getAll();
-	}
+    @PerformanceLogAnnotation
+    public List<FoundItem> getAllFoundItems() {
+        return foundItemsService.getAll();
+    }
 }

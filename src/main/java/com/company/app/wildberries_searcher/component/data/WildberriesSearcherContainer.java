@@ -13,21 +13,21 @@ import org.springframework.beans.BeanUtils;
 @Builder
 public class WildberriesSearcherContainer {
 
-	private String chatName;
-	private String footSize;
-	private String dressSize;
-	private String gender;
-	private String supplier;
-	private String greedIndex;
+    private String chatName;
+    private String footSize;
+    private String dressSize;
+    private String gender;
+    private String supplier;
+    private String greedIndex;
 
-	public static WildberriesSearcherContainer of(SearchData searchData) {
-		WildberriesSearcherContainer container = new WildberriesSearcherContainer();
-		BeanUtils.copyProperties(searchData, container);
-		return container;
-	}
+    public static WildberriesSearcherContainer of(SearchData searchData) {
+        WildberriesSearcherContainer container = new WildberriesSearcherContainer();
+        BeanUtils.copyProperties(searchData, container);
+        return container;
+    }
 
-	public static WildberriesSearcherContainer of(WildberriesSearcherContainer wildberriesSearcherContainer, SearchData searchData) {
-		BeanUtils.copyProperties(searchData, wildberriesSearcherContainer);
-		return wildberriesSearcherContainer;
-	}
+    public static WildberriesSearcherContainer of(WildberriesSearcherContainer wildberriesSearcherContainer, SearchData searchData) {
+        BeanUtils.copyProperties(searchData, wildberriesSearcherContainer);
+        return wildberriesSearcherContainer;
+    }
 }

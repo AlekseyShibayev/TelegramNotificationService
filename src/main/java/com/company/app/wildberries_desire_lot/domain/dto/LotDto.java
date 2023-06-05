@@ -7,7 +7,7 @@ import lombok.Getter;
 @Builder
 public class LotDto {
 
-	private String article;
-	private String desiredPrice;
-	private String discount;
+    private String article;
+    private String desiredPrice;
+    private String discount;
 }

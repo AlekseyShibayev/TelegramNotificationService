@@ -18,32 +18,32 @@ import java.util.List;
 @Component
 public class WildberriesBinderImpl implements WildberriesBinder {
 
-	private static final String TYPE = "WB";
+    private static final String TYPE = "WB";
 
-	@Autowired
-	private WildberriesController wildberriesController;
-	@Autowired
-	private TelegramFacade telegramFacade;
+    @Autowired
+    private WildberriesController wildberriesController;
+    @Autowired
+    private TelegramFacade telegramFacade;
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-	@SneakyThrows
-	@Override
-	public void bind(BinderContainer binderContainer) {
-		Chat chat = binderContainer.getChat();
-		List<FoundItemDto> foundItemDtoList = wildberriesController.getAllFoundItems().getBody();
-		if (CollectionUtils.isEmpty(foundItemDtoList)) {
-			telegramFacade.writeToTargetChat(chat.getChatName(), "Пусто");
-		} else {
-			String message = foundItemDtoList.stream()
-					.map(FoundItemDto::getLink)
-					.distinct()
-					.reduce((s, s2) -> s + "\n" + s2)
-					.orElseThrow();
-			telegramFacade.writeToTargetChat(chat.getChatName(), message);
-		}
-	}
+    @SneakyThrows
+    @Override
+    public void bind(BinderContainer binderContainer) {
+        Chat chat = binderContainer.getChat();
+        List<FoundItemDto> foundItemDtoList = wildberriesController.getAllFoundItems().getBody();
+        if (CollectionUtils.isEmpty(foundItemDtoList)) {
+            telegramFacade.writeToTargetChat(chat.getChatName(), "Пусто");
+        } else {
+            String message = foundItemDtoList.stream()
+                    .map(FoundItemDto::getLink)
+                    .distinct()
+                    .reduce((s, s2) -> s + "\n" + s2)
+                    .orElseThrow();
+            telegramFacade.writeToTargetChat(chat.getChatName(), message);
+        }
+    }
 }

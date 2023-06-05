@@ -16,25 +16,25 @@ import java.util.List;
 
 class WildberriesFacadeTest extends SpringBootTestApplicationContext {
 
-	private static final String FILE_NAME = "src/test/resources/wildberries/lot.json";
+    private static final String FILE_NAME = "src/test/resources/wildberries/lot.json";
 
-	@Autowired
-	private WildberriesFacade wildberriesFacade;
-	@Autowired
-	private JsonSerializationTool<Lot> jsonSerializationTool;
-	@MockBean
-	private LotRepository lotRepository;
-	@MockBean
-	private CaptchaFighter captchaFighter;
+    @Autowired
+    private WildberriesFacade wildberriesFacade;
+    @Autowired
+    private JsonSerializationTool<Lot> jsonSerializationTool;
+    @MockBean
+    private LotRepository lotRepository;
+    @MockBean
+    private CaptchaFighter captchaFighter;
 
-	@Test
-	void wildberries_can_getDesiredLots_test() {
-		File file = new File(FILE_NAME);
-		List<Lot> lots = jsonSerializationTool.load(file, Lot.class);
+    @Test
+    void wildberries_can_getDesiredLots_test() {
+        File file = new File(FILE_NAME);
+        List<Lot> lots = jsonSerializationTool.load(file, Lot.class);
 
-		Mockito.doNothing().when(captchaFighter).fight(Mockito.anyInt(), Mockito.anyInt());
-		Mockito.when(lotRepository.findAll()).thenReturn(lots);
+        Mockito.doNothing().when(captchaFighter).fight(Mockito.anyInt(), Mockito.anyInt());
+        Mockito.when(lotRepository.findAll()).thenReturn(lots);
 
-		Assertions.assertEquals(1, wildberriesFacade.getDesiredLots().size());
-	}
+        Assertions.assertEquals(1, wildberriesFacade.getDesiredLots().size());
+    }
 }

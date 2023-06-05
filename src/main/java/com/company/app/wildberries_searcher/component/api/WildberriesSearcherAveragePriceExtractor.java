@@ -4,5 +4,5 @@ import com.company.app.wildberries_desire_lot.component.common.data.ResponseProd
 
 public interface WildberriesSearcherAveragePriceExtractor {
 
-	int getAveragePrice(ResponseProducts responseProducts);
+    int getAveragePrice(ResponseProducts responseProducts);
 }

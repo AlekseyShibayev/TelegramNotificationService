@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Size {
 
-	String name;
+    String name;
 }

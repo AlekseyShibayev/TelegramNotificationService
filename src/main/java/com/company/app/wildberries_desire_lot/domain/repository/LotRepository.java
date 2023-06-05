@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface LotRepository extends CrudRepository<Lot, Long> {
 
-	@Override
-	List<Lot> findAll();
+    @Override
+    List<Lot> findAll();
 
-	@Override
-	void deleteById(Long id);
+    @Override
+    void deleteById(Long id);
 }

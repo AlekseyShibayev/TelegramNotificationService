@@ -7,25 +7,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class WildberriesSearcherFeedbacksFilter implements WildberriesSearcherFilter {
 
-	private static final String TYPE = "feedbacks";
+    private static final String TYPE = "feedbacks";
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-	@Override
-	public boolean isPreFilter() {
-		return true;
-	}
+    @Override
+    public boolean isPreFilter() {
+        return true;
+    }
 
-	@Override
-	public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
-		return withFeedbacks(responseProducts);
-	}
+    @Override
+    public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+        return withFeedbacks(responseProducts);
+    }
 
-	private boolean withFeedbacks(ResponseProducts responseProducts) {
-		String feedbacks = responseProducts.getFeedbacks();
-		return Integer.parseInt(feedbacks) >= 10;
-	}
+    private boolean withFeedbacks(ResponseProducts responseProducts) {
+        String feedbacks = responseProducts.getFeedbacks();
+        return Integer.parseInt(feedbacks) >= 10;
+    }
 }

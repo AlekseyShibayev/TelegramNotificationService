@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface SupplierRepository extends CrudRepository<Supplier, Long> {
 
-	@Override
-	List<Supplier> findAll();
+    @Override
+    List<Supplier> findAll();
 
-	Supplier findBySupplierId(String supplierId);
+    Supplier findBySupplierId(String supplierId);
 }

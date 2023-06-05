@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface FoundItemsService {
 
-	void save(FoundItem foundItem);
+    void save(FoundItem foundItem);
 
-	void saveAll(Collection<FoundItem> foundItems);
+    void saveAll(Collection<FoundItem> foundItems);
 
-	List<FoundItem> getAll();
+    List<FoundItem> getAll();
 }

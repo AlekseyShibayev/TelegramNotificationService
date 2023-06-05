@@ -14,16 +14,16 @@ import java.util.List;
 @Component
 public class WildberriesPriceExtractorImpl implements WildberriesPriceExtractor {
 
-	@Autowired
-	private JsonSerializationTool<Response> jsonSerializationTool;
+    @Autowired
+    private JsonSerializationTool<Response> jsonSerializationTool;
 
-	public String extract(String jsonResponse, String id) {
-		Response response = jsonSerializationTool.loadOne(jsonResponse, Response.class);
-		List<ResponseProducts> products = response.getData().getProducts();
-		return products.stream()
-				.filter(responseProducts -> responseProducts.getId().equals(Integer.valueOf(id)))
-				.map(responseProducts -> responseProducts.getSalePriceU().toString())
-				.findFirst()
-				.orElseThrow();
-	}
+    public String extract(String jsonResponse, String id) {
+        Response response = jsonSerializationTool.loadOne(jsonResponse, Response.class);
+        List<ResponseProducts> products = response.getData().getProducts();
+        return products.stream()
+                .filter(responseProducts -> responseProducts.getId().equals(Integer.valueOf(id)))
+                .map(responseProducts -> responseProducts.getSalePriceU().toString())
+                .findFirst()
+                .orElseThrow();
+    }
 }

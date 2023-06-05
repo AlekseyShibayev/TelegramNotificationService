@@ -15,9 +15,9 @@ import java.util.Set;
 @Builder
 public class ChatDto {
 
-	private String chatName;
-	private boolean enableNotifications;
-	private List<History> historyList;
-	private UserInfo userInfo;
-	private Set<Subscription> subscriptions;
+    private String chatName;
+    private boolean enableNotifications;
+    private List<History> historyList;
+    private UserInfo userInfo;
+    private Set<Subscription> subscriptions;
 }

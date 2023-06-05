@@ -32,13 +32,13 @@ import org.springframework.test.context.TestPropertySource;
 @TestPropertySource("/test.properties")
 class ExchangeRateFacadeTest {
 
-	@Autowired
-	private ExchangeRateFacade exchangeRateFacade;
+    @Autowired
+    private ExchangeRateFacade exchangeRateFacade;
 
-	@Test
-	void extractCurse() {
-		log.debug("**********     This is component test: [{}].     **********", this.getClass());
-		ExchangeRate exchangeRate = exchangeRateFacade.extract();
-		Assertions.assertNotNull(exchangeRate.getAliexpressExchangeRate());
-	}
+    @Test
+    void extractCurse() {
+        log.debug("**********     This is component test: [{}].     **********", this.getClass());
+        ExchangeRate exchangeRate = exchangeRateFacade.extract();
+        Assertions.assertNotNull(exchangeRate.getAliexpressExchangeRate());
+    }
 }

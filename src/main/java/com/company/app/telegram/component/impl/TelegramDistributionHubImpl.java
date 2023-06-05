@@ -12,30 +12,30 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 public class TelegramDistributionHubImpl implements TelegramDistributionHub {
 
-	@Autowired
-	private IncomingMessageHandler incomingMessageHandler;
-	@Autowired
-	private OutgoingMessageHandler outgoingMessageHandler;
-	@Autowired
-	private TelegramBotConfig telegramBotConfig;
+    @Autowired
+    private IncomingMessageHandler incomingMessageHandler;
+    @Autowired
+    private OutgoingMessageHandler outgoingMessageHandler;
+    @Autowired
+    private TelegramBotConfig telegramBotConfig;
 
-	@Override
-	public void read(Update update) {
-		incomingMessageHandler.process(update);
-	}
+    @Override
+    public void read(Update update) {
+        incomingMessageHandler.process(update);
+    }
 
-	@Override
-	public void writeToEveryone(Object message) {
-		outgoingMessageHandler.sendToEveryone(message);
-	}
+    @Override
+    public void writeToEveryone(Object message) {
+        outgoingMessageHandler.sendToEveryone(message);
+    }
 
-	@Override
-	public void writeToTargetChat(String chatName, Object message) {
-		outgoingMessageHandler.sendToTargetChat(chatName, message);
-	}
+    @Override
+    public void writeToTargetChat(String chatName, Object message) {
+        outgoingMessageHandler.sendToTargetChat(chatName, message);
+    }
 
-	@Override
-	public void writeToTargetChat(SendMessage sendMessage) {
-		telegramBotConfig.write(sendMessage);
-	}
+    @Override
+    public void writeToTargetChat(SendMessage sendMessage) {
+        telegramBotConfig.write(sendMessage);
+    }
 }

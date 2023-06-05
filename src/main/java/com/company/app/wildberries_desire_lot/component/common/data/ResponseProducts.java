@@ -16,17 +16,17 @@ import java.util.List;
 @Builder
 public class ResponseProducts {
 
-	private Integer id;
-	private String name;
-	private Integer salePriceU;
-	private String rating;
-	private String feedbacks;
-	private List<Size> sizes;
+    private Integer id;
+    private String name;
+    private Integer salePriceU;
+    private String rating;
+    private String feedbacks;
+    private List<Size> sizes;
 
-	public WildberriesLinkDto toLinkDto() {
-		return WildberriesLinkDto.builder()
-				.price(Strings.cutEnd(this.salePriceU.toString(), 2))
-				.link(WBUtils.getUrlForResponse(this.id.toString()))
-				.build();
-	}
+    public WildberriesLinkDto toLinkDto() {
+        return WildberriesLinkDto.builder()
+                .price(Strings.cutEnd(this.salePriceU.toString(), 2))
+                .link(WBUtils.getUrlForResponse(this.id.toString()))
+                .build();
+    }
 }

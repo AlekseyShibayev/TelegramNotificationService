@@ -16,16 +16,16 @@ import javax.annotation.PostConstruct;
 @WebMvcTest
 public abstract class WebMvcSpringBootTestContext {
 
-	@Autowired
-	protected MockMvc mockMvc;
-	@Autowired
-	protected ObjectMapper objectMapper;
+    @Autowired
+    protected MockMvc mockMvc;
+    @Autowired
+    protected ObjectMapper objectMapper;
 
-	@MockBean
-	protected LotService lotService;
+    @MockBean
+    protected LotService lotService;
 
-	@PostConstruct
-	void init() {
-		log.debug("**********     запущена группа тестов web mvc     **********");
-	}
+    @PostConstruct
+    void init() {
+        log.debug("**********     запущена группа тестов web mvc     **********");
+    }
 }

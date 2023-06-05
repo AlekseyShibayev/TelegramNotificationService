@@ -15,54 +15,54 @@ import java.util.Optional;
 @Service
 public class LotServiceImpl implements LotService {
 
-	@Autowired
-	private LotRepository lotRepository;
+    @Autowired
+    private LotRepository lotRepository;
 
-	@Override
-	public Long create(LotDto lotDto) {
-		Lot lot = Lot.builder().build();
-		BeanUtils.copyProperties(lotDto, lot);
-		return lotRepository.save(lot).getId();
-	}
+    @Override
+    public Long create(LotDto lotDto) {
+        Lot lot = Lot.builder().build();
+        BeanUtils.copyProperties(lotDto, lot);
+        return lotRepository.save(lot).getId();
+    }
 
-	@Override
-	public Lot read(Long id) {
-		Optional<Lot> optional = lotRepository.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		} else {
-			throw new ObjectNotFoundException(id, Lot.class.getName());
-		}
-	}
+    @Override
+    public Lot read(Long id) {
+        Optional<Lot> optional = lotRepository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            throw new ObjectNotFoundException(id, Lot.class.getName());
+        }
+    }
 
-	@Override
-	public Boolean update(Long id, LotDto lotDto) {
-		Lot lot = Lot.builder()
-				.id(id)
-				.build();
-		BeanUtils.copyProperties(lotDto, lot);
-		lotRepository.save(lot);
-		return true;
-	}
+    @Override
+    public Boolean update(Long id, LotDto lotDto) {
+        Lot lot = Lot.builder()
+                .id(id)
+                .build();
+        BeanUtils.copyProperties(lotDto, lot);
+        lotRepository.save(lot);
+        return true;
+    }
 
-	@Override
-	public Boolean delete(Long id) {
-		lotRepository.deleteById(id);
-		return true;
-	}
+    @Override
+    public Boolean delete(Long id) {
+        lotRepository.deleteById(id);
+        return true;
+    }
 
-	@Override
-	public List<Lot> getAll() {
-		return lotRepository.findAll();
-	}
+    @Override
+    public List<Lot> getAll() {
+        return lotRepository.findAll();
+    }
 
-	@Override
-	public Long create(String name, String price, String discount) {
-		Lot lot = Lot.builder()
-				.article(name)
-				.desiredPrice(price)
-				.discount(discount)
-				.build();
-		return lotRepository.save(lot).getId();
-	}
+    @Override
+    public Long create(String name, String price, String discount) {
+        Lot lot = Lot.builder()
+                .article(name)
+                .desiredPrice(price)
+                .discount(discount)
+                .build();
+        return lotRepository.save(lot).getId();
+    }
 }

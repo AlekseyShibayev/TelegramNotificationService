@@ -5,11 +5,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 public interface TelegramDistributionHub {
 
-	void read(Update update);
+    void read(Update update);
 
-	void writeToEveryone(Object message);
+    void writeToEveryone(Object message);
 
-	void writeToTargetChat(String chatName, Object message);
+    void writeToTargetChat(String chatName, Object message);
 
-	void writeToTargetChat(SendMessage sendMessage);
+    void writeToTargetChat(SendMessage sendMessage);
 }

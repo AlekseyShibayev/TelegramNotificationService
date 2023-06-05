@@ -7,5 +7,5 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  */
 public interface IncomingMessageHandler {
 
-	void process(Update update);
+    void process(Update update);
 }

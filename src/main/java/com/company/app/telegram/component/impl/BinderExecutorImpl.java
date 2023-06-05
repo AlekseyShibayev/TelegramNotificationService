@@ -25,42 +25,42 @@ import static com.company.app.telegram.binder.api.Binder.BINDER_DELIMITER;
 @Component
 public class BinderExecutorImpl implements BinderExecutor {
 
-	private Map<String, Binder> binders;
+    private Map<String, Binder> binders;
 
-	@Autowired
-	private SubscriptionRepository subscriptionRepository;
-	@Autowired
-	private List<Binder> binderList;
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
+    @Autowired
+    private List<Binder> binderList;
 
-	@PostConstruct
-	void init() {
-		binders = binderList.stream()
-				.collect(Collectors.toMap(Binder::getType, Function.identity()));
-		if (binderList.size() != binders.keySet().size()) {
-			throw new DuplicateKeyException("ты конечно красиво написал, но дубли не проверил!");
-		}
-	}
+    @PostConstruct
+    void init() {
+        binders = binderList.stream()
+                .collect(Collectors.toMap(Binder::getType, Function.identity()));
+        if (binderList.size() != binders.keySet().size()) {
+            throw new DuplicateKeyException("ты конечно красиво написал, но дубли не проверил!");
+        }
+    }
 
-	@EventListener({ContextRefreshedEvent.class})
-	void saveSubscriptions() {
-		List<Subscription> subscriptionList = binders.keySet().stream()
-				.map(binderType -> Subscription.builder().type(binderType).build())
-				.collect(Collectors.toList());
-		subscriptionRepository.saveAll(subscriptionList);
-	}
+    @EventListener({ContextRefreshedEvent.class})
+    void saveSubscriptions() {
+        List<Subscription> subscriptionList = binders.keySet().stream()
+                .map(binderType -> Subscription.builder().type(binderType).build())
+                .collect(Collectors.toList());
+        subscriptionRepository.saveAll(subscriptionList);
+    }
 
-	@Override
-	public void execute(Chat chat, String text) {
-		Optional<String> first = Arrays.stream(text.split(BINDER_DELIMITER)).findFirst();
+    @Override
+    public void execute(Chat chat, String text) {
+        Optional<String> first = Arrays.stream(text.split(BINDER_DELIMITER)).findFirst();
 
-		Binder binder = Optional.ofNullable(binders.get(first.get()))
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Не смог вытащить тип binderType из [%s].", text)));
+        Binder binder = Optional.ofNullable(binders.get(first.get()))
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Не смог вытащить тип binderType из [%s].", text)));
 
-		BinderContainer binderContainer = BinderContainer.builder()
-				.chat(chat)
-				.message(text)
-				.build();
+        BinderContainer binderContainer = BinderContainer.builder()
+                .chat(chat)
+                .message(text)
+                .build();
 
-		binder.bind(binderContainer);
-	}
+        binder.bind(binderContainer);
+    }
 }

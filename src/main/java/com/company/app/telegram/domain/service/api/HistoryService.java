@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 public interface HistoryService {
 
-	void saveHistory(Chat chat, String text);
+    void saveHistory(Chat chat, String text);
 
-	void saveHistory(SendMessage sendMessage);
+    void saveHistory(SendMessage sendMessage);
 }

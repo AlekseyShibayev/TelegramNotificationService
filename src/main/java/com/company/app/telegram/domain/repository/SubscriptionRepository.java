@@ -7,5 +7,5 @@ import java.util.Set;
 
 public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
-	Set<Subscription> findAll();
+    Set<Subscription> findAll();
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface WildberriesSearcherExtractor {
 
-	List<ResponseProducts> extractResponseProducts(String url);
+    List<ResponseProducts> extractResponseProducts(String url);
 
-	List<PriceHistory> extractPriceHistory(String url);
+    List<PriceHistory> extractPriceHistory(String url);
 }

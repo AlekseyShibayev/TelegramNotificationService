@@ -11,37 +11,37 @@ import java.util.Optional;
 
 class WildberriesSearcherContainsSizeFilterTest {
 
-	private WildberriesSearcherContainsSizeFilter filter;
+    private WildberriesSearcherContainsSizeFilter filter;
 
-	@BeforeEach
-	public void init() {
-		filter = new WildberriesSearcherContainsSizeFilter();
-	}
+    @BeforeEach
+    public void init() {
+        filter = new WildberriesSearcherContainsSizeFilter();
+    }
 
-	@Test
-	void getUserSize_positive_test() {
-		ResponseProducts responseProducts = createResponseProducts();
+    @Test
+    void getUserSize_positive_test() {
+        ResponseProducts responseProducts = createResponseProducts();
 
-		Optional<Size> userSize = filter.getUserSize(responseProducts, "50;52");
+        Optional<Size> userSize = filter.getUserSize(responseProducts, "50;52");
 
-		Assertions.assertTrue(userSize.isPresent());
-	}
+        Assertions.assertTrue(userSize.isPresent());
+    }
 
-	@Test
-	void getUserSize_negative_test() {
-		ResponseProducts responseProducts = createResponseProducts();
+    @Test
+    void getUserSize_negative_test() {
+        ResponseProducts responseProducts = createResponseProducts();
 
-		Optional<Size> userSize = filter.getUserSize(responseProducts, "52;54");
+        Optional<Size> userSize = filter.getUserSize(responseProducts, "52;54");
 
-		Assertions.assertTrue(userSize.isEmpty());
-	}
+        Assertions.assertTrue(userSize.isEmpty());
+    }
 
-	private ResponseProducts createResponseProducts() {
-		return ResponseProducts.builder()
-				.sizes(List.of(Size.builder().name("46").build()
-						, Size.builder().name("48").build()
-						, Size.builder().name("50").build()
-				))
-				.build();
-	}
+    private ResponseProducts createResponseProducts() {
+        return ResponseProducts.builder()
+                .sizes(List.of(Size.builder().name("46").build()
+                        , Size.builder().name("48").build()
+                        , Size.builder().name("50").build()
+                ))
+                .build();
+    }
 }

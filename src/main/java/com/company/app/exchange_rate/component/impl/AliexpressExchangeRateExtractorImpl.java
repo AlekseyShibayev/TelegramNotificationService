@@ -14,19 +14,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class AliexpressExchangeRateExtractorImpl implements AliexpressExchangeRateExtractor {
 
-	@Autowired
-	private AliexpressReceiver aliexpressReceiver;
-	@Autowired
-	private DataExtractorTool dataExtractorTool;
+    @Autowired
+    private AliexpressReceiver aliexpressReceiver;
+    @Autowired
+    private DataExtractorTool dataExtractorTool;
 
-	@Override
-	public String extract() {
-		String htmlResponse = aliexpressReceiver.getHtmlResponse();
-		return getExchangeRate(htmlResponse);
-	}
+    @Override
+    public String extract() {
+        String htmlResponse = aliexpressReceiver.getHtmlResponse();
+        return getExchangeRate(htmlResponse);
+    }
 
-	String getExchangeRate(String response) {
-		JSONObject jsonObject = new JSONObject(response);
-		return dataExtractorTool.getFirstString(jsonObject, "finalPrice");
-	}
+    String getExchangeRate(String response) {
+        JSONObject jsonObject = new JSONObject(response);
+        return dataExtractorTool.getFirstString(jsonObject, "finalPrice");
+    }
 }

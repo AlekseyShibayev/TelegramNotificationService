@@ -13,21 +13,21 @@ import org.springframework.boot.test.system.CapturedOutput;
 @Slf4j
 class ChatRepositoryTest extends DataJpaSpringBootTestContext {
 
-	@Autowired
-	ChatRepository chatRepository;
+    @Autowired
+    ChatRepository chatRepository;
 
-	@BeforeEach
-	void init() {
+    @BeforeEach
+    void init() {
 //		chatRepository.deleteAll();
-	}
+    }
 
-	@Disabled
-	@Test
-	void N_plus_one_test(CapturedOutput capture) {
-		log.debug(SELECT_DELIMITER);
+    @Disabled
+    @Test
+    void N_plus_one_test(CapturedOutput capture) {
+        log.debug(SELECT_DELIMITER);
 
-		chatRepository.findById(1L);
+        chatRepository.findById(1L);
 
-		Assertions.assertEquals(1, getSelectCount(capture));
-	}
+        Assertions.assertEquals(1, getSelectCount(capture));
+    }
 }

@@ -11,21 +11,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExchangeRateBinderImpl implements ExchangeRateBinder {
 
-	private static final String TYPE = "EX";
+    private static final String TYPE = "EX";
 
-	@Autowired
-	private ExchangeRateController exchangeRateController;
-	@Autowired
-	private TelegramFacade telegramFacade;
+    @Autowired
+    private ExchangeRateController exchangeRateController;
+    @Autowired
+    private TelegramFacade telegramFacade;
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-	@Override
-	public void bind(BinderContainer binderContainer) {
-		ExchangeRate last = exchangeRateController.getLast().getBody();
-		telegramFacade.writeToTargetChat(binderContainer.getChat().getChatName(), last.getAliexpressExchangeRate());
-	}
+    @Override
+    public void bind(BinderContainer binderContainer) {
+        ExchangeRate last = exchangeRateController.getLast().getBody();
+        telegramFacade.writeToTargetChat(binderContainer.getChat().getChatName(), last.getAliexpressExchangeRate());
+    }
 }

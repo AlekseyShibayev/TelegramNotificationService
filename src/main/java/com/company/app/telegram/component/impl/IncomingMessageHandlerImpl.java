@@ -20,55 +20,55 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
 
-	@Autowired
-	private TelegramBotConfig telegramBotConfig;
-	@Autowired
-	private HistoryService historyService;
-	@Autowired
-	private ChatService chatService;
-	@Autowired
-	private BinderExecutor binderExecutor;
-	@Autowired
-	private PrepareChatToWorkService prepareChatToWorkService;
+    @Autowired
+    private TelegramBotConfig telegramBotConfig;
+    @Autowired
+    private HistoryService historyService;
+    @Autowired
+    private ChatService chatService;
+    @Autowired
+    private BinderExecutor binderExecutor;
+    @Autowired
+    private PrepareChatToWorkService prepareChatToWorkService;
 
-	@Override
-	public void process(Update update) {
-		if (isIncomingMessage(update)) {
-			prepareChatToWork(update);
-			showCommands(update);
-		} else if (isCallback(update)) {
-			handle(update);
-		}
-	}
+    @Override
+    public void process(Update update) {
+        if (isIncomingMessage(update)) {
+            prepareChatToWork(update);
+            showCommands(update);
+        } else if (isCallback(update)) {
+            handle(update);
+        }
+    }
 
-	private boolean isCallback(Update update) {
-		return update.hasCallbackQuery();
-	}
+    private boolean isCallback(Update update) {
+        return update.hasCallbackQuery();
+    }
 
-	private boolean isIncomingMessage(Update update) {
-		return update.getMessage() != null;
-	}
+    private boolean isIncomingMessage(Update update) {
+        return update.getMessage() != null;
+    }
 
-	private void prepareChatToWork(Update update) {
-		Message message = update.getMessage();
-		Long chatId = message.getChatId();
-		prepareChatToWorkService.getPreparedToWorkChat(message, chatId);
-	}
+    private void prepareChatToWork(Update update) {
+        Message message = update.getMessage();
+        Long chatId = message.getChatId();
+        prepareChatToWorkService.getPreparedToWorkChat(message, chatId);
+    }
 
-	private void showCommands(Update update) {
-		SendMessage sendMessage = new SendMessage();
-		sendMessage.setChatId(update.getMessage().getChatId());
-		sendMessage.setText("Доступны следующие команды:");
-		sendMessage.setReplyMarkup(ButtonFactory.inlineMarkup());
-		telegramBotConfig.write(sendMessage);
-	}
+    private void showCommands(Update update) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(update.getMessage().getChatId());
+        sendMessage.setText("Доступны следующие команды:");
+        sendMessage.setReplyMarkup(ButtonFactory.inlineMarkup());
+        telegramBotConfig.write(sendMessage);
+    }
 
-	private void handle(Update update) {
-		CallbackQuery callbackQuery = update.getCallbackQuery();
-		Long chatId = callbackQuery.getMessage().getChatId();
-		String text = callbackQuery.getData();
-		Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
-		historyService.saveHistory(chat, text);
-		binderExecutor.execute(chat, text);
-	}
+    private void handle(Update update) {
+        CallbackQuery callbackQuery = update.getCallbackQuery();
+        Long chatId = callbackQuery.getMessage().getChatId();
+        String text = callbackQuery.getData();
+        Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
+        historyService.saveHistory(chat, text);
+        binderExecutor.execute(chat, text);
+    }
 }

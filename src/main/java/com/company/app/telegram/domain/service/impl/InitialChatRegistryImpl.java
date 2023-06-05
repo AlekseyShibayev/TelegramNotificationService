@@ -17,18 +17,18 @@ import java.util.List;
 @Component
 public class InitialChatRegistryImpl implements InitialChatRegistry {
 
-	@Value("classpath:telegram/init_chat.json")
-	private Resource resource;
+    @Value("classpath:telegram/init_chat.json")
+    private Resource resource;
 
-	@Autowired
-	private JsonSerializationTool<Chat> jsonSerializationTool;
-	@Autowired
-	private ChatService chatService;
+    @Autowired
+    private JsonSerializationTool<Chat> jsonSerializationTool;
+    @Autowired
+    private ChatService chatService;
 
-	@EventListener({ContextRefreshedEvent.class})
-	@Override
-	public void init() throws TelegramApiException {
-		List<Chat> list = jsonSerializationTool.load(resource, Chat.class);
-		chatService.saveAll(list);
-	}
+    @EventListener({ContextRefreshedEvent.class})
+    @Override
+    public void init() throws TelegramApiException {
+        List<Chat> list = jsonSerializationTool.load(resource, Chat.class);
+        chatService.saveAll(list);
+    }
 }

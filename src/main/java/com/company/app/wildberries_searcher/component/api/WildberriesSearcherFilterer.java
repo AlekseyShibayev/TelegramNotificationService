@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface WildberriesSearcherFilterer {
 
-	List<ResponseProducts> filter(List<ResponseProducts> products, WildberriesSearcherContainer wildberriesSearcherContainer);
+    List<ResponseProducts> filter(List<ResponseProducts> products, WildberriesSearcherContainer wildberriesSearcherContainer);
 }

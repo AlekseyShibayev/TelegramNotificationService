@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/telegram/chat")
 public class ChatController {
 
-	@Autowired
-	ChatService chatService;
+    @Autowired
+    ChatService chatService;
 
-	@PostMapping(value = "/", produces = "application/json")
-	public ResponseEntity<Long> create(@RequestBody ChatDto chatDto) {
-		return ResponseEntity.ok(chatService.create(chatDto));
-	}
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Long> create(@RequestBody ChatDto chatDto) {
+        return ResponseEntity.ok(chatService.create(chatDto));
+    }
 
-	@GetMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Chat> read(@PathVariable Long id) {
-		return ResponseEntity.ok(chatService.read(id));
-	}
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Chat> read(@PathVariable Long id) {
+        return ResponseEntity.ok(chatService.read(id));
+    }
 
-	@PutMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Boolean> update(@PathVariable Long id,
-										  @RequestBody ChatDto chatDto) {
-		return ResponseEntity.ok(chatService.update(id, chatDto));
-	}
+    @PutMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Boolean> update(@PathVariable Long id,
+                                          @RequestBody ChatDto chatDto) {
+        return ResponseEntity.ok(chatService.update(id, chatDto));
+    }
 
-	@DeleteMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-		return ResponseEntity.ok(chatService.delete(id));
-	}
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(chatService.delete(id));
+    }
 }

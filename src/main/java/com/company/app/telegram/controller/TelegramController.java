@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/telegram")
 public class TelegramController {
 
-	@Autowired
-	private TelegramFacade telegramFacade;
+    @Autowired
+    private TelegramFacade telegramFacade;
 
-	/**
-	 * пример запроса: http://localhost:8080/telegram/say?message=hello
-	 */
-	@GetMapping(value = "/say", produces = "application/json")
-	public ResponseEntity<Boolean> say(@RequestParam String message) {
-		telegramFacade.writeToEveryone(message);
-		return ResponseEntity.ok(true);
-	}
+    /**
+     * пример запроса: http://localhost:8080/telegram/say?message=hello
+     */
+    @GetMapping(value = "/say", produces = "application/json")
+    public ResponseEntity<Boolean> say(@RequestParam String message) {
+        telegramFacade.writeToEveryone(message);
+        return ResponseEntity.ok(true);
+    }
 
-	@PostMapping(value = "/say", produces = "application/json")
-	public ResponseEntity<Boolean> say(@RequestBody TargetMessage targetMessage) {
-		telegramFacade.writeToTargetChat(targetMessage.getChatName(), targetMessage.getMessage());
-		return ResponseEntity.ok(true);
-	}
+    @PostMapping(value = "/say", produces = "application/json")
+    public ResponseEntity<Boolean> say(@RequestBody TargetMessage targetMessage) {
+        telegramFacade.writeToTargetChat(targetMessage.getChatName(), targetMessage.getMessage());
+        return ResponseEntity.ok(true);
+    }
 }

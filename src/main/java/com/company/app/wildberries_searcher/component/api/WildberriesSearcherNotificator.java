@@ -5,5 +5,5 @@ import com.company.app.wildberries_searcher.component.data.WildberriesSearcherCo
 
 public interface WildberriesSearcherNotificator {
 
-	void notify(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer);
+    void notify(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer);
 }

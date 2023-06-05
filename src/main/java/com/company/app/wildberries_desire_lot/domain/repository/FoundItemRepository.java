@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface FoundItemRepository extends CrudRepository<FoundItem, Long> {
 
-	List<FoundItem> findAll();
+    List<FoundItem> findAll();
 }

@@ -9,14 +9,14 @@ import java.util.Optional;
 
 public interface ChatRepository extends CrudRepository<Chat, Long> {
 
-	@EntityGraph(value = "Chat.all")
-	List<Chat> findAll();
+    @EntityGraph(value = "Chat.all")
+    List<Chat> findAll();
 
-	boolean existsChatByChatName(String chatName);
+    boolean existsChatByChatName(String chatName);
 
-	@EntityGraph(value = "Chat.all")
-	Optional<Chat> findFirstByChatName(String chatName);
+    @EntityGraph(value = "Chat.all")
+    Optional<Chat> findFirstByChatName(String chatName);
 
-	@EntityGraph(value = "Chat.all")
-	Optional<Chat> findById(Long id);
+    @EntityGraph(value = "Chat.all")
+    Optional<Chat> findById(Long id);
 }

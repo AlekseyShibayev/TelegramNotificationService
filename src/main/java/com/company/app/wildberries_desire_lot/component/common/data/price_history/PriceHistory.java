@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PriceHistory {
 
-	String dt;
-	Price price;
+    String dt;
+    Price price;
 }

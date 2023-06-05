@@ -5,9 +5,9 @@ import com.company.app.wildberries_searcher.component.data.WildberriesSearcherCo
 
 public interface WildberriesSearcherFilter {
 
-	String getType();
+    String getType();
 
-	boolean isPreFilter();
+    boolean isPreFilter();
 
-	boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer);
+    boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer);
 }

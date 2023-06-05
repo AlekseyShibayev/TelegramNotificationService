@@ -19,40 +19,40 @@ import java.util.List;
 @Component
 public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtractor {
 
-	@Autowired
-	private GetRequestHandler getRequestHandler;
-	@Autowired
-	private JsonSerializationTool<Response> jsonSerializationTool;
+    @Autowired
+    private GetRequestHandler getRequestHandler;
+    @Autowired
+    private JsonSerializationTool<Response> jsonSerializationTool;
 
-	@PerformanceLogAnnotation
-	@Override
-	public List<ResponseProducts> extractResponseProducts(String url) {
-		return getAllProducts(url);
-	}
+    @PerformanceLogAnnotation
+    @Override
+    public List<ResponseProducts> extractResponseProducts(String url) {
+        return getAllProducts(url);
+    }
 
-	@Override
-	public List<PriceHistory> extractPriceHistory(String url) {
-		String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
-		JsonSerializationToolImpl<PriceHistory> priceHistoryJsonSerializationTool = new JsonSerializationToolImpl<>();
-		return priceHistoryJsonSerializationTool.load(htmlResponse, PriceHistory.class);
-	}
+    @Override
+    public List<PriceHistory> extractPriceHistory(String url) {
+        String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
+        JsonSerializationToolImpl<PriceHistory> priceHistoryJsonSerializationTool = new JsonSerializationToolImpl<>();
+        return priceHistoryJsonSerializationTool.load(htmlResponse, PriceHistory.class);
+    }
 
-	private List<ResponseProducts> getAllProducts(String url) {
-		List<ResponseProducts> result = new ArrayList<>();
+    private List<ResponseProducts> getAllProducts(String url) {
+        List<ResponseProducts> result = new ArrayList<>();
 
-		int i = 1;
-		while (true) {
-			String pageUrl = String.format(url, i);
-			String htmlResponse = getRequestHandler.getResponseBodyAsString(pageUrl);
-			Response response = jsonSerializationTool.loadOne(htmlResponse, Response.class);
-			List<ResponseProducts> products = response.getData().getProducts();
-			if (products.isEmpty()) {
-				log.debug("В ходе поиска было [{}] запросов к ВБ.", i);
-				return result;
-			} else {
-				result.addAll(products);
-				i++;
-			}
-		}
-	}
+        int i = 1;
+        while (true) {
+            String pageUrl = String.format(url, i);
+            String htmlResponse = getRequestHandler.getResponseBodyAsString(pageUrl);
+            Response response = jsonSerializationTool.loadOne(htmlResponse, Response.class);
+            List<ResponseProducts> products = response.getData().getProducts();
+            if (products.isEmpty()) {
+                log.debug("В ходе поиска было [{}] запросов к ВБ.", i);
+                return result;
+            } else {
+                result.addAll(products);
+                i++;
+            }
+        }
+    }
 }

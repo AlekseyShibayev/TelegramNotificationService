@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/wildberries/lot")
 public class LotController {
 
-	@Autowired
-	LotService lotService;
+    @Autowired
+    LotService lotService;
 
-	@PostMapping(value = "/", produces = "application/json")
-	public ResponseEntity<Long> create(@RequestBody LotDto lotDto) {
-		return ResponseEntity.ok(lotService.create(lotDto));
-	}
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<Long> create(@RequestBody LotDto lotDto) {
+        return ResponseEntity.ok(lotService.create(lotDto));
+    }
 
-	@GetMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Lot> read(@PathVariable Long id) {
-		return ResponseEntity.ok(lotService.read(id));
-	}
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Lot> read(@PathVariable Long id) {
+        return ResponseEntity.ok(lotService.read(id));
+    }
 
-	@PutMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Boolean> update(@PathVariable Long id,
-										  @RequestBody LotDto lotDto) {
-		return ResponseEntity.ok(lotService.update(id, lotDto));
-	}
+    @PutMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Boolean> update(@PathVariable Long id,
+                                          @RequestBody LotDto lotDto) {
+        return ResponseEntity.ok(lotService.update(id, lotDto));
+    }
 
-	@DeleteMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Boolean> delete(@PathVariable Long id) {
-		return ResponseEntity.ok(lotService.delete(id));
-	}
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(lotService.delete(id));
+    }
 }

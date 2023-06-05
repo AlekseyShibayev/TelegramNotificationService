@@ -14,14 +14,14 @@ import java.util.Date;
 @Table(name = "EXCHANGE_RATE")
 public class ExchangeRate {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID", nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
-	@Column(name = "ALIEXPRESS_EXCHANGE_RATE")
-	private String aliexpressExchangeRate;
+    @Column(name = "ALIEXPRESS_EXCHANGE_RATE")
+    private String aliexpressExchangeRate;
 
-	@Column(name = "CREATION_DATE")
-	private Date creationDate;
+    @Column(name = "CREATION_DATE")
+    private Date creationDate;
 }

@@ -7,5 +7,5 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  */
 public interface InitialChatRegistry {
 
-	void init() throws TelegramApiException;
+    void init() throws TelegramApiException;
 }

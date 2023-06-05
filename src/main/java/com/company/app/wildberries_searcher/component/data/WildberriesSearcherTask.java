@@ -17,42 +17,42 @@ import java.util.List;
 @Builder
 public class WildberriesSearcherTask implements Runnable {
 
-	private WildberriesSearcherContainer wildberriesSearcherContainer;
-	private WildberriesSearcher wildberriesSearcher;
-	private TelegramController telegramController;
-	private WildberriesSearcherCallback callBack;
+    private WildberriesSearcherContainer wildberriesSearcherContainer;
+    private WildberriesSearcher wildberriesSearcher;
+    private TelegramController telegramController;
+    private WildberriesSearcherCallback callBack;
 
-	@Override
-	public void run() {
-		try {
-			doWork();
-		} finally {
-			callBack.callback();
-		}
-	}
+    @Override
+    public void run() {
+        try {
+            doWork();
+        } finally {
+            callBack.callback();
+        }
+    }
 
-	private void doWork() {
-		List<WildberriesLinkDto> result = getAllProducts();
-		String endMessage = String.format("Поиск завершен. Найдено: [%s].", result.size());
+    private void doWork() {
+        List<WildberriesLinkDto> result = getAllProducts();
+        String endMessage = String.format("Поиск завершен. Найдено: [%s].", result.size());
 
-		if (log.isDebugEnabled()) {
-			log.debug("[{}]: [{}].", wildberriesSearcherContainer.getChatName(), endMessage);
-			result.forEach(dto -> log.debug("[{}]: [{}].", wildberriesSearcherContainer.getChatName(), dto.toMessage()));
-		}
+        if (log.isDebugEnabled()) {
+            log.debug("[{}]: [{}].", wildberriesSearcherContainer.getChatName(), endMessage);
+            result.forEach(dto -> log.debug("[{}]: [{}].", wildberriesSearcherContainer.getChatName(), dto.toMessage()));
+        }
 
-		telegramController.say(TargetMessage.builder()
-				.chatName(wildberriesSearcherContainer.getChatName())
-				.message(endMessage)
-				.build());
-	}
+        telegramController.say(TargetMessage.builder()
+                .chatName(wildberriesSearcherContainer.getChatName())
+                .message(endMessage)
+                .build());
+    }
 
-	private List<WildberriesLinkDto> getAllProducts() {
-		List<WildberriesLinkDto> result = new ArrayList<>();
-		Arrays.stream(wildberriesSearcherContainer.getSupplier().split(";"))
-				.forEach(supplier -> {
-					wildberriesSearcherContainer.setSupplier(supplier);
-					result.addAll(wildberriesSearcher.search(this.wildberriesSearcherContainer));
-				});
-		return result;
-	}
+    private List<WildberriesLinkDto> getAllProducts() {
+        List<WildberriesLinkDto> result = new ArrayList<>();
+        Arrays.stream(wildberriesSearcherContainer.getSupplier().split(";"))
+                .forEach(supplier -> {
+                    wildberriesSearcherContainer.setSupplier(supplier);
+                    result.addAll(wildberriesSearcher.search(this.wildberriesSearcherContainer));
+                });
+        return result;
+    }
 }

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Price {
 
-	@JsonSetter("RUB")
-	String rub;
+    @JsonSetter("RUB")
+    String rub;
 }

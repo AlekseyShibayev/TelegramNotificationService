@@ -16,20 +16,20 @@ import java.util.OptionalDouble;
 @Component
 public class WildberriesSearcherAveragePriceExtractorImpl implements WildberriesSearcherAveragePriceExtractor {
 
-	@Autowired
-	private WildberriesSearcherExtractor wildberriesSearcherExtractor;
+    @Autowired
+    private WildberriesSearcherExtractor wildberriesSearcherExtractor;
 
-	@Override
-	public int getAveragePrice(ResponseProducts responseProducts) {
-		String url = WildberriesSearcherPriceHistoryUrlCreator.createUrl(String.valueOf(responseProducts.getId()));
-		List<PriceHistory> priceHistory = wildberriesSearcherExtractor.extractPriceHistory(url);
-		OptionalDouble average = priceHistory.stream()
-				.mapToInt(this::getRubAsInt)
-				.average();
-		return (int) average.orElse(0.00);
-	}
+    @Override
+    public int getAveragePrice(ResponseProducts responseProducts) {
+        String url = WildberriesSearcherPriceHistoryUrlCreator.createUrl(String.valueOf(responseProducts.getId()));
+        List<PriceHistory> priceHistory = wildberriesSearcherExtractor.extractPriceHistory(url);
+        OptionalDouble average = priceHistory.stream()
+                .mapToInt(this::getRubAsInt)
+                .average();
+        return (int) average.orElse(0.00);
+    }
 
-	private int getRubAsInt(PriceHistory priceHistory) {
-		return Integer.parseInt(priceHistory.getPrice().getRub());
-	}
+    private int getRubAsInt(PriceHistory priceHistory) {
+        return Integer.parseInt(priceHistory.getPrice().getRub());
+    }
 }

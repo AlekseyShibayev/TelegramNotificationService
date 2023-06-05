@@ -15,16 +15,16 @@ import java.util.Set;
 @RequestMapping("/telegram/subscription")
 public class SubscriptionController {
 
-	@Autowired
-	SubscriptionService subscriptionService;
+    @Autowired
+    SubscriptionService subscriptionService;
 
-	@GetMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Subscription> read(@PathVariable Long id) {
-		return ResponseEntity.ok(subscriptionService.read(id));
-	}
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<Subscription> read(@PathVariable Long id) {
+        return ResponseEntity.ok(subscriptionService.read(id));
+    }
 
-	@GetMapping(value = "/all", produces = "application/json")
-	public ResponseEntity<Set<Subscription>> readAll() {
-		return ResponseEntity.ok(subscriptionService.getAll());
-	}
+    @GetMapping(value = "/all", produces = "application/json")
+    public ResponseEntity<Set<Subscription>> readAll() {
+        return ResponseEntity.ok(subscriptionService.getAll());
+    }
 }

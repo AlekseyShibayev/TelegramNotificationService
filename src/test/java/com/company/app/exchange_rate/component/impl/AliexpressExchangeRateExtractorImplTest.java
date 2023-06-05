@@ -8,25 +8,25 @@ import org.junit.jupiter.api.Test;
 
 class AliexpressExchangeRateExtractorImplTest {
 
-	private static final String FILE_NAME = "exchangerate/response_example.json";
+    private static final String FILE_NAME = "exchangerate/response_example.json";
 
-	AliexpressExchangeRateExtractorImpl aliexpressExchangeRateExtractor;
-	DataExtractorTool dataExtractorTool;
+    AliexpressExchangeRateExtractorImpl aliexpressExchangeRateExtractor;
+    DataExtractorTool dataExtractorTool;
 
-	@BeforeEach
-	public void init() {
-		dataExtractorTool = new DataExtractorToolImpl();
-		AliexpressReceiverImpl aliexpressReceiver = new AliexpressReceiverImpl();
+    @BeforeEach
+    public void init() {
+        dataExtractorTool = new DataExtractorToolImpl();
+        AliexpressReceiverImpl aliexpressReceiver = new AliexpressReceiverImpl();
 
-		aliexpressExchangeRateExtractor = new AliexpressExchangeRateExtractorImpl();
-		aliexpressExchangeRateExtractor.setAliexpressReceiver(aliexpressReceiver);
-		aliexpressExchangeRateExtractor.setDataExtractorTool(dataExtractorTool);
-	}
+        aliexpressExchangeRateExtractor = new AliexpressExchangeRateExtractorImpl();
+        aliexpressExchangeRateExtractor.setAliexpressReceiver(aliexpressReceiver);
+        aliexpressExchangeRateExtractor.setDataExtractorTool(dataExtractorTool);
+    }
 
-	@Test
-	void extractTest() {
-		String aliexpressExchangeRate = aliexpressExchangeRateExtractor.getExchangeRate(dataExtractorTool.getFileAsString(FILE_NAME));
-		Assertions.assertNotNull(aliexpressExchangeRate);
-		Assertions.assertFalse(aliexpressExchangeRate.isEmpty());
-	}
+    @Test
+    void extractTest() {
+        String aliexpressExchangeRate = aliexpressExchangeRateExtractor.getExchangeRate(dataExtractorTool.getFileAsString(FILE_NAME));
+        Assertions.assertNotNull(aliexpressExchangeRate);
+        Assertions.assertFalse(aliexpressExchangeRate.isEmpty());
+    }
 }

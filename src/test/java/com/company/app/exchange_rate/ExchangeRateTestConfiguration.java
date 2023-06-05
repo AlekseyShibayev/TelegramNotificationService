@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Bean;
 @TestConfiguration
 public class ExchangeRateTestConfiguration {
 
-	@MockBean
-	ExchangeRateService exchangeRateService;
+    @MockBean
+    ExchangeRateService exchangeRateService;
 
-	@Bean
-	DataExtractorTool dataExtractorTool() {
-		return new DataExtractorToolImpl();
-	}
+    @Bean
+    DataExtractorTool dataExtractorTool() {
+        return new DataExtractorToolImpl();
+    }
 }

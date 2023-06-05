@@ -14,19 +14,19 @@ import java.net.http.HttpResponse;
 @Component
 public class GetRequestHandlerImpl implements GetRequestHandler {
 
-	@Autowired
-	private CaptchaFighter captchaFighter;
+    @Autowired
+    private CaptchaFighter captchaFighter;
 
-	@SneakyThrows
-	public String getResponseBodyAsString(String url) {
-		captchaFighter.fight(3_000, 10_000);
+    @SneakyThrows
+    public String getResponseBodyAsString(String url) {
+        captchaFighter.fight(3_000, 10_000);
 
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(url))
-				.GET()
-				.build();
-		HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-		return httpResponse.statusCode() == 200 ? httpResponse.body() : StringUtils.EMPTY;
-	}
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return httpResponse.statusCode() == 200 ? httpResponse.body() : StringUtils.EMPTY;
+    }
 }

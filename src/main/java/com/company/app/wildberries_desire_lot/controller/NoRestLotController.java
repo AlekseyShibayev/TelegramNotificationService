@@ -19,24 +19,24 @@ import java.util.List;
 @RequestMapping("/wildberries/noRest/lot")
 public class NoRestLotController {
 
-	@Autowired
-	LotService lotService;
+    @Autowired
+    LotService lotService;
 
-	/**
-	 * пример запроса: http://localhost:8080/wildberries/lot/manualCreate?name=tempName&price=999&discount=0.11
-	 */
-	@GetMapping(value = "/manualCreate", produces = "application/json")
-	public ResponseEntity<Long> create(@RequestParam String name,
-									   @RequestParam String price,
-									   @RequestParam String discount) {
-		return ResponseEntity.ok(lotService.create(name, price, discount));
-	}
+    /**
+     * пример запроса: http://localhost:8080/wildberries/lot/manualCreate?name=tempName&price=999&discount=0.11
+     */
+    @GetMapping(value = "/manualCreate", produces = "application/json")
+    public ResponseEntity<Long> create(@RequestParam String name,
+                                       @RequestParam String price,
+                                       @RequestParam String discount) {
+        return ResponseEntity.ok(lotService.create(name, price, discount));
+    }
 
-	/**
-	 * пример запроса: http://localhost:8080/wildberries/lot/getAll
-	 */
-	@GetMapping(value = "/getAll", produces = "application/json")
-	public ResponseEntity<List<Lot>> getAll() {
-		return ResponseEntity.ok(lotService.getAll());
-	}
+    /**
+     * пример запроса: http://localhost:8080/wildberries/lot/getAll
+     */
+    @GetMapping(value = "/getAll", produces = "application/json")
+    public ResponseEntity<List<Lot>> getAll() {
+        return ResponseEntity.ok(lotService.getAll());
+    }
 }

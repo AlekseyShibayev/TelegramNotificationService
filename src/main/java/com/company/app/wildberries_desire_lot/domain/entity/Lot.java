@@ -14,17 +14,17 @@ import javax.persistence.*;
 @Table(name = "LOT")
 public class Lot {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID", nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
-	@Column(name = "ARTICLE")
-	private String article;
+    @Column(name = "ARTICLE")
+    private String article;
 
-	@Column(name = "DESIRED_PRICE")
-	private String desiredPrice;
+    @Column(name = "DESIRED_PRICE")
+    private String desiredPrice;
 
-	@Column(name = "DISCOUNT")
-	private String discount;
+    @Column(name = "DISCOUNT")
+    private String discount;
 }

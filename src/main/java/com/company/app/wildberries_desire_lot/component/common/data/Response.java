@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Response {
 
-	ResponseData data;
+    ResponseData data;
 }

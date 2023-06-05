@@ -14,33 +14,33 @@ import java.util.Set;
 @Component
 public class WildberriesSearcherContainsSizeFilter implements WildberriesSearcherFilter {
 
-	private static final String TYPE = "containsSize";
+    private static final String TYPE = "containsSize";
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-	@Override
-	public boolean isPreFilter() {
-		return true;
-	}
+    @Override
+    public boolean isPreFilter() {
+        return true;
+    }
 
-	@Override
-	public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
-		return withContainsSize(responseProducts, wildberriesSearcherContainer);
-	}
+    @Override
+    public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+        return withContainsSize(responseProducts, wildberriesSearcherContainer);
+    }
 
-	private boolean withContainsSize(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
-		Optional<Size> optional = getUserSize(responseProducts, wildberriesSearcherContainer.getDressSize());
-		return optional.isPresent();
-	}
+    private boolean withContainsSize(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+        Optional<Size> optional = getUserSize(responseProducts, wildberriesSearcherContainer.getDressSize());
+        return optional.isPresent();
+    }
 
-	Optional<Size> getUserSize(ResponseProducts responseProducts, String userSizes) {
-		List<Size> productSizes = responseProducts.getSizes();
-		Set<String> userSizesSet = Sets.newHashSet(userSizes.split(Strings.DEFAULT_DELIMITER));
-		return productSizes.stream()
-				.filter(size -> userSizesSet.contains(size.getName()))
-				.findAny();
-	}
+    Optional<Size> getUserSize(ResponseProducts responseProducts, String userSizes) {
+        List<Size> productSizes = responseProducts.getSizes();
+        Set<String> userSizesSet = Sets.newHashSet(userSizes.split(Strings.DEFAULT_DELIMITER));
+        return productSizes.stream()
+                .filter(size -> userSizesSet.contains(size.getName()))
+                .findAny();
+    }
 }

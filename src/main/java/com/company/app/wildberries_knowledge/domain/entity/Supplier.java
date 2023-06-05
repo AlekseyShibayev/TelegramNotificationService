@@ -13,14 +13,14 @@ import javax.persistence.*;
 @Table(name = "SUPPLIER")
 public class Supplier {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID", nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
-	@Column(name = "SUPPLIER_NAME")
-	private String supplierName;
+    @Column(name = "SUPPLIER_NAME")
+    private String supplierName;
 
-	@Column(name = "SUPPLIER_ID")
-	private String supplierId;
+    @Column(name = "SUPPLIER_ID")
+    private String supplierId;
 }

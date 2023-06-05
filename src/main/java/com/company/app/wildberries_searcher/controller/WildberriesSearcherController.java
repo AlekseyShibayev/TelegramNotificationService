@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/wildberries/searcher")
 public class WildberriesSearcherController {
 
-	@Autowired
-	private WildberriesSearcherFacade wildberriesSearcherFacade;
+    @Autowired
+    private WildberriesSearcherFacade wildberriesSearcherFacade;
 
-	@GetMapping(value = "/search", produces = "application/json")
-	public ResponseEntity<WildberriesSearcherResult> search(@RequestParam WildberriesSearcherContainer wildberriesSearcherContainer) {
-		return ResponseEntity.ok(wildberriesSearcherFacade.search(wildberriesSearcherContainer));
-	}
+    @GetMapping(value = "/search", produces = "application/json")
+    public ResponseEntity<WildberriesSearcherResult> search(@RequestParam WildberriesSearcherContainer wildberriesSearcherContainer) {
+        return ResponseEntity.ok(wildberriesSearcherFacade.search(wildberriesSearcherContainer));
+    }
 }

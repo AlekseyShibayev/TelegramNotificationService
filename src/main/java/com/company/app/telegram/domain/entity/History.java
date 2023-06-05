@@ -15,24 +15,24 @@ import java.util.Date;
 @Table(name = "HISTORY")
 public class History {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "ID", nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "CHAT_ID", nullable = false)
-	private Chat chat;
+    @ManyToOne
+    @JoinColumn(name = "CHAT_ID", nullable = false)
+    private Chat chat;
 
-	@Column(name = "SOURCE")
-	private String source;
+    @Column(name = "SOURCE")
+    private String source;
 
-	@Column(name = "TARGET")
-	private String target;
+    @Column(name = "TARGET")
+    private String target;
 
-	@Column(name = "MESSAGE")
-	private String message;
+    @Column(name = "MESSAGE")
+    private String message;
 
-	@Column(name = "DATE")
-	private Date date;
+    @Column(name = "DATE")
+    private Date date;
 }

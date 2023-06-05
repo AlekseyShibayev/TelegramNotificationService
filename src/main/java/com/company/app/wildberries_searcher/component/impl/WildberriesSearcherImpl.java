@@ -18,19 +18,19 @@ import java.util.stream.Collectors;
 @Component
 public class WildberriesSearcherImpl implements WildberriesSearcher {
 
-	@Autowired
-	private WildberriesSearcherExtractor wildberriesSearcherExtractor;
-	@Autowired
-	private WildberriesSearcherFilterer wildberriesSearcherFilterer;
+    @Autowired
+    private WildberriesSearcherExtractor wildberriesSearcherExtractor;
+    @Autowired
+    private WildberriesSearcherFilterer wildberriesSearcherFilterer;
 
-	@Override
-	public List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer) {
-		String url = WildberriesSearcherProductsUrlCreator.createUrl(wildberriesSearcherContainer);
-		List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);
-		List<ResponseProducts> filteredProducts = wildberriesSearcherFilterer.filter(products, wildberriesSearcherContainer);
-		return filteredProducts.stream()
-				.map(ResponseProducts::toLinkDto)
-				.distinct()
-				.collect(Collectors.toList());
-	}
+    @Override
+    public List<WildberriesLinkDto> search(WildberriesSearcherContainer wildberriesSearcherContainer) {
+        String url = WildberriesSearcherProductsUrlCreator.createUrl(wildberriesSearcherContainer);
+        List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);
+        List<ResponseProducts> filteredProducts = wildberriesSearcherFilterer.filter(products, wildberriesSearcherContainer);
+        return filteredProducts.stream()
+                .map(ResponseProducts::toLinkDto)
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }

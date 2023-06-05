@@ -16,18 +16,18 @@ import java.util.List;
 @Service
 public class InitialSearchDataRegistryImpl implements InitialSearchDataRegistry {
 
-	@Value("classpath:wildberries/init_search_data.json")
-	private Resource resource;
+    @Value("classpath:wildberries/init_search_data.json")
+    private Resource resource;
 
-	@Autowired
-	private JsonSerializationTool<SearchData> jsonSerializationTool;
-	@Autowired
-	private SearchDataService searchDataService;
+    @Autowired
+    private JsonSerializationTool<SearchData> jsonSerializationTool;
+    @Autowired
+    private SearchDataService searchDataService;
 
-	@EventListener({ContextRefreshedEvent.class})
-	@Override
-	public void init() {
-		List<SearchData> list = jsonSerializationTool.load(resource, SearchData.class);
-		searchDataService.saveAll(list);
-	}
+    @EventListener({ContextRefreshedEvent.class})
+    @Override
+    public void init() {
+        List<SearchData> list = jsonSerializationTool.load(resource, SearchData.class);
+        searchDataService.saveAll(list);
+    }
 }

@@ -11,14 +11,14 @@ import java.util.List;
 
 class WildberriesKnowledgeEndToEndTest extends SpringBootTestApplicationContext {
 
-	@Autowired
-	private WildberriesSupplierController supplierController;
+    @Autowired
+    private WildberriesSupplierController supplierController;
 
-	@Test
-	void supplier_initialRegistry_can_init_test() {
-		List<Supplier> supplierList = supplierController.getAll().getBody();
+    @Test
+    void supplier_initialRegistry_can_init_test() {
+        List<Supplier> supplierList = supplierController.getAll().getBody();
 
-		Assertions.assertNotNull(supplierList);
-		Assertions.assertTrue(supplierList.size() > 1);
-	}
+        Assertions.assertNotNull(supplierList);
+        Assertions.assertTrue(supplierList.size() > 1);
+    }
 }

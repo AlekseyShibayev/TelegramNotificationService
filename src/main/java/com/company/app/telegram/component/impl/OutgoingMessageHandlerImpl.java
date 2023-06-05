@@ -14,29 +14,29 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 @Component
 public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
 
-	@Autowired
-	private HistoryService historyService;
-	@Autowired
-	private TelegramBotConfig telegramBotConfig;
-	@Autowired
-	private ChatService chatService;
+    @Autowired
+    private HistoryService historyService;
+    @Autowired
+    private TelegramBotConfig telegramBotConfig;
+    @Autowired
+    private ChatService chatService;
 
-	@Override
-	public void sendToEveryone(Object message) {
-		chatService.getAll().stream()
-				.filter(Chat::isEnableNotifications)
-				.map(chat -> SendMessage.builder().text(message.toString()).chatId(chat.getChatName()).build())
-				.forEach(this::sendOneMessage);
-	}
+    @Override
+    public void sendToEveryone(Object message) {
+        chatService.getAll().stream()
+                .filter(Chat::isEnableNotifications)
+                .map(chat -> SendMessage.builder().text(message.toString()).chatId(chat.getChatName()).build())
+                .forEach(this::sendOneMessage);
+    }
 
-	@Override
-	public void sendToTargetChat(String chatName, Object message) {
-		SendMessage sendMessage = SendMessage.builder().chatId(chatName).text(message.toString()).build();
-		sendOneMessage(sendMessage);
-	}
+    @Override
+    public void sendToTargetChat(String chatName, Object message) {
+        SendMessage sendMessage = SendMessage.builder().chatId(chatName).text(message.toString()).build();
+        sendOneMessage(sendMessage);
+    }
 
-	private void sendOneMessage(SendMessage sendMessage) {
-		historyService.saveHistory(sendMessage);
-		telegramBotConfig.write(sendMessage);
-	}
+    private void sendOneMessage(SendMessage sendMessage) {
+        historyService.saveHistory(sendMessage);
+        telegramBotConfig.write(sendMessage);
+    }
 }

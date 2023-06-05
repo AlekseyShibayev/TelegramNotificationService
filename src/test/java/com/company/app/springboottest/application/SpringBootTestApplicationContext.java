@@ -1,6 +1,7 @@
 package com.company.app.springboottest.application;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.system.OutputCaptureExtension;
@@ -35,6 +36,7 @@ import javax.annotation.PostConstruct;
 		classes = SpringBootTestApplicationConfiguration.class,
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class SpringBootTestApplicationContext {
 
 	@PostConstruct

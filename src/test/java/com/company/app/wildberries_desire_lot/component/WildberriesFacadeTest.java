@@ -1,5 +1,6 @@
 package com.company.app.wildberries_desire_lot.component;
 
+import com.company.app.core.tool.api.CaptchaFighter;
 import com.company.app.core.tool.api.JsonSerializationTool;
 import com.company.app.springboottest.application.SpringBootTestApplicationContext;
 import com.company.app.wildberries_desire_lot.domain.entity.Lot;
@@ -23,11 +24,15 @@ class WildberriesFacadeTest extends SpringBootTestApplicationContext {
 	private JsonSerializationTool<Lot> jsonSerializationTool;
 	@MockBean
 	private LotRepository lotRepository;
+	@MockBean
+	private CaptchaFighter captchaFighter;
 
 	@Test
-	void doMainLogicTest() {
+	void wildberries_can_getDesiredLots_test() {
 		File file = new File(FILE_NAME);
 		List<Lot> lots = jsonSerializationTool.load(file, Lot.class);
+
+		Mockito.doNothing().when(captchaFighter).fight(Mockito.anyInt(), Mockito.anyInt());
 		Mockito.when(lotRepository.findAll()).thenReturn(lots);
 
 		Assertions.assertEquals(1, wildberriesFacade.getDesiredLots().size());

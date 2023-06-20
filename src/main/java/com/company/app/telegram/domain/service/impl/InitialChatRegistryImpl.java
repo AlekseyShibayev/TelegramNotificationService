@@ -1,6 +1,6 @@
 package com.company.app.telegram.domain.service.impl;
 
-import com.company.app.core.tool.api.JsonSerializationTool;
+import com.company.app.core.tool.json.JsonTool;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.api.ChatService;
 import com.company.app.telegram.domain.service.api.InitialChatRegistry;
@@ -21,14 +21,15 @@ public class InitialChatRegistryImpl implements InitialChatRegistry {
     private Resource resource;
 
     @Autowired
-    private JsonSerializationTool<Chat> jsonSerializationTool;
+    private JsonTool<Chat> jsonTool;
     @Autowired
     private ChatService chatService;
 
     @EventListener({ContextRefreshedEvent.class})
     @Override
     public void init() throws TelegramApiException {
-        List<Chat> list = jsonSerializationTool.load(resource, Chat.class);
+        List<Chat> list = jsonTool.toJavaAsList(resource, Chat.class);
         chatService.saveAll(list);
     }
+
 }

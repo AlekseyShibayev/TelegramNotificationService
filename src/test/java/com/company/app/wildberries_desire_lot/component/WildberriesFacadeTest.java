@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.core.tool.api.CaptchaFighter;
-import com.company.app.core.tool.api.JsonSerializationTool;
+import com.company.app.core.tool.json.JsonTool;
 import com.company.app.springboottest.application.SpringBootTestApplicationContext;
 import com.company.app.wildberries_desire_lot.domain.entity.Lot;
 import com.company.app.wildberries_desire_lot.domain.repository.LotRepository;
@@ -21,7 +21,7 @@ class WildberriesFacadeTest extends SpringBootTestApplicationContext {
     @Autowired
     private WildberriesFacade wildberriesFacade;
     @Autowired
-    private JsonSerializationTool<Lot> jsonSerializationTool;
+    private JsonTool<Lot> jsonTool;
     @MockBean
     private LotRepository lotRepository;
     @MockBean
@@ -30,11 +30,13 @@ class WildberriesFacadeTest extends SpringBootTestApplicationContext {
     @Test
     void wildberries_can_getDesiredLots_test() {
         File file = new File(FILE_NAME);
-        List<Lot> lots = jsonSerializationTool.load(file, Lot.class);
-
+        List<Lot> lots = jsonTool.toJavaAsList(file, Lot.class);
         Mockito.doNothing().when(captchaFighter).fight(Mockito.anyInt(), Mockito.anyInt());
         Mockito.when(lotRepository.findAll()).thenReturn(lots);
 
-        Assertions.assertEquals(1, wildberriesFacade.getDesiredLots().size());
+        int size = wildberriesFacade.getDesiredLots().size();
+
+        Assertions.assertEquals(1, size);
     }
+
 }

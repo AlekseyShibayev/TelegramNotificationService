@@ -20,13 +20,13 @@ import java.util.NoSuchElementException;
 class ExchangeRateEndToEndTest extends SpringBootTestApplicationContext {
 
     @Autowired
-    ExchangeRateController exchangeRateController;
+    private ExchangeRateController exchangeRateController;
     @Autowired
-    ExchangeRateBinder exchangeRateBinder;
+    private ExchangeRateBinder exchangeRateBinder;
     @Autowired
-    ExchangeRepository exchangeRepository;
+    private ExchangeRepository exchangeRepository;
     @Autowired
-    ExchangeRateService exchangeRateService;
+    private ExchangeRateService exchangeRateService;
 
     @BeforeEach
     void init() {

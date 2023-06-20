@@ -1,6 +1,6 @@
 package com.company.app.wildberries_searcher.domain.service.impl;
 
-import com.company.app.core.tool.api.JsonSerializationTool;
+import com.company.app.core.tool.json.JsonTool;
 import com.company.app.wildberries_searcher.domain.entity.SearchData;
 import com.company.app.wildberries_searcher.domain.service.api.InitialSearchDataRegistry;
 import com.company.app.wildberries_searcher.domain.service.api.SearchDataService;
@@ -20,14 +20,14 @@ public class InitialSearchDataRegistryImpl implements InitialSearchDataRegistry 
     private Resource resource;
 
     @Autowired
-    private JsonSerializationTool<SearchData> jsonSerializationTool;
+    private JsonTool<SearchData> jsonTool;
     @Autowired
     private SearchDataService searchDataService;
 
     @EventListener({ContextRefreshedEvent.class})
     @Override
     public void init() {
-        List<SearchData> list = jsonSerializationTool.load(resource, SearchData.class);
+        List<SearchData> list = jsonTool.toJavaAsList(resource, SearchData.class);
         searchDataService.saveAll(list);
     }
 }

@@ -1,8 +1,7 @@
 package com.company.app.wildberries_searcher.component.impl;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.tool.api.JsonSerializationTool;
-import com.company.app.core.tool.impl.JsonSerializationToolImpl;
+import com.company.app.core.tool.json.JsonTool;
 import com.company.app.wildberries_desire_lot.component.common.GetRequestHandler;
 import com.company.app.wildberries_desire_lot.component.common.data.Response;
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
@@ -22,7 +21,9 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
     @Autowired
     private GetRequestHandler getRequestHandler;
     @Autowired
-    private JsonSerializationTool<Response> jsonSerializationTool;
+    private JsonTool<Response> responseJsonTool;
+    @Autowired
+    private JsonTool<PriceHistory> priceHistoryJsonTool;
 
     @PerformanceLogAnnotation
     @Override
@@ -33,8 +34,7 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
     @Override
     public List<PriceHistory> extractPriceHistory(String url) {
         String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
-        JsonSerializationToolImpl<PriceHistory> priceHistoryJsonSerializationTool = new JsonSerializationToolImpl<>();
-        return priceHistoryJsonSerializationTool.load(htmlResponse, PriceHistory.class);
+        return priceHistoryJsonTool.toJavaAsList(htmlResponse, PriceHistory.class);
     }
 
     private List<ResponseProducts> getAllProducts(String url) {
@@ -44,7 +44,7 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
         while (true) {
             String pageUrl = String.format(url, i);
             String htmlResponse = getRequestHandler.getResponseBodyAsString(pageUrl);
-            Response response = jsonSerializationTool.loadOne(htmlResponse, Response.class);
+            Response response = responseJsonTool.toJavaAsObject(htmlResponse, Response.class);
             List<ResponseProducts> products = response.getData().getProducts();
             if (products.isEmpty()) {
                 log.debug("В ходе поиска было [{}] запросов к ВБ.", i);
@@ -55,4 +55,5 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
             }
         }
     }
+
 }

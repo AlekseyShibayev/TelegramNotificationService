@@ -1,6 +1,6 @@
 package com.company.app.wildberries_knowledge.domain.service.impl;
 
-import com.company.app.core.tool.api.JsonSerializationTool;
+import com.company.app.core.tool.json.JsonTool;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import com.company.app.wildberries_knowledge.domain.service.api.InitialRegistry;
 import com.company.app.wildberries_knowledge.domain.service.api.SupplierService;
@@ -20,14 +20,15 @@ public class InitialRegistryImpl implements InitialRegistry {
     private Resource resource;
 
     @Autowired
-    private JsonSerializationTool<Supplier> jsonSerializationTool;
+    private JsonTool<Supplier> jsonTool;
     @Autowired
     private SupplierService supplierService;
 
     @EventListener({ContextRefreshedEvent.class})
     @Override
     public void init() {
-        List<Supplier> list = jsonSerializationTool.load(resource, Supplier.class);
+        List<Supplier> list = jsonTool.toJavaAsList(resource, Supplier.class);
         supplierService.saveAll(list);
     }
+
 }

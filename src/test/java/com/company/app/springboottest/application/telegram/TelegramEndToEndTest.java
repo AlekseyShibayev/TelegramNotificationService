@@ -12,6 +12,7 @@ import com.company.app.telegram.domain.entity.UserInfo;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.service.api.ChatService;
 import com.company.app.telegram.domain.util.ChatUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +20,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 class TelegramEndToEndTest extends SpringBootTestApplicationContext {
 
     @Autowired
@@ -103,4 +105,22 @@ class TelegramEndToEndTest extends SpringBootTestApplicationContext {
         Chat after = chatController.read(id).getBody();
         Assertions.assertFalse(after.isEnableNotifications());
     }
+
+    @Test
+    void chatController_crud_test2() {
+        List<ChatDto> chatDtoList = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            ChatDto chatDto = ChatDto.builder().chatName("_" + i).build();
+            chatController.create(chatDto);
+            chatDtoList.add(chatDto);
+        }
+        log.debug("ready *****");
+        Assertions.assertEquals(10 , chatDtoList.size());
+        List<Chat> all = chatRepository.findAll();
+
+        Assertions.assertEquals(10 , all.size());
+        all.forEach(chat -> log.debug(chat.getChatName()));
+    }
+
 }

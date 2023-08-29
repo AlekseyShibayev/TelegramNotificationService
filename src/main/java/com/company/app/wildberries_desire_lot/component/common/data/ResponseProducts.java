@@ -3,17 +3,14 @@ package com.company.app.wildberries_desire_lot.component.common.data;
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.component.desire_lot.util.WBUtils;
 import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
+@Accessors(chain = true)
 public class ResponseProducts {
 
     private Integer id;
@@ -29,4 +26,5 @@ public class ResponseProducts {
                 .link(WBUtils.getUrlForResponse(this.id.toString()))
                 .build();
     }
+
 }

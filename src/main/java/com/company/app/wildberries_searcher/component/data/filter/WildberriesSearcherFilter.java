@@ -1,7 +1,7 @@
 package com.company.app.wildberries_searcher.component.data.filter;
 
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 
 public interface WildberriesSearcherFilter {
 
@@ -9,5 +9,5 @@ public interface WildberriesSearcherFilter {
 
     boolean isPreFilter();
 
-    boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer);
+    boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContext wildberriesSearcherContainer);
 }

@@ -2,6 +2,7 @@ package com.company.app.wildberries_searcher.component.impl;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.tool.json.JsonTool;
+import com.company.app.core.tool.json.MapperSettings;
 import com.company.app.wildberries_desire_lot.component.common.GetRequestHandler;
 import com.company.app.wildberries_desire_lot.component.common.data.Response;
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
@@ -42,9 +43,12 @@ public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtr
 
         int i = 1;
         while (true) {
+            log.debug("try to see [{}] page", i);
             String pageUrl = String.format(url, i);
             String htmlResponse = getRequestHandler.getResponseBodyAsString(pageUrl);
-            Response response = responseJsonTool.toJavaAsObject(htmlResponse, Response.class);
+            Response response = responseJsonTool.toJavaAsObject(htmlResponse, Response.class, MapperSettings.builder()
+                    .failOnUnknownProperties(false)
+                    .build());
             List<ResponseProducts> products = response.getData().getProducts();
             if (products.isEmpty()) {
                 log.debug("В ходе поиска было [{}] запросов к ВБ.", i);

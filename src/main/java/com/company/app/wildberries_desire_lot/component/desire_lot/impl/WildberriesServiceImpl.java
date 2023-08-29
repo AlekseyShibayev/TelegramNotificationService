@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
 
-import com.company.app.core.aop.logging.util.LogUtils;
+import com.company.app.core.aop.logging.util.Logs;
 import com.company.app.wildberries_desire_lot.component.common.GetRequestHandler;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesPriceExtractor;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesService;
@@ -51,7 +51,7 @@ public class WildberriesServiceImpl implements WildberriesService {
             int i = desiredPrice.compareTo(currentPrice);
             return i > 0;
         } catch (Exception e) {
-            LogUtils.doExceptionLog(e, "проблема с " + lot.toString());
+            Logs.doExceptionLog(e, "проблема с " + lot.toString());
             return false;
         }
     }

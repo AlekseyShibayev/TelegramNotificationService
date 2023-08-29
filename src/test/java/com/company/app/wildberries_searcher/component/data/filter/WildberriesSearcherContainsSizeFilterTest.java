@@ -37,11 +37,10 @@ class WildberriesSearcherContainsSizeFilterTest {
     }
 
     private ResponseProducts createResponseProducts() {
-        return ResponseProducts.builder()
-                .sizes(List.of(Size.builder().name("46").build()
-                        , Size.builder().name("48").build()
-                        , Size.builder().name("50").build()
-                ))
-                .build();
+        return new ResponseProducts()
+                .setSizes(List.of(Size.builder().name("46").build()
+                , Size.builder().name("48").build()
+                , Size.builder().name("50").build()
+        ));
     }
 }

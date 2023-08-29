@@ -11,7 +11,7 @@ import org.springframework.beans.BeanUtils;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WildberriesSearcherContainer {
+public class WildberriesSearcherContext {
 
     private String chatName;
     private String footSize;
@@ -20,13 +20,13 @@ public class WildberriesSearcherContainer {
     private String supplier;
     private String greedIndex;
 
-    public static WildberriesSearcherContainer of(SearchData searchData) {
-        WildberriesSearcherContainer container = new WildberriesSearcherContainer();
+    public static WildberriesSearcherContext of(SearchData searchData) {
+        WildberriesSearcherContext container = new WildberriesSearcherContext();
         BeanUtils.copyProperties(searchData, container);
         return container;
     }
 
-    public static WildberriesSearcherContainer of(WildberriesSearcherContainer wildberriesSearcherContainer, SearchData searchData) {
+    public static WildberriesSearcherContext of(WildberriesSearcherContext wildberriesSearcherContainer, SearchData searchData) {
         BeanUtils.copyProperties(searchData, wildberriesSearcherContainer);
         return wildberriesSearcherContainer;
     }

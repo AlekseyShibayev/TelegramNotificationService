@@ -4,7 +4,7 @@ import com.company.app.wildberries_desire_lot.component.common.data.ResponseProd
 import com.company.app.wildberries_desire_lot.component.common.data.price_history.PriceHistory;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherExtractor;
-import com.company.app.wildberries_searcher.component.util.WildberriesSearcherPriceHistoryUrlCreator;
+import com.company.app.wildberries_searcher.component.util.PriceHistoryUrlCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class WildberriesSearcherAveragePriceExtractorImpl implements Wildberries
 
     @Override
     public int getAveragePrice(ResponseProducts responseProducts) {
-        String url = WildberriesSearcherPriceHistoryUrlCreator.createUrl(String.valueOf(responseProducts.getId()));
+        String url = PriceHistoryUrlCreator.createUrl(String.valueOf(responseProducts.getId()));
         List<PriceHistory> priceHistory = wildberriesSearcherExtractor.extractPriceHistory(url);
         OptionalDouble average = priceHistory.stream()
                 .mapToInt(this::getRubAsInt)

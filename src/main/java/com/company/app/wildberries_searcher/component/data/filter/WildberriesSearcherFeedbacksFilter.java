@@ -1,7 +1,7 @@
 package com.company.app.wildberries_searcher.component.data.filter;
 
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,7 +20,7 @@ public class WildberriesSearcherFeedbacksFilter implements WildberriesSearcherFi
     }
 
     @Override
-    public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+    public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContext wildberriesSearcherContainer) {
         return withFeedbacks(responseProducts);
     }
 

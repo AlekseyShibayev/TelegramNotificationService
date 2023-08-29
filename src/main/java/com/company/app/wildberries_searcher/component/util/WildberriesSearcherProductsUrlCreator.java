@@ -1,6 +1,6 @@
 package com.company.app.wildberries_searcher.component.util;
 
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.google.common.collect.ImmutableMap;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -49,13 +49,13 @@ public class WildberriesSearcherProductsUrlCreator {
             "&sort=popular" +
             "&spp=22";
 
-    public static String createUrl(WildberriesSearcherContainer wildberriesSearcherContainer) {
+    public static String createUrl(WildberriesSearcherContext wildberriesSearcherContainer) {
         String withGender = withGender(wildberriesSearcherContainer.getGender());
         String withSize = withSize(wildberriesSearcherContainer.getDressSize());
         String supplier = withSupplier(wildberriesSearcherContainer.getSupplier());
         String withPage = withPage();
         String url = URL + withGender + withSize + supplier + withPage;
-        log.debug("[{}]: Сформирована ссылка:\n[{}].", wildberriesSearcherContainer.getChatName(), url);
+        log.debug("chatName [{}]: url:\n[{}].", wildberriesSearcherContainer.getChatName(), url);
         return url;
     }
 

@@ -1,5 +1,6 @@
 package com.company.app.wildberries_searcher.component.data;
 
+import com.company.app.core.aop.logging.util.Logs;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
@@ -17,7 +18,7 @@ import java.util.List;
 @Builder
 public class WildberriesSearcherTask implements Runnable {
 
-    private WildberriesSearcherContainer wildberriesSearcherContainer;
+    private WildberriesSearcherContext wildberriesSearcherContainer;
     private WildberriesSearcher wildberriesSearcher;
     private TelegramController telegramController;
     private WildberriesSearcherCallback callBack;
@@ -26,6 +27,8 @@ public class WildberriesSearcherTask implements Runnable {
     public void run() {
         try {
             doWork();
+        } catch (Exception e) {
+            Logs.doExceptionLog(log, e);
         } finally {
             callBack.callback();
         }

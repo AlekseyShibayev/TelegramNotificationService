@@ -3,7 +3,7 @@ package com.company.app.wildberries_searcher.component.data.filter;
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
 import com.company.app.wildberries_desire_lot.component.common.data.Size;
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.google.common.collect.Sets;
 import org.springframework.stereotype.Component;
 
@@ -27,11 +27,11 @@ public class WildberriesSearcherContainsSizeFilter implements WildberriesSearche
     }
 
     @Override
-    public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+    public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContext wildberriesSearcherContainer) {
         return withContainsSize(responseProducts, wildberriesSearcherContainer);
     }
 
-    private boolean withContainsSize(ResponseProducts responseProducts, WildberriesSearcherContainer wildberriesSearcherContainer) {
+    private boolean withContainsSize(ResponseProducts responseProducts, WildberriesSearcherContext wildberriesSearcherContainer) {
         Optional<Size> optional = getUserSize(responseProducts, wildberriesSearcherContainer.getDressSize());
         return optional.isPresent();
     }

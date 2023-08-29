@@ -6,7 +6,7 @@ import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherResult;
 import com.company.app.wildberries_searcher.controller.WildberriesSearcherController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,7 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
     private void tryStartSearch(Chat chat, String incomingMessage) {
         String supplierId = getSupplierId(incomingMessage);
 
-        WildberriesSearcherContainer wildberriesSearcherContainer = WildberriesSearcherContainer.builder()
+        WildberriesSearcherContext wildberriesSearcherContainer = WildberriesSearcherContext.builder()
                 .chatName(chat.getChatName())
                 .supplier(supplierId)
                 .build();

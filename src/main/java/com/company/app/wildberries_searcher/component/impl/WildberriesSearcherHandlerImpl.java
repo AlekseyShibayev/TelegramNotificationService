@@ -3,7 +3,7 @@ package com.company.app.wildberries_searcher.component.impl;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherHandler;
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContainer;
+import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherResult;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherTask;
 import com.company.app.wildberries_searcher.domain.entity.SearchData;
@@ -38,7 +38,7 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
     }
 
     @Override
-    public WildberriesSearcherResult process(WildberriesSearcherContainer wildberriesSearcherContainer) {
+    public WildberriesSearcherResult process(WildberriesSearcherContext wildberriesSearcherContainer) {
         if (semaphore.tryAcquire()) {
             return startNewAsyncSearch(wildberriesSearcherContainer);
         } else {
@@ -49,7 +49,7 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
         }
     }
 
-    private WildberriesSearcherResult startNewAsyncSearch(WildberriesSearcherContainer wildberriesSearcherContainer) {
+    private WildberriesSearcherResult startNewAsyncSearch(WildberriesSearcherContext wildberriesSearcherContainer) {
         String chatName = wildberriesSearcherContainer.getChatName();
         SearchData searchData = searchDataService.getSearchData(chatName);
         if (searchData == null) {
@@ -59,7 +59,7 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
                     .message("Нет информации о поиске, обратитесь к админу.")
                     .build();
         } else {
-            WildberriesSearcherContainer container = WildberriesSearcherContainer.of(wildberriesSearcherContainer, searchData);
+            WildberriesSearcherContext container = WildberriesSearcherContext.of(wildberriesSearcherContainer, searchData);
             log.debug("Запускаю поиск для [{}].", wildberriesSearcherContainer);
             executorService.submit(WildberriesSearcherTask.builder()
                     .wildberriesSearcherContainer(container)

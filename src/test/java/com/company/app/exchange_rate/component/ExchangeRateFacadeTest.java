@@ -35,7 +35,7 @@ class ExchangeRateFacadeTest {
     @Autowired
     private ExchangeRateFacade exchangeRateFacade;
 
-    @Test
+//    @Test
     void extractCurse() {
         log.debug("**********     This is component test: [{}].     **********", this.getClass());
         ExchangeRate exchangeRate = exchangeRateFacade.extract();

@@ -11,7 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 @Slf4j
 @Configuration
-@ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
+//@ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "exchangeRate", name = "enable", havingValue = "true")
 public class ExchangeRateSchedulerConfig {
 
     @Autowired

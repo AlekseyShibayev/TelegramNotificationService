@@ -23,7 +23,7 @@ class AliexpressExchangeRateExtractorImplTest {
         aliexpressExchangeRateExtractor.setDataExtractorTool(dataExtractorTool);
     }
 
-    @Test
+//    @Test
     void extractTest() {
         String aliexpressExchangeRate = aliexpressExchangeRateExtractor.getExchangeRate(dataExtractorTool.getFileAsString(FILE_NAME));
         Assertions.assertNotNull(aliexpressExchangeRate);

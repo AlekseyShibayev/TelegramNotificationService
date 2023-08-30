@@ -6,7 +6,6 @@ import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import com.company.app.wildberries_desire_lot.domain.service.FoundItemsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ public class WildberriesDesireLotFacade {
     private final FoundItemsService foundItemsService;
 
     @PerformanceLogAnnotation
-    @Transactional
     public List<FoundItem> doDesireLotSearch() {
         return desireLotSearchHandler.getDesiredLots();
     }

@@ -11,6 +11,7 @@ import com.company.app.wildberries_desire_lot.domain.service.FoundItemsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class WildberriesDesireLotSearchHandler {
     private final DesireLotRepository lotRepository;
     private final FoundItemsService foundItemsService;
 
+    @Transactional
     public List<FoundItem> getDesiredLots() {
         try {
             return getDesiredLotsInner();

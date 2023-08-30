@@ -4,7 +4,6 @@ import com.company.app.core.tool.api.DataExtractorTool;
 import com.company.app.core.tool.impl.DataExtractorToolImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 class AliexpressExchangeRateExtractorImplTest {
 
@@ -23,7 +22,7 @@ class AliexpressExchangeRateExtractorImplTest {
         aliexpressExchangeRateExtractor.setDataExtractorTool(dataExtractorTool);
     }
 
-//    @Test
+    //    @Test
     void extractTest() {
         String aliexpressExchangeRate = aliexpressExchangeRateExtractor.getExchangeRate(dataExtractorTool.getFileAsString(FILE_NAME));
         Assertions.assertNotNull(aliexpressExchangeRate);

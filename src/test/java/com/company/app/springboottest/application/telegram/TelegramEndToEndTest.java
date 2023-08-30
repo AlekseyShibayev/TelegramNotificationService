@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Slf4j
 class TelegramEndToEndTest extends SpringBootTestApplicationContext {
 
@@ -116,10 +117,10 @@ class TelegramEndToEndTest extends SpringBootTestApplicationContext {
             chatDtoList.add(chatDto);
         }
         log.debug("ready *****");
-        Assertions.assertEquals(10 , chatDtoList.size());
+        Assertions.assertEquals(10, chatDtoList.size());
         List<Chat> all = chatRepository.findAll();
 
-        Assertions.assertEquals(10 , all.size());
+        Assertions.assertEquals(10, all.size());
         all.forEach(chat -> log.debug(chat.getChatName()));
     }
 

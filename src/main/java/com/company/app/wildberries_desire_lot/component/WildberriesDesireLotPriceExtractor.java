@@ -1,9 +1,9 @@
 package com.company.app.wildberries_desire_lot.component;
 
-import com.company.app.infrastructure.data.Response;
-import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.core.tool.json.JsonTool;
 import com.company.app.core.tool.json.MapperSettings;
+import com.company.app.infrastructure.data.Response;
+import com.company.app.infrastructure.data.ResponseProducts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

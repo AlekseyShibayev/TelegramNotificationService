@@ -1,8 +1,8 @@
 package com.company.app.wildberries_searcher.component.impl;
 
+import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
-import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherNotificator;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;

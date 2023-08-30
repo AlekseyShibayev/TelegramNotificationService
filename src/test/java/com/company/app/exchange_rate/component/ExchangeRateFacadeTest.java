@@ -4,7 +4,6 @@ import com.company.app.exchange_rate.ExchangeRateTestConfiguration;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
@@ -35,7 +34,7 @@ class ExchangeRateFacadeTest {
     @Autowired
     private ExchangeRateFacade exchangeRateFacade;
 
-//    @Test
+    //    @Test
     void extractCurse() {
         log.debug("**********     This is component test: [{}].     **********", this.getClass());
         ExchangeRate exchangeRate = exchangeRateFacade.extract();

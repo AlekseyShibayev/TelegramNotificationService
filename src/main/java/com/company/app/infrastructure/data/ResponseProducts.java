@@ -3,7 +3,8 @@ package com.company.app.infrastructure.data;
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
 import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.List;

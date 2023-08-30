@@ -13,15 +13,15 @@ public class ButtonFactory {
     private static final InlineKeyboardButton TG_OFF_BUTTON = new InlineKeyboardButton("Отключить уведомления");
     private static final InlineKeyboardButton TG_ON_BUTTON = new InlineKeyboardButton("Включить уведомления");
     private static final InlineKeyboardButton WB_BUTTON = new InlineKeyboardButton("Покажи что нашел на wildberries");
-    private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс (Отключено)");
-    private static final InlineKeyboardButton WB_SEARCH_BUTTON = new InlineKeyboardButton("START_WB_SEARCH (В разработке)");
+    private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс (Не работает)");
+    private static final InlineKeyboardButton WB_SEARCH_BUTTON = new InlineKeyboardButton("START_WB_SEARCH (Не работает)");
 
     public static InlineKeyboardMarkup inlineMarkup() {
         TG_OFF_BUTTON.setCallbackData("TG_OFF");
         TG_ON_BUTTON.setCallbackData("TG_ON");
         WB_BUTTON.setCallbackData("WB");
-//        ER_BUTTON.setCallbackData("EX");
-//        WB_SEARCH_BUTTON.setCallbackData("WB_SEARCH");
+        ER_BUTTON.setCallbackData("EX");
+        WB_SEARCH_BUTTON.setCallbackData("WB_SEARCH");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(TG_OFF_BUTTON));

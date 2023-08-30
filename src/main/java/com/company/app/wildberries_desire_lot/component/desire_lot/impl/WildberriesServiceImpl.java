@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
 
-import com.company.app.core.aop.logging.util.Logs;
+import com.company.app.core.util.Logs;
 import com.company.app.wildberries_desire_lot.component.common.GetRequestHandler;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesPriceExtractor;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesService;
@@ -10,6 +10,7 @@ import com.company.app.wildberries_desire_lot.domain.entity.Lot;
 import com.company.app.wildberries_desire_lot.domain.repository.LotRepository;
 import com.company.app.wildberries_desire_lot.domain.service.api.FoundItemsService;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Setter
 @Component
 public class WildberriesServiceImpl implements WildberriesService {
@@ -51,7 +53,7 @@ public class WildberriesServiceImpl implements WildberriesService {
             int i = desiredPrice.compareTo(currentPrice);
             return i > 0;
         } catch (Exception e) {
-            Logs.doExceptionLog(e, "проблема с " + lot.toString());
+            Logs.doExceptionLog(log, e, "проблема с [%s]".formatted(lot.toString()));
             return false;
         }
     }

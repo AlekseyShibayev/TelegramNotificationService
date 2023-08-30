@@ -1,7 +1,7 @@
 package com.company.app.wildberries_searcher.component.impl;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.aop.logging.util.Logs;
+import com.company.app.core.util.Logs;
 import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherFilterer;
@@ -78,7 +78,7 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
             int i = currentPrice.compareTo(averagePrice);
             return i < 0;
         } catch (Exception exception) {
-            Logs.doExceptionLog(exception, String.format("[%s] Проблема с [%s]:", wildberriesSearcherContainer.getChatName(), responseProducts.getId()));
+            Logs.doExceptionLog(log, exception, "[%s] Проблема с [%s]:".formatted(wildberriesSearcherContainer.getChatName(), responseProducts.getId()));
             return false;
         }
     }

@@ -1,6 +1,6 @@
 package com.company.app.wildberries_searcher.component.data;
 
-import com.company.app.core.aop.logging.util.Logs;
+import com.company.app.core.util.Logs;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;

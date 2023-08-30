@@ -1,6 +1,7 @@
 package com.company.app.wildberries_desire_lot.domain.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -8,8 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "DESIRE_LOT")
 public class DesireLot {

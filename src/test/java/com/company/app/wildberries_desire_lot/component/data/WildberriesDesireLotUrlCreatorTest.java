@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.util;
+package com.company.app.wildberries_desire_lot.component.data;
 
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.google.common.collect.ImmutableList;
@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class WBUtilsTest {
+class WildberriesDesireLotUrlCreatorTest {
 
     @Test
     void getUrlForPriceSearch() {
-        String urlForPriceSearch = WBUtils.getUrlForPriceSearch(createLots());
-        String manualCreated = WBUtils.URL_BONE + "43409221;" + "15694225;";
+        String urlForPriceSearch = WildberriesDesireLotUrlCreator.getUrlForPriceSearch(createLots());
+        String manualCreated = WildberriesDesireLotUrlCreator.URL_BONE + "43409221;" + "15694225;";
         Assertions.assertEquals(urlForPriceSearch, manualCreated);
     }
 
@@ -24,4 +24,5 @@ class WBUtilsTest {
                 .add(new DesireLot().setArticle("15694225").setDesiredPrice("5500").setDiscount("0.17"))
                 .build();
     }
+
 }

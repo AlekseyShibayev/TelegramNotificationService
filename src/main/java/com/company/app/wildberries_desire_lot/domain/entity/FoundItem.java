@@ -1,6 +1,7 @@
 package com.company.app.wildberries_desire_lot.domain.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -9,8 +10,6 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "FOUND_ITEM")
 public class FoundItem {

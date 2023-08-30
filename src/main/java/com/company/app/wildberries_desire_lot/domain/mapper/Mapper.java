@@ -1,16 +1,15 @@
 package com.company.app.wildberries_desire_lot.domain.mapper;
 
-import com.company.app.wildberries_desire_lot.component.util.WBUtils;
+import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.dto.FoundItemDto;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import lombok.experimental.UtilityClass;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @UtilityClass
-public class FoundItemMapper {
+public class Mapper {
 
     public static FoundItemDto of(FoundItem foundItem) {
         FoundItemDto foundItemDto = new FoundItemDto();
@@ -20,9 +19,9 @@ public class FoundItemMapper {
 
     public static List<FoundItemDto> of(List<FoundItem> foundItems) {
         List<FoundItemDto> result = foundItems.stream()
-                .map(FoundItemMapper::of)
+                .map(Mapper::of)
                 .toList();
-        result.forEach(foundItemDto -> foundItemDto.setLink(WBUtils.getUrlForResponse(foundItemDto.getArticle())));
+        result.forEach(foundItemDto -> foundItemDto.setLink(WildberriesDesireLotUrlCreator.getUrlForResponse(foundItemDto.getArticle())));
         return result;
     }
 

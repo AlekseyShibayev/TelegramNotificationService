@@ -2,48 +2,54 @@ package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.common.GetRequestHandler;
 import com.company.app.core.util.Logs;
-import com.company.app.wildberries_desire_lot.component.util.WBUtils;
-import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
+import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
+import com.company.app.wildberries_desire_lot.component.exception.WildberriesDesireLotSearchException;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
+import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
 import com.company.app.wildberries_desire_lot.domain.service.FoundItemsService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class WildberriesService {
+@RequiredArgsConstructor
+public class WildberriesDesireLotSearchHandler {
 
-    @Autowired
-    private WildberriesPriceExtractor wildberriesPriceExtractor;
-    @Autowired
-    private GetRequestHandler getRequestHandler;
-    @Autowired
-    private DesireLotRepository lotRepository;
-    @Autowired
-    private FoundItemsService foundItemsService;
+    private final WildberriesDesireLotPriceExtractor wildberriesDesireLotPriceExtractor;
+    private final GetRequestHandler getRequestHandler;
+    private final DesireLotRepository lotRepository;
+    private final FoundItemsService foundItemsService;
 
     public List<FoundItem> getDesiredLots() {
+        try {
+            return getDesiredLotsInner();
+        } catch (Exception e) {
+            Logs.doExceptionLog(log, e);
+            throw new WildberriesDesireLotSearchException(e);
+        }
+    }
+
+    private List<FoundItem> getDesiredLotsInner() {
         List<DesireLot> lots = lotRepository.findAll();
-        String url = WBUtils.getUrlForPriceSearch(lots);
+        String url = WildberriesDesireLotUrlCreator.getUrlForPriceSearch(lots);
         String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
         List<FoundItem> items = lots.stream()
                 .filter(lot -> isDesireLot(htmlResponse, lot))
                 .map(lot -> new FoundItem().setArticle(lot.getArticle()).setCreationDate(new Date()))
-                .collect(Collectors.toList());
+                .toList();
         foundItemsService.saveAll(items);
         return items;
     }
 
     private boolean isDesireLot(String htmlResponse, DesireLot lot) {
         try {
-            String currentPriceString = wildberriesPriceExtractor.extract(htmlResponse, lot.getArticle());
+            String currentPriceString = wildberriesDesireLotPriceExtractor.extract(htmlResponse, lot.getArticle());
             BigDecimal currentPrice = getCurrentPrice(lot, currentPriceString);
             BigDecimal desiredPrice = new BigDecimal(lot.getDesiredPrice() + "00.00");
             int i = desiredPrice.compareTo(currentPrice);

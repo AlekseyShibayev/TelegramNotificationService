@@ -11,7 +11,7 @@ class WildberriesPriceExtractorTest extends SpringBootTestApplicationContext {
     private static final String FILE_NAME = "wildberries/response_example.json";
 
     @Autowired
-    private WildberriesPriceExtractor wildberriesPriceExtractor;
+    private WildberriesDesireLotPriceExtractor wildberriesPriceExtractor;
     @Autowired
     private DataExtractorTool dataExtractorTool;
 

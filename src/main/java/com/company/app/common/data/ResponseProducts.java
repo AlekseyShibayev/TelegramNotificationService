@@ -1,7 +1,7 @@
 package com.company.app.common.data;
 
 import com.company.app.core.util.Strings;
-import com.company.app.wildberries_desire_lot.component.util.WBUtils;
+import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
 import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -23,7 +23,7 @@ public class ResponseProducts {
     public WildberriesLinkDto toLinkDto() {
         return WildberriesLinkDto.builder()
                 .price(Strings.cutEnd(this.salePriceU.toString(), 2))
-                .link(WBUtils.getUrlForResponse(this.id.toString()))
+                .link(WildberriesDesireLotUrlCreator.getUrlForResponse(this.id.toString()))
                 .build();
     }
 

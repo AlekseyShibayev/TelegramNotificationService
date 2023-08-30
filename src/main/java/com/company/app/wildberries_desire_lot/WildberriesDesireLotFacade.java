@@ -1,11 +1,12 @@
 package com.company.app.wildberries_desire_lot;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.wildberries_desire_lot.component.WildberriesService;
+import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotSearchHandler;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import com.company.app.wildberries_desire_lot.domain.service.FoundItemsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,17 +14,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WildberriesDesireLotFacade {
 
-    private final WildberriesService wildberriesService;
+    private final WildberriesDesireLotSearchHandler desireLotSearchHandler;
     private final FoundItemsService foundItemsService;
 
     @PerformanceLogAnnotation
-    public List<FoundItem> getDesiredLots() {
-        return wildberriesService.getDesiredLots();
+    @Transactional
+    public List<FoundItem> doDesireLotSearch() {
+        return desireLotSearchHandler.getDesiredLots();
     }
 
     @PerformanceLogAnnotation
     public List<FoundItem> getAllFoundItems() {
-        return foundItemsService.getAll();
+        return foundItemsService.findAll();
     }
 
 }

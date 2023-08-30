@@ -2,7 +2,7 @@ package com.company.app.wildberries_desire_lot.controller;
 
 import com.company.app.wildberries_desire_lot.WildberriesDesireLotFacade;
 import com.company.app.wildberries_desire_lot.domain.dto.FoundItemDto;
-import com.company.app.wildberries_desire_lot.domain.mapper.FoundItemMapper;
+import com.company.app.wildberries_desire_lot.domain.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public class WildberriesController {
 
     @GetMapping(value = "/getAllFoundItems", produces = "application/json")
     public ResponseEntity<List<FoundItemDto>> getAllFoundItems() {
-        return ResponseEntity.ok(FoundItemMapper.of(wildberriesFacade.getAllFoundItems()));
+        return ResponseEntity.ok(Mapper.of(wildberriesFacade.getAllFoundItems()));
     }
 
 

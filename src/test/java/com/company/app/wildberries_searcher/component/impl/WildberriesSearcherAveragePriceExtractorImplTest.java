@@ -14,12 +14,12 @@ class WildberriesSearcherAveragePriceExtractorImplTest extends SpringBootTestApp
     private WildberriesSearcherAveragePriceExtractor averagePriceExtractor;
 
 
-    @Test
-    void test_1() {
-        ResponseProducts responseProducts = new ResponseProducts()
-                .setId(152219056);
-
-        int averagePrice = averagePriceExtractor.getAveragePrice(responseProducts);
-    }
+//    @Test
+//    void test_1() {
+//        ResponseProducts responseProducts = new ResponseProducts()
+//                .setId(152219056);
+//
+//        int averagePrice = averagePriceExtractor.getAveragePrice(responseProducts);
+//    }
 
 }

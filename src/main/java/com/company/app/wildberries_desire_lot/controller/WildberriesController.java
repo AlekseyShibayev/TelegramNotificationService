@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.controller;
 
-import com.company.app.wildberries_desire_lot.component.WildberriesFacade;
+import com.company.app.wildberries_desire_lot.WildberriesDesireLotFacade;
 import com.company.app.wildberries_desire_lot.domain.dto.FoundItemDto;
 import com.company.app.wildberries_desire_lot.domain.util.FoundItemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 public class WildberriesController {
 
     @Autowired
-    WildberriesFacade wildberriesFacade;
+    WildberriesDesireLotFacade wildberriesFacade;
 
     @GetMapping(value = "/getAllFoundItems", produces = "application/json")
     public ResponseEntity<List<FoundItemDto>> getAllFoundItems() {

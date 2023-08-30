@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component;
+package com.company.app.wildberries_desire_lot;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesService;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Setter
 @Component
-public class WildberriesFacade {
+public class WildberriesDesireLotFacade {
 
     @Autowired
     private WildberriesService wildberriesService;

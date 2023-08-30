@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.scheduler;
 
 import com.company.app.telegram.component.TelegramFacade;
-import com.company.app.wildberries_desire_lot.component.WildberriesFacade;
+import com.company.app.wildberries_desire_lot.WildberriesDesireLotFacade;
 import com.company.app.wildberries_desire_lot.component.desire_lot.util.WBUtils;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class WildberriesSchedulerConfig {
     @Autowired
     private TelegramFacade telegramFacade;
     @Autowired
-    private WildberriesFacade wildberriesFacade;
+    private WildberriesDesireLotFacade wildberriesFacade;
 
     @Scheduled(fixedDelayString = "${wildberries.desire.lot.timeout}")
     public void searchWildberriesLots() {

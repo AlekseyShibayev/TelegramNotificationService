@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.component.util;
 
-import com.company.app.wildberries_desire_lot.domain.entity.Lot;
+import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.google.common.collect.ImmutableList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,13 +16,12 @@ class WBUtilsTest {
         Assertions.assertEquals(urlForPriceSearch, manualCreated);
     }
 
-    private List<Lot> createLots() {
-        return ImmutableList.<Lot>builder()
-                .add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
-                .add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
-                .add(Lot.builder().article("43409221").desiredPrice("1500").discount("0.19").build())
-                .add(Lot.builder().article("15694225").desiredPrice("5500").discount("0.17").build())
-                .add(Lot.builder().article("15694225").desiredPrice("5500").discount("0.17").build())
+    private List<DesireLot> createLots() {
+        return ImmutableList.<DesireLot>builder()
+                .add(new DesireLot().setArticle("43409221").setDesiredPrice("1500").setDiscount("0.19"))
+                .add(new DesireLot().setArticle("43409221").setDesiredPrice("1500").setDiscount("0.19"))
+                .add(new DesireLot().setArticle("15694225").setDesiredPrice("5500").setDiscount("0.17"))
+                .add(new DesireLot().setArticle("15694225").setDesiredPrice("5500").setDiscount("0.17"))
                 .build();
     }
 }

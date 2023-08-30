@@ -5,9 +5,11 @@ import com.company.app.common.data.ResponseProducts;
 import com.company.app.core.tool.json.JsonTool;
 import com.company.app.core.tool.json.MapperSettings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class WildberriesPriceExtractor {
 
     @Autowired

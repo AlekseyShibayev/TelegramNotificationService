@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @ConditionalOnProperty(prefix = "wildberries.desire.lot", name = "enable", havingValue = "true")
-public class WildberriesSchedulerConfig {
+public class WildberriesDesireLotSchedulerConfig {
 
     @Autowired
     private TelegramFacade telegramFacade;

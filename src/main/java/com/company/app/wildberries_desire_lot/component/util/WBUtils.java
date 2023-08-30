@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.component.util;
 
-import com.company.app.wildberries_desire_lot.domain.entity.Lot;
+import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ public class WBUtils {
         return URL_BONE + id;
     }
 
-    public static String getUrlForPriceSearch(List<Lot> lots) {
+    public static String getUrlForPriceSearch(List<DesireLot> lots) {
         StringBuilder stringBuilder = new StringBuilder();
 
         lots.stream()
-                .map(Lot::getArticle)
+                .map(DesireLot::getArticle)
                 .distinct()
                 .forEach(name -> stringBuilder.append(name).append(";"));
 

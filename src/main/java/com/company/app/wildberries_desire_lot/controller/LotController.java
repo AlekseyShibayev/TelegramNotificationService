@@ -1,8 +1,8 @@
 package com.company.app.wildberries_desire_lot.controller;
 
 import com.company.app.wildberries_desire_lot.domain.dto.LotDto;
-import com.company.app.wildberries_desire_lot.domain.entity.Lot;
-import com.company.app.wildberries_desire_lot.domain.service.LotService;
+import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
+import com.company.app.wildberries_desire_lot.domain.service.DesireLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class LotController {
 
     @Autowired
-    LotService lotService;
+    DesireLotService lotService;
 
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<Long> create(@RequestBody LotDto lotDto) {
@@ -23,7 +23,7 @@ public class LotController {
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Lot> read(@PathVariable Long id) {
+    public ResponseEntity<DesireLot> read(@PathVariable Long id) {
         return ResponseEntity.ok(lotService.read(id));
     }
 

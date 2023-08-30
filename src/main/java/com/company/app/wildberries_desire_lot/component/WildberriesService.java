@@ -4,8 +4,8 @@ import com.company.app.common.GetRequestHandler;
 import com.company.app.core.util.Logs;
 import com.company.app.wildberries_desire_lot.component.util.WBUtils;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
-import com.company.app.wildberries_desire_lot.domain.entity.Lot;
-import com.company.app.wildberries_desire_lot.domain.repository.LotRepository;
+import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
+import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
 import com.company.app.wildberries_desire_lot.domain.service.FoundItemsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +25,23 @@ public class WildberriesService {
     @Autowired
     private GetRequestHandler getRequestHandler;
     @Autowired
-    private LotRepository lotRepository;
+    private DesireLotRepository lotRepository;
     @Autowired
     private FoundItemsService foundItemsService;
 
     public List<FoundItem> getDesiredLots() {
-        List<Lot> lots = lotRepository.findAll();
+        List<DesireLot> lots = lotRepository.findAll();
         String url = WBUtils.getUrlForPriceSearch(lots);
         String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
         List<FoundItem> items = lots.stream()
                 .filter(lot -> isDesireLot(htmlResponse, lot))
-                .map(lot -> FoundItem.builder().article(lot.getArticle()).creationDate(new Date()).build())
+                .map(lot -> new FoundItem().setArticle(lot.getArticle()).setCreationDate(new Date()))
                 .collect(Collectors.toList());
         foundItemsService.saveAll(items);
         return items;
     }
 
-    private boolean isDesireLot(String htmlResponse, Lot lot) {
+    private boolean isDesireLot(String htmlResponse, DesireLot lot) {
         try {
             String currentPriceString = wildberriesPriceExtractor.extract(htmlResponse, lot.getArticle());
             BigDecimal currentPrice = getCurrentPrice(lot, currentPriceString);
@@ -54,7 +54,7 @@ public class WildberriesService {
         }
     }
 
-    private BigDecimal getCurrentPrice(Lot lot, String currentPriceString) {
+    private BigDecimal getCurrentPrice(DesireLot lot, String currentPriceString) {
         String discount = lot.getDiscount();
         BigDecimal currentPrice = new BigDecimal(currentPriceString);
         BigDecimal multiply = currentPrice.multiply(new BigDecimal(discount));

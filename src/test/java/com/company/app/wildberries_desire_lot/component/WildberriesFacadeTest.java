@@ -1,18 +1,6 @@
 package com.company.app.wildberries_desire_lot.component;
 
-import com.company.app.core.tool.api.CaptchaFighter;
-import com.company.app.core.tool.json.JsonTool;
 import com.company.app.springboottest.application.SpringBootTestApplicationContext;
-import com.company.app.wildberries_desire_lot.domain.entity.Lot;
-import com.company.app.wildberries_desire_lot.domain.repository.LotRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import java.io.File;
-import java.util.List;
 
 class WildberriesFacadeTest extends SpringBootTestApplicationContext {
 

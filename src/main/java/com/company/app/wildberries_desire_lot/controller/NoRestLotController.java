@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.controller;
 
-import com.company.app.wildberries_desire_lot.domain.entity.Lot;
-import com.company.app.wildberries_desire_lot.domain.service.LotService;
+import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
+import com.company.app.wildberries_desire_lot.domain.service.DesireLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ import java.util.List;
 public class NoRestLotController {
 
     @Autowired
-    LotService lotService;
+    DesireLotService lotService;
 
     /**
      * пример запроса: http://localhost:8080/wildberries/lot/manualCreate?name=tempName&price=999&discount=0.11
@@ -36,7 +36,7 @@ public class NoRestLotController {
      * пример запроса: http://localhost:8080/wildberries/lot/getAll
      */
     @GetMapping(value = "/getAll", produces = "application/json")
-    public ResponseEntity<List<Lot>> getAll() {
+    public ResponseEntity<List<DesireLot>> getAll() {
         return ResponseEntity.ok(lotService.getAll());
     }
 }

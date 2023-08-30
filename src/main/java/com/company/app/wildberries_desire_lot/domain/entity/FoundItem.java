@@ -1,18 +1,17 @@
 package com.company.app.wildberries_desire_lot.domain.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Getter
 @Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-@EqualsAndHashCode
 @Table(name = "FOUND_ITEM")
 public class FoundItem {
 
@@ -26,4 +25,5 @@ public class FoundItem {
 
     @Column(name = "CREATION_DATE")
     private Date creationDate;
+
 }

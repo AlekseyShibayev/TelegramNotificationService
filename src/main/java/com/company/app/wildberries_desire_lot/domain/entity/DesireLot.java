@@ -1,18 +1,18 @@
 package com.company.app.wildberries_desire_lot.domain.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-@EqualsAndHashCode
-@Table(name = "LOT")
-public class Lot {
+@Table(name = "DESIRE_LOT")
+public class DesireLot {
 
     @Id
     @GeneratedValue
@@ -27,4 +27,5 @@ public class Lot {
 
     @Column(name = "DISCOUNT")
     private String discount;
+
 }

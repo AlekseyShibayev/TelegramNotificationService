@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.common;
+package com.company.app.common;
 
 import com.company.app.core.tool.api.CaptchaFighter;
 import lombok.SneakyThrows;

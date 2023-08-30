@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
 
 import com.company.app.core.util.Logs;
-import com.company.app.wildberries_desire_lot.component.common.GetRequestHandler;
+import com.company.app.common.GetRequestHandler;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesPriceExtractor;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesService;
 import com.company.app.wildberries_desire_lot.component.desire_lot.util.WBUtils;

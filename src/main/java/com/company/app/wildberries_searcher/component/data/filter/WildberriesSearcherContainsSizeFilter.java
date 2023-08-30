@@ -1,8 +1,8 @@
 package com.company.app.wildberries_searcher.component.data.filter;
 
 import com.company.app.core.util.Strings;
-import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
-import com.company.app.wildberries_desire_lot.component.common.data.Size;
+import com.company.app.common.data.ResponseProducts;
+import com.company.app.common.data.Size;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.google.common.collect.Sets;
 import org.springframework.stereotype.Component;

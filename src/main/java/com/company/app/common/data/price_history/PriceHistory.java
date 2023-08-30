@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.common.data.price_history;
+package com.company.app.common.data.price_history;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

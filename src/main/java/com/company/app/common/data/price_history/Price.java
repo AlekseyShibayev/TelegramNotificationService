@@ -1,5 +1,6 @@
-package com.company.app.wildberries_desire_lot.component.common.data;
+package com.company.app.common.data.price_history;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Response {
+public class Price {
 
-    ResponseData data;
+    @JsonSetter("RUB")
+    String rub;
 }

@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.common;
+package com.company.app.common;
 
 public interface GetRequestHandler {
 

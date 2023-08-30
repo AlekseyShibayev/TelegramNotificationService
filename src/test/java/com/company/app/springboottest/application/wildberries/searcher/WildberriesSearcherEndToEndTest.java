@@ -1,21 +1,6 @@
 package com.company.app.springboottest.application.wildberries.searcher;
 
 import com.company.app.springboottest.application.SpringBootTestApplicationContext;
-import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
-import com.company.app.wildberries_desire_lot.component.common.data.Size;
-import com.company.app.wildberries_desire_lot.component.common.data.price_history.Price;
-import com.company.app.wildberries_desire_lot.component.common.data.price_history.PriceHistory;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherExtractor;
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
-import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import java.util.List;
 
 class WildberriesSearcherEndToEndTest extends SpringBootTestApplicationContext {
 

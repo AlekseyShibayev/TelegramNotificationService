@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.common.data;
+package com.company.app.common.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

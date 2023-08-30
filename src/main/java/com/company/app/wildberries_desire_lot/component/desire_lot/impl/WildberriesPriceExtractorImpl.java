@@ -2,8 +2,8 @@ package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
 
 import com.company.app.core.tool.json.JsonTool;
 import com.company.app.core.tool.json.MapperSettings;
-import com.company.app.wildberries_desire_lot.component.common.data.Response;
-import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
+import com.company.app.common.data.Response;
+import com.company.app.common.data.ResponseProducts;
 import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesPriceExtractor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

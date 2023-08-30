@@ -2,7 +2,7 @@ package com.company.app.wildberries_searcher.component.impl;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.util.Logs;
-import com.company.app.wildberries_desire_lot.component.common.data.ResponseProducts;
+import com.company.app.common.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherAveragePriceExtractor;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherFilterer;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherNotificator;

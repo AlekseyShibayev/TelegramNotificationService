@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.common.data;
+package com.company.app.common.data;
 
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.component.desire_lot.util.WBUtils;

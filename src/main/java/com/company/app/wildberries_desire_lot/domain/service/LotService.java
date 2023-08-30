@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.domain.service.api;
+package com.company.app.wildberries_desire_lot.domain.service;
 
 import com.company.app.wildberries_desire_lot.domain.dto.LotDto;
 import com.company.app.wildberries_desire_lot.domain.entity.Lot;

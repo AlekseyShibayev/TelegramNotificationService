@@ -1,19 +1,14 @@
-package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
+package com.company.app.wildberries_desire_lot.component;
 
-import com.company.app.core.tool.json.JsonTool;
-import com.company.app.core.tool.json.MapperSettings;
 import com.company.app.common.data.Response;
 import com.company.app.common.data.ResponseProducts;
-import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesPriceExtractor;
-import lombok.Setter;
+import com.company.app.core.tool.json.JsonTool;
+import com.company.app.core.tool.json.MapperSettings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Setter
-@Component
-public class WildberriesPriceExtractorImpl implements WildberriesPriceExtractor {
+public class WildberriesPriceExtractor {
 
     @Autowired
     private JsonTool<Response> jsonTool;

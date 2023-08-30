@@ -1,8 +1,7 @@
-package com.company.app.wildberries_desire_lot.domain.service.impl;
+package com.company.app.wildberries_desire_lot.domain.service;
 
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import com.company.app.wildberries_desire_lot.domain.repository.FoundItemRepository;
-import com.company.app.wildberries_desire_lot.domain.service.api.FoundItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

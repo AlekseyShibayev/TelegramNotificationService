@@ -1,9 +1,9 @@
 package com.company.app.wildberries_desire_lot;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesService;
+import com.company.app.wildberries_desire_lot.component.WildberriesService;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
-import com.company.app.wildberries_desire_lot.domain.service.api.FoundItemsService;
+import com.company.app.wildberries_desire_lot.domain.service.FoundItemsService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

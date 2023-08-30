@@ -1,11 +1,11 @@
 package com.company.app.wildberries_desire_lot.scheduler;
 
+import com.company.app.core.util.Collections;
 import com.company.app.telegram.component.TelegramFacade;
 import com.company.app.wildberries_desire_lot.WildberriesDesireLotFacade;
-import com.company.app.wildberries_desire_lot.component.desire_lot.util.WBUtils;
+import com.company.app.wildberries_desire_lot.component.util.WBUtils;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.internal.util.collections.CollectionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +31,7 @@ public class WildberriesSchedulerConfig {
             log.debug("Определены желаемые лоты вб, в количестве: [{}].", desiredLots.size());
         }
 
-        if (CollectionHelper.isNotEmpty(desiredLots)) {
+        if (Collections.isNotEmpty(desiredLots)) {
             desiredLots.forEach(foundItem -> telegramFacade.writeToEveryone(WBUtils.getUrlForResponse(foundItem.getArticle())));
         }
     }

@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.desire_lot.api;
+package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 

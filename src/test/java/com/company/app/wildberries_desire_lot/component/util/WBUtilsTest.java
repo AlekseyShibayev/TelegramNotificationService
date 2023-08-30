@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.desire_lot.util;
+package com.company.app.wildberries_desire_lot.component.util;
 
 import com.company.app.wildberries_desire_lot.domain.entity.Lot;
 import com.google.common.collect.ImmutableList;

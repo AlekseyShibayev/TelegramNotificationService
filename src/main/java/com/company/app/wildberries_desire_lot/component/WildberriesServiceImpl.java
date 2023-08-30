@@ -1,14 +1,12 @@
-package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
+package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.core.util.Logs;
 import com.company.app.common.GetRequestHandler;
-import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesPriceExtractor;
-import com.company.app.wildberries_desire_lot.component.desire_lot.api.WildberriesService;
-import com.company.app.wildberries_desire_lot.component.desire_lot.util.WBUtils;
+import com.company.app.wildberries_desire_lot.component.util.WBUtils;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
 import com.company.app.wildberries_desire_lot.domain.entity.Lot;
 import com.company.app.wildberries_desire_lot.domain.repository.LotRepository;
-import com.company.app.wildberries_desire_lot.domain.service.api.FoundItemsService;
+import com.company.app.wildberries_desire_lot.domain.service.FoundItemsService;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

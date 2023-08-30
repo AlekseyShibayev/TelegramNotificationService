@@ -2,7 +2,7 @@ package com.company.app.wildberries_desire_lot.controller;
 
 import com.company.app.wildberries_desire_lot.domain.dto.LotDto;
 import com.company.app.wildberries_desire_lot.domain.entity.Lot;
-import com.company.app.wildberries_desire_lot.domain.service.api.LotService;
+import com.company.app.wildberries_desire_lot.domain.service.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
+package com.company.app.wildberries_desire_lot.component.impl;
 
 import com.company.app.core.tool.impl.DataExtractorToolImpl;
 import com.company.app.core.tool.json.JsonToolImpl;

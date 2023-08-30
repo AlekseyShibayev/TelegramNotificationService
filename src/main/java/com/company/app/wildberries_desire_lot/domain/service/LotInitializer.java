@@ -1,22 +1,19 @@
-package com.company.app.wildberries_desire_lot.component.desire_lot.impl;
+package com.company.app.wildberries_desire_lot.domain.service;
 
 import com.company.app.core.tool.json.JsonTool;
-import com.company.app.wildberries_desire_lot.component.desire_lot.api.InitialLotRegistry;
 import com.company.app.wildberries_desire_lot.domain.entity.Lot;
 import com.company.app.wildberries_desire_lot.domain.repository.LotRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 
-@Component
-public class InitialLotRegistryImpl implements InitialLotRegistry {
+public class LotInitializer {
 
-    @Value("classpath:wildberries/init_lot.json")
+    @Value("classpath:wildberries_desire_lot/init_lot.json")
     private Resource resource;
 
     @Autowired

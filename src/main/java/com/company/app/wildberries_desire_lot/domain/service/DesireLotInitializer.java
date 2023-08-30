@@ -11,7 +11,7 @@ import org.springframework.core.io.Resource;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
-public class LotInitializer {
+public class DesireLotInitializer {
 
     @Value("classpath:wildberries_desire_lot/init_lot.json")
     private Resource resource;

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 @Configuration
-@ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "wildberries.desire.lot", name = "enable", havingValue = "true")
 public class WildberriesSchedulerConfig {
 
     @Autowired
@@ -23,7 +23,7 @@ public class WildberriesSchedulerConfig {
     @Autowired
     private WildberriesFacade wildberriesFacade;
 
-    @Scheduled(fixedDelayString = "${wildberries.timeout}")
+    @Scheduled(fixedDelayString = "${wildberries.desire.lot.timeout}")
     public void searchWildberriesLots() {
         List<FoundItem> desiredLots = wildberriesFacade.getDesiredLots();
 

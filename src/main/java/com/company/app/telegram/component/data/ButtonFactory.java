@@ -20,8 +20,8 @@ public class ButtonFactory {
         TG_OFF_BUTTON.setCallbackData("TG_OFF");
         TG_ON_BUTTON.setCallbackData("TG_ON");
         WB_BUTTON.setCallbackData("WB");
-        ER_BUTTON.setCallbackData("EX");
-        WB_SEARCH_BUTTON.setCallbackData("WB_SEARCH");
+//        ER_BUTTON.setCallbackData("EX");
+//        WB_SEARCH_BUTTON.setCallbackData("WB_SEARCH");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(TG_OFF_BUTTON));

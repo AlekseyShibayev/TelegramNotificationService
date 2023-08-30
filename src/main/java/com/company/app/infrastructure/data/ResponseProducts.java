@@ -1,4 +1,4 @@
-package com.company.app.common.data;
+package com.company.app.infrastructure.data;
 
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;

@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.core.tool.api.DataExtractorTool;
-import com.company.app.springboottest.application.SpringBootTestApplicationContext;
+import com.company.app.infrastructure.SpringBootTestApplicationContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

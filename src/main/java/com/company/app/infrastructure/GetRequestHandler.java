@@ -1,4 +1,4 @@
-package com.company.app.common;
+package com.company.app.infrastructure;
 
 public interface GetRequestHandler {
 

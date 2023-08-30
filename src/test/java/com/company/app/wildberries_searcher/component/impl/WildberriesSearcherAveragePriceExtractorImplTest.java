@@ -1,6 +1,6 @@
 package com.company.app.wildberries_searcher.component.impl;
 
-import com.company.app.springboottest.application.SpringBootTestApplicationContext;
+import com.company.app.infrastructure.SpringBootTestApplicationContext;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherAveragePriceExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 

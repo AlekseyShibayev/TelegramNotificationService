@@ -1,4 +1,4 @@
-package com.company.app.common.data.price_history;
+package com.company.app.infrastructure.data.price_history;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.company.app.springboottest.application;
+package com.company.app.infrastructure;
 
 import org.springframework.boot.test.context.TestConfiguration;
 

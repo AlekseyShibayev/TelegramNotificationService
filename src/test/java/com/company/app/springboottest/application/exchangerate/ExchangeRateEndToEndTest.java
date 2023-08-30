@@ -1,21 +1,6 @@
 package com.company.app.springboottest.application.exchangerate;
 
-import com.company.app.exchange_rate.controller.ExchangeRateController;
-import com.company.app.exchange_rate.domain.entity.ExchangeRate;
-import com.company.app.exchange_rate.domain.repository.ExchangeRepository;
-import com.company.app.exchange_rate.domain.service.api.ExchangeRateService;
-import com.company.app.springboottest.application.SpringBootTestApplicationContext;
-import com.company.app.telegram.binder.BinderContainer;
-import com.company.app.telegram.binder.api.ExchangeRateBinder;
-import com.company.app.telegram.domain.entity.Chat;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import com.company.app.infrastructure.SpringBootTestApplicationContext;
 
 class ExchangeRateEndToEndTest extends SpringBootTestApplicationContext {
 

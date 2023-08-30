@@ -1,4 +1,4 @@
-package com.company.app.common;
+package com.company.app.infrastructure;
 
 import com.company.app.core.tool.api.CaptchaFighter;
 import lombok.SneakyThrows;

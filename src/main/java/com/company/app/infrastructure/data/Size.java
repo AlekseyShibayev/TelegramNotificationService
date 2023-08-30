@@ -1,4 +1,4 @@
-package com.company.app.common.data;
+package com.company.app.infrastructure.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

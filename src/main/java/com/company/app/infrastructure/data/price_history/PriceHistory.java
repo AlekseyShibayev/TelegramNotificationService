@@ -1,4 +1,4 @@
-package com.company.app.common.data;
+package com.company.app.infrastructure.data.price_history;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Response {
+public class PriceHistory {
 
-    ResponseData data;
+    String dt;
+    Price price;
 }

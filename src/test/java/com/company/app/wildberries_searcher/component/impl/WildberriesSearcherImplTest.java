@@ -1,14 +1,8 @@
 package com.company.app.wildberries_searcher.component.impl;
 
-import com.company.app.springboottest.application.SpringBootTestApplicationContext;
+import com.company.app.infrastructure.SpringBootTestApplicationContext;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
-import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
-import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 class WildberriesSearcherImplTest extends SpringBootTestApplicationContext {
 

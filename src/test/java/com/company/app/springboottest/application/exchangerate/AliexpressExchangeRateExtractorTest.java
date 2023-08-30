@@ -1,11 +1,6 @@
 package com.company.app.springboottest.application.exchangerate;
 
-import com.company.app.exchange_rate.component.api.AliexpressExchangeRateExtractor;
-import com.company.app.exchange_rate.component.api.AliexpressReceiver;
-import com.company.app.springboottest.application.SpringBootTestApplicationContext;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.app.infrastructure.SpringBootTestApplicationContext;
 
 class AliexpressExchangeRateExtractorTest extends SpringBootTestApplicationContext {
 

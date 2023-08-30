@@ -1,6 +1,6 @@
 package com.company.app.springboottest.application.wildberries_knowledge;
 
-import com.company.app.springboottest.application.SpringBootTestApplicationContext;
+import com.company.app.infrastructure.SpringBootTestApplicationContext;
 import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import org.junit.jupiter.api.Assertions;

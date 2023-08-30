@@ -1,6 +1,6 @@
 package com.company.app.wildberries_searcher.component.impl;
 
-import com.company.app.common.data.ResponseProducts;
+import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherExtractor;
 import com.company.app.wildberries_searcher.component.api.WildberriesSearcherFilterer;

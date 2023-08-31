@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchDataInitializer {
 
-    @Value("classpath:wildberries/init_search_data.json")
+    @Value("classpath:wildberries_searcher/init_search_data.json")
     private Resource resource;
 
     private final JsonTool<SearchData> jsonTool;

@@ -1,10 +1,8 @@
-package com.company.app.wildberries_knowledge.domain.service.impl;
+package com.company.app.wildberries_knowledge.domain.service;
 
 import com.company.app.core.tool.json.JsonTool;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
-import com.company.app.wildberries_knowledge.domain.service.api.InitialRegistry;
-import com.company.app.wildberries_knowledge.domain.service.api.SupplierService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -14,18 +12,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class InitialRegistryImpl implements InitialRegistry {
+@RequiredArgsConstructor
+public class SupplierInitialRegistry {
 
-    @Value("classpath:wildberries/init_supplier.json")
+    @Value("classpath:wildberries_knowledge/init_supplier.json")
     private Resource resource;
 
-    @Autowired
-    private JsonTool<Supplier> jsonTool;
-    @Autowired
-    private SupplierService supplierService;
+    private final JsonTool<Supplier> jsonTool;
+    private final SupplierService supplierService;
 
     @EventListener({ContextRefreshedEvent.class})
-    @Override
     public void init() {
         List<Supplier> list = jsonTool.toJavaAsList(resource, Supplier.class);
         supplierService.saveAll(list);

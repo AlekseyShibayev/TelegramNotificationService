@@ -1,14 +1,18 @@
 package com.company.app.wildberries_knowledge.domain.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 @Entity
 @Table(name = "SUPPLIER")
 public class Supplier {
@@ -23,4 +27,5 @@ public class Supplier {
 
     @Column(name = "SUPPLIER_ID")
     private String supplierId;
+
 }

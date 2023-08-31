@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SupplierInitialRegistry {
+public class SupplierInitializer {
 
     @Value("classpath:wildberries_knowledge/init_supplier.json")
     private Resource resource;

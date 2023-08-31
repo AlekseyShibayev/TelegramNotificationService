@@ -1,8 +1,7 @@
-package com.company.app.wildberries_searcher.component.data.filter;
+package com.company.app.wildberries_searcher.component.filter;
 
 import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.infrastructure.data.Size;
-import com.company.app.wildberries_searcher.component.filter.WildberriesSearcherContainsSizeFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,4 +43,5 @@ class WildberriesSearcherContainsSizeFilterTest {
                         , Size.builder().name("50").build()
                 ));
     }
+
 }

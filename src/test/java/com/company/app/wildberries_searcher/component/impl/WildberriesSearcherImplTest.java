@@ -1,14 +1,12 @@
 package com.company.app.wildberries_searcher.component.impl;
 
 import com.company.app.infrastructure.SpringBootTestApplicationContext;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
-import org.springframework.beans.factory.annotation.Autowired;
 
 class WildberriesSearcherImplTest extends SpringBootTestApplicationContext {
 
-    @Autowired
-    private WildberriesSearcher wildberriesSearcher;
-
+//    @Autowired
+//    private WildberriesSearcher wildberriesSearcher;
+//
 //    @Test
 //    void test_1() {
 //        WildberriesSearcherContext context = WildberriesSearcherContext.builder()

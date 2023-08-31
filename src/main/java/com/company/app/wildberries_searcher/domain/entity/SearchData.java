@@ -1,15 +1,13 @@
 package com.company.app.wildberries_searcher.domain.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@Accessors(chain = true)
 @Entity
 @Table(name = "SEARCH_DATA")
 public class SearchData {

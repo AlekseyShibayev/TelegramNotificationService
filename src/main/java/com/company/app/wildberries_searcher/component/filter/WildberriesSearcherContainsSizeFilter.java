@@ -1,4 +1,4 @@
-package com.company.app.wildberries_searcher.component.data.filter;
+package com.company.app.wildberries_searcher.component.filter;
 
 import com.company.app.core.util.Strings;
 import com.company.app.infrastructure.data.ResponseProducts;

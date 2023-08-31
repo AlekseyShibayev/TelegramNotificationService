@@ -1,4 +1,4 @@
-package com.company.app.wildberries_searcher.component.util;
+package com.company.app.wildberries_searcher.component.data.util;
 
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.google.common.collect.ImmutableMap;

@@ -1,28 +1,23 @@
-package com.company.app.wildberries_searcher.component.impl;
+package com.company.app.wildberries_searcher.component;
 
 import com.company.app.infrastructure.data.ResponseProducts;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherExtractor;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherFilterer;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
-import com.company.app.wildberries_searcher.component.util.WildberriesSearcherProductsUrlCreator;
+import com.company.app.wildberries_searcher.component.data.util.WildberriesSearcherProductsUrlCreator;
 import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Slf4j
 @Component
-public class WildberriesSearcherImpl implements WildberriesSearcher {
+@RequiredArgsConstructor
+public class WildberriesSearcher {
 
-    @Autowired
-    private WildberriesSearcherExtractor wildberriesSearcherExtractor;
-    @Autowired
-    private WildberriesSearcherFilterer wildberriesSearcherFilterer;
+    private final WildberriesSearcherExtractor wildberriesSearcherExtractor;
+    private final WildberriesSearcherFilterer wildberriesSearcherFilterer;
 
-    @Override
     public List<WildberriesLinkDto> search(WildberriesSearcherContext context) {
         String url = WildberriesSearcherProductsUrlCreator.createUrl(context);
         List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);

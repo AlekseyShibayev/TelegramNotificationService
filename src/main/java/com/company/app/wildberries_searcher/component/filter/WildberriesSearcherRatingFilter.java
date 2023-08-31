@@ -1,14 +1,13 @@
-package com.company.app.wildberries_searcher.component.data.filter;
+package com.company.app.wildberries_searcher.component.filter;
 
 import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WildberriesSearcherMaxPriceFilter implements WildberriesSearcherFilter {
+public class WildberriesSearcherRatingFilter implements WildberriesSearcherFilter {
 
-    private static final String TYPE = "maxPrice";
-    private static final int MAX_PRICE = 5000_00;
+    private static final String TYPE = "rating";
 
     @Override
     public String getType() {
@@ -22,11 +21,11 @@ public class WildberriesSearcherMaxPriceFilter implements WildberriesSearcherFil
 
     @Override
     public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContext wildberriesSearcherContainer) {
-        return withMaxPrice(responseProducts);
+        return withRating(responseProducts);
     }
 
-    private boolean withMaxPrice(ResponseProducts responseProducts) {
-        Integer price = responseProducts.getSalePriceU();
-        return price <= MAX_PRICE;
+    private boolean withRating(ResponseProducts responseProducts) {
+        String rating = responseProducts.getRating();
+        return Integer.parseInt(rating) >= 4;
     }
 }

@@ -1,12 +1,10 @@
-package com.company.app.wildberries_searcher.component.impl;
+package com.company.app.wildberries_searcher.component;
 
 import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.infrastructure.data.price_history.PriceHistory;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherAveragePriceExtractor;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherExtractor;
-import com.company.app.wildberries_searcher.component.util.PriceHistoryUrlCreator;
+import com.company.app.wildberries_searcher.component.data.util.PriceHistoryUrlCreator;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,12 +12,11 @@ import java.util.OptionalDouble;
 
 @Slf4j
 @Component
-public class WildberriesSearcherAveragePriceExtractorImpl implements WildberriesSearcherAveragePriceExtractor {
+@RequiredArgsConstructor
+public class WildberriesSearcherAveragePriceExtractor {
 
-    @Autowired
-    private WildberriesSearcherExtractor wildberriesSearcherExtractor;
+    private final WildberriesSearcherExtractor wildberriesSearcherExtractor;
 
-    @Override
     public int getAveragePrice(ResponseProducts responseProducts) {
         String url = PriceHistoryUrlCreator.createUrl(String.valueOf(responseProducts.getId()));
         List<PriceHistory> priceHistory = wildberriesSearcherExtractor.extractPriceHistory(url);

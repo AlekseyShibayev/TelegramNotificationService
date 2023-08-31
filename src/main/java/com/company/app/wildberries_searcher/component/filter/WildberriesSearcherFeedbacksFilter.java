@@ -1,13 +1,13 @@
-package com.company.app.wildberries_searcher.component.data.filter;
+package com.company.app.wildberries_searcher.component.filter;
 
 import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WildberriesSearcherRatingFilter implements WildberriesSearcherFilter {
+public class WildberriesSearcherFeedbacksFilter implements WildberriesSearcherFilter {
 
-    private static final String TYPE = "rating";
+    private static final String TYPE = "feedbacks";
 
     @Override
     public String getType() {
@@ -21,11 +21,11 @@ public class WildberriesSearcherRatingFilter implements WildberriesSearcherFilte
 
     @Override
     public boolean doFilter(ResponseProducts responseProducts, WildberriesSearcherContext wildberriesSearcherContainer) {
-        return withRating(responseProducts);
+        return withFeedbacks(responseProducts);
     }
 
-    private boolean withRating(ResponseProducts responseProducts) {
-        String rating = responseProducts.getRating();
-        return Integer.parseInt(rating) >= 4;
+    private boolean withFeedbacks(ResponseProducts responseProducts) {
+        String feedbacks = responseProducts.getFeedbacks();
+        return Integer.parseInt(feedbacks) >= 10;
     }
 }

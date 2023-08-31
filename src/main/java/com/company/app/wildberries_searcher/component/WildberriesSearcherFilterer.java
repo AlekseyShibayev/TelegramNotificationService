@@ -1,13 +1,11 @@
-package com.company.app.wildberries_searcher.component.impl;
+package com.company.app.wildberries_searcher.component;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.util.Logs;
 import com.company.app.infrastructure.data.ResponseProducts;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherAveragePriceExtractor;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherFilterer;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherNotificator;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
-import com.company.app.wildberries_searcher.component.data.filter.WildberriesSearcherFilter;
+import com.company.app.wildberries_searcher.component.filter.WildberriesSearcherFilter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +16,8 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilterer {
+@RequiredArgsConstructor
+public class WildberriesSearcherFilterer {
 
     /**
      * Нужно для логов. Будет только один поток, гарантирую.
@@ -26,19 +25,15 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
     private int preparedProductsSize;
     private int filterPosition;
 
-    @Autowired
-    private WildberriesSearcherAveragePriceExtractor wildberriesSearcherAveragePriceExtractor;
-    @Autowired
-    private WildberriesSearcherNotificator wildberriesSearcherNotificator;
-    @Autowired
-    private List<WildberriesSearcherFilter> wildberriesSearcherFilterList;
+    private final WildberriesSearcherAveragePriceExtractor wildberriesSearcherAveragePriceExtractor;
+    private final WildberriesSearcherNotificator wildberriesSearcherNotificator;
+    private final List<WildberriesSearcherFilter> wildberriesSearcherFilterList;
 
     @PerformanceLogAnnotation
-    @Override
     public List<ResponseProducts> filter(List<ResponseProducts> products, WildberriesSearcherContext wildberriesSearcherContainer) {
         List<ResponseProducts> preparedProducts = products.stream()
                 .filter(responseProducts -> filterAll(responseProducts, wildberriesSearcherContainer))
-                .collect(Collectors.toList());
+                .toList();
 
         if (log.isDebugEnabled()) {
             log.debug("[{}]: После предварительной фильтрации осталось [{}] шт.", wildberriesSearcherContainer.getChatName(), preparedProducts.size());
@@ -49,7 +44,7 @@ public class WildberriesSearcherFiltererImpl implements WildberriesSearcherFilte
         return preparedProducts.stream()
                 .filter(responseProducts -> currentPriceLesserThanAveragePrice(responseProducts, wildberriesSearcherContainer))
                 .map(responseProducts -> notify(responseProducts, wildberriesSearcherContainer))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private ResponseProducts notify(ResponseProducts responseProducts, WildberriesSearcherContext wildberriesSearcherContainer) {

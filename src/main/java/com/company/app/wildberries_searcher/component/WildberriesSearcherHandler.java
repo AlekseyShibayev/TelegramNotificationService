@@ -1,15 +1,13 @@
-package com.company.app.wildberries_searcher.component.impl;
+package com.company.app.wildberries_searcher.component;
 
 import com.company.app.telegram.controller.TelegramController;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcher;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherHandler;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherResult;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherTask;
 import com.company.app.wildberries_searcher.domain.entity.SearchData;
-import com.company.app.wildberries_searcher.domain.service.api.SearchDataService;
+import com.company.app.wildberries_searcher.domain.service.SearchDataService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,17 +17,15 @@ import java.util.concurrent.Semaphore;
 
 @Slf4j
 @Component
-public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandler {
-
-    @Autowired
-    private SearchDataService searchDataService;
-    @Autowired
-    private WildberriesSearcher wildberriesSearcher;
-    @Autowired
-    private TelegramController telegramController;
+@RequiredArgsConstructor
+public class WildberriesSearcherHandler {
 
     private ExecutorService executorService;
     private Semaphore semaphore;
+
+    private final SearchDataService searchDataService;
+    private final WildberriesSearcher wildberriesSearcher;
+    private final TelegramController telegramController;
 
     @PostConstruct
     private void init() {
@@ -37,7 +33,6 @@ public class WildberriesSearcherHandlerImpl implements WildberriesSearcherHandle
         semaphore = new Semaphore(1);
     }
 
-    @Override
     public WildberriesSearcherResult process(WildberriesSearcherContext wildberriesSearcherContainer) {
         if (semaphore.tryAcquire()) {
             return startNewAsyncSearch(wildberriesSearcherContainer);

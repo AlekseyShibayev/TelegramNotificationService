@@ -1,4 +1,4 @@
-package com.company.app.wildberries_searcher.component.impl;
+package com.company.app.wildberries_searcher.component;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.tool.json.JsonTool;
@@ -7,7 +7,7 @@ import com.company.app.infrastructure.GetRequestHandler;
 import com.company.app.infrastructure.data.Response;
 import com.company.app.infrastructure.data.ResponseProducts;
 import com.company.app.infrastructure.data.price_history.PriceHistory;
-import com.company.app.wildberries_searcher.component.api.WildberriesSearcherExtractor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,22 +17,18 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class WildberriesSearcherExtractorImpl implements WildberriesSearcherExtractor {
+@RequiredArgsConstructor
+public class WildberriesSearcherExtractor {
 
-    @Autowired
-    private GetRequestHandler getRequestHandler;
-    @Autowired
-    private JsonTool<Response> responseJsonTool;
-    @Autowired
-    private JsonTool<PriceHistory> priceHistoryJsonTool;
+    private final GetRequestHandler getRequestHandler;
+    private final JsonTool<Response> responseJsonTool;
+    private final JsonTool<PriceHistory> priceHistoryJsonTool;
 
     @PerformanceLogAnnotation
-    @Override
     public List<ResponseProducts> extractResponseProducts(String url) {
         return getAllProducts(url);
     }
 
-    @Override
     public List<PriceHistory> extractPriceHistory(String url) {
         String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
         return priceHistoryJsonTool.toJavaAsList(htmlResponse, PriceHistory.class);

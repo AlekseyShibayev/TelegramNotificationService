@@ -1,8 +1,8 @@
-package com.company.app.wildberries_searcher.domain.service.impl;
+package com.company.app.wildberries_searcher.domain.service;
 
 import com.company.app.wildberries_searcher.domain.entity.SearchData;
 import com.company.app.wildberries_searcher.domain.repository.SearchDataRepository;
-import com.company.app.wildberries_searcher.domain.service.api.SearchDataService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,20 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class SearchDataServiceImpl implements SearchDataService {
+@RequiredArgsConstructor
+public class SearchDataService {
 
-    @Autowired
-    private SearchDataRepository searchDataRepository;
+    private final SearchDataRepository searchDataRepository;
 
-    @Override
-    @Transactional
     public void saveAll(List<SearchData> list) {
         searchDataRepository.saveAll(list);
     }
 
-    @Override
-    @Transactional
     public SearchData getSearchData(String chatName) {
         return searchDataRepository.findByChatName(chatName);
     }
+
 }

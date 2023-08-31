@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class WildberriesDesireLotSearchHandler {
+public class WildberriesDesireLotSearcher {
 
     private final WildberriesDesireLotPriceExtractor wildberriesDesireLotPriceExtractor;
     private final GetRequestHandler getRequestHandler;
@@ -28,7 +28,7 @@ public class WildberriesDesireLotSearchHandler {
     private final FoundItemsService foundItemsService;
 
     @Transactional
-    public List<FoundItem> getDesiredLots() {
+    public List<FoundItem> doDesireLotSearch() {
         try {
             return getDesiredLotsInner();
         } catch (Exception e) {

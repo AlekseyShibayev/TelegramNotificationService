@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.io.File;
 import java.util.List;
 
-class WildberriesDesireLotSearchHandlerTest extends SpringBootTestApplicationContext {
+class WildberriesDesireLotSearcherTest extends SpringBootTestApplicationContext {
 
     private static final String FILE_NAME = "src/test/resources/wildberries/lot.json";
 

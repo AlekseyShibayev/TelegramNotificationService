@@ -1,6 +1,6 @@
 package com.company.app.springboottest.application;
 
-import com.company.app.infrastructure.SpringBootTestApplicationContext;
+import com.company.app.core.SpringBootTestApplicationContext;
 
 class SmokeTest extends SpringBootTestApplicationContext {
 

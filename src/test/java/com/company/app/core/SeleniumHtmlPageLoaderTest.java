@@ -1,4 +1,4 @@
-package com.company.app.infrastructure;
+package com.company.app.core;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

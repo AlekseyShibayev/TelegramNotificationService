@@ -1,4 +1,4 @@
-package com.company.app.infrastructure.data;
+package com.company.app.core.tool.json.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Size {
+public class Response {
 
-    String name;
+    ResponseData data;
 }

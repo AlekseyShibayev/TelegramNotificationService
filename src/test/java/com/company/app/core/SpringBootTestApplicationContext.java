@@ -1,4 +1,4 @@
-package com.company.app.infrastructure;
+package com.company.app.core;
 
 import com.company.app.core.tool.api.CaptchaFighter;
 import lombok.extern.slf4j.Slf4j;

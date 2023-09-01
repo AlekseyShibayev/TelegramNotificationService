@@ -1,6 +1,6 @@
 package com.company.app.springboottest.application.telegram;
 
-import com.company.app.infrastructure.SpringBootTestApplicationContext;
+import com.company.app.core.SpringBootTestApplicationContext;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.controller.TelegramOwnerController;
 import com.company.app.telegram.domain.dto.ChatDto;

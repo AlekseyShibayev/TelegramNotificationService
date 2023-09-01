@@ -1,17 +1,16 @@
-package com.company.app.infrastructure.data;
+package com.company.app.core.data.price_history;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponseData {
+public class PriceHistory {
 
-    List<ResponseProducts> products;
+    String dt;
+    Price price;
 }

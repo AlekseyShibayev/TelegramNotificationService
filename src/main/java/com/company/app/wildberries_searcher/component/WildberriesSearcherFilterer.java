@@ -2,7 +2,7 @@ package com.company.app.wildberries_searcher.component;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.util.Logs;
-import com.company.app.infrastructure.data.ResponseProducts;
+import com.company.app.core.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries_searcher.component.filter.WildberriesSearcherFilter;
 import lombok.RequiredArgsConstructor;

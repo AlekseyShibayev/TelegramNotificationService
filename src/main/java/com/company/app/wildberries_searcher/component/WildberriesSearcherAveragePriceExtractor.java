@@ -1,7 +1,7 @@
 package com.company.app.wildberries_searcher.component;
 
-import com.company.app.infrastructure.data.ResponseProducts;
-import com.company.app.infrastructure.data.price_history.PriceHistory;
+import com.company.app.core.data.ResponseProducts;
+import com.company.app.core.data.price_history.PriceHistory;
 import com.company.app.wildberries_searcher.component.data.util.PriceHistoryUrlCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

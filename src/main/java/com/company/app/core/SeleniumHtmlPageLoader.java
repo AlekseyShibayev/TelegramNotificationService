@@ -1,4 +1,4 @@
-package com.company.app.infrastructure;
+package com.company.app.core;
 
 import com.company.app.core.util.Logs;
 import lombok.SneakyThrows;

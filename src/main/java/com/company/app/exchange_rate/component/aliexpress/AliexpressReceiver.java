@@ -15,24 +15,24 @@ import java.net.http.HttpResponse;
 @Component
 @RequiredArgsConstructor
 public class AliexpressReceiver {
-    @Value("${exchangeRate.aliexpressUrl}")
-    private String url;
-
-    private static final String FILE_NAME = "exchangerate/aliexpress_mock.json";
-
-    private final DataExtractorTool dataExtractorTool;
-
-    @SneakyThrows
-    public String getHtmlResponse() {
-        HttpClient client = HttpClient.newHttpClient();
-        String mockAsString = dataExtractorTool.getFileAsString(FILE_NAME);
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .POST(HttpRequest.BodyPublishers.ofString(mockAsString))
-                .build();
-        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return httpResponse.statusCode() == 200 ? httpResponse.body() : StringUtils.EMPTY;
-    }
+//    @Value("${exchangeRate.aliexpressUrl}")
+//    private String url;
+//
+//    private static final String FILE_NAME = "exchangerate/aliexpress_mock.json";
+//
+//    private final DataExtractorTool dataExtractorTool;
+//
+//    @SneakyThrows
+//    public String getHtmlResponse() {
+//        HttpClient client = HttpClient.newHttpClient();
+//        String mockAsString = dataExtractorTool.getFileAsString(FILE_NAME);
+//        HttpRequest request = HttpRequest.newBuilder()
+//                .uri(URI.create(url))
+//                .POST(HttpRequest.BodyPublishers.ofString(mockAsString))
+//                .build();
+//        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+//
+//        return httpResponse.statusCode() == 200 ? httpResponse.body() : StringUtils.EMPTY;
+//    }
 
 }

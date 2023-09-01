@@ -23,16 +23,16 @@ public class AliexpressExchangeRateExtractor {
     private final GetRequestHandler getRequestHandler;
 
     public String extract() {
-//        String htmlPage = seleniumHtmlPageLoader.loadHtmlPage(aliexpressUrl);
-        String htmlPage = getRequestHandler.loadHtmlPage(aliexpressUrl);
+        String htmlPage = seleniumHtmlPageLoader.loadHtmlPage(aliexpressUrl);
+//        String htmlPage = getRequestHandler.loadHtmlPage(aliexpressUrl);
 
 
-        String htmlResponse = aliexpressReceiver.getHtmlResponse();
-        return getExchangeRate(htmlResponse);
+
+        return getExchangeRate(htmlPage);
     }
 
-    String getExchangeRate(String response) {
-        JSONObject jsonObject = new JSONObject(response);
+    String getExchangeRate(String htmlPage) {
+        JSONObject jsonObject = new JSONObject(htmlPage);
         return dataExtractorTool.getFirstString(jsonObject, "finalPrice");
     }
 

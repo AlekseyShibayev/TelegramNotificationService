@@ -10,7 +10,7 @@ class SeleniumHtmlPageLoaderTest extends SpringBootTestApplicationContext {
 
     @Test
     void test() {
-        String htmlResponse = seleniumHtmlPageLoader.getHtmlResponse("https://aliexpress.ru/item/1005005832268516.html");
+        seleniumHtmlPageLoader.loadHtmlPage("https://aliexpress.ru/item/1005005832268516.html");
     }
 
 }

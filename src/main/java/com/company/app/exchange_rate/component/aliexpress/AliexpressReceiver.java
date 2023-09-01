@@ -1,4 +1,4 @@
-package com.company.app.exchange_rate.component;
+package com.company.app.exchange_rate.component.aliexpress;
 
 import com.company.app.core.tool.api.DataExtractorTool;
 import lombok.RequiredArgsConstructor;

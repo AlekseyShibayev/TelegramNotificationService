@@ -29,7 +29,7 @@ public class WildberriesSearcherExtractor {
     }
 
     public List<PriceHistory> extractPriceHistory(String url) {
-        String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
+        String htmlResponse = getRequestHandler.loadHtmlPage(url);
         return priceHistoryJsonTool.toJavaAsList(htmlResponse, PriceHistory.class);
     }
 
@@ -40,7 +40,7 @@ public class WildberriesSearcherExtractor {
         while (true) {
             log.debug("try to see [{}] page", i);
             String pageUrl = String.format(url, i);
-            String htmlResponse = getRequestHandler.getResponseBodyAsString(pageUrl);
+            String htmlResponse = getRequestHandler.loadHtmlPage(pageUrl);
             Response response = responseJsonTool.toJavaAsObject(htmlResponse, Response.class, MapperSettings.builder()
                     .failOnUnknownProperties(false)
                     .build());

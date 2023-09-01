@@ -40,7 +40,7 @@ public class WildberriesDesireLotSearcher {
     private List<FoundItem> getDesiredLotsInner() {
         List<DesireLot> lots = lotRepository.findAll();
         String url = WildberriesDesireLotUrlCreator.getUrlForPriceSearch(lots);
-        String htmlResponse = getRequestHandler.getResponseBodyAsString(url);
+        String htmlResponse = getRequestHandler.loadHtmlPage(url);
         List<FoundItem> items = lots.stream()
                 .filter(lot -> isDesireLot(htmlResponse, lot))
                 .map(lot -> new FoundItem().setArticle(lot.getArticle()).setCreationDate(new Date()))

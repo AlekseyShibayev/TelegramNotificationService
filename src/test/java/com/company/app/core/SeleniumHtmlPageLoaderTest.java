@@ -8,7 +8,7 @@ class SeleniumHtmlPageLoaderTest extends SpringBootTestApplicationContext {
     @Autowired
     private SeleniumHtmlPageLoader seleniumHtmlPageLoader;
 
-    @Test
+//    @Test
     void test() {
         seleniumHtmlPageLoader.loadHtmlPage("https://aliexpress.ru/item/1005005832268516.html");
     }

@@ -20,17 +20,17 @@ public class SeleniumHtmlPageLoader {
     private static final String FIRST_DRIVER_PATH = "selenium_driver/geckodriver";
     private static final String SECOND_DRIVER_PATH = "/usr/local/bin/geckodriver";
 
-    public Optional<String> loadHtmlPage(String urlName) {
+    public String loadHtmlPage(String url) {
         try {
-            return Optional.ofNullable(loadHtmlPageInner(urlName));
+            return loadHtmlPageInner(url);
         } catch (Exception e) {
-            Logs.doExceptionLog(log, e, "can't load html from [%s]".formatted(urlName));
-            return Optional.empty();
+            Logs.doExceptionLog(log, e, "can't load html from [%s]".formatted(url));
+            throw e;
         }
     }
 
     @SneakyThrows
-    private String loadHtmlPageInner(String urlName) {
+    private String loadHtmlPageInner(String url) {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         URL path = loader.getResource(FIRST_DRIVER_PATH);
         File file = new File(path.getPath());
@@ -50,7 +50,7 @@ public class SeleniumHtmlPageLoader {
         driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
 
-        driver.get(urlName);
+        driver.get(url);
 
 //        Thread.sleep(15000);
 

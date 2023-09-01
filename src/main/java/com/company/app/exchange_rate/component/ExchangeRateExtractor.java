@@ -1,7 +1,7 @@
 package com.company.app.exchange_rate.component;
 
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
-import com.company.app.exchange_rate.domain.service.api.ExchangeRateService;
+import com.company.app.exchange_rate.domain.service.ExchangeRateService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;

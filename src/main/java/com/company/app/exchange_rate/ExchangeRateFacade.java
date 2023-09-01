@@ -1,7 +1,7 @@
-package com.company.app.exchange_rate.component;
+package com.company.app.exchange_rate;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.exchange_rate.component.api.ExchangeRateExtractor;
+import com.company.app.exchange_rate.component.ExchangeRateExtractor;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import com.company.app.exchange_rate.domain.service.api.ExchangeRateService;
 import org.springframework.beans.factory.annotation.Autowired;

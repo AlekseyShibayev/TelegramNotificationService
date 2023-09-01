@@ -1,27 +1,21 @@
-package com.company.app.exchange_rate.component.impl;
+package com.company.app.exchange_rate.component;
 
-import com.company.app.exchange_rate.component.api.AliexpressExchangeRateExtractor;
-import com.company.app.exchange_rate.component.api.ExchangeRateExtractor;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import com.company.app.exchange_rate.domain.service.api.ExchangeRateService;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
-@Setter
-public class ExchangeRateExtractorImpl implements ExchangeRateExtractor {
+@RequiredArgsConstructor
+public class ExchangeRateExtractor {
 
-    @Autowired
-    private ExchangeRateService exchangeRateService;
-    @Autowired
-    private AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
+    private final ExchangeRateService exchangeRateService;
+    private final AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
 
     @SneakyThrows
-    @Override
     public ExchangeRate extract() {
         ExchangeRate exchange = ExchangeRate.builder()
                 .aliexpressExchangeRate(aliexpressExchangeRateExtractor.extract())
@@ -31,4 +25,5 @@ public class ExchangeRateExtractorImpl implements ExchangeRateExtractor {
 
         return exchange;
     }
+
 }

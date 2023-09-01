@@ -1,5 +1,6 @@
 package com.company.app.exchange_rate.component;
 
+import com.company.app.exchange_rate.ExchangeRateFacade;
 import com.company.app.exchange_rate.ExchangeRateTestConfiguration;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import lombok.extern.slf4j.Slf4j;

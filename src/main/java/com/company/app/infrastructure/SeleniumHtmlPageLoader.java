@@ -17,7 +17,7 @@ public class SeleniumHtmlPageLoader {
 
     public String getHtmlResponse(String urlName) {
         try {
-            return  getHtmlPage(urlName);
+            return getHtmlPage(urlName);
         } catch (InterruptedException e) {
             throw new RuntimeException("Can't get html.");
         }

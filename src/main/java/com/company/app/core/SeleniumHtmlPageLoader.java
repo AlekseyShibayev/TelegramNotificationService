@@ -44,7 +44,7 @@ public class SeleniumHtmlPageLoader {
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
 
         FirefoxOptions firefoxOptions = new FirefoxOptions();
-//        firefoxOptions.setHeadless(true);
+        firefoxOptions.setHeadless(true);
 
         WebDriver driver = new FirefoxDriver(firefoxOptions);
         driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);

@@ -1,0 +1,312 @@
+{
+  "state": 0,
+  "params": {
+    "curr": "rub",
+    "spp": 0,
+    "version": 1
+  },
+  "data": {
+    "products": [
+      {
+        "id": 43409221,
+        "root": 15413142,
+        "kindId": 0,
+        "subjectId": 953,
+        "subjectParentId": 49,
+        "name": "1440 шт Восстанавливающие детские влажные салфетки, клапан",
+        "brand": "Свежая нота",
+        "brandId": 41338,
+        "siteBrandId": 51338,
+        "supplierId": 39726,
+        "sale": 65,
+        "priceU": 249000,
+        "salePriceU": 87100,
+        "logisticsCost": 0,
+        "extended": {
+          "basicSale": 65,
+          "basicPriceU": 87100
+        },
+        "saleConditions": 0,
+        "pics": 8,
+        "rating": 5,
+        "feedbacks": 20335,
+        "panelPromoId": 159148,
+        "promoTextCard": "Майский sale",
+        "promoTextCat": "Майский sale",
+        "volume": 213,
+        "colors": [],
+        "promotions": [
+          63484,
+          95776,
+          96213,
+          123496,
+          137206,
+          139114,
+          159148
+        ],
+        "sizes": [
+          {
+            "name": "",
+            "origName": "0",
+            "rank": 0,
+            "optionId": 86410217,
+            "stocks": [
+              {
+                "wh": 117986,
+                "qty": 914,
+                "time1": 4,
+                "time2": 74
+              },
+              {
+                "wh": 120762,
+                "qty": 1267,
+                "time1": 4,
+                "time2": 64
+              },
+              {
+                "wh": 130744,
+                "qty": 1283,
+                "time1": 4,
+                "time2": 58
+              },
+              {
+                "wh": 159402,
+                "qty": 340,
+                "time1": 4,
+                "time2": 95
+              },
+              {
+                "wh": 206348,
+                "qty": 1453,
+                "time1": 5,
+                "time2": 84
+              },
+              {
+                "wh": 210001,
+                "qty": 327,
+                "time1": 3,
+                "time2": 93
+              }
+            ],
+            "time1": 4,
+            "time2": 58,
+            "wh": 130744,
+            "sign": "90gYUb+QEVjfEj28XUyOBA2i23U="
+          }
+        ],
+        "diffPrice": false,
+        "time1": 4,
+        "time2": 58,
+        "wh": 130744
+      },
+      {
+        "id": 15694225,
+        "root": 11704577,
+        "kindId": 1,
+        "subjectId": 94,
+        "subjectParentId": 2,
+        "name": "Мужские ботинки RIVER из нубука без меха демисезонные",
+        "brand": "Lumberjack",
+        "brandId": 20472,
+        "siteBrandId": 30472,
+        "supplierId": 4420,
+        "sale": 0,
+        "priceU": 999000,
+        "salePriceU": 999000,
+        "logisticsCost": 0,
+        "sale": 0,
+        "saleConditions": 0,
+        "pics": 13,
+        "rating": 4,
+        "feedbacks": 66,
+        "volume": 151,
+        "colors": [
+          {
+            "name": "желтый",
+            "id": 16776960
+          }
+        ],
+        "promotions": [
+          63398,
+          70846,
+          100812,
+          104304,
+          115212,
+          118400,
+          134673,
+          137206,
+          150949,
+          158521
+        ],
+        "sizes": [
+          {
+            "name": "40",
+            "origName": "40",
+            "rank": 149490,
+            "optionId": 45359341,
+            "stocks": [
+              {
+                "wh": 2737,
+                "qty": 1,
+                "time1": 4,
+                "time2": 105
+              },
+              {
+                "wh": 119261,
+                "qty": 8,
+                "time1": 24,
+                "time2": 74
+              }
+            ],
+            "time1": 24,
+            "time2": 74,
+            "wh": 119261,
+            "sign": "XfBK8V39y+FFWjTb1nI1VprRuQ0="
+          },
+          {
+            "name": "41",
+            "origName": "41",
+            "rank": 161922,
+            "optionId": 45359342,
+            "stocks": [
+              {
+                "wh": 507,
+                "qty": 1,
+                "time1": 5,
+                "time2": 74
+              },
+              {
+                "wh": 119261,
+                "qty": 8,
+                "time1": 24,
+                "time2": 74
+              }
+            ],
+            "time1": 5,
+            "time2": 74,
+            "wh": 507,
+            "sign": "YVfLMFBeLzTEIP7JiHdLumrunO4="
+          },
+          {
+            "name": "42",
+            "origName": "42",
+            "rank": 165572,
+            "optionId": 45359343,
+            "stocks": [
+              {
+                "wh": 2737,
+                "qty": 1,
+                "time1": 4,
+                "time2": 105
+              },
+              {
+                "wh": 119261,
+                "qty": 8,
+                "time1": 24,
+                "time2": 74
+              }
+            ],
+            "time1": 24,
+            "time2": 74,
+            "wh": 119261,
+            "sign": "TNBLS+9840zDAkGr1E6DJ/fDz1U="
+          },
+          {
+            "name": "43",
+            "origName": "43",
+            "rank": 180206,
+            "optionId": 45359344,
+            "stocks": [
+              {
+                "wh": 507,
+                "qty": 1,
+                "time1": 5,
+                "time2": 74
+              },
+              {
+                "wh": 120762,
+                "qty": 2,
+                "time1": 4,
+                "time2": 64
+              },
+              {
+                "wh": 119261,
+                "qty": 8,
+                "time1": 24,
+                "time2": 74
+              }
+            ],
+            "time1": 4,
+            "time2": 64,
+            "wh": 120762,
+            "sign": "tDDGFmrgTGXAUT3Ek/85iPX4NS0="
+          },
+          {
+            "name": "44",
+            "origName": "44",
+            "rank": 183019,
+            "optionId": 45359345,
+            "stocks": [
+              {
+                "wh": 119261,
+                "qty": 8,
+                "time1": 24,
+                "time2": 74
+              }
+            ],
+            "time1": 24,
+            "time2": 74,
+            "wh": 119261,
+            "sign": "mchfxzXzPC5teMDfIoO/h82Kug8="
+          },
+          {
+            "name": "45",
+            "origName": "45",
+            "rank": 196434,
+            "optionId": 45359346,
+            "stocks": [
+              {
+                "wh": 119261,
+                "qty": 8,
+                "time1": 24,
+                "time2": 74
+              }
+            ],
+            "time1": 24,
+            "time2": 74,
+            "wh": 119261,
+            "sign": "/1M3BXW9tgTL0XZh/KNrW3NIqCE="
+          },
+          {
+            "name": "46",
+            "origName": "46",
+            "rank": 202194,
+            "optionId": 45359347,
+            "stocks": [
+              {
+                "wh": 117986,
+                "qty": 1,
+                "time1": 4,
+                "time2": 74
+              },
+              {
+                "wh": 119261,
+                "qty": 7,
+                "time1": 24,
+                "time2": 74
+              }
+            ],
+            "time1": 4,
+            "time2": 74,
+            "wh": 117986,
+            "sign": "YI0+7a9PNWnzXoHs7K12JY1HBJk="
+          }
+        ],
+        "diffPrice": false,
+        "time1": 4,
+        "time2": 64,
+        "wh": 120762
+      }
+    ]
+  }
+}

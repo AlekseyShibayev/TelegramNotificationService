@@ -1,10 +1,5 @@
 package com.company.app.exchange_rate.component.impl;
 
-import com.company.app.core.tool.api.DataExtractorTool;
-import com.company.app.core.tool.impl.DataExtractorToolImpl;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-
 class AliexpressExchangeRateExtractorImplTest {
 //
 //    private static final String FILE_NAME = "exchangerate/response_example.json";

@@ -1,7 +1,6 @@
 package com.company.app.wildberries_searcher.component.impl;
 
 import com.company.app.infrastructure.SpringBootTestApplicationContext;
-import org.springframework.beans.factory.annotation.Autowired;
 
 class WildberriesSearcherAveragePriceExtractorImplTest extends SpringBootTestApplicationContext {
 

@@ -5,7 +5,6 @@ import com.company.app.exchange_rate.component.ExchangeRateExtractor;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import com.company.app.exchange_rate.domain.service.ExchangeRateService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

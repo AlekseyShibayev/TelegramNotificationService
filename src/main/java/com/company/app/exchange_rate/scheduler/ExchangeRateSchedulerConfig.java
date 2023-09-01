@@ -28,4 +28,5 @@ public class ExchangeRateSchedulerConfig {
         }
         telegramFacade.writeToEveryone(notification);
     }
+
 }

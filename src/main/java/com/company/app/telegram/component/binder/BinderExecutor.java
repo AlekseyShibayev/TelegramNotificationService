@@ -1,7 +1,5 @@
-package com.company.app.telegram.component;
+package com.company.app.telegram.component.binder;
 
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.Binder;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
@@ -19,7 +17,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.company.app.telegram.component.binder.api.Binder.BINDER_DELIMITER;
+import static com.company.app.telegram.component.binder.Binder.BINDER_DELIMITER;
 
 /**
  * Запускает, соответствующий типу Binder.
@@ -28,7 +26,7 @@ import static com.company.app.telegram.component.binder.api.Binder.BINDER_DELIMI
 @RequiredArgsConstructor
 public class BinderExecutor {
 
-    private Map<String, Binder> binders;
+    private Map<String, Binder> binders; // todo encapsulate in BinderRegistry
 
     private final SubscriptionRepository subscriptionRepository;
     private final List<Binder> binderList;
@@ -56,7 +54,7 @@ public class BinderExecutor {
         Binder binder = Optional.ofNullable(binders.get(first.get()))
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Не смог вытащить тип binderType из [%s].", text)));
 
-        BinderContainer binderContainer = BinderContainer.builder()
+        BinderContext binderContainer = BinderContext.builder()
                 .chat(chat)
                 .message(text)
                 .build();

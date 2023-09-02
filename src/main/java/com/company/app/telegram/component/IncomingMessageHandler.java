@@ -1,6 +1,7 @@
 package com.company.app.telegram.component;
 
 import com.company.app.telegram.TelegramFacade;
+import com.company.app.telegram.component.binder.BinderExecutor;
 import com.company.app.telegram.component.data.ButtonFactory;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.ChatService;

@@ -1,21 +1,21 @@
 package com.company.app.telegram.component.binder.impl;
 
 import com.company.app.telegram.component.ChatActivationService;
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.TelegramBinder;
+import com.company.app.telegram.component.binder.Binder;
+import com.company.app.telegram.component.binder.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
-public class TelegramOffBinderImpl implements TelegramBinder {
+@Service
+@RequiredArgsConstructor
+public class TelegramOffBinder implements Binder {
 
     private static final String TYPE = "TG_OFF";
 
-    @Autowired
-    private ChatActivationService chatActivationService;
+    private final ChatActivationService chatActivationService;
 
     @Override
     public String getType() {
@@ -23,8 +23,9 @@ public class TelegramOffBinderImpl implements TelegramBinder {
     }
 
     @Override
-    public void bind(BinderContainer binderContainer) {
+    public void bind(BinderContext binderContainer) {
         Chat chat = binderContainer.getChat();
         chatActivationService.deactivate(chat);
     }
+
 }

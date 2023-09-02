@@ -1,6 +1,6 @@
 package com.company.app.telegram.component.data;
 
-import com.company.app.telegram.component.binder.BinderContainer;
+import com.company.app.telegram.component.binder.BinderContext;
 import com.google.common.collect.Lists;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ForceReplyKeyboard;
@@ -55,7 +55,7 @@ public class TempRegistry {
                 .build();
     }
 
-    private SendPoll getSendPoll(BinderContainer binderContainer) {
+    private SendPoll getSendPoll(BinderContext binderContainer) {
         InlineKeyboardMarkup inlineKeyboardMarkup = getInlineKeyboardMarkup();
 
         return SendPoll.builder()

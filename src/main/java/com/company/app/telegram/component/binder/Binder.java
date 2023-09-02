@@ -1,6 +1,4 @@
-package com.company.app.telegram.component.binder.api;
-
-import com.company.app.telegram.component.binder.BinderContainer;
+package com.company.app.telegram.component.binder;
 
 /**
  * Связывает модуль и входящее сообщение, отправленное пользователем в телеграм бота.
@@ -11,5 +9,5 @@ public interface Binder {
 
     String getType();
 
-    void bind(BinderContainer binderContainer);
+    void bind(BinderContext binderContainer);
 }

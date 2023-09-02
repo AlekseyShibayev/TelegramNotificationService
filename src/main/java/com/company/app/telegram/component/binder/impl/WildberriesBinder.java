@@ -1,29 +1,26 @@
 package com.company.app.telegram.component.binder.impl;
 
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.WildberriesBinder;
+import com.company.app.telegram.component.binder.Binder;
+import com.company.app.telegram.component.binder.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_desire_lot.controller.WildberriesController;
 import com.company.app.wildberries_desire_lot.domain.dto.FoundItemDto;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
-@Slf4j
-@Component
-public class WildberriesBinderImpl implements WildberriesBinder {
+@Service
+@RequiredArgsConstructor
+public class WildberriesBinder implements Binder { // todo это какой-то конкретный биндер
 
     private static final String TYPE = "WB";
 
-    @Autowired
-    private WildberriesController wildberriesController;
-    @Autowired
-    private TelegramFacade telegramFacade;
+    private final WildberriesController wildberriesController;
+    private final TelegramFacade telegramFacade;
 
     @Override
     public String getType() {
@@ -32,7 +29,7 @@ public class WildberriesBinderImpl implements WildberriesBinder {
 
     @SneakyThrows
     @Override
-    public void bind(BinderContainer binderContainer) {
+    public void bind(BinderContext binderContainer) {
         Chat chat = binderContainer.getChat();
         List<FoundItemDto> foundItemDtoList = wildberriesController.getAllFoundItems().getBody();
         if (CollectionUtils.isEmpty(foundItemDtoList)) {
@@ -46,4 +43,5 @@ public class WildberriesBinderImpl implements WildberriesBinder {
             telegramFacade.writeToTargetChat(chat.getChatName(), message);
         }
     }
+
 }

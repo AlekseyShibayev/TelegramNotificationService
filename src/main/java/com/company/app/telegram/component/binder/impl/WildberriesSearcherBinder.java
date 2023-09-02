@@ -1,16 +1,16 @@
 package com.company.app.telegram.component.binder.impl;
 
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.component.binder.BinderContainer;
-import com.company.app.telegram.component.binder.api.WildberriesBinder;
+import com.company.app.telegram.component.binder.Binder;
+import com.company.app.telegram.component.binder.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherResult;
 import com.company.app.wildberries_searcher.controller.WildberriesSearcherController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -18,17 +18,15 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class WildberriesSearcherBinderImpl implements WildberriesBinder {
+@Service
+@RequiredArgsConstructor
+public class WildberriesSearcherBinder implements Binder {
 
     private static final String TYPE = "WB_SEARCH";
 
-    @Autowired
-    private TelegramFacade telegramFacade;
-    @Autowired
-    private WildberriesSearcherController wildberriesSearcherController;
-    @Autowired
-    private WildberriesSupplierController wildberriesSupplierController;
+    private final TelegramFacade telegramFacade;
+    private final WildberriesSearcherController wildberriesSearcherController;
+    private final WildberriesSupplierController wildberriesSupplierController;
 
     @Override
     public String getType() {
@@ -36,7 +34,7 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
     }
 
     @Override
-    public void bind(BinderContainer binderContainer) {
+    public void bind(BinderContext binderContainer) {
         Chat chat = binderContainer.getChat();
         String incomingMessage = binderContainer.getMessage();
 
@@ -99,4 +97,5 @@ public class WildberriesSearcherBinderImpl implements WildberriesBinder {
         }
         return rowsInLine;
     }
+
 }

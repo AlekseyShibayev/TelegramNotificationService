@@ -2,8 +2,8 @@ package com.company.app.telegram.domain.service;
 
 import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.mapper.Mapper;
+import com.company.app.telegram.domain.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;

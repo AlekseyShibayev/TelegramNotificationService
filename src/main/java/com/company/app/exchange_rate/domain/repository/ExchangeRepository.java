@@ -11,4 +11,5 @@ public interface ExchangeRepository extends CrudRepository<ExchangeRate, Long> {
     Optional<ExchangeRate> findFirstByOrderByCreationDateDesc();
 
     List<ExchangeRate> findAll();
+
 }

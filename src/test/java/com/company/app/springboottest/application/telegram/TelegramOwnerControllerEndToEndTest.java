@@ -1,12 +1,12 @@
 package com.company.app.springboottest.application.telegram;
 
 import com.company.app.core.SpringBootTestApplicationContext;
+import com.company.app.telegram.component.ChatInitializer;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.controller.TelegramOwnerController;
 import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.repository.ChatRepository;
-import com.company.app.telegram.component.ChatInitializer;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

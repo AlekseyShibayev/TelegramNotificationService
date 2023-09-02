@@ -1,10 +1,8 @@
 package com.company.app.exchange_rate.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +13,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 @Entity
 @Table(name = "EXCHANGE_RATE")
 public class ExchangeRate {
@@ -32,4 +28,5 @@ public class ExchangeRate {
 
     @Column(name = "CREATION_DATE")
     private Date creationDate;
+
 }

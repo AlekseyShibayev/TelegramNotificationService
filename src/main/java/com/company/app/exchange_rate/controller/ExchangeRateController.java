@@ -16,19 +16,11 @@ public class ExchangeRateController {
     private ExchangeRateFacade exchangeRateFacade;
 
     /**
-     * пример запроса: http://localhost:8080/exchangeRate/get
-     */
-//    @GetMapping(value = "/extract", produces = "application/json")
-//    public ResponseEntity<ExchangeRate> extract() {
-//
-//        return ResponseEntity.ok(exchangeRateFacade.extract());
-//    }
-
-    /**
-     * пример запроса: http://localhost:8080/exchangeRate/get
+     * example: http://localhost:8080/exchangeRate/getLast
      */
     @GetMapping(value = "/getLast", produces = "application/json")
     public ResponseEntity<ExchangeRate> getLast() {
         return ResponseEntity.ok(exchangeRateFacade.getLast());
     }
+
 }

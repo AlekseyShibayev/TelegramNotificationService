@@ -10,4 +10,5 @@ public interface Binder {
     String getType();
 
     void bind(BinderContext binderContainer);
+
 }

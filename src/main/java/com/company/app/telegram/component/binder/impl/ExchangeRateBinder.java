@@ -12,20 +12,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ExchangeRateBinder implements Binder {
 
-        private static final String TYPE = "EX";
+    private static final String TYPE = "EX";
 
-        private final ExchangeRateController exchangeRateController;
-        private final TelegramFacade telegramFacade;
+    private final ExchangeRateController exchangeRateController;
+    private final TelegramFacade telegramFacade;
 
-        @Override
-        public String getType() {
-            return TYPE;
-        }
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 
-        @Override
-        public void bind(BinderContext binderContainer) {
-            ExchangeRate last = exchangeRateController.getLast().getBody();
-            telegramFacade.writeToTargetChat(binderContainer.getChat().getChatName(), last.getAliexpressExchangeRate());
-        }
+    @Override
+    public void bind(BinderContext binderContainer) {
+        ExchangeRate last = exchangeRateController.getLast().getBody();
+        telegramFacade.writeToTargetChat(binderContainer.getChat().getChatName(), last.getAliexpressExchangeRate());
+    }
 
 }

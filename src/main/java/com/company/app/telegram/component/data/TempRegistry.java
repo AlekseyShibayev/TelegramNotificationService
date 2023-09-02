@@ -18,6 +18,7 @@ import java.util.List;
  * https://api.telegram.org/bot1585428394:AAH2XP_r0-IUQr3nPKqp-KH6I2z2W_rEC1s/getMe
  * https://api.telegram.org/bot1585428394:AAH2XP_r0-IUQr3nPKqp-KH6I2z2W_rEC1s/getUpdates
  */
+@Deprecated
 public class TempRegistry {
 
     private ForceReplyKeyboard getForceReplyKeyboard() {

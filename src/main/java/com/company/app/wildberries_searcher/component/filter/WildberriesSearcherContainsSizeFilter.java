@@ -1,8 +1,8 @@
 package com.company.app.wildberries_searcher.component.filter;
 
-import com.company.app.core.util.Strings;
 import com.company.app.core.data.ResponseProducts;
 import com.company.app.core.data.Size;
+import com.company.app.core.util.Strings;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.google.common.collect.Sets;
 import org.springframework.stereotype.Component;

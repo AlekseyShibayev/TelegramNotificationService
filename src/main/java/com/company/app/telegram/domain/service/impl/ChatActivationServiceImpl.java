@@ -1,6 +1,6 @@
 package com.company.app.telegram.domain.service.impl;
 
-import com.company.app.telegram.component.TelegramFacade;
+import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.controller.SubscriptionController;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;

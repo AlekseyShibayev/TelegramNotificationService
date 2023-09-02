@@ -1,6 +1,6 @@
-package com.company.app.telegram.binder.api;
+package com.company.app.telegram.component.binder.api;
 
-import com.company.app.telegram.binder.BinderContainer;
+import com.company.app.telegram.component.binder.BinderContainer;
 
 /**
  * Связывает модуль и входящее сообщение, отправленное пользователем в телеграм бота.

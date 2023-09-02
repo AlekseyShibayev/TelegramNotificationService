@@ -1,12 +1,12 @@
 package com.company.app.wildberries_searcher.component;
 
-import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.core.tool.json.JsonTool;
-import com.company.app.core.tool.json.MapperSettings;
 import com.company.app.core.GetRequestHandler;
+import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.data.Response;
 import com.company.app.core.data.ResponseProducts;
 import com.company.app.core.data.price_history.PriceHistory;
+import com.company.app.core.tool.json.JsonTool;
+import com.company.app.core.tool.json.MapperSettings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.company.app.telegram.domain.service.impl;
 
-import com.company.app.telegram.component.api.TelegramBotConfig;
+import com.company.app.telegram.component.config.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.repository.HistoryRepository;

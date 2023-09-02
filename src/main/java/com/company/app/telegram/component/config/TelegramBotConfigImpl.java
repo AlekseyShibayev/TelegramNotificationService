@@ -1,7 +1,6 @@
-package com.company.app.telegram.component.impl;
+package com.company.app.telegram.component.config;
 
-import com.company.app.telegram.component.api.TelegramBotConfig;
-import com.company.app.telegram.component.api.TelegramDistributionHub;
+import com.company.app.telegram.component.TelegramDistributionHub;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

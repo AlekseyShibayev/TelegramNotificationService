@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.scheduler;
 
 import com.company.app.core.util.Collections;
-import com.company.app.telegram.component.TelegramFacade;
+import com.company.app.telegram.TelegramFacade;
 import com.company.app.wildberries_desire_lot.WildberriesDesireLotFacade;
 import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;

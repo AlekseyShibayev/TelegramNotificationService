@@ -1,37 +1,31 @@
-package com.company.app.telegram.component.impl;
+package com.company.app.telegram.component;
 
-import com.company.app.telegram.component.api.BinderExecutor;
-import com.company.app.telegram.component.api.IncomingMessageHandler;
-import com.company.app.telegram.component.api.TelegramBotConfig;
+import com.company.app.telegram.component.config.TelegramBotConfig;
 import com.company.app.telegram.component.data.ButtonFactory;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.api.ChatService;
 import com.company.app.telegram.domain.service.api.HistoryService;
 import com.company.app.telegram.domain.service.api.PrepareChatToWorkService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-@Slf4j
-@Component
-public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
+/**
+ * Обрабатывает сообщения, отправленные пользователем в телеграм бота.
+ */
+@Service
+@RequiredArgsConstructor
+public class IncomingMessageHandler {
 
-    @Autowired
-    private TelegramBotConfig telegramBotConfig;
-    @Autowired
-    private HistoryService historyService;
-    @Autowired
-    private ChatService chatService;
-    @Autowired
-    private BinderExecutor binderExecutor;
-    @Autowired
-    private PrepareChatToWorkService prepareChatToWorkService;
+    private final TelegramBotConfig telegramBotConfig;
+    private final HistoryService historyService;
+    private final ChatService chatService;
+    private final BinderExecutor binderExecutor;
+    private final PrepareChatToWorkService prepareChatToWorkService;
 
-    @Override
     public void process(Update update) {
         if (isIncomingMessage(update)) {
             prepareChatToWork(update);
@@ -71,4 +65,5 @@ public class IncomingMessageHandlerImpl implements IncomingMessageHandler {
         historyService.saveHistory(chat, text);
         binderExecutor.execute(chat, text);
     }
+
 }

@@ -1,16 +1,15 @@
-package com.company.app.telegram.component.impl;
+package com.company.app.telegram.component;
 
-import com.company.app.telegram.binder.BinderContainer;
-import com.company.app.telegram.binder.api.Binder;
-import com.company.app.telegram.component.api.BinderExecutor;
+import com.company.app.telegram.component.binder.BinderContainer;
+import com.company.app.telegram.component.binder.api.Binder;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -20,17 +19,19 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.company.app.telegram.binder.api.Binder.BINDER_DELIMITER;
+import static com.company.app.telegram.component.binder.api.Binder.BINDER_DELIMITER;
 
-@Component
-public class BinderExecutorImpl implements BinderExecutor {
+/**
+ * Запускает, соответствующий типу Binder.
+ */
+@Service
+@RequiredArgsConstructor
+public class BinderExecutor {
 
     private Map<String, Binder> binders;
 
-    @Autowired
-    private SubscriptionRepository subscriptionRepository;
-    @Autowired
-    private List<Binder> binderList;
+    private final SubscriptionRepository subscriptionRepository;
+    private final List<Binder> binderList;
 
     @PostConstruct
     void init() {
@@ -49,7 +50,6 @@ public class BinderExecutorImpl implements BinderExecutor {
         subscriptionRepository.saveAll(subscriptionList);
     }
 
-    @Override
     public void execute(Chat chat, String text) {
         Optional<String> first = Arrays.stream(text.split(BINDER_DELIMITER)).findFirst();
 
@@ -63,4 +63,5 @@ public class BinderExecutorImpl implements BinderExecutor {
 
         binder.bind(binderContainer);
     }
+
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j

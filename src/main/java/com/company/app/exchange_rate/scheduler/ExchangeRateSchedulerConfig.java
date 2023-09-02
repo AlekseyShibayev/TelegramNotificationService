@@ -2,7 +2,7 @@ package com.company.app.exchange_rate.scheduler;
 
 import com.company.app.exchange_rate.ExchangeRateFacade;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
-import com.company.app.telegram.component.TelegramFacade;
+import com.company.app.telegram.TelegramFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

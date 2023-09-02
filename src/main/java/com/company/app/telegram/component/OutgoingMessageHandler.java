@@ -1,27 +1,24 @@
-package com.company.app.telegram.component.impl;
+package com.company.app.telegram.component;
 
-import com.company.app.telegram.component.api.OutgoingMessageHandler;
-import com.company.app.telegram.component.api.TelegramBotConfig;
+import com.company.app.telegram.component.config.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.api.ChatService;
 import com.company.app.telegram.domain.service.api.HistoryService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-@Slf4j
-@Component
-public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
+/**
+ * Обрабатывает сообщения, отправленные телеграм ботом пользователю.
+ */
+@Service
+@RequiredArgsConstructor
+public class OutgoingMessageHandler {
 
-    @Autowired
-    private HistoryService historyService;
-    @Autowired
-    private TelegramBotConfig telegramBotConfig;
-    @Autowired
-    private ChatService chatService;
+    private final HistoryService historyService;
+    private final TelegramBotConfig telegramBotConfig;
+    private final ChatService chatService;
 
-    @Override
     public void sendToEveryone(Object message) {
         chatService.getAll().stream()
                 .filter(Chat::isEnableNotifications)
@@ -29,7 +26,6 @@ public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
                 .forEach(this::sendOneMessage);
     }
 
-    @Override
     public void sendToTargetChat(String chatName, Object message) {
         SendMessage sendMessage = SendMessage.builder().chatId(chatName).text(message.toString()).build();
         sendOneMessage(sendMessage);
@@ -39,4 +35,6 @@ public class OutgoingMessageHandlerImpl implements OutgoingMessageHandler {
         historyService.saveHistory(sendMessage);
         telegramBotConfig.write(sendMessage);
     }
+
 }
+

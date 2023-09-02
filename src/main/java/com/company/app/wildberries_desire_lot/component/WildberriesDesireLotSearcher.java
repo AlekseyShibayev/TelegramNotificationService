@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.component;
 
-import com.company.app.core.util.Logs;
 import com.company.app.core.GetRequestHandler;
+import com.company.app.core.util.Logs;
 import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
 import com.company.app.wildberries_desire_lot.component.exception.WildberriesDesireLotSearchException;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;

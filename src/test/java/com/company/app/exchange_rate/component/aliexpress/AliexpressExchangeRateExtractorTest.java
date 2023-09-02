@@ -11,7 +11,7 @@ class AliexpressExchangeRateExtractorTest extends SpringBootTestApplicationConte
     private AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
 
     @Test
-    void test() {
+    void can_extract_aliexpress_exchangeRate_test() {
         String aliexpressExchangeRate = aliexpressExchangeRateExtractor.extract();
 
         Assertions.assertNotNull(aliexpressExchangeRate);

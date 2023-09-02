@@ -1,36 +1,28 @@
-package com.company.app.telegram.domain.service.impl;
+package com.company.app.telegram.domain.service;
 
 import com.company.app.telegram.component.config.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.repository.HistoryRepository;
-import com.company.app.telegram.domain.service.api.ChatService;
-import com.company.app.telegram.domain.service.api.HistoryService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.Date;
 
 @Slf4j
 @Service
-public class HistoryServiceImpl implements HistoryService {
-
+@RequiredArgsConstructor
+public class HistoryService {
     @Value("${telegram.isHistoryEnable}")
     private boolean isHistoryEnable;
 
-    @Autowired
-    private HistoryRepository historyRepository;
-    @Autowired
-    private ChatService chatService;
-    @Autowired
-    private TelegramBotConfig telegramBotConfig;
+    private final HistoryRepository historyRepository;
+    private final ChatService chatService;
+    private final TelegramBotConfig telegramBotConfig;
 
-    @Transactional
-    @Override
     public void saveHistory(Chat chat, String text) {
         log.debug("Читаю из чата [{}] сообщение [{}].", chat.getChatName(), text);
         if (isHistoryEnable) {
@@ -45,8 +37,6 @@ public class HistoryServiceImpl implements HistoryService {
         }
     }
 
-    @Transactional
-    @Override
     public void saveHistory(SendMessage sendMessage) {
         log.debug("Пробую написать в телеграм [{}]: [{}].", sendMessage.getChatId(), sendMessage.getText());
         if (isHistoryEnable) {
@@ -61,4 +51,5 @@ public class HistoryServiceImpl implements HistoryService {
             historyRepository.save(history);
         }
     }
+
 }

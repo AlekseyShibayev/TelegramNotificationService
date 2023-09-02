@@ -10,7 +10,7 @@ import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.entity.UserInfo;
 import com.company.app.telegram.domain.repository.ChatRepository;
-import com.company.app.telegram.domain.service.api.ChatService;
+import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.domain.util.ChatUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ObjectNotFoundException;

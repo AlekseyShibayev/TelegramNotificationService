@@ -5,7 +5,9 @@ import com.company.app.telegram.domain.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class SubscriptionService {
     }
 
     public Set<Subscription> getAll() {
-        return subscriptionRepository.findAll();
+        return new HashSet<>(subscriptionRepository.findAll());
     }
 
 }

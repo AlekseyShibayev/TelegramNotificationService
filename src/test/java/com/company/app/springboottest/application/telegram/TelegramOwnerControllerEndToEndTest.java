@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,23 +25,22 @@ class TelegramOwnerControllerEndToEndTest extends SpringBootTestApplicationConte
     @Autowired
     TelegramController telegramController;
     @Autowired
-    ChatInitializer initialChatRegistry;
+    ChatInitializer chatInitializer;
     @Autowired
     ChatRepository chatRepository;
 
-    @BeforeEach
-    void init() {
-        chatRepository.deleteAll();
-    }
+//    @BeforeEach
+//    void init() {
+//        chatRepository.deleteAll();
+//    }
 
     @SneakyThrows
     @Test
     void telegram_owner_get_all_test() {
-        initialChatRegistry.init();
+//        initialChatRegistry.init();
         telegramController.say(OWNER_MESSAGE);
 
-        ResponseEntity<List<ChatDto>> json = telegramOwnerController.getAllTelegramSettingsAsJson();
-        List<ChatDto> chatDtoList = json.getBody();
+        List<ChatDto> chatDtoList = telegramOwnerController.getAllTelegramSettingsAsJson().getBody();
         ChatDto chatDto = chatDtoList.get(0);
 
         Assertions.assertEquals("Owner", chatDto.getUserInfo().getRole());

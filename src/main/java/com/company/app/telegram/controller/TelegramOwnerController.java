@@ -28,4 +28,5 @@ public class TelegramOwnerController {
         List<ChatDto> dtoList = Mapper.of(chatList);
         return ResponseEntity.ok(dtoList);
     }
+
 }

@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,5 +34,6 @@ public class Subscription {
     private String type;
 
     @ManyToMany(mappedBy = "subscriptions")
-    private Set<Chat> chats;
+    private List<Chat> chats;
+
 }

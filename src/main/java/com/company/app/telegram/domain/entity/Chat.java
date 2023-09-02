@@ -68,5 +68,6 @@ public class Chat {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "CHATS_SUBSCRIPTIONS")
-    private Set<Subscription> subscriptions;
+    private Set<Subscription> subscriptions; // todo create EntityGraphExtractor in this project and change set to list here
+
 }

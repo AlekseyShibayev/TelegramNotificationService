@@ -46,4 +46,5 @@ public class History {
 
     @Column(name = "DATE")
     private Date date;
+
 }

@@ -40,4 +40,5 @@ public class UserInfo {
 
     @Column(name = "GENDER")
     private String gender;
+
 }

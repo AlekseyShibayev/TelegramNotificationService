@@ -1,15 +1,16 @@
 package com.company.app.telegram.component;
 
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.controller.SubscriptionController;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
+import com.company.app.telegram.domain.repository.SubscriptionRepository;
 import com.company.app.telegram.domain.service.ChatService;
 import lombok.RequiredArgsConstructor;
-import org.glassfish.jersey.internal.guava.Sets;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Отвечает за активацию чата.
@@ -18,15 +19,15 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ChatActivationService {
 
-    private final SubscriptionController subscriptionController;
+    private final SubscriptionRepository subscriptionRepository;
     private final ChatService chatService;
     private final TelegramFacade telegramFacade;
 
     public void activate(Chat chat) {
         if (isChatNotActive(chat)) {
             chat.setEnableNotifications(true);
-            Set<Subscription> subscriptions = subscriptionController.readAll().getBody();
-            chat.setSubscriptions(subscriptions);
+            List<Subscription> subscriptions = subscriptionRepository.findAll();
+            chat.setSubscriptions(new HashSet<>(subscriptions));
 
             chatService.update(chat);
 
@@ -38,7 +39,7 @@ public class ChatActivationService {
     public void deactivate(Chat chat) {
         if (!isChatNotActive(chat)) {
             chat.setEnableNotifications(false);
-            chat.setSubscriptions(Sets.newHashSet());
+            chat.setSubscriptions(new HashSet<>());
 
             chatService.update(chat);
 

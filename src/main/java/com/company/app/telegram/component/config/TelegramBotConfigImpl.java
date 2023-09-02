@@ -1,6 +1,5 @@
 package com.company.app.telegram.component.config;
 
-import com.company.app.telegram.component.IncomingMessageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

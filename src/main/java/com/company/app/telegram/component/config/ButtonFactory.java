@@ -1,4 +1,4 @@
-package com.company.app.telegram.component.data;
+package com.company.app.telegram.component.config;
 
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;

@@ -1,4 +1,4 @@
-package com.company.app.telegram.component;
+package com.company.app.telegram.component.config;
 
 import com.company.app.telegram.component.config.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;

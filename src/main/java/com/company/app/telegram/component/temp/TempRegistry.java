@@ -1,4 +1,4 @@
-package com.company.app.telegram.component.data;
+package com.company.app.telegram.component.temp;
 
 import com.company.app.telegram.component.binder.BinderContext;
 import com.google.common.collect.Lists;

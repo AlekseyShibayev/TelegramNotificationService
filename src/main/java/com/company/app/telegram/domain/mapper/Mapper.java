@@ -1,4 +1,4 @@
-package com.company.app.telegram.domain.util;
+package com.company.app.telegram.domain.mapper;
 
 import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.Chat;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @UtilityClass
-public class ChatUtil {
+public class Mapper {
 
     public static ChatDto of(Chat chat) {
         ChatDto chatDto = new ChatDto();
@@ -32,7 +32,7 @@ public class ChatUtil {
 
     public static List<ChatDto> of(List<Chat> chatList) {
         List<ChatDto> dtoList = chatList.stream()
-                .map(ChatUtil::of)
+                .map(Mapper::of)
                 .collect(Collectors.toList());
 
         // пока что закостылим

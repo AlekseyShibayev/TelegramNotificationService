@@ -23,7 +23,7 @@ public class BinderRegistry {
     private final List<Binder> binderList;
 
     @PostConstruct
-    void init() {
+    void initBinders() {
         for (Binder binder : binderList) {
             if (binderMap.containsKey(binder.getType())) {
                 throw new DuplicateKeyException("developer! check binders for unique type, current type [%s]".formatted(binder.getType()));
@@ -34,7 +34,7 @@ public class BinderRegistry {
     }
 
     @EventListener({ContextRefreshedEvent.class})
-    void saveSubscriptions() {
+    void initSubscriptions() {
         List<Subscription> subscriptionList = binderMap.keySet().stream()
                 .map(binderType -> Subscription.builder().type(binderType).build())
                 .toList();

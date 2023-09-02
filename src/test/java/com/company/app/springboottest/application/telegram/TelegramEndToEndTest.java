@@ -11,7 +11,7 @@ import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.entity.UserInfo;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.service.ChatService;
-import com.company.app.telegram.domain.util.ChatUtil;
+import com.company.app.telegram.domain.mapper.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
@@ -95,7 +95,7 @@ class TelegramEndToEndTest extends SpringBootTestApplicationContext {
 
         ChatDto chatDto = ChatDto.builder().chatName("653606407").enableNotifications(true).build();
         Long id = chatController.create(chatDto).getBody();
-        Chat chat = ChatUtil.of(chatDto);
+        Chat chat = Mapper.of(chatDto);
         chat.setId(id);
 
         telegramBinder.bind(BinderContext.builder()

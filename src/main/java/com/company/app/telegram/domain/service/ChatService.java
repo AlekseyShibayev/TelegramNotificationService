@@ -3,7 +3,7 @@ package com.company.app.telegram.domain.service;
 import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.repository.ChatRepository;
-import com.company.app.telegram.domain.util.ChatUtil;
+import com.company.app.telegram.domain.mapper.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ChatService {
         if (optional.isPresent()) {
             return optional.get().getId();
         } else {
-            Chat chat = ChatUtil.of(chatDto);
+            Chat chat = Mapper.of(chatDto);
             return chatRepository.save(chat).getId();
         }
     }
@@ -37,7 +37,7 @@ public class ChatService {
     }
 
     public Boolean update(Long id, ChatDto chatDto) {
-        Chat chat = ChatUtil.of(id, chatDto);
+        Chat chat = Mapper.of(id, chatDto);
         chatRepository.save(chat);
         return true;
     }

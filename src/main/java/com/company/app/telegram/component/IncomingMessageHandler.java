@@ -1,11 +1,10 @@
 package com.company.app.telegram.component;
 
-import com.company.app.telegram.component.config.TelegramBotConfig;
+import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.component.data.ButtonFactory;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.domain.service.HistoryService;
-import com.company.app.telegram.domain.service.PrepareChatToWorkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -20,7 +19,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @RequiredArgsConstructor
 public class IncomingMessageHandler {
 
-    private final TelegramBotConfig telegramBotConfig;
+    private final TelegramFacade telegramFacade;
     private final HistoryService historyService;
     private final ChatService chatService;
     private final BinderExecutor binderExecutor;
@@ -54,7 +53,7 @@ public class IncomingMessageHandler {
         sendMessage.setChatId(update.getMessage().getChatId());
         sendMessage.setText("Доступны следующие команды:");
         sendMessage.setReplyMarkup(ButtonFactory.inlineMarkup());
-        telegramBotConfig.write(sendMessage);
+        telegramFacade.writeToTargetChat(sendMessage);
     }
 
     private void handle(Update update) {

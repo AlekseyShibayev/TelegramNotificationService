@@ -15,4 +15,5 @@ class ApplicationTest extends SpringBootTestApplicationContext {
     void context_must_be_test() {
         Assertions.assertNotNull(applicationContext);
     }
+
 }

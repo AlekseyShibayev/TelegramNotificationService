@@ -1,7 +1,8 @@
-package com.company.app.telegram.domain.service;
+package com.company.app.telegram.component;
 
 import com.company.app.core.tool.json.JsonTool;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class InitialChatRegistry {
+public class ChatInitializer {
 
     @Value("classpath:telegram/init_chat.json")
     private Resource resource;

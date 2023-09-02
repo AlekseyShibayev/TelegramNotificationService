@@ -1,9 +1,10 @@
-package com.company.app.telegram.domain.service;
+package com.company.app.telegram.component;
 
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.controller.SubscriptionController;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
+import com.company.app.telegram.domain.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.glassfish.jersey.internal.guava.Sets;
 import org.springframework.stereotype.Service;

@@ -1,26 +1,28 @@
 package com.company.app.telegram;
 
-import com.company.app.telegram.component.TelegramDistributionHub;
+import com.company.app.telegram.component.OutgoingMessageHandler;
+import com.company.app.telegram.component.config.TelegramBotConfig;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class TelegramFacade {
 
-    private final TelegramDistributionHub telegramDistributionHub;
+    private final OutgoingMessageHandler outgoingMessageHandler;
+    private final TelegramBotConfig telegramBotConfig;
 
     public void writeToEveryone(Object message) {
-        telegramDistributionHub.writeToEveryone(message);
+        outgoingMessageHandler.sendToEveryone(message);
     }
 
     public void writeToTargetChat(String chatName, Object message) {
-        telegramDistributionHub.writeToTargetChat(chatName, message);
+        outgoingMessageHandler.sendToTargetChat(chatName, message);
     }
 
     public void writeToTargetChat(SendMessage sendMessage) {
-        telegramDistributionHub.writeToTargetChat(sendMessage);
+        telegramBotConfig.write(sendMessage);
     }
 
 }

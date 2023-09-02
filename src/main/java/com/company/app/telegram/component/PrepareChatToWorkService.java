@@ -1,6 +1,8 @@
-package com.company.app.telegram.domain.service;
+package com.company.app.telegram.component;
 
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.service.ChatService;
+import com.company.app.telegram.domain.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;

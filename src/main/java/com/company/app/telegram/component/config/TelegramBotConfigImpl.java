@@ -1,9 +1,9 @@
 package com.company.app.telegram.component.config;
 
-import com.company.app.telegram.component.TelegramDistributionHub;
+import com.company.app.telegram.component.IncomingMessageHandler;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -19,6 +19,7 @@ import java.io.Serializable;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot implements TelegramBotConfig {
 
     @Value("${telegram.name}")
@@ -26,8 +27,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
     @Value("${telegram.token}")
     private String token;
 
-    @Autowired
-    private TelegramDistributionHub telegramDistributionHub;
+    private final IncomingMessageHandler incomingMessageHandler;
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() throws TelegramApiException {
@@ -50,7 +50,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 
     @Override
     public void processNonCommandUpdate(Update update) {
-        telegramDistributionHub.read(update);
+        incomingMessageHandler.process(update);
     }
 
     @SneakyThrows
@@ -63,4 +63,5 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
     public String getName() {
         return this.getBotUsername();
     }
+
 }

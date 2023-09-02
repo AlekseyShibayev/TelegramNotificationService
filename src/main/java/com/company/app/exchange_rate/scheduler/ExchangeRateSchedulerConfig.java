@@ -22,10 +22,10 @@ public class ExchangeRateSchedulerConfig {
     @Scheduled(fixedDelayString = "${exchangeRate.timeout}")
     public void writeExchange() {
         ExchangeRate exchangeRate = exchangeRateFacade.extract();
-        String notification = exchangeRate.getAliexpressExchangeRate() + " (курс али)";
-        if (log.isDebugEnabled()) {
-            log.debug("Определён курс: [{}].", notification);
-        }
+
+        String notification = "exchange rate: ali: [%s]".formatted(exchangeRate.getAliexpressExchangeRate());
+        log.debug(notification);
+
         telegramFacade.writeToEveryone(notification);
     }
 

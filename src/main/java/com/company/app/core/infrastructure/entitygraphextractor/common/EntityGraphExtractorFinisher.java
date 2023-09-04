@@ -2,7 +2,6 @@ package com.company.app.core.infrastructure.entitygraphextractor.common;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
@@ -21,7 +20,6 @@ public class EntityGraphExtractorFinisher {
     private final EntityManager entityManager;
     private final EntityGraphExtractorPreparer entityGraphExtractorPreparer;
 
-    @Transactional(readOnly = true)
     public <E> E extractOne(EntityGraphExtractorContext<E> context) {
         List<E> entities = context.getEntities_();
         Class<E> eClass = context.getClass_();
@@ -33,7 +31,6 @@ public class EntityGraphExtractorFinisher {
                 Collections.singletonMap("javax.persistence.loadgraph", preparedEntityGraph));
     }
 
-    @Transactional(readOnly = true)
     public <E> List<E> extractAll(EntityGraphExtractorContext<E> context) {
         Class<E> eClass = context.getClass_();
 

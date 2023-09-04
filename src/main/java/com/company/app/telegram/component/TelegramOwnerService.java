@@ -16,7 +16,7 @@ public class TelegramOwnerService {
     private final ChatRepository chatRepository;
     private final EntityGraphExtractor entityGraphExtractor;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Chat> findAll() {
         List<Chat> chats = chatRepository.findAll();
         entityGraphExtractor.createContext(chats)

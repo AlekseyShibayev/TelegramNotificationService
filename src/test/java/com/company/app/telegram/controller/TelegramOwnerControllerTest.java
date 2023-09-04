@@ -1,9 +1,7 @@
-package com.company.app.springboottest.application.telegram;
+package com.company.app.telegram.controller;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.telegram.controller.TelegramOwnerController;
 import com.company.app.telegram.domain.entity.Chat;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
-class TelegramOwnerControllerEndToEndTest extends SpringBootTestApplicationContext {
+class TelegramOwnerControllerTest extends SpringBootTestApplicationContext {
 
     @Autowired
     private TelegramOwnerController telegramOwnerController;
 
-    @SneakyThrows
     @Test
     void telegram_owner_get_all_test() {
         List<Chat> chats = telegramOwnerController.getAllTelegramChats().getBody();
@@ -26,4 +23,5 @@ class TelegramOwnerControllerEndToEndTest extends SpringBootTestApplicationConte
         Assertions.assertEquals("653606407", first.get().getChatName());
         Assertions.assertEquals("Aleksey", first.get().getUserInfo().getName());
     }
+
 }

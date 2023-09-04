@@ -1,6 +1,6 @@
 package com.company.app.wildberries_searcher.component;
 
-import com.company.app.core.data.ResponseProducts;
+import com.company.app.core.temp.data.ResponseProducts;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries_searcher.component.data.util.WildberriesSearcherProductsUrlCreator;
 import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;

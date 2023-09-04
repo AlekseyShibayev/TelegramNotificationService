@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.domain.service;
 
-import com.company.app.core.tool.json.JsonTool;
+import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.core.tool.json.JsonTool;
+import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.wildberries_desire_lot.WildberriesDesireLotFacade;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;

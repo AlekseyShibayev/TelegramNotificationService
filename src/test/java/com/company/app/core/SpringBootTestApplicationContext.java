@@ -1,7 +1,7 @@
 package com.company.app.core;
 
-import com.company.app.core.entitygraphextractor.EntityGraphExtractor;
-import com.company.app.core.tool.api.CaptchaFighter;
+import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
+import com.company.app.core.temp.tool.api.CaptchaFighter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
 package com.company.app.core.controller;
 
-import com.company.app.core.tool.LogService;
+import com.company.app.core.temp.tool.LogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

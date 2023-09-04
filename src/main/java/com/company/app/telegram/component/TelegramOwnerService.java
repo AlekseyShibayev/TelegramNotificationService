@@ -1,6 +1,6 @@
 package com.company.app.telegram.component;
 
-import com.company.app.core.entitygraphextractor.EntityGraphExtractor;
+import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;

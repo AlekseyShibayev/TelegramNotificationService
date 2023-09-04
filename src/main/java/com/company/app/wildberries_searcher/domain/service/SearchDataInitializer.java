@@ -1,6 +1,6 @@
 package com.company.app.wildberries_searcher.domain.service;
 
-import com.company.app.core.tool.json.JsonTool;
+import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.wildberries_searcher.domain.entity.SearchData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

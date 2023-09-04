@@ -1,6 +1,6 @@
 package com.company.app.telegram.component;
 
-import com.company.app.core.tool.json.JsonTool;
+import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.service.ChatService;
 import lombok.RequiredArgsConstructor;

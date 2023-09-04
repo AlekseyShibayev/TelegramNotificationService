@@ -1,6 +1,6 @@
 package com.company.app.telegram.domain.service;
 
-import com.company.app.core.entitygraphextractor.EntityGraphExtractor;
+import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.mapper.Mapper;

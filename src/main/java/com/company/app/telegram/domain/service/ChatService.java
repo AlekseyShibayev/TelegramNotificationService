@@ -1,5 +1,6 @@
 package com.company.app.telegram.domain.service;
 
+import com.company.app.core.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.mapper.Mapper;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class ChatService {
 
     private final ChatRepository chatRepository;
+    private final EntityGraphExtractor entityGraphExtractor;
 
     public Long create(ChatDto chatDto) {
         Optional<Chat> optional = chatRepository.findFirstByChatName(chatDto.getChatName());
@@ -60,13 +62,10 @@ public class ChatService {
         }
     }
 
-    private Chat save(String chatId) {
-        Chat chat = Chat.builder().chatName(chatId).build();
+    private Chat save(String chatName) {
+        Chat chat = new Chat()
+                .setChatName(chatName);
         return chatRepository.save(chat);
-    }
-
-    public List<Chat> getAll() {
-        return chatRepository.findAll();
     }
 
     public void saveAll(List<Chat> list) {

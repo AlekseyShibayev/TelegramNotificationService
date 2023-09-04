@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -34,6 +35,6 @@ public class Subscription {
     private String type;
 
     @ManyToMany(mappedBy = "subscriptions")
-    private List<Chat> chats;
+    private List<Chat> chats = new ArrayList<>();
 
 }

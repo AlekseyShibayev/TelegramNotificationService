@@ -1,28 +1,14 @@
 package com.company.app.springboottest.application.telegram;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.telegram.component.binder.BinderContext;
 import com.company.app.telegram.component.binder.impl.TelegramOffBinder;
 import com.company.app.telegram.controller.ChatController;
 import com.company.app.telegram.controller.TelegramController;
-import com.company.app.telegram.domain.dto.ChatDto;
-import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.domain.entity.History;
-import com.company.app.telegram.domain.entity.UserInfo;
-import com.company.app.telegram.domain.mapper.Mapper;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.UserInfoRepository;
 import com.company.app.telegram.domain.service.ChatService;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.ObjectNotFoundException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 class TelegramEndToEndTest extends SpringBootTestApplicationContext {

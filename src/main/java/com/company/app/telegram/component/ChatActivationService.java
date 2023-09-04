@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -27,7 +26,7 @@ public class ChatActivationService {
         if (isChatNotActive(chat)) {
             chat.setEnableNotifications(true);
             List<Subscription> subscriptions = subscriptionRepository.findAll();
-            chat.setSubscriptions(new HashSet<>(subscriptions));
+            chat.setSubscriptions(subscriptions);
 
             chatService.update(chat);
 
@@ -39,7 +38,7 @@ public class ChatActivationService {
     public void deactivate(Chat chat) {
         if (!isChatNotActive(chat)) {
             chat.setEnableNotifications(false);
-            chat.setSubscriptions(new HashSet<>());
+            chat.setSubscriptions(new ArrayList<>());
 
             chatService.update(chat);
 

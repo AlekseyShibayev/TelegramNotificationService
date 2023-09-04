@@ -1,10 +1,8 @@
 package com.company.app.telegram.controller;
 
-import com.company.app.telegram.domain.dto.ChatDto;
+import com.company.app.telegram.component.TelegramOwnerService;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.domain.mapper.Mapper;
-import com.company.app.telegram.domain.service.ChatService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,20 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/telegram/owner")
 public class TelegramOwnerController {
 
-    @Autowired
-    ChatService chatService;
+    private final TelegramOwnerService telegramOwnerService;
 
     /**
-     * пример запроса: http://localhost:8080/telegram/owner/getAllTelegramSettingsAsJson
+     * example: http://localhost:8080/telegram/owner/getAllTelegramSettingsAsJson
      */
-    @GetMapping(value = "/getAllTelegramSettingsAsJson", produces = "application/json")
-    public ResponseEntity<List<ChatDto>> getAllTelegramSettingsAsJson() {
-        List<Chat> chatList = chatService.getAll();
-        List<ChatDto> dtoList = Mapper.of(chatList);
-        return ResponseEntity.ok(dtoList);
+    @GetMapping(value = "/getAllTelegramChats", produces = "application/json")
+    public ResponseEntity<List<Chat>> getAllTelegramChats() {
+        return ResponseEntity.ok(telegramOwnerService.findAll());
     }
 
 }

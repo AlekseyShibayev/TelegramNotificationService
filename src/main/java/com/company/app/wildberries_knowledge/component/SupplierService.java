@@ -1,4 +1,4 @@
-package com.company.app.wildberries_knowledge.domain.service;
+package com.company.app.wildberries_knowledge.component;
 
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import com.company.app.wildberries_knowledge.domain.repository.SupplierRepository;

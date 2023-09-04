@@ -1,4 +1,4 @@
-package com.company.app.wildberries_knowledge.domain.service;
+package com.company.app.wildberries_knowledge.component;
 
 import com.company.app.core.SpringBootTestApplicationContext;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
@@ -17,8 +17,8 @@ class SupplierInitializerTest extends SpringBootTestApplicationContext {
 
     @Test
     void can_init() {
-        List<Supplier> all = supplierService.getAll();
-        Assertions.assertTrue(all.size() > 0);
+        List<Supplier> suppliers = supplierService.getAll();
+        Assertions.assertTrue(suppliers.size() > 0);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.company.app.wildberries_knowledge.domain.service;
+package com.company.app.wildberries_knowledge.component;
 
 import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;

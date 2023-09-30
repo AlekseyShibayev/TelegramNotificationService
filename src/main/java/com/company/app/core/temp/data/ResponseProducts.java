@@ -1,7 +1,7 @@
 package com.company.app.core.temp.data;
 
 import com.company.app.core.util.Strings;
-import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
+import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotUrlCreator;
 import com.company.app.wildberries_searcher.domain.dto.WildberriesLinkDto;
 import lombok.Getter;
 import lombok.Setter;

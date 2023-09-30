@@ -19,7 +19,7 @@ public class TelegramOwnerService {
     @Transactional(readOnly = true)
     public List<Chat> findAll() {
         List<Chat> chats = chatRepository.findAll();
-        entityGraphExtractor.createContext(chats)
+        entityGraphExtractor.createChatContext(chats)
                 .withUserInfo()
                 .extractAll();
         return chats;

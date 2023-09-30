@@ -2,6 +2,7 @@ package com.company.app.core;
 
 import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.core.temp.tool.api.CaptchaFighter;
+import com.company.app.wildberries_desire_lot.domain.initializer.DesireInitializer;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -26,10 +28,12 @@ public abstract class SpringBootTestApplicationContext {
     @MockBean
     protected CaptchaFighter captchaFighter;
     @Autowired
+    protected TransactionTemplate transactionTemplate;
+    @Autowired
     protected EntityGraphExtractor entityGraphExtractor;
 
     @PostConstruct
     void init() {
-        log.debug("**********     запущена группа тестов всего приложения     **********");
+        log.debug("**********     run spring boot test context     **********");
     }
 }

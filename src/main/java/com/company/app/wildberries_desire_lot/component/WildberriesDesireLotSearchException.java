@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component.exception;
+package com.company.app.wildberries_desire_lot.component;
 
 public class WildberriesDesireLotSearchException extends RuntimeException {
 

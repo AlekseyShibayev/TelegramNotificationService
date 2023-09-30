@@ -3,12 +3,20 @@ package com.company.app.wildberries_desire_lot.domain.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,10 +33,17 @@ public class DesireLot {
     @Column(name = "ARTICLE")
     private String article;
 
-    @Column(name = "DESIRED_PRICE")
-    private String desiredPrice;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
-    @Column(name = "DISCOUNT")
-    private String discount;
+    @Column(name = "PRICE")
+    private BigDecimal price;
+
+    @Column(name = "LAST_SEEN")
+    @UpdateTimestamp
+    private OffsetDateTime lastSeen;
+
+    @OneToMany(mappedBy = "desireLot", fetch = FetchType.LAZY)
+    private List<Desire> desireList = new ArrayList<>();
 
 }

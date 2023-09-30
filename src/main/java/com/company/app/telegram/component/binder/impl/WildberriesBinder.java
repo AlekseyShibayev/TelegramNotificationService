@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,7 +32,8 @@ public class WildberriesBinder implements Binder { // todo это какой-т�
     @Override
     public void bind(BinderContext binderContainer) {
         Chat chat = binderContainer.getChat();
-        List<FoundItemDto> foundItemDtoList = wildberriesController.getAllFoundItems().getBody();
+//        List<FoundItemDto> foundItemDtoList = wildberriesController.getAllFoundItems().getBody();
+        List<FoundItemDto> foundItemDtoList = new ArrayList<>();
         if (CollectionUtils.isEmpty(foundItemDtoList)) {
             telegramFacade.writeToTargetChat(chat.getChatName(), "Пусто");
         } else {

@@ -2,9 +2,10 @@ package com.company.app.wildberries_desire_lot.scheduler;
 
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.wildberries_desire_lot.WildberriesDesireLotFacade;
-import com.company.app.wildberries_desire_lot.component.data.WildberriesDesireLotUrlCreator;
-import com.company.app.wildberries_desire_lot.domain.entity.FoundItem;
+import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotFinder;
+import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotRefresher;
+import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotUrlCreator;
+import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,16 +21,13 @@ import java.util.List;
 public class WildberriesDesireLotSchedulerConfig {
 
     private final TelegramFacade telegramFacade;
-    private final WildberriesDesireLotFacade wildberriesFacade;
+    private final WildberriesDesireLotRefresher wildberriesDesireLotRefresher;
+    private final WildberriesDesireLotFinder wildberriesDesireLotFinder;
 
     @Scheduled(fixedDelayString = "${wildberries.desire.lot.timeout}")
     public void doDesireLotSearch() {
-        List<FoundItem> desiredLots = wildberriesFacade.doDesireLotSearch();
-
-        if (log.isDebugEnabled()) {
-            log.debug("Определены желаемые лоты вб, в количестве: [{}].", desiredLots.size());
-        }
-
+        wildberriesDesireLotRefresher.refresh();
+        List<Desire> desiredLots = wildberriesDesireLotFinder.find();
         if (Collections.isNotEmpty(desiredLots)) {
             desiredLots.forEach(foundItem -> telegramFacade.writeToEveryone(WildberriesDesireLotUrlCreator.getUrlForResponse(foundItem.getArticle())));
         }

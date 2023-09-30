@@ -1,9 +1,6 @@
-package com.company.app.wildberries_desire_lot.component.data;
+package com.company.app.wildberries_desire_lot.component;
 
-import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import lombok.experimental.UtilityClass;
-
-import java.util.List;
 
 @UtilityClass
 public class WildberriesDesireLotUrlCreator {
@@ -13,17 +10,6 @@ public class WildberriesDesireLotUrlCreator {
 
     public static String getUrlForPriceSearch(String id) {
         return URL_BONE + id;
-    }
-
-    public static String getUrlForPriceSearch(List<DesireLot> lots) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        lots.stream()
-                .map(DesireLot::getArticle)
-                .distinct()
-                .forEach(name -> stringBuilder.append(name).append(";"));
-
-        return getUrlForPriceSearch(stringBuilder.toString());
     }
 
     public static String getUrlForResponse(String id) {

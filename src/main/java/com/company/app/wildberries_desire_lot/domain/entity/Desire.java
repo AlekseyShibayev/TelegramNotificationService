@@ -8,25 +8,37 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.Date;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Accessors(chain = true)
 @Entity
-@Table(name = "FOUND_ITEM")
-public class FoundItem {
+@Table(name = "DESIRE")
+public class Desire {
 
     @Id
     @GeneratedValue
     @Column(name = "ID", nullable = false)
     private Long id;
 
+    @Column(name = "CHAT_NAME")
+    private String chatName;
+
     @Column(name = "ARTICLE")
     private String article;
 
-    @Column(name = "CREATION_DATE")
-    private Date creationDate;
+    @Column(name = "PRICE")
+    private BigDecimal price;
+
+    @Column(name = "DISCOUNT")
+    private String discount;
+
+    @ManyToOne
+    @JoinColumn(name = "DESIRE_LOT_ID")
+    private DesireLot desireLot;
 
 }

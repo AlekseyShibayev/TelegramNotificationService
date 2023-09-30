@@ -4,6 +4,7 @@ import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class WildberriesDesireLotFinder {
     private final DesireRepository desireRepository;
 
     public List<Desire> find() {
-
-        return null;
+        Specification<Desire> where = Specification.where(null);
+        return desireRepository.findAll(where);
     }
 
 }

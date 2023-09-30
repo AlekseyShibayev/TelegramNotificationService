@@ -16,8 +16,8 @@ import java.util.List;
 @RequestMapping("/wildberries")
 public class WildberriesController {
 
-//    private final WildberriesDesireLotFacade wildberriesFacade;
-//
+    private final WildberriesDesireLotFacade wildberriesFacade;
+
 //    @GetMapping(value = "/getAllFoundItems", produces = "application/json")
 //    public ResponseEntity<List<FoundItemDto>> getAllFoundItems() {
 //        return ResponseEntity.ok(Mapper.of(wildberriesFacade.getAllFoundItems()));

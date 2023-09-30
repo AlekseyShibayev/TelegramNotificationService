@@ -1,6 +1,7 @@
 package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.core.GetRequestHandler;
+import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.core.temp.data.Response;
 import com.company.app.core.temp.data.ResponseProducts;
 import com.company.app.core.temp.tool.json.JsonTool;
@@ -31,17 +32,18 @@ public class WildberriesDesireLotRefresher {
     private final GetRequestHandler getRequestHandler;
     private final JsonTool<Response> jsonTool;
 
+    @PerformanceLogAnnotation
     @Transactional
     public void refresh() {
         List<Desire> desireList = desireRepository.findAll();
 
-        String collect = desireList.stream()
+        String articles = desireList.stream()
                 .map(Desire::getArticle)
                 .filter(StringUtils::isNotEmpty)
                 .distinct()
                 .collect(joining(";"));
 
-        String urlForPriceSearch = WildberriesDesireLotUrlCreator.getUrlForPriceSearch(collect);
+        String urlForPriceSearch = WildberriesDesireLotUrlCreator.getUrlForPriceSearch(articles);
         String jsonResponse = getRequestHandler.loadHtmlPage(urlForPriceSearch);
 
         Response response = jsonTool.toJavaAsObject(jsonResponse, Response.class, MapperSettings.builder()

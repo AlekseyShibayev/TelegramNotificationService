@@ -1,10 +1,8 @@
-package com.company.app.wildberries_desire_lot.component;
+package com.company.app.wildberries_desire_lot.domain.repository;
 
 import com.company.app.core.SpringBootTestApplicationContext;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
-import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
-import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,8 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
-class WildberriesDesireLotFinderTest extends SpringBootTestApplicationContext {
+class DesireRepositoryTest extends SpringBootTestApplicationContext {
 
-    @Autowired
-    private WildberriesDesireLotFinder wildberriesDesireLotFinder;
     @Autowired
     private DesireRepository desireRepository;
     @Autowired
@@ -35,10 +31,12 @@ class WildberriesDesireLotFinderTest extends SpringBootTestApplicationContext {
                 .setPrice(new BigDecimal("500"))
                 .setDesireList(Collections.singletonList(desire));
         desireLotRepository.save(desireLot);
+        desire.setDesireLot(desireLot);
+        desireRepository.save(desire);
 
-        List<Desire> desires = wildberriesDesireLotFinder.find();
+        List<Desire> desires = desireRepository.findWithDesirePriceGreaterThenRealPrice();
 
-//        Assertions.assertEquals(1, desires.size());
+        Assertions.assertEquals(1, desires.size());
     }
 
 }

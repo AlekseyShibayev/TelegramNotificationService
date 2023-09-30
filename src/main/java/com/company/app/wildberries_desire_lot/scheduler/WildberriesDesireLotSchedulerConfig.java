@@ -2,10 +2,10 @@ package com.company.app.wildberries_desire_lot.scheduler;
 
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotFinder;
 import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotRefresher;
 import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
+import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -22,14 +22,17 @@ public class WildberriesDesireLotSchedulerConfig {
 
     private final TelegramFacade telegramFacade;
     private final WildberriesDesireLotRefresher wildberriesDesireLotRefresher;
-    private final WildberriesDesireLotFinder wildberriesDesireLotFinder;
+    private final DesireRepository desireRepository;
 
     @Scheduled(fixedDelayString = "${wildberries.desire.lot.timeout}")
     public void doDesireLotSearch() {
         wildberriesDesireLotRefresher.refresh();
-        List<Desire> desiredLots = wildberriesDesireLotFinder.find();
-        if (Collections.isNotEmpty(desiredLots)) {
-            desiredLots.forEach(foundItem -> telegramFacade.writeToEveryone(WildberriesDesireLotUrlCreator.getUrlForResponse(foundItem.getArticle())));
+        List<Desire> desireList = desireRepository.findWithDesirePriceGreaterThenRealPrice();
+        if (Collections.isNotEmpty(desireList)) {
+            desireList.forEach(desire -> {
+                String urlForResponse = WildberriesDesireLotUrlCreator.getUrlForResponse(desire.getArticle());
+                telegramFacade.writeToTargetChat(desire.getChatName(), urlForResponse);
+            });
         }
     }
 

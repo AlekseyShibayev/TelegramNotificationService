@@ -6,6 +6,7 @@ import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 class WildberriesDesireControllerExecutorTest extends SpringBootTestApplicationContext {
 
     @Autowired
@@ -47,6 +49,7 @@ class WildberriesDesireControllerExecutorTest extends SpringBootTestApplicationC
             desireRepository.save(desire2);
         });
 
+        log.debug("*****");
         List<DesireDto> desireDtoList = wildberriesDesireControllerExecutor.get("1");
 
         Assertions.assertEquals(1, desireDtoList.size());

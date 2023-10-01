@@ -7,6 +7,7 @@ import com.company.app.core.temp.data.ResponseProducts;
 import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.core.temp.tool.json.MapperSettings;
 import com.company.app.core.util.Strings;
+import com.company.app.core.wildberries_common.WildberriesUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;

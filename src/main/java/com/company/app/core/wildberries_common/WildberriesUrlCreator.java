@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component;
+package com.company.app.core.wildberries_common;
 
 import lombok.experimental.UtilityClass;
 

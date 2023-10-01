@@ -20,12 +20,12 @@ public class WildberriesDesireLotUpdater {
 
     private final DesireLotRepository desireLotRepository;
 
-    public List<DesireLot> updateDesireLots(List<DesireLot> toUpdate) {
+    public List<DesireLot> updateDesireLots(List<DesireLot> dtoListToUpdate) {
         List<DesireLot> persisted = desireLotRepository.findAll();
         if (isRefreshFirstTime(persisted)) {
-            desireLotRepository.saveAll(toUpdate);
+            desireLotRepository.saveAll(dtoListToUpdate);
         } else {
-            Map<String, DesireLot> mapToUpdate = toUpdate.stream()
+            Map<String, DesireLot> mapToUpdate = dtoListToUpdate.stream()
                     .collect(Collectors.toMap(DesireLot::getArticle, Function.identity()));
 
             persisted.forEach(desireLot -> updateOneDesireLot(mapToUpdate, desireLot));

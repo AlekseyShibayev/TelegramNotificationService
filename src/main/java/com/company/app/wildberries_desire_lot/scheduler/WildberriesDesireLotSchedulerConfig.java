@@ -3,7 +3,7 @@ package com.company.app.wildberries_desire_lot.scheduler;
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotRefresher;
-import com.company.app.wildberries_desire_lot.component.WildberriesUrlCreator;
+import com.company.app.core.wildberries_common.WildberriesUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;

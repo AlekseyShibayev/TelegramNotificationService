@@ -1,12 +1,8 @@
 package com.company.app.wildberries_desire_lot.component;
 
-import com.company.app.core.GetRequestHandler;
-import com.company.app.core.temp.data.Response;
-import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.core.util.Collections;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
-import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -22,10 +18,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class WildberriesDesireLotUpdater {
 
-    private final DesireRepository desireRepository;
     private final DesireLotRepository desireLotRepository;
-    private final GetRequestHandler getRequestHandler;
-    private final JsonTool<Response> jsonTool;
 
     public List<DesireLot> updateDesireLots(List<DesireLot> toUpdate) {
         List<DesireLot> persisted = desireLotRepository.findAll();

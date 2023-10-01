@@ -41,8 +41,8 @@ public class WildberriesDesireLotRefresher {
 
         desireList.forEach(desire ->
                 persistedDesireLots.stream()
-                    .filter(desireLot -> desire.getArticle().equals(desireLot.getArticle()))
-                    .forEach(desireLot -> desire.setDesireLot(desireLot))
+                        .filter(desireLot -> desire.getArticle().equals(desireLot.getArticle()))
+                        .forEach(desireLot -> desire.setDesireLot(desireLot))
         );
 
         desireRepository.saveAll(desireList);
@@ -65,11 +65,11 @@ public class WildberriesDesireLotRefresher {
         List<ResponseProducts> products = response.getData().getProducts();
 
         return products.stream()
-                .map(WildberriesDesireLotRefresher::toDesireLot)
+                .map(this::toDesireLot)
                 .toList();
     }
 
-    private static DesireLot toDesireLot(ResponseProducts responseProducts) {
+    private DesireLot toDesireLot(ResponseProducts responseProducts) {
         String price = Strings.cutEnd(String.valueOf(responseProducts.getSalePriceU()), 2);
         return new DesireLot()
                 .setArticle(String.valueOf(responseProducts.getId()))

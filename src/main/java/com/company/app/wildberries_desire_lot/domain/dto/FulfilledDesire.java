@@ -9,14 +9,14 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class DesireDto {
+public class FulfilledDesire {
 
     private String chatName;
     private String article;
     private String url;
 
-    public static DesireDto of(Desire desire) {
-        return new DesireDto()
+    public static FulfilledDesire of(Desire desire) {
+        return new FulfilledDesire()
                 .setChatName(desire.getChatName())
                 .setArticle(desire.getArticle())
                 .setUrl(WildberriesUrlCreator.getUrlForResponse(desire.getArticle()));

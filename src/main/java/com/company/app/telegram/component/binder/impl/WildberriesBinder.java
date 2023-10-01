@@ -6,7 +6,7 @@ import com.company.app.telegram.component.binder.Binder;
 import com.company.app.telegram.component.binder.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_desire_lot.controller.WildberriesDesireController;
-import com.company.app.wildberries_desire_lot.domain.entity.Desire;
+import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -31,18 +31,14 @@ public class WildberriesBinder implements Binder { // todo это какой-т�
     @Override
     public void bind(BinderContext binderContainer) {
         Chat chat = binderContainer.getChat();
-        List<Desire> desireList = wildberriesDesireController.get(chat.getChatName()).getBody();
+        List<FulfilledDesire> desireList = wildberriesDesireController.getFulfilledDesires(chat.getChatName()).getBody();
 
-//        if (Collections.isEmpty(desireList)) {
-//            telegramFacade.writeToTargetChat(chat.getChatName(), "nothing");
-//        } else {
-//            String message = desireList.stream()
-//                    .map((Desire t) -> FoundItemDto.getLink(t))
-//                    .distinct()
-//                    .reduce((s, s2) -> s + "\n" + s2)
-//                    .orElseThrow();
-//            telegramFacade.writeToTargetChat(chat.getChatName(), message);
-//        }
+        if (Collections.isEmpty(desireList)) {
+            telegramFacade.writeToTargetChat(chat.getChatName(), "find nothing");
+        } else {
+            desireList.forEach(fulfilledDesire ->
+                    telegramFacade.writeToTargetChat(fulfilledDesire.getChatName(), fulfilledDesire.getUrl()));
+        }
     }
 
 }

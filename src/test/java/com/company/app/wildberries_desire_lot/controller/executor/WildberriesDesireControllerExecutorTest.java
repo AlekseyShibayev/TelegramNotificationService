@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.controller.executor;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.wildberries_desire_lot.domain.dto.DesireDto;
+import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
@@ -50,13 +50,13 @@ class WildberriesDesireControllerExecutorTest extends SpringBootTestApplicationC
         });
 
         log.debug("*****");
-        List<DesireDto> desireDtoList = wildberriesDesireControllerExecutor.get("1");
+        List<FulfilledDesire> desireDtoList = wildberriesDesireControllerExecutor.getFulfilledDesires("1");
 
         Assertions.assertEquals(1, desireDtoList.size());
         Assertions.assertEquals("999", desireDtoList.get(0).getArticle());
 
-        List<DesireDto> desireDtoList2 = wildberriesDesireControllerExecutor.get("2");
-        Assertions.assertEquals(0, desireDtoList.size());
+        List<FulfilledDesire> desireDtoList2 = wildberriesDesireControllerExecutor.getFulfilledDesires("2");
+        Assertions.assertEquals(0, desireDtoList2.size());
     }
 
 }

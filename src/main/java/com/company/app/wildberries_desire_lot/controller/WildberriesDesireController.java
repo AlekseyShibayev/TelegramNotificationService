@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.controller;
 
-import com.company.app.wildberries_desire_lot.domain.entity.Desire;
-import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
+import com.company.app.wildberries_desire_lot.controller.executor.WildberriesDesireControllerExecutor;
+import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,11 @@ import java.util.List;
 @RequestMapping("/wildberries")
 public class WildberriesDesireController {
 
-    private final DesireRepository desireRepository;
+    private final WildberriesDesireControllerExecutor wildberriesDesireControllerExecutor;
 
-    @GetMapping(value = "/get", produces = "application/json")
-    public ResponseEntity<List<Desire>> get(@RequestParam String chatName) {
-        return ResponseEntity.ok(desireRepository.findAll());
+    @GetMapping(value = "/getFulfilledDesires", produces = "application/json")
+    public ResponseEntity<List<FulfilledDesire>> getFulfilledDesires(@RequestParam String chatName) {
+        return ResponseEntity.ok(wildberriesDesireControllerExecutor.getFulfilledDesires(chatName));
     }
 
 }

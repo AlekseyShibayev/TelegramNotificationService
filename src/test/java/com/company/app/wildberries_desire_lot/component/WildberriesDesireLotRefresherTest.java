@@ -1,7 +1,6 @@
 package com.company.app.wildberries_desire_lot.component;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotRefresher;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import org.junit.jupiter.api.Assertions;
@@ -32,6 +31,7 @@ class WildberriesDesireLotRefresherTest extends SpringBootTestApplicationContext
                 .withDesireLot()
                 .extractOne();
         Assertions.assertEquals(desire.getArticle(), extracted.getDesireLot().getArticle());
+        Assertions.assertNotNull(extracted.getDesireLot().getPrice());
     }
 
 }

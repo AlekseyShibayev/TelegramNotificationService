@@ -36,14 +36,26 @@ public class WildberriesDesireLotRefresher {
     @Transactional
     public void refresh() {
         List<Desire> desireList = desireRepository.findAll();
+        List<DesireLot> desireLotList = getDesireLots(desireList);
+        desireLotRepository.saveAll(desireLotList);
 
+        desireList.forEach(desire ->
+            desireLotList.stream()
+                    .filter(desireLot -> desire.getArticle().equals(desireLot.getArticle()))
+                    .forEach(desireLot -> desire.setDesireLot(desireLot))
+        );
+
+        desireRepository.saveAll(desireList);
+    }
+
+    private List<DesireLot> getDesireLots(List<Desire> desireList) {
         String articles = desireList.stream()
                 .map(Desire::getArticle)
                 .filter(StringUtils::isNotEmpty)
                 .distinct()
                 .collect(joining(";"));
 
-        String urlForPriceSearch = WildberriesDesireLotUrlCreator.getUrlForPriceSearch(articles);
+        String urlForPriceSearch = WildberriesUrlCreator.getUrlForPriceSearch(articles);
         String jsonResponse = getRequestHandler.loadHtmlPage(urlForPriceSearch);
 
         Response response = jsonTool.toJavaAsObject(jsonResponse, Response.class, MapperSettings.builder()
@@ -52,18 +64,9 @@ public class WildberriesDesireLotRefresher {
 
         List<ResponseProducts> products = response.getData().getProducts();
 
-        List<DesireLot> desireLotList = products.stream()
+        return products.stream()
                 .map(WildberriesDesireLotRefresher::toDesireLot)
                 .toList();
-
-        desireList.forEach(desire ->
-            desireLotList.stream()
-                    .filter(desireLot -> desire.getArticle().equals(desireLot.getArticle()))
-                    .forEach(desire::setDesireLot)
-        );
-
-        desireLotRepository.saveAll(desireLotList);
-        desireRepository.saveAll(desireList);
     }
 
     private static DesireLot toDesireLot(ResponseProducts responseProducts) {

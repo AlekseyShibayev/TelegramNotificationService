@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.domain.mapper;
 
-import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotUrlCreator;
+import com.company.app.wildberries_desire_lot.component.WildberriesUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.dto.FoundItemDto;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import lombok.experimental.UtilityClass;
@@ -21,7 +21,7 @@ public class Mapper {
         List<FoundItemDto> result = foundItems.stream()
                 .map(Mapper::of)
                 .toList();
-        result.forEach(foundItemDto -> foundItemDto.setLink(WildberriesDesireLotUrlCreator.getUrlForResponse(foundItemDto.getArticle())));
+        result.forEach(foundItemDto -> foundItemDto.setLink(WildberriesUrlCreator.getUrlForResponse(foundItemDto.getArticle())));
         return result;
     }
 

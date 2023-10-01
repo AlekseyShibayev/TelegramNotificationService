@@ -3,7 +3,7 @@ package com.company.app.wildberries_desire_lot.scheduler;
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotRefresher;
-import com.company.app.wildberries_desire_lot.component.WildberriesDesireLotUrlCreator;
+import com.company.app.wildberries_desire_lot.component.WildberriesUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class WildberriesDesireLotSchedulerConfig {
         List<Desire> desireList = desireRepository.findWithDesirePriceGreaterThenRealPrice();
         if (Collections.isNotEmpty(desireList)) {
             desireList.forEach(desire -> {
-                String urlForResponse = WildberriesDesireLotUrlCreator.getUrlForResponse(desire.getArticle());
+                String urlForResponse = WildberriesUrlCreator.getUrlForResponse(desire.getArticle());
                 telegramFacade.writeToTargetChat(desire.getChatName(), urlForResponse);
             });
         }

@@ -9,7 +9,6 @@ import com.company.app.core.temp.tool.json.MapperSettings;
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
-import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,19 +27,19 @@ import static java.util.stream.Collectors.joining;
 public class WildberriesDesireLotRefresher {
 
     private final DesireRepository desireRepository;
-    private final DesireLotRepository desireLotRepository;
     private final GetRequestHandler getRequestHandler;
     private final JsonTool<Response> jsonTool;
+    private final WildberriesDesireLotUpdater wildberriesDesireLotUpdater;
 
     @PerformanceLogAnnotation
     @Transactional
     public void refresh() {
         List<Desire> desireList = desireRepository.findAll();
         List<DesireLot> desireLotList = getDesireLots(desireList);
-        desireLotRepository.saveAll(desireLotList);
+        List<DesireLot> persistedDesireLots = wildberriesDesireLotUpdater.updateDesireLots(desireLotList);
 
         desireList.forEach(desire ->
-            desireLotList.stream()
+                persistedDesireLots.stream()
                     .filter(desireLot -> desire.getArticle().equals(desireLot.getArticle()))
                     .forEach(desireLot -> desire.setDesireLot(desireLot))
         );

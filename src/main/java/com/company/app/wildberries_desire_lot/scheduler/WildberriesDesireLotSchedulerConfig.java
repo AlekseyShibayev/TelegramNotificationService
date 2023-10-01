@@ -27,7 +27,7 @@ public class WildberriesDesireLotSchedulerConfig {
     @Scheduled(fixedDelayString = "${wildberries.desire.lot.timeout}")
     public void doDesireLotSearch() {
         wildberriesDesireLotRefresher.refresh();
-        List<Desire> desireList = desireRepository.findWithDesirePriceGreaterThenRealPrice();
+        List<Desire> desireList = desireRepository.findAllWithDesirePriceGreaterThenRealPrice();
         if (Collections.isNotEmpty(desireList)) {
             desireList.forEach(desire -> {
                 String urlForResponse = WildberriesUrlCreator.getUrlForResponse(desire.getArticle());

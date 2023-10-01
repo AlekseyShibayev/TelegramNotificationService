@@ -10,6 +10,6 @@ import java.util.List;
 public interface DesireRepository extends JpaRepository<Desire, Long>, JpaSpecificationExecutor<Desire> {
 
     @Query("from Desire d join d.desireLot dl where d.price >= dl.price")
-    List<Desire> findWithDesirePriceGreaterThenRealPrice();
+    List<Desire> findAllWithDesirePriceGreaterThenRealPrice();
 
 }

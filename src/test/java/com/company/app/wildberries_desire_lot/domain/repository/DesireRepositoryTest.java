@@ -34,7 +34,7 @@ class DesireRepositoryTest extends SpringBootTestApplicationContext {
         desire.setDesireLot(desireLot);
         desireRepository.save(desire);
 
-        List<Desire> desires = desireRepository.findWithDesirePriceGreaterThenRealPrice();
+        List<Desire> desires = desireRepository.findAllWithDesirePriceGreaterThenRealPrice();
 
         Assertions.assertEquals(1, desires.size());
     }

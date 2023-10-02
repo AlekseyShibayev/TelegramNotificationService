@@ -41,9 +41,9 @@ public class EntityGraphExtractorFinisher {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(eClass);
         Root<E> eRoot = criteriaQuery.from(eClass);
+
         criteriaQuery.select(eRoot)
-                .where(eRoot.get(idName)
-                        .in(ids));
+                .where(eRoot.get(idName).in(ids));
 
         TypedQuery<E> typedQuery = entityManager.createQuery(criteriaQuery);
         typedQuery.setHint("javax.persistence.loadgraph", preparedEntityGraph);

@@ -25,6 +25,6 @@ public class Application {
 
     @Bean
     public ApplicationRunner runner() {
-        return args -> log.debug("*******************  The app has been started.  *******************");
+        return args -> log.info("*******************  The app has been started.  *******************");
     }
 }

@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component;
+package com.company.app.wildberries_desire_lot.scheduler.executor.component;
 
 import com.company.app.core.util.Collections;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
@@ -23,7 +23,7 @@ public class WildberriesDesireLotUpdater {
     public List<DesireLot> updateDesireLots(List<DesireLot> dtoListToUpdate) {
         List<DesireLot> persisted = desireLotRepository.findAll();
         if (isRefreshFirstTime(persisted)) {
-            desireLotRepository.saveAll(dtoListToUpdate);
+            return desireLotRepository.saveAll(dtoListToUpdate);
         } else {
             Map<String, DesireLot> mapToUpdate = dtoListToUpdate.stream()
                     .collect(Collectors.toMap(DesireLot::getArticle, Function.identity()));

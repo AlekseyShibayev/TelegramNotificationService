@@ -34,7 +34,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 //		this.execute(new SetMyCommands(LIST_OF_COMMANDS, new BotCommandScopeDefault(), null));
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
         botsApi.registerBot(this);
-        log.info("**********     телеграм бот создан     **********");
+        log.info("**********     The telegram bot has been created.     **********");
 //		this.execute(GetUpdates.builder().build()); // пока не ясно о каких updates идет речь
     }
 

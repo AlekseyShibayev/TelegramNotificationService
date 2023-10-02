@@ -34,7 +34,7 @@ public class WildberriesBinder implements Binder { // todo это какой-т�
         List<FulfilledDesire> desireList = wildberriesDesireController.getFulfilledDesires(chat.getChatName()).getBody();
 
         if (Collections.isEmpty(desireList)) {
-            telegramFacade.writeToTargetChat(chat.getChatName(), "find nothing");
+            telegramFacade.writeToTargetChat(chat.getChatName(), "Ничего не нашёл");
         } else {
             desireList.forEach(fulfilledDesire ->
                     telegramFacade.writeToTargetChat(fulfilledDesire.getChatName(), fulfilledDesire.getUrl()));

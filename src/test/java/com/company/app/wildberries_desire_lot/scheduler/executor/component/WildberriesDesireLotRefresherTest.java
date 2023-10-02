@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.component;
+package com.company.app.wildberries_desire_lot.scheduler.executor.component;
 
 import com.company.app.core.SpringBootTestApplicationContext;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;

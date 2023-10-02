@@ -23,8 +23,7 @@ class DesireRepositoryTest extends SpringBootTestApplicationContext {
         Desire desire = new Desire()
                 .setChatName("653606407")
                 .setArticle("43409221")
-                .setPrice(new BigDecimal("699"))
-                .setDiscount("0.15");
+                .setPrice(new BigDecimal("699"));
         desireRepository.save(desire);
         DesireLot desireLot = new DesireLot()
                 .setArticle(desire.getArticle())

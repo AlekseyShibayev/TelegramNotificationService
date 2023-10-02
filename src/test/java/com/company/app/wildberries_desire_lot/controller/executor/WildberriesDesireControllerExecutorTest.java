@@ -36,7 +36,6 @@ class WildberriesDesireControllerExecutorTest extends SpringBootTestApplicationC
                     .setChatName("1")
                     .setArticle(desireLot.getArticle())
                     .setPrice(new BigDecimal("699"))
-                    .setDiscount("0.15")
                     .setDesireLot(desireLot);
             desireRepository.save(desire);
 
@@ -44,7 +43,6 @@ class WildberriesDesireControllerExecutorTest extends SpringBootTestApplicationC
                     .setChatName("2")
                     .setArticle(desireLot.getArticle())
                     .setPrice(new BigDecimal("300"))
-                    .setDiscount("0.15")
                     .setDesireLot(desireLot);
             desireRepository.save(desire2);
         });

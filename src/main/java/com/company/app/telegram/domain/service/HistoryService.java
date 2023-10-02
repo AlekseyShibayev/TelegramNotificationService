@@ -24,7 +24,7 @@ public class HistoryService {
     private final TelegramBotConfig telegramBotConfig;
 
     public void saveHistory(Chat chat, String text) {
-        log.debug("Читаю из чата [{}] сообщение [{}].", chat.getChatName(), text);
+        log.debug("try to read from telegram with chat name: [{}] message: [{}]", chat.getChatName(), text);
         if (isHistoryEnable) {
             History history = History.builder()
                     .chat(chat)
@@ -38,7 +38,7 @@ public class HistoryService {
     }
 
     public void saveHistory(SendMessage sendMessage) {
-        log.debug("Пробую написать в телеграм [{}]: [{}].", sendMessage.getChatId(), sendMessage.getText());
+        log.debug("try to write to telegram with chat name: [{}] message: [{}]", sendMessage.getChatId(), sendMessage.getText());
         if (isHistoryEnable) {
             String chatId = sendMessage.getChatId();
             History history = History.builder()

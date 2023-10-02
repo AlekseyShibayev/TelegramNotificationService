@@ -34,9 +34,6 @@ public class Desire {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @Column(name = "DISCOUNT")
-    private String discount;
-
     @ManyToOne
     @JoinColumn(name = "DESIRE_LOT_ID")
     private DesireLot desireLot;

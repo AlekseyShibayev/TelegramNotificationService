@@ -24,15 +24,19 @@ public class WildberriesDesireControllerExecutor {
     @Transactional
     public List<FulfilledDesire> getFulfilledDesires(String chatName) {
         List<Desire> desireList = desireRepository.findAll(Specification.where(chatNameIs(chatName))
-                .and((root, criteriaQuery, criteriaBuilder) -> {
-                    root.join("desireLot", JoinType.INNER);
-                    return criteriaBuilder.greaterThan(root.get("price"), root.get("desireLot").get("price"));
-                })
+                .and(fulfilledDesire())
         );
 
         return desireList.stream()
                 .map(FulfilledDesire::of)
                 .toList();
+    }
+
+    private static Specification<Desire> fulfilledDesire() {
+        return (root, criteriaQuery, criteriaBuilder) -> {
+            root.join("desireLot", JoinType.INNER);
+            return criteriaBuilder.greaterThan(root.get("price"), root.get("desireLot").get("price"));
+        };
     }
 
     private static Specification<Desire> chatNameIs(String chatName) {

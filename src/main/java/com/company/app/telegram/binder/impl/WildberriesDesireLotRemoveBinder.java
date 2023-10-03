@@ -13,13 +13,17 @@ import com.company.app.wildberries_desire_lot.domain.specification.DesireSpecifi
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -37,6 +41,7 @@ public class WildberriesDesireLotRemoveBinder implements Binder {
         return TYPE;
     }
 
+    @Transactional
     @Override
     public void bind(BinderContext binderContext) {
         execute(binderContext);
@@ -49,32 +54,44 @@ public class WildberriesDesireLotRemoveBinder implements Binder {
         if (isFirstTimeHere(incomingMessage)) {
             showButtons(chat);
         } else {
-            telegramFacade.writeToTargetChat(chat.getChatName(), "в разработке");
+            List<String> list = Arrays.stream(incomingMessage.split(BINDER_DELIMITER)).toList();
+            String toRemove = list.get(1);
+            String article = Arrays.stream(toRemove.split(" ")).findFirst().orElse("");
+            Optional<Desire> one = desireRepository.findOne(DesireSpecification.chatNameIs(chat.getChatName())
+                    .and(DesireSpecification.articleIs(article)));
+            one.ifPresent(desire -> {
+                desireRepository.delete(desire);
+                telegramFacade.writeToTargetChat(chat.getChatName(), "%s удалил".formatted(article));
+            });
         }
     }
 
     private void showButtons(Chat chat) {
         List<Desire> desires = desireRepository.findAll(DesireSpecification.chatNameIs(chat.getChatName()));
-        List<Desire> extractedDesires = entityGraphExtractor.createDesireContext(desires)
-                .withDesireLot()
-                .extractAll();
 
-        List<String> names = extractedDesires.stream()
-                .map(desire -> {
-                    String article = desire.getArticle();
-                    BigDecimal desirePrice = desire.getPrice();
+        if (CollectionUtils.isEmpty(desires)) {
+            telegramFacade.writeToTargetChat(chat.getChatName(), "Список желаний пуст");
+        } else {
+            List<Desire> extractedDesires = entityGraphExtractor.createDesireContext(desires)
+                    .withDesireLot()
+                    .extractAll();
 
-                    DesireLot desireLot = desire.getDesireLot();
-                    String description = desireLot == null ? "описания ещё нет" : desireLot.getDescription();
-                    return article + " " + Strings.cutEnd(desirePrice.toString(), 3) + " " + description;
-                }).toList();
+            List<String> names = extractedDesires.stream()
+                    .map(desire -> {
+                        String article = desire.getArticle();
+                        BigDecimal desirePrice = desire.getPrice();
 
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chat.getChatName());
-        sendMessage.setText("Выберите что удалить:");
-        sendMessage.setReplyMarkup(getButtons(names));
-//        sendMessage.setReplyMarkup(getButtons(List.of("1", "2", "3")));
-        telegramFacade.writeToTargetChat(sendMessage);
+                        DesireLot desireLot = desire.getDesireLot();
+                        String description = desireLot == null ? "описания ещё нет" : desireLot.getDescription();
+                        return article + " " + Strings.cutEnd(desirePrice.toString(), 3) + " " + description;
+                    }).toList();
+
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setChatId(chat.getChatName());
+            sendMessage.setText("Выберите что удалить:");
+            sendMessage.setReplyMarkup(getButtons(names));
+            telegramFacade.writeToTargetChat(sendMessage);
+        }
     }
 
     private InlineKeyboardMarkup getButtons(List<String> strings) {
@@ -86,13 +103,13 @@ public class WildberriesDesireLotRemoveBinder implements Binder {
     private List<List<InlineKeyboardButton>> getRowsInLine(List<String> strings) {
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         for (String string : strings) {
-            string = string.substring(0, 35);
+//            String substring = string.substring(0, 35);
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton(string);
-            inlineKeyboardButton.setCallbackData(TYPE + Binder.BINDER_DELIMITER + string);
+            inlineKeyboardButton.setCallbackData(TYPE + Binder.BINDER_DELIMITER + Arrays.stream(string.split(" ")).findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("<?>")));
             rowsInLine.add(List.of(inlineKeyboardButton));
         }
         return rowsInLine;
     }
-
 
 }

@@ -2,6 +2,7 @@ package com.company.app.core.infrastructure.entitygraphextractor.common;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
@@ -33,6 +34,10 @@ public class EntityGraphExtractorFinisher {
 
     public <E> List<E> extractAll(EntityGraphExtractorContext<E> context) {
         Class<E> eClass = context.getClass_();
+
+        if (CollectionUtils.isEmpty(context.getEntities_())) {
+            return context.getEntities_();
+        }
 
         String idName = entityGraphExtractorPreparer.getFieldNameWithId(context);
         Set<Long> ids = entityGraphExtractorPreparer.getIds(context);

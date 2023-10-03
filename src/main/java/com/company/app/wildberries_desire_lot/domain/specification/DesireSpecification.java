@@ -21,4 +21,9 @@ public class DesireSpecification {
                 criteriaBuilder.equal(root.get("chatName"), chatName);
     }
 
+    public static Specification<Desire> articleIs(String article) {
+        return (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("article"), article);
+    }
+
 }

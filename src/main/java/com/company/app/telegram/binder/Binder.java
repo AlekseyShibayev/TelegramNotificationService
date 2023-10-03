@@ -13,4 +13,8 @@ public interface Binder {
 
     void bind(BinderContext binderContext);
 
+    default boolean isFirstTimeHere(String incomingMessage) {
+        return !incomingMessage.contains(BINDER_DELIMITER);
+    }
+
 }

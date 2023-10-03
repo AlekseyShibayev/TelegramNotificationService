@@ -8,16 +8,15 @@ import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_desire_lot.controller.WildberriesDesireController;
 import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class WildberriesDesireLotBinder implements Binder {
+public class WildberriesDesireLotShowBinder implements Binder {
 
-    private static final String TYPE = "WB_DESIRE_LOT";
+    private static final String TYPE = "WB_DL_S";
 
     private final WildberriesDesireController wildberriesDesireController;
     private final TelegramFacade telegramFacade;
@@ -27,15 +26,19 @@ public class WildberriesDesireLotBinder implements Binder {
         return TYPE;
     }
 
-    @SneakyThrows
     @Override
     public void bind(BinderContext binderContext) {
+        show(binderContext);
+    }
+
+    private void show(BinderContext binderContext) {
         Chat chat = binderContext.getChat();
+
         List<FulfilledDesire> desireList = wildberriesDesireController.getFulfilledDesires(chat.getChatName()).getBody();
 
         if (Collections.isEmpty(desireList)) {
             telegramFacade.writeToTargetChat(chat.getChatName(), "Ничего не нашёл");
-        } else {
+        } else  {
             desireList.forEach(fulfilledDesire ->
                     telegramFacade.writeToTargetChat(fulfilledDesire.getChatName(), fulfilledDesire.getUrl()));
         }

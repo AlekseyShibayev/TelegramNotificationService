@@ -1,14 +1,11 @@
 package com.company.app.telegram.binder.component;
 
 import com.company.app.telegram.binder.Binder;
-import com.company.app.telegram.binder.component.BinderContext;
-import com.company.app.telegram.binder.component.BinderRegistry;
 import com.company.app.telegram.domain.entity.Chat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * Запускает, соответствующий типу Binder.

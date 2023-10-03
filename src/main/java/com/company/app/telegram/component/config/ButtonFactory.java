@@ -12,21 +12,24 @@ public class ButtonFactory {
 
     private static final InlineKeyboardButton TG_OFF_BUTTON = new InlineKeyboardButton("Отключить уведомления");
     private static final InlineKeyboardButton TG_ON_BUTTON = new InlineKeyboardButton("Включить уведомления");
-    private static final InlineKeyboardButton WB_BUTTON = new InlineKeyboardButton("Покажи что нашел на wildberries");
-    private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс (Не работает)");
-    private static final InlineKeyboardButton WB_SEARCH_BUTTON = new InlineKeyboardButton("START_WB_SEARCH (Не работает)");
+    private static final InlineKeyboardButton WB_DL_S = new InlineKeyboardButton("Покажи что нашёл");
+    private static final InlineKeyboardButton WB_DL_R = new InlineKeyboardButton("Удалить желание");
+    private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний найденный курс (DEV)");
+    private static final InlineKeyboardButton WB_SEARCH_BUTTON = new InlineKeyboardButton("START_WB_SEARCH (DEV)");
 
     public static InlineKeyboardMarkup inlineMarkup() {
         TG_OFF_BUTTON.setCallbackData("TG_OFF");
         TG_ON_BUTTON.setCallbackData("TG_ON");
-        WB_BUTTON.setCallbackData("WB");
+        WB_DL_S.setCallbackData("WB_DL_S");
+        WB_DL_R.setCallbackData("WB_DL_R");
         ER_BUTTON.setCallbackData("EX");
         WB_SEARCH_BUTTON.setCallbackData("WB_SEARCH");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(TG_OFF_BUTTON));
         rowsInLine.add(List.of(TG_ON_BUTTON));
-        rowsInLine.add(List.of(WB_BUTTON));
+        rowsInLine.add(List.of(WB_DL_S));
+        rowsInLine.add(List.of(WB_DL_R));
         rowsInLine.add(List.of(ER_BUTTON));
         rowsInLine.add(List.of(WB_SEARCH_BUTTON));
 

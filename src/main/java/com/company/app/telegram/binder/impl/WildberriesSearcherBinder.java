@@ -64,10 +64,6 @@ public class WildberriesSearcherBinder implements Binder {
         }
     }
 
-    private boolean isFirstTimeHere(String incomingMessage) {
-        return !incomingMessage.contains(BINDER_DELIMITER);
-    }
-
     private String getSupplierId(String incomingMessage) {
         String[] split = incomingMessage.split(BINDER_DELIMITER);
         return split[1];

@@ -2,6 +2,7 @@ package com.company.app.wildberries_knowledge.component;
 
 import com.company.app.core.temp.tool.json.JsonTool;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
+import com.company.app.wildberries_knowledge.domain.repository.SupplierRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -19,12 +20,12 @@ public class SupplierInitializer {
     private Resource resource;
 
     private final JsonTool<Supplier> jsonTool;
-    private final SupplierService supplierService;
+    private final SupplierRepository supplierRepository;
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() {
         List<Supplier> list = jsonTool.toJavaAsList(resource, Supplier.class);
-        supplierService.saveAll(list);
+        supplierRepository.saveAll(list);
     }
 
 }

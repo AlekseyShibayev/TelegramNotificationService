@@ -1,10 +1,10 @@
-package com.company.app.telegram.component.binder.impl;
+package com.company.app.telegram.binder.impl;
 
 import com.company.app.exchange_rate.controller.ExchangeRateController;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.component.binder.Binder;
-import com.company.app.telegram.component.binder.BinderContext;
+import com.company.app.telegram.binder.Binder;
+import com.company.app.telegram.binder.component.BinderContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,9 @@ public class ExchangeRateBinder implements Binder {
     }
 
     @Override
-    public void bind(BinderContext binderContainer) {
+    public void bind(BinderContext binderContext) {
         ExchangeRate last = exchangeRateController.getLast().getBody();
-        telegramFacade.writeToTargetChat(binderContainer.getChat().getChatName(), last.getAliexpressExchangeRate());
+        telegramFacade.writeToTargetChat(binderContext.getChat().getChatName(), last.getAliexpressExchangeRate());
     }
 
 }

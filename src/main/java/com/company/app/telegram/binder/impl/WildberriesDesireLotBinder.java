@@ -1,9 +1,9 @@
-package com.company.app.telegram.component.binder.impl;
+package com.company.app.telegram.binder.impl;
 
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.component.binder.Binder;
-import com.company.app.telegram.component.binder.BinderContext;
+import com.company.app.telegram.binder.Binder;
+import com.company.app.telegram.binder.component.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_desire_lot.controller.WildberriesDesireController;
 import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
@@ -15,9 +15,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class WildberriesBinder implements Binder { // todo это какой-то конкретный биндер
+public class WildberriesDesireLotBinder implements Binder {
 
-    private static final String TYPE = "WB";
+    private static final String TYPE = "WB_DESIRE_LOT";
 
     private final WildberriesDesireController wildberriesDesireController;
     private final TelegramFacade telegramFacade;
@@ -29,8 +29,8 @@ public class WildberriesBinder implements Binder { // todo это какой-т�
 
     @SneakyThrows
     @Override
-    public void bind(BinderContext binderContainer) {
-        Chat chat = binderContainer.getChat();
+    public void bind(BinderContext binderContext) {
+        Chat chat = binderContext.getChat();
         List<FulfilledDesire> desireList = wildberriesDesireController.getFulfilledDesires(chat.getChatName()).getBody();
 
         if (Collections.isEmpty(desireList)) {

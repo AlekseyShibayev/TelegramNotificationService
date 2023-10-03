@@ -1,5 +1,7 @@
-package com.company.app.telegram.component.binder;
+package com.company.app.telegram.binder.component;
 
+import com.company.app.core.exception.DeveloperMistakeException;
+import com.company.app.telegram.binder.Binder;
 import com.company.app.telegram.domain.entity.Subscription;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +28,7 @@ public class BinderRegistry {
     void initBinders() {
         for (Binder binder : binderList) {
             if (binderMap.containsKey(binder.getType())) {
-                throw new DuplicateKeyException("developer! check binders for unique type, current type [%s]".formatted(binder.getType()));
+                throw new DeveloperMistakeException("check binders for unique type, current type [%s]".formatted(binder.getType()));
             } else {
                 binderMap.put(binder.getType(), binder);
             }
@@ -46,7 +48,7 @@ public class BinderRegistry {
         if (binder != null) {
             return binder;
         } else {
-            throw new UnsupportedOperationException("developer! impl this binder type [%s]".formatted(binderType));
+            throw new DeveloperMistakeException("unsupported binder type: [%s]".formatted(binderType));
         }
     }
 

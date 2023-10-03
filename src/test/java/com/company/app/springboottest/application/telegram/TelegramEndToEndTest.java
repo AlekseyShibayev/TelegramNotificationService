@@ -1,7 +1,7 @@
 package com.company.app.springboottest.application.telegram;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.telegram.component.binder.impl.TelegramOffBinder;
+import com.company.app.telegram.binder.impl.TelegramOffBinder;
 import com.company.app.telegram.controller.ChatController;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.repository.ChatRepository;

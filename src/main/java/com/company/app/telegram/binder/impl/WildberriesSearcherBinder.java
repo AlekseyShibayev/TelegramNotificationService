@@ -1,8 +1,8 @@
-package com.company.app.telegram.component.binder.impl;
+package com.company.app.telegram.binder.impl;
 
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.component.binder.Binder;
-import com.company.app.telegram.component.binder.BinderContext;
+import com.company.app.telegram.binder.Binder;
+import com.company.app.telegram.binder.component.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
@@ -34,9 +34,9 @@ public class WildberriesSearcherBinder implements Binder {
     }
 
     @Override
-    public void bind(BinderContext binderContainer) {
-        Chat chat = binderContainer.getChat();
-        String incomingMessage = binderContainer.getMessage();
+    public void bind(BinderContext binderContext) {
+        Chat chat = binderContext.getChat();
+        String incomingMessage = binderContext.getMessage();
 
         if (isFirstTimeHere(incomingMessage)) {
             showButtonsWithSuppliers(chat);

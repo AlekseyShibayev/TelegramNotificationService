@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.controller.executor;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
+import com.company.app.wildberries_desire_lot.controller.dto.FulfilledDesire;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;

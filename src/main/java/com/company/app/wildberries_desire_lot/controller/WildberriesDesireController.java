@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.controller;
 
 import com.company.app.wildberries_desire_lot.controller.executor.WildberriesDesireControllerExecutor;
-import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
+import com.company.app.wildberries_desire_lot.controller.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

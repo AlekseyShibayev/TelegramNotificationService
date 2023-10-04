@@ -6,7 +6,7 @@ import com.company.app.telegram.binder.Binder;
 import com.company.app.telegram.binder.component.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_desire_lot.controller.WildberriesDesireController;
-import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
+import com.company.app.wildberries_desire_lot.controller.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

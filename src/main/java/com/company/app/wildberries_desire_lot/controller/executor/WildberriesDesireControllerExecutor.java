@@ -1,7 +1,7 @@
 package com.company.app.wildberries_desire_lot.controller.executor;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.wildberries_desire_lot.domain.dto.FulfilledDesire;
+import com.company.app.wildberries_desire_lot.controller.dto.FulfilledDesire;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.specification.DesireSpecification;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;

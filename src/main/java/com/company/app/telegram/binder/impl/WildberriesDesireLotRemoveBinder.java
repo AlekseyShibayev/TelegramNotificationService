@@ -76,40 +76,33 @@ public class WildberriesDesireLotRemoveBinder implements Binder {
                     .withDesireLot()
                     .extractAll();
 
-            List<String> names = extractedDesires.stream()
-                    .map(desire -> {
-                        String article = desire.getArticle();
-                        BigDecimal desirePrice = desire.getPrice();
-
-                        DesireLot desireLot = desire.getDesireLot();
-                        String description = desireLot == null ? "описания ещё нет" : desireLot.getDescription();
-                        return article + " " + Strings.cutEnd(desirePrice.toString(), 3) + " " + description;
-                    }).toList();
+            InlineKeyboardMarkup markupInline = getInlineKeyboardMarkup(extractedDesires);
 
             SendMessage sendMessage = new SendMessage();
             sendMessage.setChatId(chat.getChatName());
             sendMessage.setText("Выберите что удалить:");
-            sendMessage.setReplyMarkup(getButtons(names));
+            sendMessage.setReplyMarkup(markupInline);
             telegramFacade.writeToTargetChat(sendMessage);
         }
     }
 
-    private InlineKeyboardMarkup getButtons(List<String> strings) {
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        markupInline.setKeyboard(getRowsInLine(strings));
-        return markupInline;
-    }
-
-    private List<List<InlineKeyboardButton>> getRowsInLine(List<String> strings) {
+    private InlineKeyboardMarkup getInlineKeyboardMarkup(List<Desire> extractedDesires) {
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        for (String string : strings) {
-//            String substring = string.substring(0, 35);
+        for (Desire desire : extractedDesires) {
+            String article = desire.getArticle();
+            BigDecimal desirePrice = desire.getPrice();
+            DesireLot desireLot = desire.getDesireLot();
+            String description = desireLot == null ? "Описания ещё нет" : desireLot.getDescription();
+            String string = article + " " + Strings.cutEnd(desirePrice.toString(), 3) + " " + description;
+
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton(string);
-            inlineKeyboardButton.setCallbackData(TYPE + Binder.BINDER_DELIMITER + Arrays.stream(string.split(" ")).findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("<?>")));
+            inlineKeyboardButton.setCallbackData(TYPE + Binder.BINDER_DELIMITER + article);
             rowsInLine.add(List.of(inlineKeyboardButton));
         }
-        return rowsInLine;
+
+        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+        markupInline.setKeyboard(rowsInLine);
+        return markupInline;
     }
 
 }

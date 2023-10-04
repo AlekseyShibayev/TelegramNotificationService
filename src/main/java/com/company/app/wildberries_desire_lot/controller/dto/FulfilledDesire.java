@@ -1,4 +1,4 @@
-package com.company.app.wildberries_desire_lot.domain.dto;
+package com.company.app.wildberries_desire_lot.controller.dto;
 
 import com.company.app.core.wildberries_common.WildberriesUrlCreator;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;

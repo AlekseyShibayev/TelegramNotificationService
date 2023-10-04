@@ -18,12 +18,12 @@ public class DesireSpecification {
 
     public static Specification<Desire> chatNameIs(String chatName) {
         return (root, criteriaQuery, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("chatName"), chatName);
+                chatName != null ? criteriaBuilder.equal(root.get("chatName"), chatName) : null;
     }
 
     public static Specification<Desire> articleIs(String article) {
         return (root, criteriaQuery, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("article"), article);
+                article != null ? criteriaBuilder.equal(root.get("article"), article) : null;
     }
 
 }

@@ -55,8 +55,7 @@ public class WildberriesDesireLotRemoveBinder implements Binder {
             showButtons(chat);
         } else {
             List<String> list = Arrays.stream(incomingMessage.split(BINDER_DELIMITER)).toList();
-            String toRemove = list.get(1);
-            String article = Arrays.stream(toRemove.split(" ")).findFirst().orElse("");
+            String article = list.get(1);
             Optional<Desire> one = desireRepository.findOne(DesireSpecification.chatNameIs(chat.getChatName())
                     .and(DesireSpecification.articleIs(article)));
             one.ifPresent(desire -> {

@@ -1,6 +1,4 @@
-package com.company.app.telegram.binder;
-
-import com.company.app.telegram.binder.component.BinderContext;
+package com.company.app.telegram.incoming_message.binder.binder_strategy;
 
 /**
  * Связывает модуль и входящее сообщение, отправленное пользователем в телеграм бота.

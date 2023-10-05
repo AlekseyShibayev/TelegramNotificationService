@@ -1,10 +1,10 @@
-package com.company.app.telegram.component;
+package com.company.app.telegram.incoming_message.component;
 
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
+import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
-import com.company.app.telegram.domain.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,36 +19,40 @@ import java.util.List;
 public class ChatActivationService {
 
     private final SubscriptionRepository subscriptionRepository;
-    private final ChatService chatService;
+    private final ChatRepository chatRepository;
     private final TelegramFacade telegramFacade;
 
-    public void activate(Chat chat) {
-        if (isChatNotActive(chat)) {
+    public Chat activate(Chat chat) {
+        if (!chat.isEnableNotifications()) {
             chat.setEnableNotifications(true);
             List<Subscription> subscriptions = subscriptionRepository.findAll();
             chat.setSubscriptions(subscriptions);
 
-            chatService.update(chat);
+            Chat saved = chatRepository.save(chat);
 
             String message = String.format("Для чата [%s] уведомления включены.", chat.getChatName());
             telegramFacade.writeToTargetChat(chat.getChatName(), message);
+
+            return saved;
+        } else {
+            return chat;
         }
     }
 
-    public void deactivate(Chat chat) {
-        if (!isChatNotActive(chat)) {
+    public Chat deactivate(Chat chat) {
+        if (chat.isEnableNotifications()) {
             chat.setEnableNotifications(false);
             chat.setSubscriptions(new ArrayList<>());
 
-            chatService.update(chat);
+            Chat saved = chatRepository.save(chat);
 
             String message = String.format("Для чата [%s] уведомления отключены.", chat.getChatName());
             telegramFacade.writeToTargetChat(chat.getChatName(), message);
-        }
-    }
 
-    private boolean isChatNotActive(Chat chat) {
-        return !chat.isEnableNotifications();
+            return saved;
+        } else {
+            return chat;
+        }
     }
 
 }

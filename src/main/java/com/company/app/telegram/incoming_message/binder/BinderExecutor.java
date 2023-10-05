@@ -1,7 +1,9 @@
-package com.company.app.telegram.binder.component;
+package com.company.app.telegram.incoming_message.binder;
 
-import com.company.app.telegram.binder.Binder;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.Binder;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.BinderContext;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.BinderRegistry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

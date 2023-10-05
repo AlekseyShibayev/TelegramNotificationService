@@ -44,17 +44,12 @@ public class ChatService {
         return true;
     }
 
-    public Boolean update(Chat chat) {
-        chatRepository.save(chat);
-        return true;
-    }
-
     public Boolean delete(Long id) {
         chatRepository.deleteById(id);
         return true;
     }
 
-    public Chat getChatOrCreateIfNotExist(String chatId) {
+    public Chat findChatByChatNameOrCreateIfNotExist(String chatId) {
         if (chatRepository.existsChatByChatName(chatId)) {
             return chatRepository.findFirstByChatName(chatId).get();
         } else {

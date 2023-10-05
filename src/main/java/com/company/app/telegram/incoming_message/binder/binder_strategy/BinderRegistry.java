@@ -1,12 +1,7 @@
-package com.company.app.telegram.binder.component;
+package com.company.app.telegram.incoming_message.binder.binder_strategy;
 
 import com.company.app.core.exception.DeveloperMistakeException;
-import com.company.app.telegram.binder.Binder;
-import com.company.app.telegram.domain.entity.Subscription;
-import com.company.app.telegram.domain.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -19,8 +14,6 @@ import java.util.Map;
 public class BinderRegistry {
 
     private final Map<String, Binder> binderMap = new HashMap<>();
-
-    private final SubscriptionRepository subscriptionRepository;
     private final List<Binder> binderList;
 
     @PostConstruct
@@ -32,14 +25,6 @@ public class BinderRegistry {
                 binderMap.put(binder.getType(), binder);
             }
         }
-    }
-
-    @EventListener({ContextRefreshedEvent.class})
-    void initSubscriptions() {
-        List<Subscription> subscriptionList = binderMap.keySet().stream()
-                .map(binderType -> Subscription.builder().type(binderType).build())
-                .toList();
-        subscriptionRepository.saveAll(subscriptionList);
     }
 
     public Binder get(String binderType) {

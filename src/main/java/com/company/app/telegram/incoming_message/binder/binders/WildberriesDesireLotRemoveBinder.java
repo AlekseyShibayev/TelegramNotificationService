@@ -1,31 +1,23 @@
-package com.company.app.telegram.binder.impl;
+package com.company.app.telegram.incoming_message.binder.binders;
 
 import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.core.util.Strings;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.binder.Binder;
-import com.company.app.telegram.binder.component.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.Binder;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.BinderContext;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import com.company.app.wildberries_desire_lot.domain.specification.DesireSpecification;
-import com.pengrad.telegrambot.model.request.ForceReply;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.MessageEntity;
-import org.telegram.telegrambots.meta.api.objects.inlinequery.inputmessagecontent.InputTextMessageContent;
-import org.telegram.telegrambots.meta.api.objects.inlinequery.result.InlineQueryResultsButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ForceReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -36,9 +28,9 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class WildberriesDesireLotAdderBinder implements Binder {
+public class WildberriesDesireLotRemoveBinder implements Binder {
 
-    private static final String TYPE = "WB_DL_A";
+    private static final String TYPE = "WB_DL_REMOVE";
 
     private final TelegramFacade telegramFacade;
     private final DesireRepository desireRepository;
@@ -62,7 +54,14 @@ public class WildberriesDesireLotAdderBinder implements Binder {
         if (isFirstTimeHere(incomingMessage)) {
             showButtons(chat);
         } else {
-            telegramFacade.writeToTargetChat(chat.getChatName(), "в разработке");
+            List<String> list = Arrays.stream(incomingMessage.split(BINDER_DELIMITER)).toList();
+            String article = list.get(1);
+            Optional<Desire> one = desireRepository.findOne(DesireSpecification.chatNameIs(chat.getChatName())
+                    .and(DesireSpecification.articleIs(article)));
+            one.ifPresent(desire -> {
+                desireRepository.delete(desire);
+                telegramFacade.writeToTargetChat(chat.getChatName(), "%s удалил".formatted(article));
+            });
         }
     }
 
@@ -75,29 +74,13 @@ public class WildberriesDesireLotAdderBinder implements Binder {
             List<Desire> extractedDesires = entityGraphExtractor.createDesireContext(desires)
                     .withDesireLot()
                     .extractAll();
-//
-//            InlineKeyboardMarkup markupInline = getInlineKeyboardMarkup(extractedDesires);
-//
-//            InlineQueryResultsButton inlineQueryResultsButton = new InlineQueryResultsButton();
 
-            ForceReplyKeyboard forceReplyKeyboard = new ForceReplyKeyboard();
-            forceReplyKeyboard.setInputFieldPlaceholder("123");
-
-            ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-            KeyboardRow keyboardButtons = new KeyboardRow();
-            keyboardButtons.add(new KeyboardButton());
-
-            replyKeyboardMarkup.setKeyboard(List.of(keyboardButtons));
-
-//            InputTextMessageContent inputTextMessageContent = new InputTextMessageContent();
-//            MessageEntity messageEntity = new MessageEntity();
-//            messageEntity.setText("123");
+            InlineKeyboardMarkup markupInline = getInlineKeyboardMarkup(extractedDesires);
 
             SendMessage sendMessage = new SendMessage();
             sendMessage.setChatId(chat.getChatName());
-            sendMessage.setText("введите желание");
-            sendMessage.setReplyMarkup(replyKeyboardMarkup);
-//            sendMessage.setEntities(List.of(messageEntity));
+            sendMessage.setText("Выберите что удалить:");
+            sendMessage.setReplyMarkup(markupInline);
             telegramFacade.writeToTargetChat(sendMessage);
         }
     }
@@ -113,7 +96,6 @@ public class WildberriesDesireLotAdderBinder implements Binder {
 
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton(string);
             inlineKeyboardButton.setCallbackData(TYPE + Binder.BINDER_DELIMITER + article);
-            inlineKeyboardButton.setSwitchInlineQueryCurrentChat("1");
             rowsInLine.add(List.of(inlineKeyboardButton));
         }
 

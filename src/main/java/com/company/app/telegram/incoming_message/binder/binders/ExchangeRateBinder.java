@@ -1,10 +1,10 @@
-package com.company.app.telegram.binder.impl;
+package com.company.app.telegram.incoming_message.binder.binders;
 
 import com.company.app.exchange_rate.controller.ExchangeRateController;
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.binder.Binder;
-import com.company.app.telegram.binder.component.BinderContext;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.Binder;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.BinderContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

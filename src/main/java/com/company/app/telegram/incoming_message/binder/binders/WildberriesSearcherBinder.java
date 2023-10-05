@@ -1,9 +1,9 @@
-package com.company.app.telegram.binder.impl;
+package com.company.app.telegram.incoming_message.binder.binders;
 
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.binder.Binder;
-import com.company.app.telegram.binder.component.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.Binder;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.BinderContext;
 import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;

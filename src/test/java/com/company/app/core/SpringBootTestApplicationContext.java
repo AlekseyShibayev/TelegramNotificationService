@@ -2,13 +2,16 @@ package com.company.app.core;
 
 import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.core.temp.tool.api.CaptchaFighter;
+import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.wildberries_desire_lot.domain.initializer.DesireInitializer;
+import com.company.app.wildberries_desire_lot.scheduler.WildberriesDesireLotSchedulerConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -27,10 +30,14 @@ public abstract class SpringBootTestApplicationContext {
 
     @MockBean
     protected CaptchaFighter captchaFighter;
-    @Autowired
+    @MockBean
+    private WildberriesDesireLotSchedulerConfig wildberriesDesireLotSchedulerConfig;
+    @SpyBean
     protected TransactionTemplate transactionTemplate;
-    @Autowired
+    @SpyBean
     protected EntityGraphExtractor entityGraphExtractor;
+    @SpyBean
+    protected ChatRepository chatRepository;
 
     @PostConstruct
     void init() {

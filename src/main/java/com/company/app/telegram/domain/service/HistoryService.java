@@ -42,7 +42,7 @@ public class HistoryService {
         if (isHistoryEnable) {
             String chatId = sendMessage.getChatId();
             History history = History.builder()
-                    .chat(chatService.getChatOrCreateIfNotExist(chatId))
+                    .chat(chatService.findChatByChatNameOrCreateIfNotExist(chatId))
                     .message(sendMessage.getText())
                     .source(telegramBotConfig.getName())
                     .target(chatId)

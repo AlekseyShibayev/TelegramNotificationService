@@ -1,10 +1,10 @@
-package com.company.app.telegram.binder.impl;
+package com.company.app.telegram.incoming_message.binder.binders;
 
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.binder.Binder;
-import com.company.app.telegram.binder.component.BinderContext;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.Binder;
+import com.company.app.telegram.incoming_message.binder.binder_strategy.BinderContext;
 import com.company.app.wildberries_desire_lot.controller.WildberriesDesireController;
 import com.company.app.wildberries_desire_lot.controller.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WildberriesDesireLotShowBinder implements Binder {
 
-    private static final String TYPE = "WB_DL_S";
+    private static final String TYPE = "WB_DL_SHOW";
 
     private final WildberriesDesireController wildberriesDesireController;
     private final TelegramFacade telegramFacade;
@@ -38,7 +38,7 @@ public class WildberriesDesireLotShowBinder implements Binder {
 
         if (Collections.isEmpty(desireList)) {
             telegramFacade.writeToTargetChat(chat.getChatName(), "Ничего не нашёл");
-        } else  {
+        } else {
             desireList.forEach(fulfilledDesire ->
                     telegramFacade.writeToTargetChat(fulfilledDesire.getChatName(), fulfilledDesire.getUrl()));
         }

@@ -1,20 +1,26 @@
-package com.company.app.telegram.component.config;
+package com.company.app.telegram.incoming_message;
 
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.component.PrepareChatToWorkService;
-import com.company.app.telegram.binder.component.BinderExecutor;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.entity.IncomingMessageTask;
+import com.company.app.telegram.domain.enums.ModeType;
+import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
 import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.domain.service.HistoryService;
+import com.company.app.telegram.incoming_message.binder.BinderExecutor;
+import com.company.app.telegram.incoming_message.component.ChatActivationService;
+import com.company.app.telegram.incoming_message.model.ButtonFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 /**
- * Обрабатывает сообщения, отправленные пользователем в телеграм бота.
+ * Responsibility:
+ * Process incoming messages, which send to telegram bot by user.
  */
 @Service
 @RequiredArgsConstructor
@@ -24,12 +30,29 @@ public class IncomingMessageHandler {
     private final HistoryService historyService;
     private final ChatService chatService;
     private final BinderExecutor binderExecutor;
-    private final PrepareChatToWorkService prepareChatToWorkService;
+    private final ChatActivationService chatActivationService;
+    private final IncomingMessageTaskRepository incomingMessageTaskRepository;
 
+    @Transactional
     public void process(Update update) {
         if (isIncomingMessage(update)) {
-            prepareChatToWork(update);
-            showCommands(update);
+            Message message = update.getMessage();
+            Long chatId = message.getChatId();
+
+            Chat chat = chatService.findChatByChatNameOrCreateIfNotExist(chatId.toString());
+            historyService.saveHistory(chat, message.getText());
+            chatActivationService.activate(chat);
+
+            if (ModeType.DEFAULT.is(chat)) {
+                showCommands(update);
+            } else {
+                IncomingMessageTask task = new IncomingMessageTask()
+                        .setChatName(chat.getChatName())
+                        .setModeType(chat.getMode().getType())
+                        .setMessage(message.getText());
+                incomingMessageTaskRepository.save(task);
+            }
+
         } else if (isCallback(update)) {
             handle(update);
         }
@@ -41,12 +64,6 @@ public class IncomingMessageHandler {
 
     private boolean isIncomingMessage(Update update) {
         return update.getMessage() != null;
-    }
-
-    private void prepareChatToWork(Update update) {
-        Message message = update.getMessage();
-        Long chatId = message.getChatId();
-        prepareChatToWorkService.getPreparedToWorkChat(message, chatId);
     }
 
     private void showCommands(Update update) {
@@ -61,7 +78,7 @@ public class IncomingMessageHandler {
         CallbackQuery callbackQuery = update.getCallbackQuery();
         Long chatId = callbackQuery.getMessage().getChatId();
         String text = callbackQuery.getData();
-        Chat chat = chatService.getChatOrCreateIfNotExist(chatId.toString());
+        Chat chat = chatService.findChatByChatNameOrCreateIfNotExist(chatId.toString());
         historyService.saveHistory(chat, text);
         binderExecutor.execute(chat, text);
     }

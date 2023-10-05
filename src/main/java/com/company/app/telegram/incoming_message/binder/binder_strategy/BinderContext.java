@@ -1,4 +1,4 @@
-package com.company.app.telegram.binder.component;
+package com.company.app.telegram.incoming_message.binder.binder_strategy;
 
 import com.company.app.telegram.domain.entity.Chat;
 import lombok.Getter;

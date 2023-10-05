@@ -16,8 +16,6 @@ public interface ChatRepository extends JpaRepository<Chat, Long>, JpaSpecificat
         )).orElseThrow(() -> new DeveloperMistakeException("Owner must be"));
     }
 
-    boolean existsChatByChatName(String chatName);
-
-    Optional<Chat> findFirstByChatName(String chatName);
+    Optional<Chat> findByChatName(String chatName);
 
 }

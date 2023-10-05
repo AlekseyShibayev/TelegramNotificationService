@@ -1,30 +1,10 @@
 package com.company.app.springboottest.application.telegram;
 
 import com.company.app.core.SpringBootTestApplicationContext;
-import com.company.app.telegram.controller.ChatController;
-import com.company.app.telegram.controller.TelegramController;
-import com.company.app.telegram.domain.repository.ChatRepository;
-import com.company.app.telegram.domain.repository.UserInfoRepository;
-import com.company.app.telegram.domain.service.ChatService;
-import com.company.app.telegram.incoming_message.binder.binders.TelegramOffBinder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 class TelegramEndToEndTest extends SpringBootTestApplicationContext {
-
-    @Autowired
-    private TelegramController telegramController;
-    @Autowired
-    private ChatController chatController;
-    @Autowired
-    private ChatService chatService;
-    @Autowired
-    private TelegramOffBinder telegramBinder;
-    @Autowired
-    private ChatRepository chatRepository;
-    @Autowired
-    private UserInfoRepository userInfoRepository;
 
 //    @BeforeEach
 //    void init() {

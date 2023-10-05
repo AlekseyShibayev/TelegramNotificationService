@@ -1,7 +1,7 @@
 package com.company.app.telegram;
 
-import com.company.app.telegram.component.config.OutgoingMessageHandler;
-import com.company.app.telegram.component.config.TelegramBotConfig;
+import com.company.app.telegram.config.OutgoingMessageHandler;
+import com.company.app.telegram.config.TelegramBotConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

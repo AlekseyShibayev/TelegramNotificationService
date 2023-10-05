@@ -5,10 +5,10 @@ import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.entity.Subscription;
 import com.company.app.telegram.domain.enums.ModeType;
+import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
-import com.company.app.telegram.domain.service.ChatService;
-import com.company.app.telegram.incoming_message.binder.binder_strategy.Binder;
+import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.Binder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -31,7 +31,7 @@ public class Initializer {
     private Resource resource;
 
     private final JsonTool<Chat> jsonTool;
-    private final ChatService chatService;
+    private final ChatRepository chatRepository;
     private final ModeRepository modeRepository;
     private final SubscriptionRepository subscriptionRepository;
     private final List<Binder> binderList;
@@ -49,7 +49,7 @@ public class Initializer {
         Mode defaultMode = modeRepository.findByType(ModeType.DEFAULT);
 
         list.forEach(chat -> chat.setMode(defaultMode));
-        chatService.saveAll(list);
+        chatRepository.saveAll(list);
     }
 
     private void prepareMode() {

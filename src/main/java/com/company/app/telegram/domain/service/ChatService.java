@@ -1,17 +1,14 @@
 package com.company.app.telegram.domain.service;
 
-import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
-import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.enums.ModeType;
-import com.company.app.telegram.domain.mapper.Mapper;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
+import com.company.app.telegram.domain.spec.ChatSpecification;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,8 +26,8 @@ public class ChatService {
     }
 
     public Chat findChatByChatNameOrCreateIfNotExist(String chatName) {
-        return chatRepository.findByChatName(chatName)
-                .orElse(createChat(chatName));
+        Optional<Chat> chat = chatRepository.findOne(Specification.where(ChatSpecification.chatNameIs(chatName)));
+        return chat.orElseGet(() -> createChat(chatName));
     }
 
 }

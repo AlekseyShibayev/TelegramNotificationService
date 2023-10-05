@@ -38,9 +38,9 @@ public class DesireLot {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @Column(name = "LAST_SEEN")
+    @Column(name = "UPDATE_TIME")
     @UpdateTimestamp
-    private OffsetDateTime lastSeen;
+    private OffsetDateTime updateTime;
 
     @OneToMany(mappedBy = "desireLot", fetch = FetchType.LAZY)
     private List<Desire> desireList = new ArrayList<>();

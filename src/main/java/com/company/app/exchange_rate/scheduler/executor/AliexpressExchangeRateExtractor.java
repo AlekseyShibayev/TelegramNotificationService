@@ -14,10 +14,10 @@ public class AliexpressExchangeRateExtractor {
     @Value("${exchangeRate.aliexpressUrl}")
     private String aliexpressUrl;
 
-    private final SeleniumHtmlPageLoader seleniumHtmlPageLoader; // for example
+    private final SeleniumHtmlPageLoader seleniumHtmlPageLoader;
 
     public String extract() {
-        // write code here
+        String loadedHtmlPage = seleniumHtmlPageLoader.loadHtmlPage(aliexpressUrl);
 
         return "105,83";
     }

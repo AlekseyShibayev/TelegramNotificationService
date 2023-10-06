@@ -1,11 +1,13 @@
 package com.company.app.exchange_rate.scheduler.executor;
 
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
+import com.company.app.exchange_rate.domain.enums.ExchangeRateType;
 import com.company.app.exchange_rate.domain.repository.ExchangeRepository;
 import com.company.app.telegram.TelegramFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -18,6 +20,7 @@ public class ExchangeRateSchedulerExecutor {
     private final AliexpressExchangeRateExtractor aliexpressExchangeRateExtractor;
     private final ExchangeRepository exchangeRepository;
 
+    @Transactional
     public void writeExchange() {
         ExchangeRate exchangeRate = extractInner();
 
@@ -28,9 +31,11 @@ public class ExchangeRateSchedulerExecutor {
     }
 
     private ExchangeRate extractInner() {
-        String ali = aliexpressExchangeRateExtractor.extract();
+        String aliexpressExchangeRate = aliexpressExchangeRateExtractor.extract();
+
         ExchangeRate exchangeRate = new ExchangeRate()
-                .setValue(ali)
+                .setType(ExchangeRateType.ALIEXPRESS)
+                .setValue(aliexpressExchangeRate)
                 .setCreationDate(new Date());
         return exchangeRepository.save(exchangeRate);
     }

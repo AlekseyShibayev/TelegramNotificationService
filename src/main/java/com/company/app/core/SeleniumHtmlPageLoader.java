@@ -46,7 +46,7 @@ public class SeleniumHtmlPageLoader {
         firefoxOptions.setHeadless(true);
 
         WebDriver driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
 
         driver.get(url);

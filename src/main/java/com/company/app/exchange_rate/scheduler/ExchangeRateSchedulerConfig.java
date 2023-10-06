@@ -1,32 +1,26 @@
 package com.company.app.exchange_rate.scheduler;
 
-import com.company.app.exchange_rate.ExchangeRateFacade;
-import com.company.app.exchange_rate.domain.entity.ExchangeRate;
-import com.company.app.telegram.TelegramFacade;
+import com.company.app.exchange_rate.scheduler.executor.ExchangeRateSchedulerExecutor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 @ConditionalOnProperty(prefix = "exchangeRate", name = "enable", havingValue = "true")
 public class ExchangeRateSchedulerConfig {
 
-    @Autowired
-    private TelegramFacade telegramFacade;
-    @Autowired
-    private ExchangeRateFacade exchangeRateFacade;
+    private final ExchangeRateSchedulerExecutor exchangeRateSchedulerExecutor;
 
-    @Scheduled(fixedDelayString = "${exchangeRate.timeout}")
+    @EventListener({ContextRefreshedEvent.class})
+    @Scheduled(cron = "${exchangeRate.delay}")
     public void writeExchange() {
-        ExchangeRate exchangeRate = exchangeRateFacade.extract();
-
-        String notification = "exchange rate: ali: [%s]".formatted(exchangeRate.getAliexpressExchangeRate());
-        log.debug(notification);
-
-        telegramFacade.writeToEveryone(notification);
+        exchangeRateSchedulerExecutor.writeExchange();
     }
 
 }

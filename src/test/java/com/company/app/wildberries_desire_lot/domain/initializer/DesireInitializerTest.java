@@ -11,7 +11,7 @@ class DesireInitializerTest extends SpringBootTestApplicationContext {
     @Autowired
     private DesireRepository desireRepository;
     @Autowired
-    private DesireInitializer desireInitializer;
+    private DesireLotDomainInitializer desireInitializer;
 
     @Test
     void desireLotInitializer_do_init_test() {

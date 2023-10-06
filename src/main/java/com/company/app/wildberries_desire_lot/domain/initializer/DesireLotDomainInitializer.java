@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DesireInitializer {
+public class DesireLotDomainInitializer {
 
     @Value("classpath:wildberries_desire_lot/init_desire.json")
     private Resource resource;

@@ -1,6 +1,7 @@
 package com.company.app.exchange_rate.component.aliexpress;
 
 import com.company.app.core.SpringBootTestApplicationContext;
+import com.company.app.exchange_rate.scheduler.executor.AliexpressExchangeRateExtractor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

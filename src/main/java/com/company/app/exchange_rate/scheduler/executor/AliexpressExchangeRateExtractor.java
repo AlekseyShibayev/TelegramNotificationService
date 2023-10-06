@@ -1,4 +1,4 @@
-package com.company.app.exchange_rate.component.aliexpress;
+package com.company.app.exchange_rate.scheduler.executor;
 
 import com.company.app.core.SeleniumHtmlPageLoader;
 import lombok.RequiredArgsConstructor;

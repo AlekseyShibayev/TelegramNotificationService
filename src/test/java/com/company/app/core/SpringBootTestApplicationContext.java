@@ -4,12 +4,10 @@ import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtra
 import com.company.app.core.temp.tool.api.CaptchaFighter;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.repository.ChatRepository;
-import com.company.app.wildberries_desire_lot.domain.initializer.DesireInitializer;
 import com.company.app.wildberries_desire_lot.scheduler.WildberriesDesireLotSchedulerConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;

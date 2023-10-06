@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class Initializer {
+public class TelegramDomainInitializer {
 
     @Value("classpath:telegram/init_chat.json")
     private Resource resource;

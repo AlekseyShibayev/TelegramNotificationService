@@ -1,12 +1,11 @@
 package com.company.app.exchange_rate.scheduler;
 
+import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.exchange_rate.scheduler.executor.ExchangeRateSchedulerExecutor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @Slf4j
@@ -17,7 +16,7 @@ public class ExchangeRateSchedulerConfig {
 
     private final ExchangeRateSchedulerExecutor exchangeRateSchedulerExecutor;
 
-    @EventListener({ContextRefreshedEvent.class})
+    @PerformanceLogAnnotation
     @Scheduled(cron = "${exchangeRate.delay}")
     public void writeExchange() {
         exchangeRateSchedulerExecutor.writeExchange();

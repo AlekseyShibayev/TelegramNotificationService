@@ -1,4 +1,4 @@
-package com.company.app.telegram.incoming_message_handler.binder.binders;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
@@ -6,13 +6,12 @@ import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.Binder;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.BinderContext;
-import com.company.app.telegram.incoming_message_handler.message_executor.IncomingMessageTaskExecutor;
+import com.company.app.telegram.incoming_message_handler.button.task_executor.IncomingMessageTaskExecutor;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -23,7 +22,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class WildberriesDesireLotAdderBinder implements Binder {
+public class WildberriesDesireLotAddButtonCallbackAction implements ButtonCallbackAction {
 
     private static final String TYPE = "WB_DL_ADD";
 
@@ -37,15 +36,10 @@ public class WildberriesDesireLotAdderBinder implements Binder {
         return TYPE;
     }
 
-    @Transactional
     @Override
-    public void bind(BinderContext binderContext) {
-        execute(binderContext);
-    }
-
-    public void execute(BinderContext binderContext) {
-        Chat chat = binderContext.getChat();
-        String incomingMessage = binderContext.getMessage();
+    public void doAction(ButtonCallbackActionContext context) {
+        Chat chat = context.getChat();
+        String incomingMessage = context.getMessage();
 
         if (isFirstTimeHere(incomingMessage)) {
             Mode newMode = modeRepository.findByType(ModeType.ADD_DESIRE);
@@ -62,7 +56,7 @@ public class WildberriesDesireLotAdderBinder implements Binder {
 
     private void showButtons(Chat chat) {
         InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton("Я всё");
-        inlineKeyboardButton.setCallbackData(TYPE + Binder.BINDER_DELIMITER + "1");
+        inlineKeyboardButton.setCallbackData(TYPE + ButtonCallbackAction.BINDER_DELIMITER + "add");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(inlineKeyboardButton));

@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.JoinType;
+import java.math.BigDecimal;
 
 @UtilityClass
 public class DesireSpecification {
@@ -24,6 +25,11 @@ public class DesireSpecification {
     public static Specification<Desire> articleIs(String article) {
         return (root, criteriaQuery, criteriaBuilder) ->
                 article != null ? criteriaBuilder.equal(root.get("article"), article) : null;
+    }
+
+    public static Specification<Desire> priceIs(BigDecimal price) {
+        return (root, criteriaQuery, criteriaBuilder) ->
+                price != null ? criteriaBuilder.equal(root.get("price"), price) : null;
     }
 
 }

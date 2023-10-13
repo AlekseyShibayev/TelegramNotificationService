@@ -1,15 +1,15 @@
-package com.company.app.telegram.incoming_message_handler.binder.binder_strategy;
+package com.company.app.telegram.incoming_message_handler.button.model;
 
 /**
  * Связывает модуль и входящее сообщение, отправленное пользователем в телеграм бота.
  */
-public interface Binder {
+public interface ButtonCallbackAction {
 
     String BINDER_DELIMITER = "::";
 
     String getType();
 
-    void bind(BinderContext binderContext);
+    void doAction(ButtonCallbackActionContext context);
 
     default boolean isFirstTimeHere(String incomingMessage) {
         return !incomingMessage.contains(BINDER_DELIMITER);

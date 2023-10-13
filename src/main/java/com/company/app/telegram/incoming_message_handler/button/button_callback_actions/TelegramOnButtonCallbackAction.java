@@ -1,8 +1,8 @@
-package com.company.app.telegram.incoming_message_handler.binder.binders;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.Binder;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.BinderContext;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import com.company.app.telegram.incoming_message_handler.service.ChatActivationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TelegramOnBinder implements Binder {
+public class TelegramOnButtonCallbackAction implements ButtonCallbackAction {
 
     private static final String TYPE = "TG_ON";
 
@@ -23,8 +23,8 @@ public class TelegramOnBinder implements Binder {
     }
 
     @Override
-    public void bind(BinderContext binderContext) {
-        Chat chat = binderContext.getChat();
+    public void doAction(ButtonCallbackActionContext context) {
+        Chat chat = context.getChat();
         chatActivationService.activate(chat);
     }
 

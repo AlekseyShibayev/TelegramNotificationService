@@ -8,7 +8,7 @@ import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.Binder;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -34,7 +34,7 @@ public class TelegramDomainInitializer {
     private final ChatRepository chatRepository;
     private final ModeRepository modeRepository;
     private final SubscriptionRepository subscriptionRepository;
-    private final List<Binder> binderList;
+    private final List<ButtonCallbackAction> binderList;
 
     @EventListener({ContextRefreshedEvent.class})
     @Transactional

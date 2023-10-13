@@ -1,8 +1,7 @@
-package com.company.app.telegram.incoming_message_handler.message_executor;
+package com.company.app.telegram.incoming_message_handler.button.task_executor;
 
 import com.company.app.core.exception.DeveloperMistakeException;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
@@ -53,7 +52,7 @@ public class IncomingMessageTaskExecutor {
     private List<Desire> createDesireList(String chatName, List<IncomingMessageTask> tasks) {
         List<Desire> desireList = new ArrayList<>();
         for (int i = 1; i < tasks.size(); i = i + 2) {
-            String article = tasks.get(i-1).getMessage();
+            String article = tasks.get(i - 1).getMessage();
             String price = tasks.get(i).getMessage();
             desireList.add(new Desire()
                     .setChatName(chatName)

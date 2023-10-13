@@ -51,8 +51,6 @@ public class SeleniumHtmlPageLoader {
 
         driver.get(url);
 
-//        Thread.sleep(15000);
-
         String pageSource = driver.getPageSource();
         driver.quit();
         return pageSource;

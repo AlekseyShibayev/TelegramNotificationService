@@ -1,9 +1,9 @@
-package com.company.app.telegram.incoming_message_handler.binder.binders;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.Binder;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.BinderContext;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import com.company.app.wildberries_knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries_knowledge.domain.entity.Supplier;
 import com.company.app.wildberries_searcher.component.data.WildberriesSearcherContext;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class WildberriesSearcherBinder implements Binder {
+public class WildberriesSearcherButtonCallbackAction implements ButtonCallbackAction {
 
     private static final String TYPE = "WB_SEARCH";
 
@@ -34,9 +34,9 @@ public class WildberriesSearcherBinder implements Binder {
     }
 
     @Override
-    public void bind(BinderContext binderContext) {
-        Chat chat = binderContext.getChat();
-        String incomingMessage = binderContext.getMessage();
+    public void doAction(ButtonCallbackActionContext context) {
+        Chat chat = context.getChat();
+        String incomingMessage = context.getMessage();
 
         if (isFirstTimeHere(incomingMessage)) {
             showButtonsWithSuppliers(chat);

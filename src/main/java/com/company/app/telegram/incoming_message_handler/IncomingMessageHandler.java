@@ -7,9 +7,9 @@ import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
 import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.domain.service.HistoryService;
-import com.company.app.telegram.incoming_message_handler.binder.BinderExecutor;
+import com.company.app.telegram.incoming_message_handler.button.ButtonCallbackActionExecutor;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonFactory;
 import com.company.app.telegram.incoming_message_handler.service.ChatActivationService;
-import com.company.app.telegram.incoming_message_handler.model.ButtonFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +29,7 @@ public class IncomingMessageHandler {
     private final TelegramFacade telegramFacade;
     private final HistoryService historyService;
     private final ChatService chatService;
-    private final BinderExecutor binderExecutor;
+    private final ButtonCallbackActionExecutor binderExecutor;
     private final ChatActivationService chatActivationService;
     private final IncomingMessageTaskRepository incomingMessageTaskRepository;
 
@@ -44,7 +44,7 @@ public class IncomingMessageHandler {
             chatActivationService.activate(chat);
 
             if (ModeType.DEFAULT.is(chat)) {
-                showCommands(update);
+                showMainMenuButtons(update);
             } else {
                 IncomingMessageTask task = new IncomingMessageTask()
                         .setChatName(chat.getChatName())
@@ -66,11 +66,11 @@ public class IncomingMessageHandler {
         return update.getMessage() != null;
     }
 
-    private void showCommands(Update update) {
+    private void showMainMenuButtons(Update update) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(update.getMessage().getChatId());
         sendMessage.setText("Доступны следующие команды:");
-        sendMessage.setReplyMarkup(ButtonFactory.inlineMarkup());
+        sendMessage.setReplyMarkup(ButtonFactory.mainMenuButtons());
         telegramFacade.writeToTargetChat(sendMessage);
     }
 

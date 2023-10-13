@@ -1,4 +1,4 @@
-package com.company.app.telegram.incoming_message_handler.binder.binder_strategy;
+package com.company.app.telegram.incoming_message_handler.button.model;
 
 import com.company.app.telegram.domain.entity.Chat;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class BinderContext {
+public class ButtonCallbackActionContext {
 
     private Chat chat;
     private String message;

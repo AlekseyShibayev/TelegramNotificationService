@@ -1,10 +1,10 @@
-package com.company.app.telegram.incoming_message_handler.binder.binders;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.Binder;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.BinderContext;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import com.company.app.wildberries_desire_lot.controller.WildberriesDesireController;
 import com.company.app.wildberries_desire_lot.controller.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class WildberriesDesireLotShowBinder implements Binder {
+public class WildberriesDesireLotShowButtonCallbackAction implements ButtonCallbackAction {
 
     private static final String TYPE = "WB_DL_SHOW";
 
@@ -27,12 +27,8 @@ public class WildberriesDesireLotShowBinder implements Binder {
     }
 
     @Override
-    public void bind(BinderContext binderContext) {
-        show(binderContext);
-    }
-
-    private void show(BinderContext binderContext) {
-        Chat chat = binderContext.getChat();
+    public void doAction(ButtonCallbackActionContext context) {
+        Chat chat = context.getChat();
 
         List<FulfilledDesire> desireList = wildberriesDesireController.getFulfilledDesires(chat.getChatName()).getBody();
 

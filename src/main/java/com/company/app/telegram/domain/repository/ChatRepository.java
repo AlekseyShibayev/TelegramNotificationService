@@ -12,7 +12,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long>, JpaSpecificat
 
     default Chat findOwner() {
         return this.findOne(Specification.where((root, query, criteriaBuilder) ->
-            criteriaBuilder.equal(root.get("userInfo").get("role"), "Owner")
+                criteriaBuilder.equal(root.get("userInfo").get("role"), "Owner")
         )).orElseThrow(() -> new DeveloperMistakeException("Owner must be"));
     }
 

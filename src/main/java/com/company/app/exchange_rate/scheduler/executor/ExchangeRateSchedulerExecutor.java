@@ -24,7 +24,7 @@ public class ExchangeRateSchedulerExecutor {
     public void writeExchange() {
         ExchangeRate exchangeRate = extractInner();
 
-        String notification = "exchange rate: ali: [%s]".formatted(exchangeRate.getValue());
+        String notification = "Курс aliexpress: %s".formatted(exchangeRate.getValue());
         log.debug(notification);
 
         telegramFacade.writeToEveryone(notification);

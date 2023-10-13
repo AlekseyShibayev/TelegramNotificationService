@@ -1,11 +1,11 @@
-package com.company.app.telegram.incoming_message_handler.binder.binders;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
 import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.core.util.Strings;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.Binder;
-import com.company.app.telegram.incoming_message_handler.binder.binder_strategy.BinderContext;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
+import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
@@ -13,7 +13,6 @@ import com.company.app.wildberries_desire_lot.domain.specification.DesireSpecifi
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -28,7 +27,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class WildberriesDesireLotRemoveBinder implements Binder {
+public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCallbackAction {
 
     private static final String TYPE = "WB_DL_REMOVE";
 
@@ -41,23 +40,21 @@ public class WildberriesDesireLotRemoveBinder implements Binder {
         return TYPE;
     }
 
-    @Transactional
     @Override
-    public void bind(BinderContext binderContext) {
-        execute(binderContext);
-    }
-
-    public void execute(BinderContext binderContext) {
-        Chat chat = binderContext.getChat();
-        String incomingMessage = binderContext.getMessage();
+    public void doAction(ButtonCallbackActionContext context) {
+        Chat chat = context.getChat();
+        String incomingMessage = context.getMessage();
 
         if (isFirstTimeHere(incomingMessage)) {
             showButtons(chat);
         } else {
             List<String> list = Arrays.stream(incomingMessage.split(BINDER_DELIMITER)).toList();
             String article = list.get(1);
+            String price = list.get(2);
             Optional<Desire> one = desireRepository.findOne(DesireSpecification.chatNameIs(chat.getChatName())
-                    .and(DesireSpecification.articleIs(article)));
+                    .and(DesireSpecification.articleIs(article))
+                    .and(DesireSpecification.priceIs(new BigDecimal(price)))
+            );
             one.ifPresent(desire -> {
                 desireRepository.delete(desire);
                 telegramFacade.writeToTargetChat(chat.getChatName(), "%s удалил".formatted(article));
@@ -95,7 +92,7 @@ public class WildberriesDesireLotRemoveBinder implements Binder {
             String string = article + " " + Strings.cutEnd(desirePrice.toString(), 3) + " " + description;
 
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton(string);
-            inlineKeyboardButton.setCallbackData(TYPE + Binder.BINDER_DELIMITER + article);
+            inlineKeyboardButton.setCallbackData(TYPE + ButtonCallbackAction.BINDER_DELIMITER + article + ButtonCallbackAction.BINDER_DELIMITER + desire.getPrice());
             rowsInLine.add(List.of(inlineKeyboardButton));
         }
 

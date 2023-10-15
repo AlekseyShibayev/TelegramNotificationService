@@ -5,10 +5,15 @@ import com.company.app.core.temp.tool.api.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.repository.ChatRepository;
+import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
+import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import com.company.app.wildberries_desire_lot.scheduler.WildberriesDesireLotSchedulerConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -38,9 +43,25 @@ public abstract class SpringBootTestApplicationContext {
     protected EntityGraphExtractor entityGraphExtractor;
     @SpyBean
     protected ChatRepository chatRepository;
+    @Autowired
+    protected DesireLotRepository desireLotRepository;
+    @Autowired
+    protected DesireRepository desireRepository;
 
     @PostConstruct
     void init() {
         log.debug("**********     run spring boot test context     **********");
     }
+
+    @BeforeEach
+    void doBeforeEach() {
+
+    }
+
+    @AfterEach
+    void doAfterEach() {
+        desireRepository.deleteAllInBatch();
+        desireLotRepository.deleteAllInBatch();
+    }
+
 }

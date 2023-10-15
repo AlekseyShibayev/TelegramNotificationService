@@ -2,6 +2,7 @@ package com.company.app.telegram.incoming_message_handler.button.model;
 
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
@@ -17,21 +18,23 @@ public class ButtonFactory {
     private static final InlineKeyboardButton WB_DL_ADD = new InlineKeyboardButton("Добавить желания");
     private static final InlineKeyboardButton WB_DL_REMOVE = new InlineKeyboardButton("Удалить желания");
     private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний курс aliexpress");
-//    private static final InlineKeyboardButton WB_SEARCH_BUTTON = new InlineKeyboardButton("START_WB_SEARCH (DEV)");
+    private static final InlineKeyboardButton ADMIN_MAIN_MENU = new InlineKeyboardButton("Админка");
+    private static final InlineKeyboardButton ADMIN_WB_DL_SELECT = new InlineKeyboardButton("wb desire lot select *");
+    private static final InlineKeyboardButton ADMIN_WB_DL_MANUAL_REFRESH = new InlineKeyboardButton("wb desire lot manual refresh");
 
     public static InlineKeyboardMarkup mainMenuButtons() {
         TG_OFF_BUTTON.setCallbackData("TG_OFF");
         TG_ON_BUTTON.setCallbackData("TG_ON");
         WB_MAIN_MENU.setCallbackData("WB_MAIN_MENU");
         ER_BUTTON.setCallbackData("EX");
-//        WB_SEARCH_BUTTON.setCallbackData("WB_SEARCH");
+        ADMIN_MAIN_MENU.setCallbackData("ADMIN_MAIN_MENU");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(TG_OFF_BUTTON));
         rowsInLine.add(List.of(TG_ON_BUTTON));
         rowsInLine.add(List.of(WB_MAIN_MENU));
         rowsInLine.add(List.of(ER_BUTTON));
-//        rowsInLine.add(List.of(WB_SEARCH_BUTTON));
+        rowsInLine.add(List.of(ADMIN_MAIN_MENU));
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         markupInline.setKeyboard(rowsInLine);
@@ -49,6 +52,21 @@ public class ButtonFactory {
         rowsInLine.add(List.of(WB_DL_SHOW));
         rowsInLine.add(List.of(WB_DL_ADD));
         rowsInLine.add(List.of(WB_DL_REMOVE));
+
+        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+        markupInline.setKeyboard(rowsInLine);
+
+        return markupInline;
+    }
+
+    public static ReplyKeyboard adminMenuButtons() {
+        ADMIN_WB_DL_SELECT.setCallbackData("ADMIN_WB_DL_SELECT");
+        ADMIN_WB_DL_MANUAL_REFRESH.setCallbackData("ADMIN_WB_DL_MANUAL_REFRESH");
+
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+
+        rowsInLine.add(List.of(ADMIN_WB_DL_SELECT));
+        rowsInLine.add(List.of(ADMIN_WB_DL_MANUAL_REFRESH));
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         markupInline.setKeyboard(rowsInLine);

@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 
@@ -39,13 +42,14 @@ public class WildberriesDesireLotRefresher {
         List<DesireLot> desireLotList = getDesireLots(desireList);
         List<DesireLot> persistedDesireLots = wildberriesDesireLotUpdater.updateDesireLots(desireLotList);
 
-        desireList.forEach(desire ->
-                persistedDesireLots.stream()
-                        .filter(desireLot -> desire.getArticle().equals(desireLot.getArticle()))
-                        .forEach(desireLot -> desire.setDesireLot(desireLot))
-        );
+        Map<String, DesireLot> desireLotPersistedMap = persistedDesireLots.stream()
+                .collect(Collectors.toMap(DesireLot::getArticle, Function.identity()));
 
-        desireRepository.saveAll(desireList);
+        for (Desire desire : desireList) {
+            DesireLot desireLot = desireLotPersistedMap.get(desire.getArticle());
+            desire.setDesireLot(desireLot);
+            desireRepository.save(desire);
+        }
     }
 
     private List<DesireLot> getDesireLots(List<Desire> desireList) {

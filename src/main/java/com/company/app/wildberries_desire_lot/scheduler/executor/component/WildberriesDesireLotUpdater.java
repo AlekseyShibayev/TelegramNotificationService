@@ -5,9 +5,9 @@ import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -22,28 +22,25 @@ public class WildberriesDesireLotUpdater {
 
     public List<DesireLot> updateDesireLots(List<DesireLot> dtoListToUpdate) {
         List<DesireLot> persisted = desireLotRepository.findAll();
-        if (isRefreshFirstTime(persisted)) {
+        if (Collections.isEmpty(persisted)) {
             return desireLotRepository.saveAll(dtoListToUpdate);
         } else {
-            Map<String, DesireLot> mapToUpdate = dtoListToUpdate.stream()
+            Map<String, DesireLot> desireLotPersistedMap = persisted.stream()
                     .collect(Collectors.toMap(DesireLot::getArticle, Function.identity()));
 
-            persisted.forEach(desireLot -> updateOneDesireLot(mapToUpdate, desireLot));
+            List<DesireLot> result = new ArrayList<>();
+            for (DesireLot toUpdate : dtoListToUpdate) {
+                if (desireLotPersistedMap.containsKey(toUpdate.getArticle())) {
+                    DesireLot persistedDesireLot = desireLotPersistedMap.get(toUpdate.getArticle());
+                    persistedDesireLot.setPrice(toUpdate.getPrice());
+                    persistedDesireLot.setDescription(toUpdate.getDescription());
+                    result.add(desireLotRepository.save(persistedDesireLot));
+                } else {
+                    result.add(desireLotRepository.save(toUpdate));
+                }
+            }
+            return result;
         }
-        return persisted;
-    }
-
-    private void updateOneDesireLot(Map<String, DesireLot> mapToUpdate, DesireLot desireLot) {
-        if (mapToUpdate.containsKey(desireLot.getArticle())) {
-            BeanUtils.copyProperties(mapToUpdate.get(desireLot.getArticle()), desireLot, "id");
-            desireLotRepository.save(desireLot);
-        } else {
-            desireLotRepository.save(desireLot);
-        }
-    }
-
-    private boolean isRefreshFirstTime(List<DesireLot> allDesireLot) {
-        return Collections.isEmpty(allDesireLot);
     }
 
 }

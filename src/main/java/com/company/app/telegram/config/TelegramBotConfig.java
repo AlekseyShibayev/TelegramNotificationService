@@ -10,6 +10,10 @@ import java.io.Serializable;
  */
 public interface TelegramBotConfig {
 
+    public static final String OWNER = "Owner";
+    public static final String ADMIN = "Admin";
+    public static final String USER = "User";
+
     void write(BotApiMethod<? extends Serializable> botApiMethod);
 
     String getName();

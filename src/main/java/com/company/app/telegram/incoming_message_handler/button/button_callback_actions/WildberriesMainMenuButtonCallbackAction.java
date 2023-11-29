@@ -4,7 +4,7 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
-import com.company.app.telegram.incoming_message_handler.button.model.ButtonFactory;
+import com.company.app.telegram.incoming_message_handler.button.service.ButtonFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +18,7 @@ public class WildberriesMainMenuButtonCallbackAction implements ButtonCallbackAc
     private static final String TYPE = "WB_MAIN_MENU";
 
     private final TelegramFacade telegramFacade;
+    private final ButtonFactory buttonFactory;
 
     @Override
     public String getType() {
@@ -31,7 +32,7 @@ public class WildberriesMainMenuButtonCallbackAction implements ButtonCallbackAc
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chat.getChatName());
         sendMessage.setText("Управление wildberries:");
-        sendMessage.setReplyMarkup(ButtonFactory.wildberriesMenuButtons());
+        sendMessage.setReplyMarkup(buttonFactory.wildberriesMenuButtons());
         telegramFacade.writeToTargetChat(sendMessage);
     }
 

@@ -1,6 +1,13 @@
-package com.company.app.telegram.incoming_message_handler.button.model;
+package com.company.app.telegram.incoming_message_handler.button.service;
 
-import lombok.experimental.UtilityClass;
+import com.company.app.telegram.config.TelegramBotConfig;
+import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.repository.ChatRepository;
+import com.company.app.telegram.domain.spec.ChatSpecification;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -8,7 +15,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-@UtilityClass
+@Service
+@RequiredArgsConstructor
 public class ButtonFactory {
 
     private static final InlineKeyboardButton TG_OFF_BUTTON = new InlineKeyboardButton("Отключить уведомления");
@@ -22,19 +30,26 @@ public class ButtonFactory {
     private static final InlineKeyboardButton ADMIN_WB_DL_SELECT = new InlineKeyboardButton("wb desire lot select *");
     private static final InlineKeyboardButton ADMIN_WB_DL_MANUAL_REFRESH = new InlineKeyboardButton("wb desire lot manual refresh");
 
-    public static InlineKeyboardMarkup mainMenuButtons() {
+    private final ChatRepository chatRepository;
+
+    public InlineKeyboardMarkup mainMenuButtons(Update update) {
+        String role = getUserRole(update.getMessage());
+
         TG_OFF_BUTTON.setCallbackData("TG_OFF");
         TG_ON_BUTTON.setCallbackData("TG_ON");
         WB_MAIN_MENU.setCallbackData("WB_MAIN_MENU");
         ER_BUTTON.setCallbackData("EX");
-        ADMIN_MAIN_MENU.setCallbackData("ADMIN_MAIN_MENU");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(TG_OFF_BUTTON));
         rowsInLine.add(List.of(TG_ON_BUTTON));
         rowsInLine.add(List.of(WB_MAIN_MENU));
         rowsInLine.add(List.of(ER_BUTTON));
-        rowsInLine.add(List.of(ADMIN_MAIN_MENU));
+
+        if (TelegramBotConfig.OWNER.equals(role)) {
+            ADMIN_MAIN_MENU.setCallbackData("ADMIN_MAIN_MENU");
+            rowsInLine.add(List.of(ADMIN_MAIN_MENU));
+        }
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         markupInline.setKeyboard(rowsInLine);
@@ -42,7 +57,14 @@ public class ButtonFactory {
         return markupInline;
     }
 
-    public static InlineKeyboardMarkup wildberriesMenuButtons() {
+    private String getUserRole(Message message) {
+        String chatName = String.valueOf(message.getChatId());
+        Chat chat = chatRepository.findOne(ChatSpecification.chatNameIs(chatName))
+                .orElseThrow(() -> new IllegalArgumentException("Chat with name [%s] is absent".formatted(chatName)));
+        return chat.getUserInfo().getRole();
+    }
+
+    public InlineKeyboardMarkup wildberriesMenuButtons() {
         WB_DL_SHOW.setCallbackData("WB_DL_SHOW");
         WB_DL_ADD.setCallbackData("WB_DL_ADD");
         WB_DL_REMOVE.setCallbackData("WB_DL_REMOVE");
@@ -59,7 +81,7 @@ public class ButtonFactory {
         return markupInline;
     }
 
-    public static ReplyKeyboard adminMenuButtons() {
+    public ReplyKeyboard adminMenuButtons() {
         ADMIN_WB_DL_SELECT.setCallbackData("ADMIN_WB_DL_SELECT");
         ADMIN_WB_DL_MANUAL_REFRESH.setCallbackData("ADMIN_WB_DL_MANUAL_REFRESH");
 

@@ -8,7 +8,7 @@ import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
 import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.domain.service.HistoryService;
 import com.company.app.telegram.incoming_message_handler.button.ButtonCallbackActionExecutor;
-import com.company.app.telegram.incoming_message_handler.button.model.ButtonFactory;
+import com.company.app.telegram.incoming_message_handler.button.service.ButtonFactory;
 import com.company.app.telegram.incoming_message_handler.service.ChatActivationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +32,7 @@ public class IncomingMessageHandler {
     private final ButtonCallbackActionExecutor binderExecutor;
     private final ChatActivationService chatActivationService;
     private final IncomingMessageTaskRepository incomingMessageTaskRepository;
+    private final ButtonFactory buttonFactory;
 
     @Transactional
     public void process(Update update) {
@@ -70,7 +71,7 @@ public class IncomingMessageHandler {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(update.getMessage().getChatId());
         sendMessage.setText("Доступны следующие команды:");
-        sendMessage.setReplyMarkup(ButtonFactory.mainMenuButtons());
+        sendMessage.setReplyMarkup(buttonFactory.mainMenuButtons(update));
         telegramFacade.writeToTargetChat(sendMessage);
     }
 

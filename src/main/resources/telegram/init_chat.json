@@ -9,11 +9,20 @@
     }
   },
   {
+    "chatName": "231720043",
+    "enableNotifications": false,
+    "userInfo": {
+      "name": "Anastasia",
+      "role": "User",
+      "gender": "female"
+    }
+  },
+  {
     "chatName": "484518144",
     "enableNotifications": false,
     "userInfo": {
       "name": "Uliana",
-      "role": "Admin",
+      "role": "User",
       "gender": "female"
     }
   }

@@ -4,7 +4,7 @@
     "enableNotifications": true,
     "userInfo": {
       "name": "Aleksey",
-      "role": "Owner",
+      "role": "OWNER",
       "gender": "male"
     }
   },
@@ -13,7 +13,7 @@
     "enableNotifications": false,
     "userInfo": {
       "name": "Anastasia",
-      "role": "User",
+      "role": "USER",
       "gender": "female"
     }
   },
@@ -22,7 +22,7 @@
     "enableNotifications": false,
     "userInfo": {
       "name": "Uliana",
-      "role": "User",
+      "role": "USER",
       "gender": "female"
     }
   }

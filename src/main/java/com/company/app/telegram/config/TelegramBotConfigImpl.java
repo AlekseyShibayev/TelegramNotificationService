@@ -51,7 +51,7 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 
     @Override
     public void processNonCommandUpdate(Update update) {
-        incomingMessageHandler.process(update);
+        incomingMessageHandler.take(update);
     }
 
     @SneakyThrows

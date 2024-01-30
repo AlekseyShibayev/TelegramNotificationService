@@ -35,7 +35,7 @@ public class IncomingMessageHandler {
     private final ButtonFactory buttonFactory;
 
     @Transactional
-    public void process(Update update) {
+    public void take(Update update) {
         if (isIncomingMessage(update)) {
             Message message = update.getMessage();
             Long chatId = message.getChatId();

@@ -2,6 +2,7 @@ package com.company.app.telegram.incoming_message_handler.button.service;
 
 import com.company.app.telegram.config.TelegramBotConfig;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.enums.Role;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.spec.ChatSpecification;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +47,7 @@ public class ButtonFactory {
         rowsInLine.add(List.of(WB_MAIN_MENU));
         rowsInLine.add(List.of(ER_BUTTON));
 
-        if (TelegramBotConfig.OWNER.equals(role)) {
+        if (Role.OWNER.name().equals(role)) {
             ADMIN_MAIN_MENU.setCallbackData("ADMIN_MAIN_MENU");
             rowsInLine.add(List.of(ADMIN_MAIN_MENU));
         }

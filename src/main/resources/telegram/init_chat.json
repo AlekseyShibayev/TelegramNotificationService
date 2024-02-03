@@ -9,6 +9,15 @@
     }
   },
   {
+    "chatName": "1787170043",
+    "enableNotifications": false,
+    "userInfo": {
+      "name": "Maria",
+      "role": "USER",
+      "gender": "female"
+    }
+  },
+  {
     "chatName": "231720043",
     "enableNotifications": false,
     "userInfo": {

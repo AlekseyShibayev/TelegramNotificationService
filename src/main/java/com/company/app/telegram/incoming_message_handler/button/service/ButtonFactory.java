@@ -24,6 +24,7 @@ public class ButtonFactory {
     private static final InlineKeyboardButton TG_ON_BUTTON = new InlineKeyboardButton("Включить уведомления");
     private static final InlineKeyboardButton WB_MAIN_MENU = new InlineKeyboardButton("Управление wildberries");
     private static final InlineKeyboardButton WB_DL_SHOW = new InlineKeyboardButton("Покажи что нашёл");
+    private static final InlineKeyboardButton WB_DL_SHOW_MY_DESIRES = new InlineKeyboardButton("Покажи мои желания");
     private static final InlineKeyboardButton WB_DL_ADD = new InlineKeyboardButton("Добавить желания");
     private static final InlineKeyboardButton WB_DL_REMOVE = new InlineKeyboardButton("Удалить желания");
     private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний курс aliexpress");
@@ -67,12 +68,14 @@ public class ButtonFactory {
 
     public InlineKeyboardMarkup wildberriesMenuButtons() {
         WB_DL_SHOW.setCallbackData("WB_DL_SHOW");
+        WB_DL_SHOW_MY_DESIRES.setCallbackData("WB_DL_SHOW_MY_DESIRES");
         WB_DL_ADD.setCallbackData("WB_DL_ADD");
         WB_DL_REMOVE.setCallbackData("WB_DL_REMOVE");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
 
         rowsInLine.add(List.of(WB_DL_SHOW));
+        rowsInLine.add(List.of(WB_DL_SHOW_MY_DESIRES));
         rowsInLine.add(List.of(WB_DL_ADD));
         rowsInLine.add(List.of(WB_DL_REMOVE));
 

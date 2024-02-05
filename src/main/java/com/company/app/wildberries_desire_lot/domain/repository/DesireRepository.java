@@ -12,4 +12,6 @@ public interface DesireRepository extends JpaRepository<Desire, Long>, JpaSpecif
     @Query("from Desire d join d.desireLot dl where d.price >= dl.price")
     List<Desire> findAllWithDesirePriceGreaterThenRealPrice();
 
+    List<Desire> findAllByChatName(String chatName);
+
 }

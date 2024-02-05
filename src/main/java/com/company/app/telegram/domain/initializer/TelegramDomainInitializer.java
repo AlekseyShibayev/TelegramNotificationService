@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Initializes different @Entity, when application started.
@@ -45,25 +48,38 @@ public class TelegramDomainInitializer {
     }
 
     private void prepareChat() {
-        List<Chat> list = jsonTool.toJavaAsList(resource, Chat.class);
         Mode defaultMode = modeRepository.findByType(ModeType.DEFAULT);
 
-        list.forEach(chat -> chat.setMode(defaultMode));
-        chatRepository.saveAll(list);
+        List<Chat> currentChats = chatRepository.findAll();
+        Map<String, Chat> chatNameVsChat = currentChats.stream().collect(Collectors.toMap(Chat::getChatName, Function.identity()));
+
+        List<Chat> list = jsonTool.toJavaAsList(resource, Chat.class);
+        List<Chat> newChats = list.stream()
+                .filter(chat -> !chatNameVsChat.containsKey(chat.getChatName()))
+                .map(chat -> chat.setMode(defaultMode))
+                .toList();
+        chatRepository.saveAll(newChats);
     }
 
     private void prepareMode() {
+        List<Mode> currentModes = modeRepository.findAll();
+        Map<String, Mode> typeVsNode = currentModes.stream().collect(Collectors.toMap(Mode::getType, Function.identity()));
+
         List<Mode> list = Arrays.stream(ModeType.values())
-                .map(chatModeType -> new Mode()
-                        .setType(chatModeType.getType()))
+                .map(newModeType -> new Mode().setType(newModeType.getType()))
+                .filter(mode -> !typeVsNode.containsKey(mode.getType()))
                 .toList();
 
         modeRepository.saveAll(list);
     }
 
     void prepareSubscriptions() {
+        List<Subscription> currentSubscriptions = subscriptionRepository.findAll();
+        Map<String, Subscription> typeVsSubscription = currentSubscriptions.stream().collect(Collectors.toMap(Subscription::getType, Function.identity()));
+
         List<Subscription> subscriptionList = binderList.stream()
                 .map(binderType -> Subscription.builder().type(binderType.getType()).build())
+                .filter(subscription -> !typeVsSubscription.containsKey(subscription.getType()))
                 .toList();
         subscriptionRepository.saveAll(subscriptionList);
     }

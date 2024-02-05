@@ -1,6 +1,6 @@
 package com.company.app.springboottest.application.wildberries.searcher;
 
-import com.company.app.core.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplicationContext;
 
 class WildberriesSearcherEndToEndTest extends SpringBootTestApplicationContext {
 

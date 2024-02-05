@@ -1,4 +1,4 @@
-package com.company.app.core;
+package com.company.app.configuration;
 
 import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.core.temp.tool.api.CaptchaFighter;
@@ -20,16 +20,17 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import javax.annotation.PostConstruct;
 
 @Slf4j
 @ExtendWith(OutputCaptureExtension.class)
 @TestPropertySource("/test.properties")
-@SpringBootTest(
-        classes = SpringBootTestApplicationConfiguration.class,
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+@SpringBootTest(classes = {DbTestConfiguration.class}
+        , webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
+@Testcontainers(disabledWithoutDocker = false)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @MockBean(CaptchaFighter.class)
 @MockBean(WildberriesDesireLotSchedulerConfig.class)

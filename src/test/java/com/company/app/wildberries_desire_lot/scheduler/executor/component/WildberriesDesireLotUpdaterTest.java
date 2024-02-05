@@ -1,10 +1,9 @@
 package com.company.app.wildberries_desire_lot.scheduler.executor.component;
 
-import com.company.app.core.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplicationContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_desire_lot.domain.entity.Desire;
 import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
-import com.company.app.wildberries_desire_lot.domain.repository.DesireLotRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

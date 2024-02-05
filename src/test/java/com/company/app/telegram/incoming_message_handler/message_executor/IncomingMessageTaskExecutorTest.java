@@ -1,6 +1,6 @@
 package com.company.app.telegram.incoming_message_handler.message_executor;
 
-import com.company.app.core.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplicationContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.enums.ModeType;

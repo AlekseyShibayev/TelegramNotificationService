@@ -1,6 +1,6 @@
 package com.company.app.springboottest.application.telegram;
 
-import com.company.app.core.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplicationContext;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

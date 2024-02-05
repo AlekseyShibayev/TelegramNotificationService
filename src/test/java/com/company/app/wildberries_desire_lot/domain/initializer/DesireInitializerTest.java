@@ -1,6 +1,6 @@
 package com.company.app.wildberries_desire_lot.domain.initializer;
 
-import com.company.app.core.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplicationContext;
 import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

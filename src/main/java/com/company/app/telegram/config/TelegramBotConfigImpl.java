@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor_ = {@Lazy})
+@RequiredArgsConstructor
 public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot implements TelegramBotConfig {
 
     @Value("${telegram.name}")

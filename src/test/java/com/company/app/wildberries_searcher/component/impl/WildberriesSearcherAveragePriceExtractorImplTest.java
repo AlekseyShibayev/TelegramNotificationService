@@ -1,8 +1,8 @@
 package com.company.app.wildberries_searcher.component.impl;
 
-import com.company.app.configuration.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplication;
 
-class WildberriesSearcherAveragePriceExtractorImplTest extends SpringBootTestApplicationContext {
+class WildberriesSearcherAveragePriceExtractorImplTest extends SpringBootTestApplication {
 
 //    @Autowired
 //    private WildberriesSearcherAveragePriceExtractor averagePriceExtractor;

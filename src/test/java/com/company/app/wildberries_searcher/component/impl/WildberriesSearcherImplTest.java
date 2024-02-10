@@ -1,8 +1,8 @@
 package com.company.app.wildberries_searcher.component.impl;
 
-import com.company.app.configuration.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplication;
 
-class WildberriesSearcherImplTest extends SpringBootTestApplicationContext {
+class WildberriesSearcherImplTest extends SpringBootTestApplication {
 
 //    @Autowired
 //    private WildberriesSearcher wildberriesSearcher;

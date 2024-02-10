@@ -1,8 +1,8 @@
 package com.company.app.springboottest.application.exchangerate;
 
-import com.company.app.configuration.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplication;
 
-class ExchangeRateEndToEndTest extends SpringBootTestApplicationContext {
+class ExchangeRateEndToEndTest extends SpringBootTestApplication {
 
 //    @Autowired
 //    private ExchangeRateController exchangeRateController;

@@ -2,7 +2,7 @@ package com.company.app.core.infrastructure.entitygraphextractor.impl;
 
 import com.company.app.core.infrastructure.entitygraphextractor.common.EntityGraphExtractorAbstractContext;
 import com.company.app.core.infrastructure.entitygraphextractor.common.EntityGraphExtractorFinisher;
-import com.company.app.wildberries_desire_lot.domain.entity.Desire;
+import com.company.app.wildberries_desire.domain.entity.Desire;
 
 import java.util.List;
 

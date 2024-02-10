@@ -32,11 +32,9 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() throws TelegramApiException {
-//		this.execute(new SetMyCommands(LIST_OF_COMMANDS, new BotCommandScopeDefault(), null));
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
         botsApi.registerBot(this);
         log.info("**********     The telegram bot has been created.     **********");
-//		this.execute(GetUpdates.builder().build()); // пока не ясно о каких updates идет речь
     }
 
     @Override

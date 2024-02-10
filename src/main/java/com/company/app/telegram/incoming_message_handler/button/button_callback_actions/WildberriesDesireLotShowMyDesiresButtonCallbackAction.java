@@ -5,9 +5,9 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
-import com.company.app.wildberries_desire_lot.domain.entity.Desire;
-import com.company.app.wildberries_desire_lot.domain.entity.DesireLot;
-import com.company.app.wildberries_desire_lot.domain.repository.DesireRepository;
+import com.company.app.wildberries_desire.domain.entity.Desire;
+import com.company.app.wildberries_desire.domain.entity.DesireLot;
+import com.company.app.wildberries_desire.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

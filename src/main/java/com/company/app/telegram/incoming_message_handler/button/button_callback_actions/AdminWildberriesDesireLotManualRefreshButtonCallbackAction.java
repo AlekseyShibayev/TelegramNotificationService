@@ -4,7 +4,7 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
-import com.company.app.wildberries_desire_lot.scheduler.executor.component.WildberriesDesireLotRefresher;
+import com.company.app.wildberries_desire.service.WildberriesDesireLotService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class AdminWildberriesDesireLotManualRefreshButtonCallbackAction implemen
     private static final String TYPE = "ADMIN_WB_DL_MANUAL_REFRESH";
 
     private final TelegramFacade telegramFacade;
-    private final WildberriesDesireLotRefresher wildberriesDesireLotRefresher;
+    private final WildberriesDesireLotService wildberriesDesireLotService;
 
     @Override
     public String getType() {
@@ -28,7 +28,7 @@ public class AdminWildberriesDesireLotManualRefreshButtonCallbackAction implemen
     public void doAction(ButtonCallbackActionContext context) {
         Chat chat = context.getChat();
 
-        wildberriesDesireLotRefresher.refresh();
+        wildberriesDesireLotService.search();
         telegramFacade.writeToTargetChat(chat.getChatName(), "success");
     }
 

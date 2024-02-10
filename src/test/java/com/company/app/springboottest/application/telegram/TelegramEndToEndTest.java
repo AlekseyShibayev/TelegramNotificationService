@@ -1,10 +1,10 @@
 package com.company.app.springboottest.application.telegram;
 
-import com.company.app.configuration.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplication;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class TelegramEndToEndTest extends SpringBootTestApplicationContext {
+class TelegramEndToEndTest extends SpringBootTestApplication {
 
 //    @BeforeEach
 //    void init() {

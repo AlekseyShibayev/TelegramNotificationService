@@ -5,8 +5,8 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
-import com.company.app.wildberries_desire_lot.controller.WildberriesDesireController;
-import com.company.app.wildberries_desire_lot.controller.dto.FulfilledDesire;
+import com.company.app.wildberries_desire.WildberriesDesireFacade;
+import com.company.app.wildberries_desire.domain.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class WildberriesDesireLotShowButtonCallbackAction implements ButtonCallb
 
     private static final String TYPE = "WB_DL_SHOW";
 
-    private final WildberriesDesireController wildberriesDesireController;
+    private final WildberriesDesireFacade wildberriesDesireFacade;
     private final TelegramFacade telegramFacade;
 
     @Override
@@ -30,7 +30,7 @@ public class WildberriesDesireLotShowButtonCallbackAction implements ButtonCallb
     public void doAction(ButtonCallbackActionContext context) {
         Chat chat = context.getChat();
 
-        List<FulfilledDesire> desireList = wildberriesDesireController.getFulfilledDesires(chat.getChatName()).getBody();
+        List<FulfilledDesire> desireList = wildberriesDesireFacade.getFulfilledDesires(chat.getChatName());
 
         if (Collections.isEmpty(desireList)) {
             telegramFacade.writeToTargetChat(chat.getChatName(), "Ничего не нашёл");

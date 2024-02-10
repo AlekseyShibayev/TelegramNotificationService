@@ -1,6 +1,6 @@
 package com.company.app.telegram.incoming_message_handler.message_executor;
 
-import com.company.app.configuration.SpringBootTestApplicationContext;
+import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.enums.ModeType;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class IncomingMessageTaskExecutorTest extends SpringBootTestApplicationContext {
+class IncomingMessageTaskExecutorTest extends SpringBootTestApplication {
 
     @Autowired
     private IncomingMessageTaskExecutor incomingMessageTaskExecutor;

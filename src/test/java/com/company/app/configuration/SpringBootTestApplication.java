@@ -1,11 +1,15 @@
 package com.company.app.configuration;
 
+import javax.annotation.PostConstruct;
+
+import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.core.temp.tool.api.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.config.TelegramBotConfigImpl;
 import com.company.app.telegram.domain.repository.ChatRepository;
+import com.company.app.telegram.domain.repository.ModeRepository;
 import com.company.app.wildberries_desire.domain.repository.DesireLotRepository;
 import com.company.app.wildberries_desire.domain.repository.DesireRepository;
 import com.company.app.wildberries_desire.scheduler.WildberriesDesireLotSchedulerConfig;
@@ -14,7 +18,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,8 +26,6 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
-import javax.annotation.PostConstruct;
 
 @Slf4j
 @ExtendWith(OutputCaptureExtension.class)
@@ -52,6 +53,10 @@ public abstract class SpringBootTestApplication {
     protected DesireLotRepository desireLotRepository;
     @Autowired
     protected DesireRepository desireRepository;
+    @Autowired
+    protected ModeRepository modeRepository;
+    @Autowired
+    protected TimerRepository timerRepository;
 
     @PostConstruct
     void init() {
@@ -67,6 +72,7 @@ public abstract class SpringBootTestApplication {
     void doAfterEach() {
         desireRepository.deleteAllInBatch();
         desireLotRepository.deleteAllInBatch();
+        timerRepository.deleteAllInBatch();
     }
 
 }

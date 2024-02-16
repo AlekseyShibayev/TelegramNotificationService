@@ -42,4 +42,9 @@ public class ChatContext extends EntityGraphExtractorAbstractContext<Chat> {
         return this;
     }
 
+    public ChatContext withMode() {
+        addParameter("mode");
+        return this;
+    }
+
 }

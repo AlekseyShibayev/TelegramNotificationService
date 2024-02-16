@@ -1,5 +1,7 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
+import com.company.app.common.timer.domain.enums.TimerType;
+import com.company.app.common.timer.service.TimerService;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Mode;
@@ -30,6 +32,7 @@ public class WildberriesDesireLotAddButtonCallbackAction implements ButtonCallba
     private final ModeRepository modeRepository;
     private final ChatRepository chatRepository;
     private final IncomingMessageTaskExecutor incomingMessageTaskExecutor;
+    private final TimerService timerService;
 
     @Override
     public String getType() {
@@ -42,11 +45,16 @@ public class WildberriesDesireLotAddButtonCallbackAction implements ButtonCallba
         String incomingMessage = context.getMessage();
 
         if (isFirstTimeHere(incomingMessage)) {
+            timerService.start(chat.getChatName(), TimerType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+
             Mode newMode = modeRepository.findByType(ModeType.ADD_DESIRE);
             chat.setMode(newMode);
             chatRepository.save(chat);
+
             showButtons(chat);
         } else {
+            timerService.stop(chat.getChatName(), TimerType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+
             Mode newMode = modeRepository.findByType(ModeType.DEFAULT);
             chat.setMode(newMode);
             chatRepository.save(chat);

@@ -12,6 +12,7 @@ import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
+import com.company.app.telegram.incoming_message_handler.button.task_executor.IncomingMessageTaskExecutor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,7 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
     private final ChatRepository chatRepository;
     private final TimerRepository timerRepository;
     private final ModeRepository modeRepository;
+    private final IncomingMessageTaskExecutor incomingMessageTaskExecutor;
 
     @Override
     public TimerType getType() {
@@ -56,6 +58,7 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
     private void executeOne(Timer timer) {
         chatRepository.findByChatName(timer.getChatName())
             .ifPresent(chat -> {
+                incomingMessageTaskExecutor.processIncomingMessageTask(chat.getChatName(), ModeType.ADD_DESIRE.name());
                 Mode mode = chat.getMode();
                 if (!mode.getType().equals(ModeType.DEFAULT.name())) {
                     Mode defaultMode = modeRepository.findByType(ModeType.DEFAULT);

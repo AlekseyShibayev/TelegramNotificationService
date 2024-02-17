@@ -14,7 +14,6 @@ import com.company.app.telegram.domain.repository.UserInfoRepository;
 import com.company.app.telegram.domain.spec.ChatSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,8 +31,8 @@ public class ChatService {
     private final TimerService timerService;
 
     public Chat findChatByChatNameOrCreateIfNotExist(String chatName) {
-        Optional<Chat> chat = chatRepository.findOne(Specification.where(ChatSpecification.chatNameIs(chatName)));
-        return chat.orElseGet(() -> createChat(chatName));
+        return chatRepository.findOne(ChatSpecification.chatNameIs(chatName))
+                .orElseGet(() -> createChat(chatName));
     }
 
     private Chat createChat(String chatName) {

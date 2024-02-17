@@ -7,18 +7,14 @@
 
 ## Цели проекта:
 ### 1. Учебная:
-1. Получить продвинутые навыки в разработке приложений на Java + Spring:
-  * Java Core: Java 11, Stream API, Lambdas, Optional, Reflection
+Получить продвинутые навыки в разработке приложений на Java + Spring:
+  * Java Core: Java 17, Stream API, Lambdas, Optional, Reflection
   * Spring(Core, Boot, Data Jpa, Web, Caching, Scheduling, AOP)
-  * Spring Boot Test, JUnit5
+  * Spring Boot Test, JUnit5, TestContainers
   * Refactoring, Patterns, SOLID, DRY, KISS
-2. Изучить технологии:
-  * Spring Security
-  * Docker Compose, Kubernetes, TestContainers
-  * Kafka
 
 ### 2. Прикладная:
-1. Написать приложение с использованием микросервисной архитектуры.
+1. Написать приложение с использованием микросервисной архитектуры (будет модульный монолит)
 2. Развернуть сервер на одноплатнике Orange Pi 4.
 3. Пользоваться благами написанных модулей.
    
@@ -32,11 +28,7 @@
   - searcher - отслеживает желаемые лоты wildberries, массовым поиском по производителю
   - knowledge - содержит справочную информацию
 ### Технологии:
-  * java 11 + spring boot + maven
-  * бд использую H2, потому что давно хотел. Вот консоль её: http://localhost:8080/h2-console
-  * swagger: http://localhost:8080/swagger-ui.html
-  * есть возможность запуска в Docker
-  * перешел с JUnit4 на JUnit5
+  * java 17 + spring boot + maven
 
 ## Вечно забываемые команды docker:
 1. docker build --tag "app:0" .
@@ -45,38 +37,16 @@
 4. docker stop {$name}
 
 ## Маленькая jira (todo'шки, мысли):
-1. Простые:
+1. Актуальные:
+  - добавить отправку в тг через outbox pattern
+  - навести порядок в старых модулях, используя новый опыт
 
+2. Прочие:
   - добавить первую регистрацию пользователя в виде переписки с ботом и подтверждением в конце (да, нет)
   - кнопка вкл выкл должна меняться в зависимости от текущего статуса пользователя
-
   - добавить управление подписками
-  - добавить добавление лотов вб, через гугл док
-
-  - использовать бд PostgreSQL, H2 использовать в тестах
   - прикрутить flyway, делать DDL не авто, а скриптами
-
   - добавить @Validate
-
-2. Сложные:
-  - разбить оставшийся проект на 3 модуля, научить общаться их между собой
-  - засунуть 3 проекта + core в docker-compose
-  - сделать общение через kafka
-  - засунуть 3 проекта (с общим core) + kafka в kuber
-  - прикрутить TestContainers или WireMock
-
-3. Прочие:
   - посмотреть io.micrometer.core.annotation.Timed io.micrometer.core.aop.TimedAspect
   - найти или сделать Dockerfile openjre_alpine-musl, выкинув не нужные пакеты из jre, ожидаемый вес < 80 mb [habr](https://habr.com/ru/companies/piter/articles/692992/)
   - в core, сделать админку для сброса спринг кеш
-  - прикрутить kafka + ELK
-  - посмотреть Debezium(конфиги) + Redis(кеш)
-
-## селекты для бд
-select * from CHAT;
-select * from HISTORY;
-select * from USER_INFO;
-select * from CHATS_SUBSCRIPTIONS;
-select * from SUBSCRIPTION;
-select * from LOT;
-select * from EXCHANGE_RATE;

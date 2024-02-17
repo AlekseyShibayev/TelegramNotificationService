@@ -5,9 +5,11 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
+import com.company.app.telegram.domain.spec.IncomingMessageTaskSpecification;
 import com.company.app.wildberries_desire.domain.entity.Desire;
 import com.company.app.wildberries_desire.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +28,7 @@ public class IncomingMessageTaskExecutor {
 
     public void processIncomingMessageTask(String chatName, String modeType) {
         if (modeType.equals(ModeType.ADD_DESIRE.name())) {
-            List<IncomingMessageTask> tasks = incomingMessageTaskRepository.findAll(Specification.where(chatNameIs(chatName))
-                    .and(modeTypeIs(modeType))
-            );
-            tasks.sort(Comparator.comparing(IncomingMessageTask::getCreateTime));
+            List<IncomingMessageTask> tasks = getIncomingMessageTasks(chatName, modeType);
 
             List<Desire> desireList;
             try {
@@ -47,6 +46,13 @@ public class IncomingMessageTaskExecutor {
         } else {
             throw new DeveloperMistakeException("unsupported mode type: [%s]".formatted(modeType));
         }
+    }
+
+    private List<IncomingMessageTask> getIncomingMessageTasks(String chatName, String modeType) {
+        List<IncomingMessageTask> tasks = incomingMessageTaskRepository.findAll(IncomingMessageTaskSpecification.chatNameIs(chatName)
+                .and(IncomingMessageTaskSpecification.modeTypeIs(modeType)));
+        tasks.sort(Comparator.comparing(IncomingMessageTask::getCreateTime));
+        return tasks;
     }
 
     private List<Desire> createDesireList(String chatName, List<IncomingMessageTask> tasks) {
@@ -67,14 +73,6 @@ public class IncomingMessageTaskExecutor {
         String secondPart = split1[1];
         String[] split2 = secondPart.split("/detail");
         return split2[0];
-    }
-
-    private static Specification<IncomingMessageTask> chatNameIs(String chatName) {
-        return (root, criteriaQuery, criteriaBuilder) -> chatName != null ? criteriaBuilder.equal(root.get("chatName"), chatName) : null;
-    }
-
-    private static Specification<IncomingMessageTask> modeTypeIs(String modeType) {
-        return (root, query, criteriaBuilder) -> modeType != null ? criteriaBuilder.equal(root.get("modeType"), modeType) : null;
     }
 
 }

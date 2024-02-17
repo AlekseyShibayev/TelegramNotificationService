@@ -1,30 +1,18 @@
 package com.company.app.telegram.domain.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @Accessors(chain = true)
-@EqualsAndHashCode(of = {"chatName"})
 @Entity
 @Table(name = "CHAT")
 public class Chat {
@@ -34,7 +22,7 @@ public class Chat {
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @Column(name = "CHAT_NAME")
+    @Column(name = "CHAT_NAME", nullable = false)
     private String chatName;
 
     @Column(name = "ENABLE_NOTIFICATIONS")

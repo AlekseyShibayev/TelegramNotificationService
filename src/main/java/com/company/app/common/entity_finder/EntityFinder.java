@@ -35,20 +35,18 @@ public class EntityFinder {
      */
     public <E> List<E> findAll(PersistenceContext<E> persistenceContext) {
         Class<E> entityClass = persistenceContext.getClassGenericType();
-        Specification<E> specification = persistenceContext.getSpecification();
-        DynamicEntityGraph dynamicEntityGraph = persistenceContext.getDynamicEntityGraph();
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<E> root = criteriaQuery.from(entityClass);
 
-        CriteriaQuery<E> select = criteriaQuery.select(root);
-        if (specification != null) {
-            select.where(specification.toPredicate(root, criteriaQuery, criteriaBuilder));
-        }
+        Specification<E> specification = addNullSafePredicate(persistenceContext.getSpecification());
+        criteriaQuery.select(root)
+                .where(specification.toPredicate(root, criteriaQuery, criteriaBuilder));
 
         TypedQuery<E> typedQuery = entityManager.createQuery(criteriaQuery);
 
+        DynamicEntityGraph dynamicEntityGraph = persistenceContext.getDynamicEntityGraph();
         if (dynamicEntityGraph.exist()) {
             EntityGraph<E> entityGraph = entityManager.createEntityGraph(entityClass);
             dynamicEntityGraph.prepareGraph(entityGraph);
@@ -60,6 +58,11 @@ public class EntityFinder {
         }
 
         return typedQuery.getResultList();
+    }
+
+    private <E> Specification<E> addNullSafePredicate(Specification<E> specification) {
+        Specification<E> nullSafePredicate = (root, query, criteriaBuilder) -> criteriaBuilder.equal(criteriaBuilder.literal(1), 1);
+        return nullSafePredicate.and(specification);
     }
 
     public <E> Optional<E> findFirst(PersistenceContext<E> persistenceContext) {

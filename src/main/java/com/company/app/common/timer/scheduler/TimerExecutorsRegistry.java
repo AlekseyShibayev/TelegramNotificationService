@@ -1,14 +1,14 @@
 package com.company.app.common.timer.scheduler;
 
+import com.company.app.common.timer.domain.enums.ActionType;
+import com.company.app.core.exception.DeveloperMistakeException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.PostConstruct;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-
-import com.company.app.common.timer.domain.enums.TimerType;
-import com.company.app.core.exception.DeveloperMistakeException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 
 @Service
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class TimerExecutorsRegistry {
 
     private final List<TimerExecutor> list;
-    private final Map<TimerType, TimerExecutor> map = new EnumMap<>(TimerType.class);
+    private final Map<ActionType, TimerExecutor> map = new EnumMap<>(ActionType.class);
 
     @PostConstruct
     void init() {
@@ -29,7 +29,7 @@ public class TimerExecutorsRegistry {
         }
     }
 
-    public TimerExecutor get(TimerType type) {
+    public TimerExecutor get(ActionType type) {
         TimerExecutor timerExecutor = map.get(type);
         if (timerExecutor != null) {
             return timerExecutor;

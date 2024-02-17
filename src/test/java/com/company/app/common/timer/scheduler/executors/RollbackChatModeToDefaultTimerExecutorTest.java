@@ -3,7 +3,8 @@ package com.company.app.common.timer.scheduler.executors;
 import java.util.List;
 
 import com.company.app.common.timer.domain.entity.Timer;
-import com.company.app.common.timer.domain.enums.TimerType;
+import com.company.app.common.timer.domain.enums.ActionType;
+import com.company.app.common.timer.domain.enums.StatusType;
 import com.company.app.common.timer.service.TimerService;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.telegram.domain.entity.Chat;
@@ -17,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class RollbackChatModeToDefaultTimerExecutorTest extends SpringBootTestApplication {
 
     @Autowired
-    private RollbackChatModeToDefaultTimerExecutor timerSchedulerExecutor;
+    private RollbackChatModeToDefaultTimerExecutor rollbackChatModeToDefaultTimerExecutor;
     @Autowired
     private TimerService timerService;
 
@@ -29,18 +30,20 @@ class RollbackChatModeToDefaultTimerExecutorTest extends SpringBootTestApplicati
             Mode mode = modeRepository.findByType(ModeType.ADD_DESIRE);
             owner.setMode(mode);
             chatRepository.save(owner);
-            timerService.start(owner.getChatName(), TimerType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+            timerService.start(owner.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
         });
 
-        timerSchedulerExecutor.execute();
+        rollbackChatModeToDefaultTimerExecutor.execute();
 
         Chat extracted = entityGraphExtractor.createChatContext(owner)
             .withMode()
             .extractOne();
         Assertions.assertEquals(extracted.getMode().getType(), ModeType.DEFAULT.name());
 
-        List<Timer> timerList = timerRepository.findAll();
-        Assertions.assertEquals(0, timerList.size());
+        Timer timer = timerRepository.findAll().get(0);
+        Assertions.assertEquals(StatusType.DONE, timer.getStatusType());
+        Assertions.assertEquals(ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT, timer.getActionType());
+        Assertions.assertEquals(owner.getChatName(), timer.getEntityView());
     }
 
 }

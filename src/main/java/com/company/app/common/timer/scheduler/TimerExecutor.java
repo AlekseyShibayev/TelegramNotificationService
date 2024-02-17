@@ -1,11 +1,11 @@
 package com.company.app.common.timer.scheduler;
 
-import com.company.app.common.timer.domain.enums.TimerType;
+import com.company.app.common.timer.domain.enums.ActionType;
 
 
 public interface TimerExecutor {
 
-    TimerType getType();
+    ActionType getType();
 
     void execute();
 

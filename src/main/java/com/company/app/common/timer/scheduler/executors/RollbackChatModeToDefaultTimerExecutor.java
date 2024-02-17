@@ -1,10 +1,8 @@
 package com.company.app.common.timer.scheduler.executors;
 
-import java.time.ZonedDateTime;
-import java.util.List;
-
 import com.company.app.common.timer.domain.entity.Timer;
-import com.company.app.common.timer.domain.enums.TimerType;
+import com.company.app.common.timer.domain.enums.ActionType;
+import com.company.app.common.timer.domain.enums.StatusType;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.timer.scheduler.TimerExecutor;
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
@@ -19,6 +17,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+import java.util.List;
+
 
 @Slf4j
 @Service
@@ -27,7 +28,7 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
 
     @Value("${timer.rollback_chat_mode_to_default.timeout_minutes}")
     private Integer timeout;
-    private static final TimerType TIMER_TYPE = TimerType.ROLLBACK_CHAT_MODE_TO_DEFAULT;
+    private static final ActionType ACTION_TYPE = ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT;
 
     private final ChatRepository chatRepository;
     private final TimerRepository timerRepository;
@@ -35,8 +36,8 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
     private final IncomingMessageTaskExecutor incomingMessageTaskExecutor;
 
     @Override
-    public TimerType getType() {
-        return TIMER_TYPE;
+    public ActionType getType() {
+        return ACTION_TYPE;
     }
 
     /**
@@ -48,25 +49,30 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
     public void execute() {
         ZonedDateTime now = ZonedDateTime.now();
 
-        List<Timer> timers = timerRepository.findAllByTimerType(TIMER_TYPE);
+        List<Timer> timers = timerRepository.findAllByActionTypeAndStatusType(ACTION_TYPE, StatusType.NEW);
 
         timers.stream()
-            .filter(timer -> timer.getCreateDate().plusMinutes(timeout).isBefore(now))
-            .forEach(this::executeOne);
+                .filter(timer -> timer.getCreateDate().plusMinutes(timeout).isBefore(now))
+                .forEach(this::executeOne);
     }
 
     private void executeOne(Timer timer) {
-        chatRepository.findByChatName(timer.getChatName())
-            .ifPresent(chat -> {
-                incomingMessageTaskExecutor.processIncomingMessageTask(chat.getChatName(), ModeType.ADD_DESIRE.name());
-                Mode mode = chat.getMode();
-                if (!mode.getType().equals(ModeType.DEFAULT.name())) {
-                    Mode defaultMode = modeRepository.findByType(ModeType.DEFAULT);
-                    chat.setMode(defaultMode);
-                    chatRepository.save(chat);
-                }
-            });
-        timerRepository.delete(timer);
+        timer.setStatusType(StatusType.FAIL);
+
+        //todo N+1
+        chatRepository.findByChatName(timer.getEntityView())
+                .ifPresent(chat -> {
+                    incomingMessageTaskExecutor.processIncomingMessageTask(chat.getChatName(), ModeType.ADD_DESIRE.name());
+                    Mode mode = chat.getMode();
+                    if (!mode.getType().equals(ModeType.DEFAULT.name())) {
+                        timer.setStatusType(StatusType.DONE);
+                        Mode defaultMode = modeRepository.findByType(ModeType.DEFAULT);
+                        chat.setMode(defaultMode);
+                        chatRepository.save(chat);
+                    }
+                });
+
+        timerRepository.save(timer);
     }
 
 }

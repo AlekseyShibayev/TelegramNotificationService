@@ -1,6 +1,6 @@
 package com.company.app.common.timer.scheduler;
 
-import com.company.app.common.timer.domain.enums.TimerType;
+import com.company.app.common.timer.domain.enums.ActionType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
@@ -20,7 +20,7 @@ public class TimerSchedulerConfig {
     @Scheduled(cron = "${timer.rollback_chat_mode_to_default.scheduler_delay}")
     @SchedulerLock(name = "rollback_chat_mode_to_default")
     public void rollbackChatModeToDefault() {
-        timerExecutorsRegistry.get(TimerType.ROLLBACK_CHAT_MODE_TO_DEFAULT).execute();
+        timerExecutorsRegistry.get(ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT).execute();
     }
 
 }

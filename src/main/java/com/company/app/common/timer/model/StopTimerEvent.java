@@ -1,6 +1,6 @@
 package com.company.app.common.timer.model;
 
-import com.company.app.common.timer.domain.enums.TimerType;
+import com.company.app.common.timer.domain.enums.ActionType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class StopTimerEvent {
 
-    private String chatName;
-    private TimerType timerType;
+    private String entityView;
+    private ActionType actionType;
 
 }

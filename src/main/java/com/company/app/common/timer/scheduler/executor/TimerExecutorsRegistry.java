@@ -1,6 +1,7 @@
-package com.company.app.common.timer.scheduler;
+package com.company.app.common.timer.scheduler.executor;
 
 import com.company.app.common.timer.domain.enums.ActionType;
+import com.company.app.common.timer.scheduler.executor.TimerExecutor;
 import com.company.app.core.exception.DeveloperMistakeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

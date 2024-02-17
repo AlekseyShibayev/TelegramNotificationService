@@ -1,7 +1,7 @@
 package com.company.app.telegram.domain.service;
 
 import com.company.app.common.timer.domain.enums.ActionType;
-import com.company.app.common.timer.service.TimerService;
+import com.company.app.common.timer.TimerFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.entity.UserInfo;
@@ -28,7 +28,7 @@ public class ChatService {
     private final ChatRepository chatRepository;
     private final UserInfoRepository userInfoRepository;
     private final ModeRepository modeRepository;
-    private final TimerService timerService;
+    private final TimerFacade timerFacade;
 
     public Chat findChatByChatNameOrCreateIfNotExist(String chatName) {
         return chatRepository.findOne(ChatSpecification.chatNameIs(chatName))
@@ -61,10 +61,10 @@ public class ChatService {
             if (modeType.typeOf(chat)) {
                 log.debug("chat with name [{}] already in mode [{}]", chat.getChatName(), modeType);
             } else if (modeType.equals(DEFAULT)) {
-                timerService.stop(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+                timerFacade.stop(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
                 updateChatMode(chat, ModeType.DEFAULT);
             } else if (modeType.equals(ModeType.ADD_DESIRE)) {
-                timerService.start(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+                timerFacade.start(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
                 updateChatMode(chat, ModeType.ADD_DESIRE);
             } else {
                 log.error("can not update chat with name [{}] by mode [{}], not support yet", chat.getChatName(), modeType);

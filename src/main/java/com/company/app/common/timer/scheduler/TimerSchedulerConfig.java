@@ -1,6 +1,7 @@
 package com.company.app.common.timer.scheduler;
 
 import com.company.app.common.timer.domain.enums.ActionType;
+import com.company.app.common.timer.scheduler.executor.TimerExecutorsRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;

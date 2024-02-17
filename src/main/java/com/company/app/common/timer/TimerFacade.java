@@ -1,4 +1,4 @@
-package com.company.app.common.timer.service;
+package com.company.app.common.timer;
 
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.model.StartTimerEvent;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TimerService {
+public class TimerFacade {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 

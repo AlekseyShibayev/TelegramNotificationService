@@ -1,4 +1,4 @@
-package com.company.app.common.timer.scheduler.executors;
+package com.company.app.common.timer.scheduler.executor.impl;
 
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
@@ -6,7 +6,7 @@ import com.company.app.common.timer.domain.entity.Timer;
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
 import com.company.app.common.timer.domain.repository.TimerRepository;
-import com.company.app.common.timer.scheduler.TimerExecutor;
+import com.company.app.common.timer.scheduler.executor.TimerExecutor;
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;

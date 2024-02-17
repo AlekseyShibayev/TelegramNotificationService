@@ -1,11 +1,10 @@
-package com.company.app.common.timer.scheduler.executors;
-
-import java.util.List;
+package com.company.app.common.timer.scheduler.executor.impl;
 
 import com.company.app.common.timer.domain.entity.Timer;
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
-import com.company.app.common.timer.service.TimerService;
+import com.company.app.common.timer.TimerFacade;
+import com.company.app.common.timer.scheduler.executor.impl.RollbackChatModeToDefaultTimerExecutor;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Mode;
@@ -20,7 +19,7 @@ class RollbackChatModeToDefaultTimerExecutorTest extends SpringBootTestApplicati
     @Autowired
     private RollbackChatModeToDefaultTimerExecutor rollbackChatModeToDefaultTimerExecutor;
     @Autowired
-    private TimerService timerService;
+    private TimerFacade timerFacade;
 
     @Test
     void test_1() {
@@ -30,7 +29,7 @@ class RollbackChatModeToDefaultTimerExecutorTest extends SpringBootTestApplicati
             Mode mode = modeRepository.findByType(ModeType.ADD_DESIRE);
             owner.setMode(mode);
             chatRepository.save(owner);
-            timerService.start(owner.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+            timerFacade.start(owner.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
         });
 
         rollbackChatModeToDefaultTimerExecutor.execute();

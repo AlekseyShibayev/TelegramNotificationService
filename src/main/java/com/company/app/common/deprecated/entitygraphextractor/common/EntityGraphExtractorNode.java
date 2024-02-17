@@ -1,4 +1,4 @@
-package com.company.app.core.infrastructure.entitygraphextractor.common;
+package com.company.app.common.deprecated.entitygraphextractor.common;
 
 import lombok.Data;
 

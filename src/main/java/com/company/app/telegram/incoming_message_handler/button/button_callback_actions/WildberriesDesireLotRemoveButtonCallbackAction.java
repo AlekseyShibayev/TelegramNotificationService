@@ -1,6 +1,7 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
-import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
+import com.company.app.common.entity_finder.EntityFinder;
+import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.core.util.Strings;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
@@ -8,6 +9,7 @@ import com.company.app.telegram.incoming_message_handler.button.model.ButtonCall
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import com.company.app.wildberries_desire.domain.entity.Desire;
 import com.company.app.wildberries_desire.domain.entity.DesireLot;
+import com.company.app.wildberries_desire.domain.entity.Desire_;
 import com.company.app.wildberries_desire.domain.repository.DesireRepository;
 import com.company.app.wildberries_desire.domain.specification.DesireSpecification;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +35,7 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
 
     private final TelegramFacade telegramFacade;
     private final DesireRepository desireRepository;
-    private final EntityGraphExtractor entityGraphExtractor;
+    private final EntityFinder entityFinder;
 
     @Override
     public String getType() {
@@ -63,16 +65,14 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
     }
 
     private void showButtons(Chat chat) {
-        List<Desire> desires = desireRepository.findAll(DesireSpecification.chatNameIs(chat.getChatName()));
+        List<Desire> desires = entityFinder.findAll(new PersistenceContext<>(Desire.class)
+                .setSpecification(DesireSpecification.chatNameIs(chat.getChatName()))
+                .with(Desire_.DESIRE_LOT));
 
         if (CollectionUtils.isEmpty(desires)) {
             telegramFacade.writeToTargetChat(chat.getChatName(), "Список желаний пуст");
         } else {
-            List<Desire> extractedDesires = entityGraphExtractor.createDesireContext(desires)
-                    .withDesireLot()
-                    .extractAll();
-
-            InlineKeyboardMarkup markupInline = getInlineKeyboardMarkup(extractedDesires);
+            InlineKeyboardMarkup markupInline = getInlineKeyboardMarkup(desires);
 
             SendMessage sendMessage = new SendMessage();
             sendMessage.setChatId(chat.getChatName());

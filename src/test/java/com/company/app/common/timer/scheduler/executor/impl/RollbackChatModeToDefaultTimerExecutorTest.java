@@ -1,14 +1,16 @@
 package com.company.app.common.timer.scheduler.executor.impl;
 
+import com.company.app.common.entity_finder.model.PersistenceContext;
+import com.company.app.common.timer.TimerFacade;
 import com.company.app.common.timer.domain.entity.Timer;
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
-import com.company.app.common.timer.TimerFacade;
-import com.company.app.common.timer.scheduler.executor.impl.RollbackChatModeToDefaultTimerExecutor;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.entity.Chat_;
 import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.enums.ModeType;
+import com.company.app.telegram.domain.spec.ChatSpecification;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +36,11 @@ class RollbackChatModeToDefaultTimerExecutorTest extends SpringBootTestApplicati
 
         rollbackChatModeToDefaultTimerExecutor.execute();
 
-        Chat extracted = entityGraphExtractor.createChatContext(owner)
-            .withMode()
-            .extractOne();
-        Assertions.assertEquals(extracted.getMode().getType(), ModeType.DEFAULT.name());
+        Chat extractedChat = entityFinder.findFirst(new PersistenceContext<>(Chat.class)
+                .setSpecification(ChatSpecification.chatNameIs(owner.getChatName()))
+                .with(Chat_.MODE)).get();
+
+        Assertions.assertEquals(extractedChat.getMode().getType(), ModeType.DEFAULT.name());
 
         Timer timer = timerRepository.findAll().get(0);
         Assertions.assertEquals(StatusType.DONE, timer.getStatusType());

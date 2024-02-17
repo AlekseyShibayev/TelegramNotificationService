@@ -1,8 +1,8 @@
-package com.company.app.core.infrastructure.entitygraphextractor;
+package com.company.app.common.deprecated.entitygraphextractor;
 
-import com.company.app.core.infrastructure.entitygraphextractor.common.EntityGraphExtractorFinisher;
-import com.company.app.core.infrastructure.entitygraphextractor.impl.ChatContext;
-import com.company.app.core.infrastructure.entitygraphextractor.impl.DesireContext;
+import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorFinisher;
+import com.company.app.common.deprecated.entitygraphextractor.impl.ChatContext;
+import com.company.app.common.deprecated.entitygraphextractor.impl.DesireContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries_desire.domain.entity.Desire;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +12,14 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * first version of dynamic entity graph
+ * use EntityFinder
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@Deprecated
 public class EntityGraphExtractor {
 
     private final EntityGraphExtractorFinisher entityGraphExtractorFinisher;

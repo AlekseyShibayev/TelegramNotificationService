@@ -1,13 +1,14 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
-import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
+import com.company.app.common.entity_finder.EntityFinder;
+import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import com.company.app.wildberries_desire.domain.entity.Desire;
 import com.company.app.wildberries_desire.domain.entity.DesireLot;
-import com.company.app.wildberries_desire.domain.repository.DesireRepository;
+import com.company.app.wildberries_desire.domain.entity.Desire_;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,7 @@ public class AdminWildberriesDesireLotShowButtonCallbackAction implements Button
     private static final String TYPE = "ADMIN_WB_DL_SELECT";
 
     private final TelegramFacade telegramFacade;
-    private final DesireRepository desireRepository;
-    private final EntityGraphExtractor entityGraphExtractor;
+    private final EntityFinder entityFinder;
 
     @Override
     public String getType() {
@@ -34,9 +34,8 @@ public class AdminWildberriesDesireLotShowButtonCallbackAction implements Button
     public void doAction(ButtonCallbackActionContext context) {
         Chat chat = context.getChat();
 
-        List<Desire> desireList = entityGraphExtractor.createDesireContext(desireRepository.findAll())
-                .withDesireLot()
-                .extractAll();
+        List<Desire> desireList = entityFinder.findAll(new PersistenceContext<>(Desire.class)
+                .with(Desire_.DESIRE_LOT));
 
         for (Desire desire : desireList) {
             DesireLot desireLot = desire.getDesireLot();

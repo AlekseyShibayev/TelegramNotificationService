@@ -15,6 +15,7 @@ public class PersistenceContext<E> {
     private final Class<E> classGenericType;
     private Specification<E> specification;
     private DynamicEntityGraph dynamicEntityGraph = new DynamicEntityGraph();
+    private Integer limit;
 
     public PersistenceContext<E> with(String... path) {
         dynamicEntityGraph.with(path);

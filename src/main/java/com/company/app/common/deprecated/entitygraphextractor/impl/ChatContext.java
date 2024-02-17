@@ -1,7 +1,7 @@
-package com.company.app.core.infrastructure.entitygraphextractor.impl;
+package com.company.app.common.deprecated.entitygraphextractor.impl;
 
-import com.company.app.core.infrastructure.entitygraphextractor.common.EntityGraphExtractorAbstractContext;
-import com.company.app.core.infrastructure.entitygraphextractor.common.EntityGraphExtractorFinisher;
+import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorAbstractContext;
+import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorFinisher;
 import com.company.app.telegram.domain.entity.Chat;
 
 import java.util.List;

@@ -1,9 +1,7 @@
 package com.company.app.configuration;
 
-import javax.annotation.PostConstruct;
-
+import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.timer.domain.repository.TimerRepository;
-import com.company.app.core.infrastructure.entitygraphextractor.EntityGraphExtractor;
 import com.company.app.core.temp.tool.api.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
 import com.company.app.telegram.TelegramFacade;
@@ -21,11 +19,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import javax.annotation.PostConstruct;
 
 @Slf4j
 @ExtendWith(OutputCaptureExtension.class)
@@ -43,11 +42,11 @@ public abstract class SpringBootTestApplication {
 
     @MockBean
     protected TelegramBotConfigImpl telegramBotConfig;
-    @SpyBean
+    @Autowired
     protected TransactionTemplate transactionTemplate;
-    @SpyBean
-    protected EntityGraphExtractor entityGraphExtractor;
-    @SpyBean
+    @Autowired
+    protected EntityFinder entityFinder;
+    @Autowired
     protected ChatRepository chatRepository;
     @Autowired
     protected DesireLotRepository desireLotRepository;

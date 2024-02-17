@@ -78,7 +78,7 @@ public class TelegramDomainInitializer {
         Map<String, Subscription> typeVsSubscription = currentSubscriptions.stream().collect(Collectors.toMap(Subscription::getType, Function.identity()));
 
         List<Subscription> subscriptionList = binderList.stream()
-                .map(binderType -> Subscription.builder().type(binderType.getType()).build())
+                .map(binderType -> new Subscription().setType(binderType.getType()))
                 .filter(subscription -> !typeVsSubscription.containsKey(subscription.getType()))
                 .toList();
         subscriptionRepository.saveAll(subscriptionList);

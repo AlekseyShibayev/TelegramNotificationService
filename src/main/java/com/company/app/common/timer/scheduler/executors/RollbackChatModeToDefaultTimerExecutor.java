@@ -10,6 +10,7 @@ import com.company.app.common.timer.scheduler.TimerExecutor;
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
+import com.company.app.telegram.domain.entity.Chat_;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.enums.ModeType;
@@ -82,7 +83,7 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
 
         List<Chat> chatList = entityFinder.findAll(new PersistenceContext<>(Chat.class)
                 .setSpecification(ChatSpecification.chatNameIn(chatNames))
-                .with("mode")
+                .with(Chat_.MODE)
         );
 
         return chatList.stream()

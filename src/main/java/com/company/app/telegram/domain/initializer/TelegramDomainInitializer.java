@@ -66,7 +66,7 @@ public class TelegramDomainInitializer {
         Map<String, Mode> typeVsNode = currentModes.stream().collect(Collectors.toMap(Mode::getType, Function.identity()));
 
         List<Mode> list = Arrays.stream(ModeType.values())
-                .map(newModeType -> new Mode().setType(newModeType.getType()))
+                .map(newModeType -> new Mode().setType(newModeType.name()))
                 .filter(mode -> !typeVsNode.containsKey(mode.getType()))
                 .toList();
 

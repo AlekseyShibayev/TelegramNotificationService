@@ -10,6 +10,7 @@ import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
+import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.incoming_message_handler.button.task_executor.IncomingMessageTaskExecutor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +32,8 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
     private static final ActionType ACTION_TYPE = ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT;
 
     private final ChatRepository chatRepository;
+    private final ChatService chatService;
     private final TimerRepository timerRepository;
-    private final ModeRepository modeRepository;
     private final IncomingMessageTaskExecutor incomingMessageTaskExecutor;
 
     @Override
@@ -66,9 +67,7 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
                     Mode mode = chat.getMode();
                     if (!mode.getType().equals(ModeType.DEFAULT.name())) {
                         timer.setStatusType(StatusType.DONE);
-                        Mode defaultMode = modeRepository.findByType(ModeType.DEFAULT);
-                        chat.setMode(defaultMode);
-                        chatRepository.save(chat);
+                        chatService.updateChatMode(chat, ModeType.DEFAULT);
                     }
                 });
 

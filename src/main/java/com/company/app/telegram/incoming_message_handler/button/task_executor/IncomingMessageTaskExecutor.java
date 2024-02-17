@@ -25,7 +25,7 @@ public class IncomingMessageTaskExecutor {
     private final DesireRepository desireRepository;
 
     public void processIncomingMessageTask(String chatName, String modeType) {
-        if (modeType.equals(ModeType.ADD_DESIRE.getType())) {
+        if (modeType.equals(ModeType.ADD_DESIRE.name())) {
             List<IncomingMessageTask> tasks = incomingMessageTaskRepository.findAll(Specification.where(chatNameIs(chatName))
                     .and(modeTypeIs(modeType))
             );

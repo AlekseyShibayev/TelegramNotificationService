@@ -45,7 +45,7 @@ public class IncomingMessageHandler {
             historyService.saveHistory(chat, message.getText());
             chatActivationService.activate(chat);
 
-            if (ModeType.DEFAULT.is(chat)) {
+            if (ModeType.DEFAULT.typeOf(chat)) {
                 showMainMenuButtons(update);
             } else {
                 IncomingMessageTask task = new IncomingMessageTask()

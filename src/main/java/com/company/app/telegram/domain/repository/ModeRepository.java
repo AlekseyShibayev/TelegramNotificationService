@@ -10,8 +10,8 @@ import java.util.Optional;
 public interface ModeRepository extends JpaRepository<Mode, Long> {
 
     default Mode findByType(ModeType modeType) {
-        return this.findByType(modeType.getType())
-                .orElseThrow(() -> new DeveloperMistakeException("[%s] mode must be".formatted(modeType.getType())));
+        return this.findByType(modeType.name())
+                .orElseThrow(() -> new DeveloperMistakeException("[%s] mode must be".formatted(modeType.name())));
     }
 
     Optional<Mode> findByType(String type);

@@ -1,16 +1,13 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
-import com.company.app.common.timer.domain.enums.ActionType;
-import com.company.app.common.timer.service.TimerService;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.enums.ModeType;
-import com.company.app.telegram.domain.repository.ChatRepository;
-import com.company.app.telegram.domain.repository.ModeRepository;
-import com.company.app.telegram.incoming_message_handler.button.task_executor.IncomingMessageTaskExecutor;
+import com.company.app.telegram.domain.model.UpdateChat;
+import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
+import com.company.app.telegram.incoming_message_handler.button.task_executor.IncomingMessageTaskExecutor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,10 +26,8 @@ public class WildberriesDesireLotAddButtonCallbackAction implements ButtonCallba
     private static final String TYPE = "WB_DL_ADD";
 
     private final TelegramFacade telegramFacade;
-    private final ModeRepository modeRepository;
-    private final ChatRepository chatRepository;
+    private final ChatService chatService;
     private final IncomingMessageTaskExecutor incomingMessageTaskExecutor;
-    private final TimerService timerService;
 
     @Override
     public String getType() {
@@ -45,20 +40,17 @@ public class WildberriesDesireLotAddButtonCallbackAction implements ButtonCallba
         String incomingMessage = context.getMessage();
 
         if (isFirstTimeHere(incomingMessage)) {
-            timerService.start(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
-
-            Mode newMode = modeRepository.findByType(ModeType.ADD_DESIRE);
-            chat.setMode(newMode);
-            chatRepository.save(chat);
+            chatService.updateChat(new UpdateChat()
+                    .setChatName(chat.getChatName())
+                    .setMode(ModeType.ADD_DESIRE.name()));
 
             showButtons(chat);
         } else {
-            timerService.stop(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+            chatService.updateChat(new UpdateChat()
+                    .setChatName(chat.getChatName())
+                    .setMode(ModeType.DEFAULT.name()));
 
-            Mode newMode = modeRepository.findByType(ModeType.DEFAULT);
-            chat.setMode(newMode);
-            chatRepository.save(chat);
-            incomingMessageTaskExecutor.processIncomingMessageTask(chat.getChatName(), ModeType.ADD_DESIRE.getType());
+            incomingMessageTaskExecutor.processIncomingMessageTask(chat.getChatName(), ModeType.ADD_DESIRE.name());
         }
     }
 

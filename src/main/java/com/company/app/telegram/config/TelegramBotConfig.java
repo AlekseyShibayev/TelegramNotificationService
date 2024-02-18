@@ -5,8 +5,7 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import java.io.Serializable;
 
 /**
- * документация телеграм-апи:
- * https://core.telegram.org/bots/features#inputs
+ * telegram api documentation: https://core.telegram.org/bots/features#inputs
  */
 public interface TelegramBotConfig {
 

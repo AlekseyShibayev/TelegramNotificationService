@@ -1,7 +1,5 @@
 package com.company.app.telegram.config;
 
-import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,20 +14,13 @@ public class OutgoingMessageHandler {
 
     private final HistoryService historyService;
     private final TelegramBotConfig telegramBotConfig;
-    private final ChatRepository chatRepository;
-
-    public void sendToEveryone(Object message) {
-        chatRepository.findAll().stream()
-                .filter(Chat::isEnableNotifications)
-                .map(chat -> SendMessage.builder()
-                        .text(message.toString())
-                        .chatId(chat.getChatName())
-                        .build())
-                .forEach(this::sendOneMessage);
-    }
 
     public void sendToTargetChat(String chatName, Object message) {
         SendMessage sendMessage = SendMessage.builder().chatId(chatName).text(message.toString()).build();
+        sendOneMessage(sendMessage);
+    }
+
+    public void sendToTargetChat(SendMessage sendMessage) {
         sendOneMessage(sendMessage);
     }
 
@@ -39,4 +30,3 @@ public class OutgoingMessageHandler {
     }
 
 }
-

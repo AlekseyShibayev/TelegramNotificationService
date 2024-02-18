@@ -1,6 +1,8 @@
 package com.company.app.telegram.incoming_message_handler.button.service;
 
-import com.company.app.telegram.config.TelegramBotConfig;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.enums.Role;
 import com.company.app.telegram.domain.repository.ChatRepository;
@@ -13,15 +15,11 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ButtonFactory {
 
     private static final InlineKeyboardButton TG_OFF_BUTTON = new InlineKeyboardButton("Отключить уведомления");
-    private static final InlineKeyboardButton TG_ON_BUTTON = new InlineKeyboardButton("Включить уведомления");
     private static final InlineKeyboardButton WB_MAIN_MENU = new InlineKeyboardButton("Управление wildberries");
     private static final InlineKeyboardButton WB_DL_SHOW = new InlineKeyboardButton("Покажи что нашёл");
     private static final InlineKeyboardButton WB_DL_SHOW_MY_DESIRES = new InlineKeyboardButton("Покажи мои желания");
@@ -38,13 +36,11 @@ public class ButtonFactory {
         String role = getUserRole(update.getMessage());
 
         TG_OFF_BUTTON.setCallbackData("TG_OFF");
-        TG_ON_BUTTON.setCallbackData("TG_ON");
         WB_MAIN_MENU.setCallbackData("WB_MAIN_MENU");
         ER_BUTTON.setCallbackData("EX");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(TG_OFF_BUTTON));
-        rowsInLine.add(List.of(TG_ON_BUTTON));
         rowsInLine.add(List.of(WB_MAIN_MENU));
         rowsInLine.add(List.of(ER_BUTTON));
 

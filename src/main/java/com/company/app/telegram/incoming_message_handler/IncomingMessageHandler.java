@@ -19,6 +19,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+
 /**
  * Responsibility:
  * Process incoming messages, which send to telegram bot by user.
@@ -48,16 +49,20 @@ public class IncomingMessageHandler {
             if (ModeType.DEFAULT.typeOf(chat)) {
                 showMainMenuButtons(update);
             } else {
-                IncomingMessageTask task = new IncomingMessageTask()
-                        .setChatName(chat.getChatName())
-                        .setModeType(chat.getMode().getType())
-                        .setMessage(message.getText());
-                incomingMessageTaskRepository.save(task);
+                saveMessageAsTask(message, chat);
             }
 
         } else if (isCallback(update)) {
             processCallback(update);
         }
+    }
+
+    private void saveMessageAsTask(Message message, Chat chat) {
+        IncomingMessageTask task = new IncomingMessageTask()
+            .setChatName(chat.getChatName())
+            .setModeType(chat.getMode().getType())
+            .setMessage(message.getText());
+        incomingMessageTaskRepository.save(task);
     }
 
     private boolean isCallback(Update update) {
@@ -81,6 +86,7 @@ public class IncomingMessageHandler {
         Long chatId = callbackQuery.getMessage().getChatId();
         String text = callbackQuery.getData();
         Chat chat = chatService.findChatByChatNameOrCreateIfNotExist(chatId.toString());
+        chatActivationService.activate(chat);
         historyService.saveHistory(chat, text);
         binderExecutor.execute(chat, text);
     }

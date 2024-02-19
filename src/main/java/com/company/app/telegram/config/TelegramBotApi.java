@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -18,10 +17,13 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.io.Serializable;
 
+/**
+ * telegram api documentation: https://core.telegram.org/bots/features#inputs
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor()
-public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot implements TelegramBotConfig {
+public class TelegramBotApi extends TelegramLongPollingCommandBot {
 
     @Value("${telegram.name}")
     private String name;
@@ -47,20 +49,18 @@ public class TelegramBotConfigImpl extends TelegramLongPollingCommandBot impleme
         return token;
     }
 
+    public String getName() {
+        return this.getBotUsername();
+    }
+
     @Override
     public void processNonCommandUpdate(Update update) {
         incomingMessageHandler.take(update);
     }
 
     @SneakyThrows
-    @Override
     public void write(BotApiMethod<? extends Serializable> botApiMethod) {
         this.execute(botApiMethod);
-    }
-
-    @Override
-    public String getName() {
-        return this.getBotUsername();
     }
 
 }

@@ -65,10 +65,9 @@ public class DataExtractorToolImpl implements DataExtractorTool {
     @Override
     public List<File> getFiles(String packageName) {
         try (Stream<Path> walk = Files.walk(Paths.get(packageName))) {
-            return walk
-                    .filter(Files::isRegularFile)
+            return walk.filter(Files::isRegularFile)
                     .map(Path::toFile)
-                    .collect(Collectors.toList());
+                    .toList();
         }
     }
 

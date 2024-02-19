@@ -7,7 +7,7 @@ import com.company.app.common.outbox.domain.enums.Status;
 import com.company.app.common.outbox.domain.enums.Target;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
 import com.company.app.common.outbox.scheduler.executor.OutboxExecutor;
-import com.company.app.telegram.config.TelegramBotConfig;
+import com.company.app.telegram.config.TelegramBotApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -25,7 +25,7 @@ public class TelegramOutboxExecutor implements OutboxExecutor {
     public static final Target TYPE = Target.TELEGRAM;
 
     private final OutboxRepository outboxRepository;
-    private final TelegramBotConfig telegramBotConfig;
+    private final TelegramBotApi telegramBotApi;
 
     @Override
     public Target getType() {
@@ -44,7 +44,7 @@ public class TelegramOutboxExecutor implements OutboxExecutor {
     @SneakyThrows
     private void forOne(Outbox outbox) {
         SendMessage sendMessage = new ObjectMapper().readValue(outbox.getWhat(), SendMessage.class);
-        telegramBotConfig.write(sendMessage);
+        telegramBotApi.write(sendMessage);
 
         outbox.setStatus(Status.SENT);
         outboxRepository.save(outbox);

@@ -1,4 +1,4 @@
-package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.admin;
 
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;

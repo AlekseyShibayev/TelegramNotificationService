@@ -6,7 +6,7 @@ import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.core.temp.tool.api.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.config.TelegramBotConfigImpl;
+import com.company.app.telegram.config.TelegramBotApi;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
 import com.company.app.wildberries_desire.domain.repository.DesireLotRepository;
@@ -42,7 +42,7 @@ import javax.annotation.PostConstruct;
 public abstract class SpringBootTestApplication {
 
     @MockBean
-    protected TelegramBotConfigImpl telegramBotConfig;
+    protected TelegramBotApi telegramBotConfig;
     @Autowired
     protected TransactionTemplate transactionTemplate;
     @Autowired

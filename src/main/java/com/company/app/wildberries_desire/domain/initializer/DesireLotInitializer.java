@@ -1,6 +1,5 @@
 package com.company.app.wildberries_desire.domain.initializer;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -12,6 +11,8 @@ import com.company.app.wildberries_desire.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class DesireLotInitializer {
     private final DesireRepository desireRepository;
     private final JsonTool<Desire> jsonTool;
 
-    @PostConstruct
+    @EventListener(ContextRefreshedEvent.class)
     public void init() {
         List<Desire> currentDesires = desireRepository.findAll();
         Map<ImmutablePair<String, String>, Desire> chatNameVsDesire = currentDesires.stream()

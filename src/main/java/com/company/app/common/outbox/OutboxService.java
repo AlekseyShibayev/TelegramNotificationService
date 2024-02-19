@@ -1,4 +1,4 @@
-package com.company.app.common.outbox.service;
+package com.company.app.common.outbox;
 
 import com.company.app.common.outbox.domain.entity.Outbox;
 import com.company.app.common.outbox.domain.enums.Status;

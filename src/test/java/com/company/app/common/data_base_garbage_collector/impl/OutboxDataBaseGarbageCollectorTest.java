@@ -5,7 +5,7 @@ import java.util.List;
 import com.company.app.common.outbox.domain.entity.Outbox;
 import com.company.app.common.outbox.domain.enums.Status;
 import com.company.app.common.outbox.domain.enums.Target;
-import com.company.app.common.outbox.service.OutboxService;
+import com.company.app.common.outbox.OutboxService;
 import com.company.app.configuration.SpringBootTestApplication;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

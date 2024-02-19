@@ -1,4 +1,4 @@
-package com.company.app.common.outbox.service;
+package com.company.app.common.outbox;
 
 import java.util.List;
 

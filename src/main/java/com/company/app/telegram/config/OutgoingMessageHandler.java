@@ -1,7 +1,7 @@
 package com.company.app.telegram.config;
 
 import com.company.app.common.outbox.domain.enums.Target;
-import com.company.app.common.outbox.service.OutboxService;
+import com.company.app.common.outbox.OutboxService;
 import com.company.app.telegram.domain.service.HistoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

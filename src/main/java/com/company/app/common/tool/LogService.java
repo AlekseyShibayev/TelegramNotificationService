@@ -7,7 +7,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
 import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -23,7 +22,7 @@ public class LogService {
     public static final String LOG_ZIP_FILE_NAME = "logs.zip";
     public static final String PACKAGE_NAME = "logs";
 
-    private final DataExtractorTool dataExtractorService;
+    private final DataExtractorTool dataExtractorTool;
 
     @SneakyThrows
     public InputStream getLogsAsInputStream() {
@@ -33,9 +32,9 @@ public class LogService {
     @SneakyThrows
     public byte[] getLogsAsZip() {
         if (log.isDebugEnabled()) {
-            log.debug("Пробую положить все файлы из папки [{}] в архив [{}].", PACKAGE_NAME, LOG_ZIP_FILE_NAME);
+            log.debug("try to create [{}] from package [{}]", LOG_ZIP_FILE_NAME, PACKAGE_NAME);
         }
-        List<File> files = dataExtractorService.getFiles(PACKAGE_NAME);
+        List<File> files = dataExtractorTool.getFiles(PACKAGE_NAME);
         byte[] bytes = getBytes(files);
         FileUtils.forceDelete(new File(LOG_ZIP_FILE_NAME));
         return bytes;

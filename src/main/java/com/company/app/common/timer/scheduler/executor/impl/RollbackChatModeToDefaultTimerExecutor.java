@@ -57,7 +57,6 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
      * time: _______create______create + minutes_______now_____
      */
     @Transactional
-    @PerformanceLogAnnotation
     public void execute() {
         List<Timer> filteredTimers = getFilteredTimers();
         Map<String, Chat> chatMap = getChatMap(filteredTimers);

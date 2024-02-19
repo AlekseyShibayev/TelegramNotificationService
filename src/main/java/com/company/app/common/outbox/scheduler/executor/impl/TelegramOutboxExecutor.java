@@ -8,7 +8,9 @@ import com.company.app.common.outbox.domain.enums.Target;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
 import com.company.app.common.outbox.scheduler.executor.OutboxExecutor;
 import com.company.app.telegram.config.TelegramBotConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,14 +36,18 @@ public class TelegramOutboxExecutor implements OutboxExecutor {
     @Override
     public void execute() {
         List<Outbox> all = outboxRepository.findAllByTargetAndStatus(TYPE, Status.NEW);
-
         for (Outbox outbox : all) {
-            SendMessage message = SendMessage.builder().chatId(outbox.getWho()).text(outbox.getWhat()).build();
-            telegramBotConfig.write(message);
-
-            outbox.setStatus(Status.SENT);
-            outboxRepository.save(outbox);
+            forOne(outbox);
         }
+    }
+
+    @SneakyThrows
+    private void forOne(Outbox outbox) {
+        SendMessage sendMessage = new ObjectMapper().readValue(outbox.getWhat(), SendMessage.class);
+        telegramBotConfig.write(sendMessage);
+
+        outbox.setStatus(Status.SENT);
+        outboxRepository.save(outbox);
     }
 
 }

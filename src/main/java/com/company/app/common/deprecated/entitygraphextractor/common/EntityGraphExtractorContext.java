@@ -2,6 +2,7 @@ package com.company.app.common.deprecated.entitygraphextractor.common;
 
 import java.util.List;
 
+
 interface EntityGraphExtractorContext<E> {
 
     Class<E> getClass_();

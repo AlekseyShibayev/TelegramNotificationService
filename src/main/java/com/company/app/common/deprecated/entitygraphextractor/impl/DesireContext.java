@@ -1,10 +1,11 @@
 package com.company.app.common.deprecated.entitygraphextractor.impl;
 
+import java.util.List;
+
 import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorAbstractContext;
 import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorFinisher;
 import com.company.app.wildberries_desire.domain.entity.Desire;
 
-import java.util.List;
 
 public class DesireContext extends EntityGraphExtractorAbstractContext<Desire> {
 

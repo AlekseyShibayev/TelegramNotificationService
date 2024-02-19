@@ -1,5 +1,14 @@
 package com.company.app.common.entity_finder;
 
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+import java.util.Optional;
+
 import com.company.app.common.entity_finder.model.DynamicEntityGraph;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.core.util.Collections;
@@ -9,14 +18,6 @@ import org.hibernate.jpa.QueryHints;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityGraph;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * This class have methods for select @Entity
@@ -42,7 +43,7 @@ public class EntityFinder {
 
         Specification<E> specification = addNullSafePredicate(persistenceContext.getSpecification());
         criteriaQuery.select(root)
-                .where(specification.toPredicate(root, criteriaQuery, criteriaBuilder));
+            .where(specification.toPredicate(root, criteriaQuery, criteriaBuilder));
 
         TypedQuery<E> typedQuery = entityManager.createQuery(criteriaQuery);
 

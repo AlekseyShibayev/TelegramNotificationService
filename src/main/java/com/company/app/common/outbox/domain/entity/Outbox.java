@@ -33,7 +33,7 @@ public class Outbox {
     @Column(name = "WHO", nullable = false)
     private String who;
 
-    @Column(name = "WHAT", nullable = false)
+    @Column(name = "WHAT", nullable = false, length = 5000)
     private String what;
 
     @Column(name = "TARGET", nullable = false)

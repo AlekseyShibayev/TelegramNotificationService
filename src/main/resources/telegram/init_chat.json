@@ -16,24 +16,6 @@
       "role": "USER",
       "gender": "female"
     }
-  },
-  {
-    "chatName": "231720043",
-    "enableNotifications": false,
-    "userInfo": {
-      "name": "Anastasia",
-      "role": "USER",
-      "gender": "female"
-    }
-  },
-  {
-    "chatName": "484518144",
-    "enableNotifications": false,
-    "userInfo": {
-      "name": "Uliana",
-      "role": "USER",
-      "gender": "female"
-    }
   }
 ]
 

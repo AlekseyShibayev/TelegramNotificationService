@@ -1,9 +1,5 @@
 package com.company.app.common.deprecated.entitygraphextractor.common;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-import org.springframework.util.CollectionUtils;
-
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -13,6 +9,11 @@ import javax.persistence.criteria.Root;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -28,8 +29,8 @@ public class EntityGraphExtractorFinisher {
         EntityGraph<E> preparedEntityGraph = entityGraphExtractorPreparer.getEntityGraph(context, entityManager);
 
         return entityManager.find(eClass,
-                context.getId_(entities.get(0)),
-                Collections.singletonMap("javax.persistence.loadgraph", preparedEntityGraph));
+            context.getId_(entities.get(0)),
+            Collections.singletonMap("javax.persistence.loadgraph", preparedEntityGraph));
     }
 
     public <E> List<E> extractAll(EntityGraphExtractorContext<E> context) {
@@ -48,7 +49,7 @@ public class EntityGraphExtractorFinisher {
         Root<E> eRoot = criteriaQuery.from(eClass);
 
         criteriaQuery.select(eRoot)
-                .where(eRoot.get(idName).in(ids));
+            .where(eRoot.get(idName).in(ids));
 
         TypedQuery<E> typedQuery = entityManager.createQuery(criteriaQuery);
         typedQuery.setHint("javax.persistence.loadgraph", preparedEntityGraph);

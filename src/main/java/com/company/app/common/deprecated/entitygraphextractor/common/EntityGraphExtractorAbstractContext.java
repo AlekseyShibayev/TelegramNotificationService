@@ -3,6 +3,7 @@ package com.company.app.common.deprecated.entitygraphextractor.common;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public abstract class EntityGraphExtractorAbstractContext<E> implements EntityGraphExtractorContext<E> {
 
     protected List<E> entities;

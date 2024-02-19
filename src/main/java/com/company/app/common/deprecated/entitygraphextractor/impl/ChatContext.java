@@ -1,10 +1,11 @@
 package com.company.app.common.deprecated.entitygraphextractor.impl;
 
+import java.util.List;
+
 import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorAbstractContext;
 import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorFinisher;
 import com.company.app.telegram.domain.entity.Chat;
 
-import java.util.List;
 
 public class ChatContext extends EntityGraphExtractorAbstractContext<Chat> {
 

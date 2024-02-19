@@ -16,14 +16,14 @@ public class TimerFacade {
 
     public void start(String entityView, ActionType actionType) {
         applicationEventPublisher.publishEvent(new StartTimerEvent()
-                .setEntityView(entityView)
-                .setActionType(actionType));
+            .setEntityView(entityView)
+            .setActionType(actionType));
     }
 
     public void stop(String entityView, ActionType actionType) {
         applicationEventPublisher.publishEvent(new StopTimerEvent()
-                .setEntityView(entityView)
-                .setActionType(actionType));
+            .setEntityView(entityView)
+            .setActionType(actionType));
     }
 
 }

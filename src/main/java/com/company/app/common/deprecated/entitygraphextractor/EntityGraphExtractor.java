@@ -1,5 +1,8 @@
 package com.company.app.common.deprecated.entitygraphextractor;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraphExtractorFinisher;
 import com.company.app.common.deprecated.entitygraphextractor.impl.ChatContext;
 import com.company.app.common.deprecated.entitygraphextractor.impl.DesireContext;
@@ -9,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.List;
 
 /**
  * first version of dynamic entity graph

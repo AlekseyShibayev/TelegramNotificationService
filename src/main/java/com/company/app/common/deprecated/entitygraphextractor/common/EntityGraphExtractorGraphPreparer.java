@@ -1,10 +1,11 @@
 package com.company.app.common.deprecated.entitygraphextractor.common;
 
-import lombok.experimental.UtilityClass;
-
 import javax.persistence.EntityGraph;
 import javax.persistence.Subgraph;
 import java.util.List;
+
+import lombok.experimental.UtilityClass;
+
 
 @UtilityClass
 public class EntityGraphExtractorGraphPreparer {

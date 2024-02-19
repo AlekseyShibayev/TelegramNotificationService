@@ -1,5 +1,14 @@
 package com.company.app.common.timer.domain.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.ZonedDateTime;
+
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
 import lombok.Getter;
@@ -7,9 +16,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.persistence.*;
-import java.time.ZonedDateTime;
 
 
 @Getter

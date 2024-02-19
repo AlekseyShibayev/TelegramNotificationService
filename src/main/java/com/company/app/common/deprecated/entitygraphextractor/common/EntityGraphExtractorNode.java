@@ -1,9 +1,10 @@
 package com.company.app.common.deprecated.entitygraphextractor.common;
 
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.Data;
+
 
 @Data
 public class EntityGraphExtractorNode {

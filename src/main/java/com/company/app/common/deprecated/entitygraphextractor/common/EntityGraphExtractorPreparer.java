@@ -1,7 +1,5 @@
 package com.company.app.common.deprecated.entitygraphextractor.common;
 
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
@@ -10,6 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class EntityGraphExtractorPreparer {
@@ -34,21 +35,21 @@ public class EntityGraphExtractorPreparer {
         E entity = entities.get(0);
         Class<?> aClass = entity.getClass();
         return Arrays.stream(aClass.getDeclaredFields())
-                .filter(this::isIdAnnotation)
-                .map(Field::getName)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("can't find field with @Id"));
+            .filter(this::isIdAnnotation)
+            .map(Field::getName)
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("can't find field with @Id"));
     }
 
     private boolean isIdAnnotation(Field field) {
         return Arrays.stream(field.getDeclaredAnnotations())
-                .anyMatch(declaredAnnotation -> declaredAnnotation.annotationType().equals(Id.class));
+            .anyMatch(declaredAnnotation -> declaredAnnotation.annotationType().equals(Id.class));
     }
 
     public <E> Set<Long> getIds(EntityGraphExtractorContext<E> context) {
         return context.getEntities_().stream()
-                .map(context::getId_)
-                .collect(Collectors.toSet());
+            .map(context::getId_)
+            .collect(Collectors.toSet());
     }
 
 }

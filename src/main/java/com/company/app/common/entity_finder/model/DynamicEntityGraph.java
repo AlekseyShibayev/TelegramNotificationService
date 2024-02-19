@@ -1,16 +1,17 @@
 package com.company.app.common.entity_finder.model;
 
+import javax.persistence.EntityGraph;
+import javax.persistence.Subgraph;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.company.app.core.exception.DeveloperMistakeException;
 import com.company.app.core.util.Collections;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.EntityGraph;
-import javax.persistence.Subgraph;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Getter
 @Setter
@@ -47,8 +48,8 @@ public class DynamicEntityGraph {
 
     private List<EntityGraphNode> mapToTempNodeList(String[] path) {
         return Arrays.stream(path)
-                .map(name -> new EntityGraphNode().setName(name))
-                .toList();
+            .map(name -> new EntityGraphNode().setName(name))
+            .toList();
     }
 
     private void bindNodes(List<EntityGraphNode> tempNodeList) {
@@ -65,7 +66,7 @@ public class DynamicEntityGraph {
 
     EntityGraphNode createTreeAndGetRoot() {
         EntityGraphNode root = new EntityGraphNode()
-                .setName("root");
+            .setName("root");
 
         for (EntityGraphNode node : entityGraphNodes) {
             recursionCreate(root, node);

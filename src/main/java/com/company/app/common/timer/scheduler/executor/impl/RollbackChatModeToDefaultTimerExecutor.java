@@ -1,5 +1,12 @@
 package com.company.app.common.timer.scheduler.executor.impl;
 
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.timer.domain.entity.Timer;
@@ -23,13 +30,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -72,22 +72,22 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
         List<Timer> allTimers = timerRepository.findAllByActionTypeAndStatusType(ACTION_TYPE, StatusType.NEW);
         // todo do date filter in bd
         return allTimers.stream()
-                .filter(timer -> timer.getCreateDate().plusMinutes(timeout).isBefore(now))
-                .toList();
+            .filter(timer -> timer.getCreateDate().plusMinutes(timeout).isBefore(now))
+            .toList();
     }
 
     private Map<String, Chat> getChatMap(List<Timer> allTimers) {
         Set<String> chatNames = allTimers.stream()
-                .map(Timer::getEntityView)
-                .collect(Collectors.toSet());
+            .map(Timer::getEntityView)
+            .collect(Collectors.toSet());
 
         List<Chat> chatList = entityFinder.findAll(new PersistenceContext<>(Chat.class)
-                .setSpecification(ChatSpecification.chatNameIn(chatNames))
-                .with(Chat_.MODE)
+            .setSpecification(ChatSpecification.chatNameIn(chatNames))
+            .with(Chat_.MODE)
         );
 
         return chatList.stream()
-                .collect(Collectors.toMap(Chat::getChatName, Function.identity()));
+            .collect(Collectors.toMap(Chat::getChatName, Function.identity()));
     }
 
     private void forOne(Map<String, Chat> chatMap, Timer timer) {
@@ -107,7 +107,7 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
             chatService.updateChatMode(chat, ModeType.DEFAULT);
 
             List<IncomingMessageTask> tasks = incomingMessageTaskRepository.findAll(IncomingMessageTaskSpecification.chatNameIs(chatName)
-                    .and(IncomingMessageTaskSpecification.modeTypeIs(ModeType.ADD_DESIRE.name())));
+                .and(IncomingMessageTaskSpecification.modeTypeIs(ModeType.ADD_DESIRE.name())));
             incomingMessageTaskRepository.deleteAll(tasks);
 
             timer.setStatusType(StatusType.DONE);

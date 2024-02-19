@@ -55,10 +55,14 @@ public class TelegramDomainInitializer {
 
         List<Chat> list = jsonTool.toJavaAsList(resource, Chat.class);
         List<Chat> newChats = list.stream()
-                .filter(chat -> !chatNameVsChat.containsKey(chat.getChatName()))
+                .filter(chat -> isAbsentInDataBase(chatNameVsChat, chat))
                 .map(chat -> chat.setMode(defaultMode))
                 .toList();
         chatRepository.saveAll(newChats);
+    }
+
+    private boolean isAbsentInDataBase(Map<String, Chat> chatNameVsChat, Chat chat) {
+        return !chatNameVsChat.containsKey(chat.getChatName());
     }
 
     private void prepareMode() {

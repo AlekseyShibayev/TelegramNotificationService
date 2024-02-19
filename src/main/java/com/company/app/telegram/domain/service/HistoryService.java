@@ -1,6 +1,7 @@
 package com.company.app.telegram.domain.service;
 
-import com.company.app.telegram.config.TelegramBotConfig;
+import java.util.Date;
+
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.repository.HistoryRepository;
@@ -9,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-
-import java.util.Date;
 
 @Slf4j
 @Service
@@ -21,7 +20,6 @@ public class HistoryService {
 
     private final HistoryRepository historyRepository;
     private final ChatService chatService;
-    private final TelegramBotConfig telegramBotConfig;
 
     public void saveHistory(Chat chat, String text) {
         log.debug("try to read from telegram with chat name: [{}] message: [{}]", chat.getChatName(), text);
@@ -30,7 +28,7 @@ public class HistoryService {
                     .chat(chat)
                     .message(text)
                     .source(chat.getChatName())
-                    .target(telegramBotConfig.getName())
+                    .target("telegram")
                     .date(new Date())
                     .build();
             historyRepository.save(history);
@@ -44,7 +42,7 @@ public class HistoryService {
             History history = History.builder()
                     .chat(chatService.findChatByChatNameOrCreateIfNotExist(chatId))
                     .message(sendMessage.getText())
-                    .source(telegramBotConfig.getName())
+                    .source("telegram")
                     .target(chatId)
                     .date(new Date())
                     .build();

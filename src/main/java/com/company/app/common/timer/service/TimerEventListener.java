@@ -1,5 +1,7 @@
 package com.company.app.common.timer.service;
 
+import java.util.Optional;
+
 import com.company.app.common.timer.domain.entity.Timer;
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
@@ -11,8 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +23,9 @@ public class TimerEventListener {
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void create(StartTimerEvent event) {
         Timer timer = new Timer()
-                .setEntityView(event.getEntityView())
-                .setActionType(event.getActionType())
-                .setStatusType(StatusType.NEW);
+            .setEntityView(event.getEntityView())
+            .setActionType(event.getActionType())
+            .setStatusType(StatusType.NEW);
         timerRepository.save(timer);
     }
 

@@ -1,15 +1,14 @@
 package com.company.app.common.timer.scheduler.executor;
 
-import com.company.app.common.timer.domain.enums.ActionType;
-import com.company.app.common.timer.scheduler.executor.TimerExecutor;
-import com.company.app.core.exception.DeveloperMistakeException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import com.company.app.common.timer.domain.enums.ActionType;
+import com.company.app.core.exception.DeveloperMistakeException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 
 @Service

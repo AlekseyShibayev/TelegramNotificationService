@@ -1,6 +1,7 @@
 package com.company.app.configuration;
 
 import com.company.app.common.entity_finder.EntityFinder;
+import com.company.app.common.outbox.domain.repository.OutboxRepository;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.core.temp.tool.api.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
@@ -56,6 +57,8 @@ public abstract class SpringBootTestApplication {
     protected ModeRepository modeRepository;
     @Autowired
     protected TimerRepository timerRepository;
+    @Autowired
+    protected OutboxRepository outboxRepository;
 
     @PostConstruct
     void init() {
@@ -72,6 +75,7 @@ public abstract class SpringBootTestApplication {
         desireRepository.deleteAllInBatch();
         desireLotRepository.deleteAllInBatch();
         timerRepository.deleteAllInBatch();
+        outboxRepository.deleteAllInBatch();
     }
 
 }

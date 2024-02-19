@@ -11,7 +11,6 @@ import com.company.app.telegram.incoming_message_handler.button.ButtonCallbackAc
 import com.company.app.telegram.incoming_message_handler.button.service.ButtonFactory;
 import com.company.app.telegram.incoming_message_handler.service.ChatActivationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -25,7 +24,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  * Process incoming messages, which send to telegram bot by user.
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Lazy))
+@RequiredArgsConstructor
 public class IncomingMessageHandler {
 
     private final TelegramFacade telegramFacade;

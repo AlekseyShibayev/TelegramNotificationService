@@ -1,4 +1,4 @@
-package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.all;
 
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;

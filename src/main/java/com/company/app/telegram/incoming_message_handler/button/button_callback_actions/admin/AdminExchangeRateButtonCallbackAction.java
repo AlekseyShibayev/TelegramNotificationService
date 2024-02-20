@@ -1,4 +1,4 @@
-package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.admin;
 
 import com.company.app.exchange_rate.domain.repository.ExchangeRepository;
 import com.company.app.telegram.TelegramFacade;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ExchangeRateButtonCallbackAction implements ButtonCallbackAction {
+public class AdminExchangeRateButtonCallbackAction implements ButtonCallbackAction {
 
     private static final String TYPE = "ADMIN_ER_BUTTON";
 

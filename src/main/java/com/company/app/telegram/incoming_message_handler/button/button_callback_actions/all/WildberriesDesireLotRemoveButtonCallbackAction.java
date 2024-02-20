@@ -1,4 +1,4 @@
-package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.all;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

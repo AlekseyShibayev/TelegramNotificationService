@@ -26,11 +26,13 @@ public class ButtonFactory {
     private static final InlineKeyboardButton WB_DL_SHOW_MY_DESIRES = new InlineKeyboardButton("Покажи мои желания");
     private static final InlineKeyboardButton WB_DL_ADD = new InlineKeyboardButton("Добавить желания");
     private static final InlineKeyboardButton WB_DL_REMOVE = new InlineKeyboardButton("Удалить желания");
-    //    private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний курс aliexpress");
+
     private static final InlineKeyboardButton ADMIN_MAIN_MENU = new InlineKeyboardButton("Админка");
     private static final InlineKeyboardButton ADMIN_WB_DL_SELECT = new InlineKeyboardButton("wb desire lot select *");
     private static final InlineKeyboardButton ADMIN_WB_DL_MANUAL_REFRESH = new InlineKeyboardButton("wb desire lot manual refresh");
+    private static final InlineKeyboardButton ADMIN_ER_BUTTON = new InlineKeyboardButton("er show last");
     private static final InlineKeyboardButton ADMIN_GET_LOG = new InlineKeyboardButton("admin get log");
+
 
     private final ChatRepository chatRepository;
 
@@ -39,12 +41,10 @@ public class ButtonFactory {
 
         TG_OFF_BUTTON.setCallbackData("TG_OFF");
         WB_MAIN_MENU.setCallbackData("WB_MAIN_MENU");
-//        ER_BUTTON.setCallbackData("EX");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         rowsInLine.add(List.of(TG_OFF_BUTTON));
         rowsInLine.add(List.of(WB_MAIN_MENU));
-//        rowsInLine.add(List.of(ER_BUTTON));
 
         if (Role.OWNER.name().equals(role)) {
             ADMIN_MAIN_MENU.setCallbackData("ADMIN_MAIN_MENU");
@@ -86,12 +86,14 @@ public class ButtonFactory {
     public ReplyKeyboard adminMenuButtons() {
         ADMIN_WB_DL_SELECT.setCallbackData("ADMIN_WB_DL_SELECT");
         ADMIN_WB_DL_MANUAL_REFRESH.setCallbackData("ADMIN_WB_DL_MANUAL_REFRESH");
+        ADMIN_ER_BUTTON.setCallbackData("ADMIN_ER_BUTTON");
         ADMIN_GET_LOG.setCallbackData("ADMIN_GET_LOG");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
 
         rowsInLine.add(List.of(ADMIN_WB_DL_SELECT));
         rowsInLine.add(List.of(ADMIN_WB_DL_MANUAL_REFRESH));
+        rowsInLine.add(List.of(ADMIN_ER_BUTTON));
         rowsInLine.add(List.of(ADMIN_GET_LOG));
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();

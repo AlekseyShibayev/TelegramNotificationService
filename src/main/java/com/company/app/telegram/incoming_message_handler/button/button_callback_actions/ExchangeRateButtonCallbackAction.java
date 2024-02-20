@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ExchangeRateButtonCallbackAction implements ButtonCallbackAction {
 
-    private static final String TYPE = "EX";
+    private static final String TYPE = "ADMIN_ER_BUTTON";
 
     private final ExchangeRepository exchangeRepository;
     private final TelegramFacade telegramFacade;

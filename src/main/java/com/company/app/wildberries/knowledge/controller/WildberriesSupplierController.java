@@ -1,5 +1,7 @@
 package com.company.app.wildberries.knowledge.controller;
 
+import java.util.List;
+
 import com.company.app.wildberries.knowledge.domain.entity.Supplier;
 import com.company.app.wildberries.knowledge.domain.repository.SupplierRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

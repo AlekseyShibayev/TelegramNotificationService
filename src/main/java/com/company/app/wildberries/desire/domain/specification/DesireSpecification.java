@@ -1,11 +1,12 @@
 package com.company.app.wildberries.desire.domain.specification;
 
+import javax.persistence.criteria.JoinType;
+import java.math.BigDecimal;
+
 import com.company.app.wildberries.desire.domain.entity.Desire;
 import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.JoinType;
-import java.math.BigDecimal;
 
 @UtilityClass
 public class DesireSpecification {
@@ -19,17 +20,17 @@ public class DesireSpecification {
 
     public static Specification<Desire> chatNameIs(String chatName) {
         return (root, criteriaQuery, criteriaBuilder) ->
-                chatName != null ? criteriaBuilder.equal(root.get("chatName"), chatName) : null;
+            chatName != null ? criteriaBuilder.equal(root.get("chatName"), chatName) : null;
     }
 
     public static Specification<Desire> articleIs(String article) {
         return (root, criteriaQuery, criteriaBuilder) ->
-                article != null ? criteriaBuilder.equal(root.get("article"), article) : null;
+            article != null ? criteriaBuilder.equal(root.get("article"), article) : null;
     }
 
     public static Specification<Desire> priceIs(BigDecimal price) {
         return (root, criteriaQuery, criteriaBuilder) ->
-                price != null ? criteriaBuilder.equal(root.get("price"), price) : null;
+            price != null ? criteriaBuilder.equal(root.get("price"), price) : null;
     }
 
 }

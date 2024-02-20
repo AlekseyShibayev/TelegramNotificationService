@@ -1,9 +1,9 @@
 package com.company.app.common.outbox.scheduler.executor.impl;
 
+import com.company.app.common.outbox.OutboxService;
 import com.company.app.common.outbox.domain.entity.Outbox;
 import com.company.app.common.outbox.domain.enums.Status;
 import com.company.app.common.outbox.domain.enums.Target;
-import com.company.app.common.outbox.OutboxService;
 import com.company.app.configuration.SpringBootTestApplication;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;

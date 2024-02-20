@@ -1,5 +1,10 @@
 package com.company.app.wildberries.search.component;
 
+import javax.annotation.PostConstruct;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.wildberries.search.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries.search.component.data.WildberriesSearcherResult;
@@ -10,10 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
 
 @Slf4j
 @Component
@@ -38,9 +39,9 @@ public class WildberriesSearcherHandler {
             return startNewAsyncSearch(wildberriesSearcherContainer);
         } else {
             return WildberriesSearcherResult.builder()
-                    .isSuccess(false)
-                    .message("Занято! Вы что 5 лет в разработке и ни разу не использовали семафор???")
-                    .build();
+                .isSuccess(false)
+                .message("Занято! Вы что 5 лет в разработке и ни разу не использовали семафор???")
+                .build();
         }
     }
 
@@ -50,18 +51,18 @@ public class WildberriesSearcherHandler {
         if (searchData == null) {
             callback();
             return WildberriesSearcherResult.builder()
-                    .isSuccess(false)
-                    .message("Нет информации о поиске, обратитесь к админу.")
-                    .build();
+                .isSuccess(false)
+                .message("Нет информации о поиске, обратитесь к админу.")
+                .build();
         } else {
             WildberriesSearcherContext container = WildberriesSearcherContext.of(wildberriesSearcherContainer, searchData);
             log.debug("Запускаю поиск для [{}].", wildberriesSearcherContainer);
             executorService.submit(WildberriesSearcherTask.builder()
-                    .wildberriesSearcherContainer(container)
-                    .telegramController(telegramController)
-                    .wildberriesSearcher(wildberriesSearcher)
-                    .callBack(this::callback)
-                    .build());
+                .wildberriesSearcherContainer(container)
+                .telegramController(telegramController)
+                .wildberriesSearcher(wildberriesSearcher)
+                .callBack(this::callback)
+                .build());
             return WildberriesSearcherResult.builder().isSuccess(true).build();
         }
     }
@@ -69,4 +70,5 @@ public class WildberriesSearcherHandler {
     private void callback() {
         semaphore.release();
     }
+
 }

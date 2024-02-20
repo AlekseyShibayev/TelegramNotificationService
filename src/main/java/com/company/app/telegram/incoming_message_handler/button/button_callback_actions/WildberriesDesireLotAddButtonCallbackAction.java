@@ -1,5 +1,8 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.enums.ModeType;
@@ -15,8 +18,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -41,14 +42,14 @@ public class WildberriesDesireLotAddButtonCallbackAction implements ButtonCallba
 
         if (isFirstTimeHere(incomingMessage)) {
             chatService.updateChat(new UpdateChat()
-                    .setChatName(chat.getChatName())
-                    .setMode(ModeType.ADD_DESIRE.name()));
+                .setChatName(chat.getChatName())
+                .setMode(ModeType.ADD_DESIRE.name()));
 
             showButtons(chat);
         } else {
             chatService.updateChat(new UpdateChat()
-                    .setChatName(chat.getChatName())
-                    .setMode(ModeType.DEFAULT.name()));
+                .setChatName(chat.getChatName())
+                .setMode(ModeType.DEFAULT.name()));
 
             incomingMessageTaskExecutor.processIncomingMessageTask(chat.getChatName(), ModeType.ADD_DESIRE.name());
         }

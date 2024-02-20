@@ -1,5 +1,7 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
+import java.util.List;
+
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
@@ -11,7 +13,6 @@ import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

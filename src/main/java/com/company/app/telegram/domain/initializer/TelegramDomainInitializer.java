@@ -1,5 +1,11 @@
 package com.company.app.telegram.domain.initializer;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Mode;
@@ -17,11 +23,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Initializes different @Entity, when application started.
@@ -55,9 +56,9 @@ public class TelegramDomainInitializer {
 
         List<Chat> list = jsonTool.toJavaAsList(resource, Chat.class);
         List<Chat> newChats = list.stream()
-                .filter(chat -> isAbsentInDataBase(chatNameVsChat, chat))
-                .map(chat -> chat.setMode(defaultMode))
-                .toList();
+            .filter(chat -> isAbsentInDataBase(chatNameVsChat, chat))
+            .map(chat -> chat.setMode(defaultMode))
+            .toList();
         chatRepository.saveAll(newChats);
     }
 
@@ -70,21 +71,22 @@ public class TelegramDomainInitializer {
         Map<String, Mode> typeVsNode = currentModes.stream().collect(Collectors.toMap(Mode::getType, Function.identity()));
 
         List<Mode> list = Arrays.stream(ModeType.values())
-                .map(newModeType -> new Mode().setType(newModeType.name()))
-                .filter(mode -> !typeVsNode.containsKey(mode.getType()))
-                .toList();
+            .map(newModeType -> new Mode().setType(newModeType.name()))
+            .filter(mode -> !typeVsNode.containsKey(mode.getType()))
+            .toList();
 
         modeRepository.saveAll(list);
     }
 
     void prepareSubscriptions() {
         List<Subscription> currentSubscriptions = subscriptionRepository.findAll();
-        Map<String, Subscription> typeVsSubscription = currentSubscriptions.stream().collect(Collectors.toMap(Subscription::getType, Function.identity()));
+        Map<String, Subscription> typeVsSubscription = currentSubscriptions.stream()
+            .collect(Collectors.toMap(Subscription::getType, Function.identity()));
 
         List<Subscription> subscriptionList = binderList.stream()
-                .map(binderType -> new Subscription().setType(binderType.getType()))
-                .filter(subscription -> !typeVsSubscription.containsKey(subscription.getType()))
-                .toList();
+            .map(binderType -> new Subscription().setType(binderType.getType()))
+            .filter(subscription -> !typeVsSubscription.containsKey(subscription.getType()))
+            .toList();
         subscriptionRepository.saveAll(subscriptionList);
     }
 

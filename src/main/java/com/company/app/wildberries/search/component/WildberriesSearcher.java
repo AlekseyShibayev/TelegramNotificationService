@@ -1,5 +1,7 @@
 package com.company.app.wildberries.search.component;
 
+import java.util.List;
+
 import com.company.app.wildberries.common.model.ResponseProducts;
 import com.company.app.wildberries.search.component.data.WildberriesSearcherContext;
 import com.company.app.wildberries.search.component.data.util.WildberriesSearcherProductsUrlCreator;
@@ -8,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Slf4j
 @Component
@@ -23,8 +24,9 @@ public class WildberriesSearcher {
         List<ResponseProducts> products = wildberriesSearcherExtractor.extractResponseProducts(url);
         List<ResponseProducts> filteredProducts = wildberriesSearcherFilterer.filter(products, context);
         return filteredProducts.stream()
-                .map(ResponseProducts::toLinkDto)
-                .distinct()
-                .toList();
+            .map(ResponseProducts::toLinkDto)
+            .distinct()
+            .toList();
     }
+
 }

@@ -1,5 +1,7 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.admin;
 
+import java.util.List;
+
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.telegram.TelegramFacade;
@@ -13,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Slf4j
 @Service
@@ -35,11 +36,12 @@ public class AdminWildberriesDesireLotShowButtonCallbackAction implements Button
         Chat chat = context.getChat();
 
         List<Desire> desireList = entityFinder.findAll(new PersistenceContext<>(Desire.class)
-                .with(Desire_.DESIRE_LOT));
+            .with(Desire_.DESIRE_LOT));
 
         for (Desire desire : desireList) {
             DesireLot desireLot = desire.getDesireLot();
-            String message = desire.getChatName() + " " + desire.getArticle() + " " + desire.getPrice() + " " + desireLot.getPrice() + " " + desireLot.getDescription();
+            String message = desire.getChatName() + " " + desire.getArticle() + " " + desire.getPrice() + " " + desireLot.getPrice() + " "
+                + desireLot.getDescription();
             telegramFacade.writeToTargetChat(chat.getChatName(), message);
         }
 

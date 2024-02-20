@@ -1,14 +1,15 @@
 package com.company.app.wildberries.search.component;
 
-import com.company.app.wildberries.common.model.ResponseProducts;
+import java.util.List;
+import java.util.OptionalDouble;
+
 import com.company.app.wildberries.common.model.PriceHistory;
+import com.company.app.wildberries.common.model.ResponseProducts;
 import com.company.app.wildberries.search.component.data.util.PriceHistoryUrlCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.OptionalDouble;
 
 @Slf4j
 @Component
@@ -21,12 +22,13 @@ public class WildberriesSearcherAveragePriceExtractor {
         String url = PriceHistoryUrlCreator.createUrl(String.valueOf(responseProducts.getId()));
         List<PriceHistory> priceHistory = wildberriesSearcherExtractor.extractPriceHistory(url);
         OptionalDouble average = priceHistory.stream()
-                .mapToInt(this::getRubAsInt)
-                .average();
+            .mapToInt(this::getRubAsInt)
+            .average();
         return (int) average.orElse(0.00);
     }
 
     private int getRubAsInt(PriceHistory priceHistory) {
         return Integer.parseInt(priceHistory.getPrice().getRub());
     }
+
 }

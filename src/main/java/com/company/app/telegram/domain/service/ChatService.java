@@ -1,7 +1,9 @@
 package com.company.app.telegram.domain.service;
 
-import com.company.app.common.timer.domain.enums.ActionType;
+import java.util.Optional;
+
 import com.company.app.common.timer.TimerFacade;
+import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.entity.UserInfo;
@@ -16,9 +18,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 import static com.company.app.telegram.domain.enums.ModeType.DEFAULT;
+
 
 @Slf4j
 @Service
@@ -32,7 +33,7 @@ public class ChatService {
 
     public Chat findChatByChatNameOrCreateIfNotExist(String chatName) {
         return chatRepository.findOne(ChatSpecification.chatNameIs(chatName))
-                .orElseGet(() -> createChat(chatName));
+            .orElseGet(() -> createChat(chatName));
     }
 
     private Chat createChat(String chatName) {

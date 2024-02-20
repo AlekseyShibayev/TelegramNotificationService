@@ -4,6 +4,7 @@ import com.company.app.wildberries.common.model.ResponseProducts;
 import com.company.app.wildberries.search.component.data.WildberriesSearcherContext;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class WildberriesSearcherMaxPriceFilter implements WildberriesSearcherFilter {
 
@@ -29,4 +30,5 @@ public class WildberriesSearcherMaxPriceFilter implements WildberriesSearcherFil
         Integer price = responseProducts.getSalePriceU();
         return price <= MAX_PRICE;
     }
+
 }

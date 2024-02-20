@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Builder
 @Getter
 @Setter
@@ -16,4 +17,5 @@ import lombok.Setter;
 public class ProductProperty {
 
     private String property;
+
 }

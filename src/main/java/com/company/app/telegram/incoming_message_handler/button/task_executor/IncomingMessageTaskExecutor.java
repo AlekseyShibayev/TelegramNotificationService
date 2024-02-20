@@ -1,5 +1,10 @@
 package com.company.app.telegram.incoming_message_handler.button.task_executor;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import com.company.app.core.exception.DeveloperMistakeException;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
@@ -11,10 +16,6 @@ import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +41,8 @@ public class IncomingMessageTaskExecutor {
 
             incomingMessageTaskRepository.deleteAll(tasks);
             desireList.forEach(desire ->
-                    telegramFacade.writeToTargetChat(chatName, "Добавлено желание: артикль %s, цена %s".formatted(desire.getArticle(), desire.getPrice())));
+                telegramFacade.writeToTargetChat(chatName,
+                    "Добавлено желание: артикль %s, цена %s".formatted(desire.getArticle(), desire.getPrice())));
         } else {
             throw new DeveloperMistakeException("unsupported mode type: [%s]".formatted(modeType));
         }
@@ -48,7 +50,7 @@ public class IncomingMessageTaskExecutor {
 
     private List<IncomingMessageTask> getIncomingMessageTasks(String chatName, String modeType) {
         List<IncomingMessageTask> tasks = incomingMessageTaskRepository.findAll(IncomingMessageTaskSpecification.chatNameIs(chatName)
-                .and(IncomingMessageTaskSpecification.modeTypeIs(modeType)));
+            .and(IncomingMessageTaskSpecification.modeTypeIs(modeType)));
         tasks.sort(Comparator.comparing(IncomingMessageTask::getCreateTime));
         return tasks;
     }
@@ -59,9 +61,9 @@ public class IncomingMessageTaskExecutor {
             String article = tasks.get(i - 1).getMessage();
             String price = tasks.get(i).getMessage();
             desireList.add(new Desire()
-                    .setChatName(chatName)
-                    .setPrice(new BigDecimal(price))
-                    .setArticle(convertToArticle(article)));
+                .setChatName(chatName)
+                .setPrice(new BigDecimal(price))
+                .setArticle(convertToArticle(article)));
         }
         return desireList;
     }

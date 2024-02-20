@@ -5,6 +5,7 @@ import com.company.app.telegram.domain.entity.IncomingMessageTask_;
 import lombok.experimental.UtilityClass;
 import org.springframework.data.jpa.domain.Specification;
 
+
 @UtilityClass
 public class IncomingMessageTaskSpecification {
 

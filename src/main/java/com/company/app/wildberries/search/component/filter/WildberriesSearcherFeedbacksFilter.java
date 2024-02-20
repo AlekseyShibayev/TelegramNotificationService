@@ -4,6 +4,7 @@ import com.company.app.wildberries.common.model.ResponseProducts;
 import com.company.app.wildberries.search.component.data.WildberriesSearcherContext;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class WildberriesSearcherFeedbacksFilter implements WildberriesSearcherFilter {
 
@@ -28,4 +29,5 @@ public class WildberriesSearcherFeedbacksFilter implements WildberriesSearcherFi
         String feedbacks = responseProducts.getFeedbacks();
         return Integer.parseInt(feedbacks) >= 10;
     }
+
 }

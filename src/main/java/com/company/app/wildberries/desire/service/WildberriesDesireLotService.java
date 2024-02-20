@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
 @RequiredArgsConstructor
 public class WildberriesDesireLotService {
@@ -31,7 +32,7 @@ public class WildberriesDesireLotService {
         List<DesireLot> persistedDesireLots = wildberriesDesireLotUpdater.updateDesireLots(desireLotList);
 
         Map<String, DesireLot> desireLotPersistedMap = persistedDesireLots.stream()
-                .collect(Collectors.toMap(DesireLot::getArticle, Function.identity()));
+            .collect(Collectors.toMap(DesireLot::getArticle, Function.identity()));
 
         for (Desire desire : desireList) {
             DesireLot desireLot = desireLotPersistedMap.get(desire.getArticle());

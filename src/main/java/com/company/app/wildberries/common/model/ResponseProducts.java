@@ -1,5 +1,7 @@
 package com.company.app.wildberries.common.model;
 
+import java.util.List;
+
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries.common.WildberriesUrlCreator;
 import com.company.app.wildberries.search.domain.dto.WildberriesLinkDto;
@@ -7,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.List;
 
 @Getter
 @Setter
@@ -23,9 +24,9 @@ public class ResponseProducts {
 
     public WildberriesLinkDto toLinkDto() {
         return WildberriesLinkDto.builder()
-                .price(Strings.cutEnd(this.salePriceU.toString(), 2))
-                .link(WildberriesUrlCreator.getUrlForResponse(this.id.toString()))
-                .build();
+            .price(Strings.cutEnd(this.salePriceU.toString(), 2))
+            .link(WildberriesUrlCreator.getUrlForResponse(this.id.toString()))
+            .build();
     }
 
 }

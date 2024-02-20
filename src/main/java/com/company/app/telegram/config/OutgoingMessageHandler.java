@@ -1,13 +1,14 @@
 package com.company.app.telegram.config;
 
-import com.company.app.common.outbox.domain.enums.Target;
 import com.company.app.common.outbox.OutboxService;
+import com.company.app.common.outbox.domain.enums.Target;
 import com.company.app.telegram.domain.service.HistoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+
 
 /**
  * Обрабатывает сообщения, отправленные телеграм ботом пользователю.

@@ -1,5 +1,8 @@
 package com.company.app.telegram.incoming_message_handler.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Subscription;
@@ -8,8 +11,6 @@ import com.company.app.telegram.domain.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Отвечает за активацию чата.

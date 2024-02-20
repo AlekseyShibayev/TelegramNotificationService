@@ -1,5 +1,8 @@
 package com.company.app.telegram.domain.dto;
 
+import java.util.List;
+import java.util.Set;
+
 import com.company.app.telegram.domain.entity.History;
 import com.company.app.telegram.domain.entity.Subscription;
 import com.company.app.telegram.domain.entity.UserInfo;
@@ -9,8 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -24,4 +25,5 @@ public class ChatDto {
     private List<History> historyList;
     private UserInfo userInfo;
     private Set<Subscription> subscriptions;
+
 }

@@ -1,11 +1,12 @@
 package com.company.app.telegram.domain.mapper;
 
+import java.util.List;
+
 import com.company.app.telegram.domain.dto.ChatDto;
 import com.company.app.telegram.domain.entity.Chat;
 import lombok.experimental.UtilityClass;
 import org.springframework.beans.BeanUtils;
 
-import java.util.List;
 
 @UtilityClass
 public class Mapper {
@@ -31,8 +32,8 @@ public class Mapper {
 
     public static List<ChatDto> of(List<Chat> chatList) {
         return chatList.stream()
-                .map(Mapper::of)
-                .toList();
+            .map(Mapper::of)
+            .toList();
     }
 
 }

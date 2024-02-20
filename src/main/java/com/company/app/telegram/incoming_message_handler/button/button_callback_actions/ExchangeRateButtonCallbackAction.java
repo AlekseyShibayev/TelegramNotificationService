@@ -7,6 +7,7 @@ import com.company.app.telegram.incoming_message_handler.button.model.ButtonCall
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
 public class ExchangeRateButtonCallbackAction implements ButtonCallbackAction {
@@ -24,8 +25,8 @@ public class ExchangeRateButtonCallbackAction implements ButtonCallbackAction {
     @Override
     public void doAction(ButtonCallbackActionContext context) {
         exchangeRepository.findFirstByOrderByCreationDateDesc()
-                .ifPresentOrElse(exchangeRate -> telegramFacade.writeToTargetChat(context.getChat().getChatName(), exchangeRate.getValue())
-                        , () -> telegramFacade.writeToTargetChat(context.getChat().getChatName(), "Курса ещё нет"));
+            .ifPresentOrElse(exchangeRate -> telegramFacade.writeToTargetChat(context.getChat().getChatName(), exchangeRate.getValue())
+                , () -> telegramFacade.writeToTargetChat(context.getChat().getChatName(), "Курса ещё нет"));
     }
 
 }

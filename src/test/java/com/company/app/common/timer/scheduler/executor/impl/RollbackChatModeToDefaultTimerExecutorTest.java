@@ -37,8 +37,8 @@ class RollbackChatModeToDefaultTimerExecutorTest extends SpringBootTestApplicati
         rollbackChatModeToDefaultTimerExecutor.execute();
 
         Chat extractedChat = entityFinder.findFirst(new PersistenceContext<>(Chat.class)
-                .setSpecification(ChatSpecification.chatNameIs(owner.getChatName()))
-                .with(Chat_.MODE)).get();
+            .setSpecification(ChatSpecification.chatNameIs(owner.getChatName()))
+            .with(Chat_.MODE)).get();
 
         Assertions.assertEquals(extractedChat.getMode().getType(), ModeType.DEFAULT.name());
 

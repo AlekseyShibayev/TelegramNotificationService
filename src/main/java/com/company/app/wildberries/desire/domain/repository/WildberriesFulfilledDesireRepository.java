@@ -1,5 +1,7 @@
 package com.company.app.wildberries.desire.domain.repository;
 
+import java.util.List;
+
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.wildberries.desire.domain.dto.FulfilledDesire;
 import com.company.app.wildberries.desire.domain.entity.Desire;
@@ -10,7 +12,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Slf4j
 @Repository
@@ -25,8 +26,8 @@ public class WildberriesFulfilledDesireRepository {
         Specification<Desire> specification = DesireSpecification.chatNameIs(chatName).and(DesireSpecification.fulfilledDesire());
         List<Desire> desireList = desireRepository.findAll(specification);
         return desireList.stream()
-                .map(FulfilledDesire::of)
-                .toList();
+            .map(FulfilledDesire::of)
+            .toList();
     }
 
 }

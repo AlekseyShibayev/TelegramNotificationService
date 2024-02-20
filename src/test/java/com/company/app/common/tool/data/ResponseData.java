@@ -1,11 +1,12 @@
 package com.company.app.common.tool.data;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,4 +15,5 @@ import java.util.List;
 public class ResponseData {
 
     List<ResponseProducts> products;
+
 }

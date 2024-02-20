@@ -1,8 +1,6 @@
 package com.company.app.telegram.domain.enums;
 
 import com.company.app.telegram.domain.entity.Chat;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 
 public enum ModeType {

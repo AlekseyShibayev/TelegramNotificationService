@@ -1,5 +1,8 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
@@ -15,8 +18,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -49,9 +50,9 @@ public class WildberriesSearcherButtonCallbackAction implements ButtonCallbackAc
         String supplierId = getSupplierId(incomingMessage);
 
         WildberriesSearcherContext wildberriesSearcherContainer = WildberriesSearcherContext.builder()
-                .chatName(chat.getChatName())
-                .supplier(supplierId)
-                .build();
+            .chatName(chat.getChatName())
+            .supplier(supplierId)
+            .build();
 
         WildberriesSearcherResult result = wildberriesSearcherController.search(wildberriesSearcherContainer).getBody();
 

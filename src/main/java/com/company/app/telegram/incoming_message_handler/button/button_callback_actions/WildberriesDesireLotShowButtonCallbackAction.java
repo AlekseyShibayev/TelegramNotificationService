@@ -1,5 +1,7 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
+import java.util.List;
+
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
@@ -10,7 +12,6 @@ import com.company.app.wildberries.desire.domain.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class WildberriesDesireLotShowButtonCallbackAction implements ButtonCallb
             telegramFacade.writeToTargetChat(chat.getChatName(), "Ничего не нашёл");
         } else {
             desireList.forEach(fulfilledDesire ->
-                    telegramFacade.writeToTargetChat(fulfilledDesire.getChatName(), fulfilledDesire.getUrl()));
+                telegramFacade.writeToTargetChat(fulfilledDesire.getChatName(), fulfilledDesire.getUrl()));
         }
     }
 

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -17,9 +18,9 @@ public class FulfilledDesire {
 
     public static FulfilledDesire of(Desire desire) {
         return new FulfilledDesire()
-                .setChatName(desire.getChatName())
-                .setArticle(desire.getArticle())
-                .setUrl(WildberriesUrlCreator.getUrlForResponse(desire.getArticle()));
+            .setChatName(desire.getChatName())
+            .setArticle(desire.getArticle())
+            .setUrl(WildberriesUrlCreator.getUrlForResponse(desire.getArticle()));
     }
 
 }

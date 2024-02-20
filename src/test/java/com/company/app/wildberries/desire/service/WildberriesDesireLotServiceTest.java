@@ -17,7 +17,7 @@ class WildberriesDesireLotServiceTest extends SpringBootTestApplication {
     @Autowired
     private WildberriesDesireLotService wildberriesDesireLotService;
 
-//    @Test todo fix that
+    //    @Test todo fix that
     void search_success_test() {
         Chat owner = chatRepository.findOwner();
 
@@ -30,8 +30,8 @@ class WildberriesDesireLotServiceTest extends SpringBootTestApplication {
         wildberriesDesireLotService.search();
 
         Desire extractedDesire = entityFinder.findFirst(new PersistenceContext<>(Desire.class)
-                .setSpecification(DesireSpecification.chatNameIs(desire.getChatName()))
-                .with(Desire_.DESIRE_LOT)).get();
+            .setSpecification(DesireSpecification.chatNameIs(desire.getChatName()))
+            .with(Desire_.DESIRE_LOT)).get();
 
         Assertions.assertEquals(desire.getArticle(), extractedDesire.getDesireLot().getArticle());
         Assertions.assertNotNull(extractedDesire.getDesireLot().getPrice());

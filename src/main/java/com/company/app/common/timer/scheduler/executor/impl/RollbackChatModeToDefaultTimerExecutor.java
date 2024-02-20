@@ -14,7 +14,6 @@ import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.timer.scheduler.executor.TimerExecutor;
-import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Chat_;

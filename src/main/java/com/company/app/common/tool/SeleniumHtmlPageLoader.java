@@ -1,5 +1,9 @@
 package com.company.app.common.tool;
 
+import java.io.File;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 import com.company.app.core.util.Logs;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -7,12 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service

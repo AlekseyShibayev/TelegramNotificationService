@@ -1,5 +1,7 @@
 package com.company.app.configuration;
 
+import javax.annotation.PostConstruct;
+
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
 import com.company.app.common.timer.domain.repository.TimerRepository;
@@ -25,13 +27,13 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import javax.annotation.PostConstruct;
 
 @Slf4j
 @ExtendWith(OutputCaptureExtension.class)
 @TestPropertySource("/test.properties")
-@SpringBootTest(classes = {DbTestConfiguration.class}
-        , webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+@SpringBootTest(
+    classes = {DbTestConfiguration.class}
+    , webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @Testcontainers(disabledWithoutDocker = false)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

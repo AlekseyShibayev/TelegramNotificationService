@@ -1,5 +1,7 @@
 package com.company.app.exchange_rate.scheduler.executor;
 
+import java.util.Date;
+
 import com.company.app.exchange_rate.domain.entity.ExchangeRate;
 import com.company.app.exchange_rate.domain.enums.ExchangeRateType;
 import com.company.app.exchange_rate.domain.repository.ExchangeRepository;
@@ -11,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 
 @Slf4j
 @Service
@@ -31,7 +32,7 @@ public class ExchangeRateSchedulerExecutor {
 
         Chat owner = chatRepository.findOwner();
         if (owner.isEnableNotifications()) {
-            telegramFacade.writeToTargetChat(owner.getChatName(),notification);
+            telegramFacade.writeToTargetChat(owner.getChatName(), notification);
         }
     }
 
@@ -39,9 +40,9 @@ public class ExchangeRateSchedulerExecutor {
         String aliexpressExchangeRate = aliexpressExchangeRateExtractor.extract();
 
         ExchangeRate exchangeRate = new ExchangeRate()
-                .setType(ExchangeRateType.ALIEXPRESS)
-                .setValue(aliexpressExchangeRate)
-                .setCreationDate(new Date());
+            .setType(ExchangeRateType.ALIEXPRESS)
+            .setValue(aliexpressExchangeRate)
+            .setCreationDate(new Date());
         return exchangeRepository.save(exchangeRate);
     }
 

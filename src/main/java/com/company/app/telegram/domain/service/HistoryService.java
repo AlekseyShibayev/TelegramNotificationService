@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class HistoryService {
+
     @Value("${telegram.isHistoryEnable}")
     private boolean isHistoryEnable;
 
@@ -25,12 +27,12 @@ public class HistoryService {
         log.debug("try to read from telegram with chat name: [{}] message: [{}]", chat.getChatName(), text);
         if (isHistoryEnable) {
             History history = History.builder()
-                    .chat(chat)
-                    .message(text)
-                    .source(chat.getChatName())
-                    .target("telegram")
-                    .date(new Date())
-                    .build();
+                .chat(chat)
+                .message(text)
+                .source(chat.getChatName())
+                .target("telegram")
+                .date(new Date())
+                .build();
             historyRepository.save(history);
         }
     }
@@ -40,12 +42,12 @@ public class HistoryService {
         if (isHistoryEnable) {
             String chatId = sendMessage.getChatId();
             History history = History.builder()
-                    .chat(chatService.findChatByChatNameOrCreateIfNotExist(chatId))
-                    .message(sendMessage.getText())
-                    .source("telegram")
-                    .target(chatId)
-                    .date(new Date())
-                    .build();
+                .chat(chatService.findChatByChatNameOrCreateIfNotExist(chatId))
+                .message(sendMessage.getText())
+                .source("telegram")
+                .target(chatId)
+                .date(new Date())
+                .build();
             historyRepository.save(history);
         }
     }

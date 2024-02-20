@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,4 +15,5 @@ public class Price {
 
     @JsonSetter("RUB")
     String rub;
+
 }

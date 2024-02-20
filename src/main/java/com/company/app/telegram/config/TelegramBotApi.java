@@ -1,5 +1,7 @@
 package com.company.app.telegram.config;
 
+import java.io.Serializable;
+
 import com.company.app.telegram.incoming_message_handler.IncomingMessageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -15,7 +17,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import java.io.Serializable;
 
 /**
  * telegram api documentation: https://core.telegram.org/bots/features#inputs

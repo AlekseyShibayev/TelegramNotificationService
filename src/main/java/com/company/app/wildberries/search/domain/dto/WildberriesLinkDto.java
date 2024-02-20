@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,4 +20,5 @@ public class WildberriesLinkDto {
     public String toMessage() {
         return this.price + ": " + this.link;
     }
+
 }

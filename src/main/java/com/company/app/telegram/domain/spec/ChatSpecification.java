@@ -1,14 +1,14 @@
 package com.company.app.telegram.domain.spec;
 
+import java.util.Set;
+
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Chat_;
 import com.company.app.telegram.domain.entity.UserInfo_;
 import com.company.app.telegram.domain.enums.Role;
 import lombok.experimental.UtilityClass;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.Set;
 
 @UtilityClass
 public class ChatSpecification {

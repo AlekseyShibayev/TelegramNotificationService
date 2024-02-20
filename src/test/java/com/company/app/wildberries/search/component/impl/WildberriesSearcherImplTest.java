@@ -2,6 +2,7 @@ package com.company.app.wildberries.search.component.impl;
 
 import com.company.app.configuration.SpringBootTestApplication;
 
+
 class WildberriesSearcherImplTest extends SpringBootTestApplication {
 
 //    @Autowired

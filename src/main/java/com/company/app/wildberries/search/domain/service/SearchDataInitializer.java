@@ -1,5 +1,7 @@
 package com.company.app.wildberries.search.domain.service;
 
+import java.util.List;
+
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.wildberries.search.domain.entity.SearchData;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

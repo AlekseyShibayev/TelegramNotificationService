@@ -1,5 +1,9 @@
 package com.company.app.wildberries.search.component.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.company.app.core.util.Logs;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
@@ -9,9 +13,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Slf4j
 @Data
@@ -44,18 +45,19 @@ public class WildberriesSearcherTask implements Runnable {
         }
 
         telegramController.say(TargetMessage.builder()
-                .chatName(wildberriesSearcherContainer.getChatName())
-                .message(endMessage)
-                .build());
+            .chatName(wildberriesSearcherContainer.getChatName())
+            .message(endMessage)
+            .build());
     }
 
     private List<WildberriesLinkDto> getAllProducts() {
         List<WildberriesLinkDto> result = new ArrayList<>();
         Arrays.stream(wildberriesSearcherContainer.getSupplier().split(";"))
-                .forEach(supplier -> {
-                    wildberriesSearcherContainer.setSupplier(supplier);
-                    result.addAll(wildberriesSearcher.search(this.wildberriesSearcherContainer));
-                });
+            .forEach(supplier -> {
+                wildberriesSearcherContainer.setSupplier(supplier);
+                result.addAll(wildberriesSearcher.search(this.wildberriesSearcherContainer));
+            });
         return result;
     }
+
 }

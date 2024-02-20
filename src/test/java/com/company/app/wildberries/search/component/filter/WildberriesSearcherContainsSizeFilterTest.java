@@ -1,13 +1,14 @@
 package com.company.app.wildberries.search.component.filter;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.company.app.wildberries.common.model.ResponseProducts;
 import com.company.app.wildberries.common.model.Size;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Optional;
 
 class WildberriesSearcherContainsSizeFilterTest {
 
@@ -38,10 +39,10 @@ class WildberriesSearcherContainsSizeFilterTest {
 
     private ResponseProducts createResponseProducts() {
         return new ResponseProducts()
-                .setSizes(List.of(Size.builder().name("46").build()
-                        , Size.builder().name("48").build()
-                        , Size.builder().name("50").build()
-                ));
+            .setSizes(List.of(Size.builder().name("46").build()
+                , Size.builder().name("48").build()
+                , Size.builder().name("50").build()
+            ));
     }
 
 }

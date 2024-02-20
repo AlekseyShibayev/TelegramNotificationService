@@ -1,12 +1,13 @@
 package com.company.app.common.tool.testEntity;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Getter
 @Builder
@@ -21,4 +22,5 @@ public class TestLot {
     private String discount;
     private ProductDescription productDescription;
     private List<ProductProperty> productPropertiesList;
+
 }

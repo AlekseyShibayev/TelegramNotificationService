@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,4 +31,5 @@ public class WildberriesSearcherContext {
         BeanUtils.copyProperties(searchData, wildberriesSearcherContainer);
         return wildberriesSearcherContainer;
     }
+
 }

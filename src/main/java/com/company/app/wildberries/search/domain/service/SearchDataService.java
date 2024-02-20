@@ -1,11 +1,12 @@
 package com.company.app.wildberries.search.domain.service;
 
+import java.util.List;
+
 import com.company.app.wildberries.search.domain.entity.SearchData;
 import com.company.app.wildberries.search.domain.repository.SearchDataRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

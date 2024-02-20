@@ -2,10 +2,10 @@ package com.company.app.common.data_base_garbage_collector.impl;
 
 import java.util.List;
 
+import com.company.app.common.outbox.OutboxService;
 import com.company.app.common.outbox.domain.entity.Outbox;
 import com.company.app.common.outbox.domain.enums.Status;
 import com.company.app.common.outbox.domain.enums.Target;
-import com.company.app.common.outbox.OutboxService;
 import com.company.app.configuration.SpringBootTestApplication;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class OutboxDataBaseGarbageCollectorTest extends SpringBootTestApplication {
         transactionTemplate.executeWithoutResult(transactionStatus -> outboxDataBaseGarbageCollector.clean());
 
         List<Outbox> all = outboxRepository.findAll();
-        Assertions.assertEquals(2,all.size());
+        Assertions.assertEquals(2, all.size());
     }
 
 }

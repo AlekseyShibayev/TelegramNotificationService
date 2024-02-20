@@ -1,5 +1,11 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.core.util.Strings;
@@ -20,11 +26,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -54,8 +55,8 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
             String article = list.get(1);
             String price = list.get(2);
             Optional<Desire> one = desireRepository.findOne(DesireSpecification.chatNameIs(chat.getChatName())
-                    .and(DesireSpecification.articleIs(article))
-                    .and(DesireSpecification.priceIs(new BigDecimal(price)))
+                .and(DesireSpecification.articleIs(article))
+                .and(DesireSpecification.priceIs(new BigDecimal(price)))
             );
             one.ifPresent(desire -> {
                 desireRepository.delete(desire);
@@ -66,8 +67,8 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
 
     private void showButtons(Chat chat) {
         List<Desire> desires = entityFinder.findAll(new PersistenceContext<>(Desire.class)
-                .setSpecification(DesireSpecification.chatNameIs(chat.getChatName()))
-                .with(Desire_.DESIRE_LOT));
+            .setSpecification(DesireSpecification.chatNameIs(chat.getChatName()))
+            .with(Desire_.DESIRE_LOT));
 
         if (CollectionUtils.isEmpty(desires)) {
             telegramFacade.writeToTargetChat(chat.getChatName(), "Список желаний пуст");
@@ -92,7 +93,8 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
             String string = article + " " + Strings.cutEnd(desirePrice.toString(), 3) + " " + description;
 
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton(string);
-            inlineKeyboardButton.setCallbackData(TYPE + ButtonCallbackAction.BINDER_DELIMITER + article + ButtonCallbackAction.BINDER_DELIMITER + desire.getPrice());
+            inlineKeyboardButton.setCallbackData(
+                TYPE + ButtonCallbackAction.BINDER_DELIMITER + article + ButtonCallbackAction.BINDER_DELIMITER + desire.getPrice());
             rowsInLine.add(List.of(inlineKeyboardButton));
         }
 

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+
 /**
  * swagger: http://localhost:8080/swagger-ui.html
  * H2 http://localhost:8080/h2-console
@@ -27,4 +28,5 @@ public class Application {
     public ApplicationRunner runner() {
         return args -> log.info("*******************  The app has been started.  *******************");
     }
+
 }

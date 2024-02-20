@@ -15,6 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+
 @Service
 @RequiredArgsConstructor
 public class ButtonFactory {
@@ -25,7 +26,7 @@ public class ButtonFactory {
     private static final InlineKeyboardButton WB_DL_SHOW_MY_DESIRES = new InlineKeyboardButton("Покажи мои желания");
     private static final InlineKeyboardButton WB_DL_ADD = new InlineKeyboardButton("Добавить желания");
     private static final InlineKeyboardButton WB_DL_REMOVE = new InlineKeyboardButton("Удалить желания");
-//    private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний курс aliexpress");
+    //    private static final InlineKeyboardButton ER_BUTTON = new InlineKeyboardButton("Последний курс aliexpress");
     private static final InlineKeyboardButton ADMIN_MAIN_MENU = new InlineKeyboardButton("Админка");
     private static final InlineKeyboardButton ADMIN_WB_DL_SELECT = new InlineKeyboardButton("wb desire lot select *");
     private static final InlineKeyboardButton ADMIN_WB_DL_MANUAL_REFRESH = new InlineKeyboardButton("wb desire lot manual refresh");
@@ -59,7 +60,7 @@ public class ButtonFactory {
     private String getUserRole(Message message) {
         String chatName = String.valueOf(message.getChatId());
         Chat chat = chatRepository.findOne(ChatSpecification.chatNameIs(chatName))
-                .orElseThrow(() -> new IllegalArgumentException("Chat with name [%s] is absent".formatted(chatName)));
+            .orElseThrow(() -> new IllegalArgumentException("Chat with name [%s] is absent".formatted(chatName)));
         return chat.getUserInfo().getRole();
     }
 

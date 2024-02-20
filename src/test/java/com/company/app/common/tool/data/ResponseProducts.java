@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,4 +15,5 @@ public class ResponseProducts {
     Integer id;
     String name;
     Integer salePriceU;
+
 }

@@ -1,5 +1,7 @@
 package com.company.app.wildberries;
 
+import java.util.List;
+
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.wildberries.knowledge.component.SupplierInitializer;
 import com.company.app.wildberries.knowledge.domain.entity.Supplier;
@@ -8,7 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 
 class SupplierInitializerTest extends SpringBootTestApplication {
 

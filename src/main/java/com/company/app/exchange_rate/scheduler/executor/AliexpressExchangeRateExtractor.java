@@ -1,5 +1,7 @@
 package com.company.app.exchange_rate.scheduler.executor;
 
+import java.util.Optional;
+
 import com.company.app.common.tool.SeleniumHtmlPageLoader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +10,6 @@ import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -25,10 +26,10 @@ public class AliexpressExchangeRateExtractor {
 
         String loadedHtmlPage = seleniumHtmlPageLoader.loadHtmlPage(aliexpressUrl);
         Optional<Element> optional = Jsoup.parse(loadedHtmlPage)
-                .getElementsByTag("div")
-                .stream()
-                .filter(element -> element.html().contains("'itemId': '1005005201823586','price': '"))
-                .findFirst();
+            .getElementsByTag("div")
+            .stream()
+            .filter(element -> element.html().contains("'itemId': '1005005201823586','price': '"))
+            .findFirst();
         if (optional.isPresent()) {
             String html = optional.get().html();
             String[] split = html.split("'itemId': '1005005201823586','price': '");

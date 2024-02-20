@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import com.company.app.common.tool.data.Response;
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.common.tool.json.MapperSettings;
-import com.company.app.common.tool.data.Response;
 import com.company.app.common.tool.testEntity.ProductDescription;
 import com.company.app.common.tool.testEntity.ProductProperty;
 import com.company.app.common.tool.testEntity.TestLot;

@@ -4,6 +4,7 @@ import com.company.app.wildberries.common.model.ResponseProducts;
 import com.company.app.wildberries.search.component.data.WildberriesSearcherContext;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class WildberriesSearcherRatingFilter implements WildberriesSearcherFilter {
 
@@ -28,4 +29,5 @@ public class WildberriesSearcherRatingFilter implements WildberriesSearcherFilte
         String rating = responseProducts.getRating();
         return Integer.parseInt(rating) >= 4;
     }
+
 }

@@ -7,6 +7,7 @@ import com.company.app.wildberries.search.component.data.WildberriesSearcherResu
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @RequiredArgsConstructor
 public class WildberriesSearcherFacade {

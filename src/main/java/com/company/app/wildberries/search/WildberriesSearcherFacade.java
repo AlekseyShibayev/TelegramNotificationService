@@ -1,9 +1,9 @@
 package com.company.app.wildberries.search;
 
 import com.company.app.core.aop.logging.performance.PerformanceLogAnnotation;
-import com.company.app.wildberries.search.component.WildberriesSearcherHandler;
-import com.company.app.wildberries.search.component.data.WildberriesSearcherContext;
-import com.company.app.wildberries.search.component.data.WildberriesSearcherResult;
+import com.company.app.wildberries.search.service.WildberriesSearcherHandler;
+import com.company.app.wildberries.search.service.data.WildberriesSearcherContext;
+import com.company.app.wildberries.search.service.data.WildberriesSearcherResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

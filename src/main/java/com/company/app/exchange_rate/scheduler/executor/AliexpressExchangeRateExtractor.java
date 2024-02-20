@@ -24,7 +24,7 @@ public class AliexpressExchangeRateExtractor {
     public String extract() {
         String result = "";
 
-        String loadedHtmlPage = seleniumHtmlPageLoader.loadHtmlPage(aliexpressUrl);
+        String loadedHtmlPage = seleniumHtmlPageLoader.loadHtmlPage(aliexpressUrl).get();
         Optional<Element> optional = Jsoup.parse(loadedHtmlPage)
             .getElementsByTag("div")
             .stream()

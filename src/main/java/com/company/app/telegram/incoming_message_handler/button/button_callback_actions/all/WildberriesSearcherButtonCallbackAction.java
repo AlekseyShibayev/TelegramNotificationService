@@ -9,9 +9,9 @@ import com.company.app.telegram.incoming_message_handler.button.model.ButtonCall
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
 import com.company.app.wildberries.knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries.knowledge.domain.entity.Supplier;
-import com.company.app.wildberries.search.component.data.WildberriesSearcherContext;
-import com.company.app.wildberries.search.component.data.WildberriesSearcherResult;
-import com.company.app.wildberries.search.controller.WildberriesSearcherController;
+import com.company.app.wildberries.search.WildberriesSearcherFacade;
+import com.company.app.wildberries.search.service.data.WildberriesSearcherContext;
+import com.company.app.wildberries.search.service.data.WildberriesSearcherResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -26,7 +26,7 @@ public class WildberriesSearcherButtonCallbackAction implements ButtonCallbackAc
     private static final String TYPE = "WB_SEARCH";
 
     private final TelegramFacade telegramFacade;
-    private final WildberriesSearcherController wildberriesSearcherController;
+    private final WildberriesSearcherFacade wildberriesSearcherFacade;
     private final WildberriesSupplierController wildberriesSupplierController;
 
     @Override
@@ -54,7 +54,7 @@ public class WildberriesSearcherButtonCallbackAction implements ButtonCallbackAc
             .supplier(supplierId)
             .build();
 
-        WildberriesSearcherResult result = wildberriesSearcherController.search(wildberriesSearcherContainer).getBody();
+        WildberriesSearcherResult result = wildberriesSearcherFacade.search(wildberriesSearcherContainer);
 
         if (result.isSuccess()) {
             Supplier supplier = wildberriesSupplierController.getBySupplierId(supplierId).getBody();

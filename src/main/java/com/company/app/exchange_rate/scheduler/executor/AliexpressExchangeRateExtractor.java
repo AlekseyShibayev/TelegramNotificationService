@@ -1,6 +1,6 @@
 package com.company.app.exchange_rate.scheduler.executor;
 
-import com.company.app.core.SeleniumHtmlPageLoader;
+import com.company.app.common.tool.SeleniumHtmlPageLoader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;

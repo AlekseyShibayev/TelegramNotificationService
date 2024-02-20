@@ -6,11 +6,9 @@ import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
 import com.company.app.telegram.domain.spec.IncomingMessageTaskSpecification;
-import com.company.app.wildberries_desire.domain.entity.Desire;
-import com.company.app.wildberries_desire.domain.repository.DesireRepository;
+import com.company.app.wildberries.desire.domain.entity.Desire;
+import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

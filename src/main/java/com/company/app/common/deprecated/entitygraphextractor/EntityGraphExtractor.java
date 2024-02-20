@@ -7,7 +7,7 @@ import com.company.app.common.deprecated.entitygraphextractor.common.EntityGraph
 import com.company.app.common.deprecated.entitygraphextractor.impl.ChatContext;
 import com.company.app.common.deprecated.entitygraphextractor.impl.DesireContext;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.wildberries_desire.domain.entity.Desire;
+import com.company.app.wildberries.desire.domain.entity.Desire;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

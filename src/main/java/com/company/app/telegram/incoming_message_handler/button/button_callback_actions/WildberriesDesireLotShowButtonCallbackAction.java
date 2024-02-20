@@ -5,8 +5,8 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
-import com.company.app.wildberries_desire.WildberriesDesireFacade;
-import com.company.app.wildberries_desire.domain.dto.FulfilledDesire;
+import com.company.app.wildberries.desire.WildberriesDesireFacade;
+import com.company.app.wildberries.desire.domain.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

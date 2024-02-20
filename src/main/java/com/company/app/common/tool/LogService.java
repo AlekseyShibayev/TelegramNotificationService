@@ -1,6 +1,5 @@
 package com.company.app.common.tool;
 
-import com.company.app.core.temp.tool.api.DataExtractorTool;
 import com.google.common.io.ByteSource;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

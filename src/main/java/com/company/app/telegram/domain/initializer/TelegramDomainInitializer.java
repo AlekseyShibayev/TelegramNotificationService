@@ -1,6 +1,6 @@
 package com.company.app.telegram.domain.initializer;
 
-import com.company.app.core.temp.tool.json.JsonTool;
+import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.entity.Subscription;
@@ -33,7 +33,7 @@ public class TelegramDomainInitializer {
     @Value("classpath:telegram/init_chat.json")
     private Resource resource;
 
-    private final JsonTool<Chat> jsonTool;
+    private final JsonMapper<Chat> jsonTool;
     private final ChatRepository chatRepository;
     private final ModeRepository modeRepository;
     private final SubscriptionRepository subscriptionRepository;

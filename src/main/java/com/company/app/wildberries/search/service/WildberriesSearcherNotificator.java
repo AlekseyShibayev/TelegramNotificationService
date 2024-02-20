@@ -3,8 +3,8 @@ package com.company.app.wildberries.search.service;
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
 import com.company.app.wildberries.common.model.ResponseProducts;
-import com.company.app.wildberries.search.service.data.WildberriesSearcherContext;
 import com.company.app.wildberries.search.domain.dto.WildberriesLinkDto;
+import com.company.app.wildberries.search.service.data.WildberriesSearcherContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

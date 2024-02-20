@@ -6,11 +6,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 import com.company.app.telegram.controller.TelegramController;
+import com.company.app.wildberries.search.domain.entity.SearchData;
+import com.company.app.wildberries.search.domain.service.SearchDataService;
 import com.company.app.wildberries.search.service.data.WildberriesSearcherContext;
 import com.company.app.wildberries.search.service.data.WildberriesSearcherResult;
 import com.company.app.wildberries.search.service.data.WildberriesSearcherTask;
-import com.company.app.wildberries.search.domain.entity.SearchData;
-import com.company.app.wildberries.search.domain.service.SearchDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -3,9 +3,9 @@ package com.company.app.wildberries.search.service;
 import java.util.List;
 
 import com.company.app.wildberries.common.model.ResponseProducts;
+import com.company.app.wildberries.search.domain.dto.WildberriesLinkDto;
 import com.company.app.wildberries.search.service.data.WildberriesSearcherContext;
 import com.company.app.wildberries.search.service.data.util.WildberriesSearcherProductsUrlCreator;
-import com.company.app.wildberries.search.domain.dto.WildberriesLinkDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,17 +1,13 @@
 package com.company.app.wildberries.search.service;
 
-import java.io.File;
-import java.net.URL;
-import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.Command;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v121.network.Network;
@@ -24,11 +20,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class WbHistoryFinder {
 
-    private static final String FIRST_DRIVER_PATH = "selenium_driver/chromedriver";
-    private static final String SECOND_DRIVER_PATH = "/usr/local/bin/chromedriver";
     private static final String WB_URL = """
-                     https://www.wildberries.ru/catalog/4221055/detail.aspx
-                     """;
+                                         https://www.wildberries.ru/catalog/4221055/detail.aspx
+                                         """;
 
     public Optional<PriceHistoryResult> findHistory() {
         try {
@@ -41,30 +35,14 @@ public class WbHistoryFinder {
 
     @SneakyThrows
     private PriceHistoryResult loadHtmlPageInner(String url) {
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        URL path = loader.getResource(FIRST_DRIVER_PATH);
-        File file = new File(path.getPath());
-        if (file.exists()) {
-            System.setProperty("webdriver.chrome.driver", path.getPath());
-        } else {
-            System.setProperty("webdriver.chrome.driver", SECOND_DRIVER_PATH);
+        try (SeleniumWebDriver seleniumWebDriver = SeleniumWebDriver.of()) {
+            ChromeDriver driver = seleniumWebDriver.getDriver();
+            driver.navigate().to(url);
+
+            CompletableFuture<PriceHistoryResult> future = new CompletableFuture<>();
+            future.completeAsync(() -> async(driver));
+            return future.get(15, TimeUnit.SECONDS);
         }
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-        driver.manage().deleteAllCookies();
-
-        driver.navigate().to(url);
-
-        CompletableFuture<PriceHistoryResult> future = new CompletableFuture<>();
-        future.completeAsync(() -> async(driver));
-        PriceHistoryResult result = future.get();
-
-        driver.close();
-        return result;
     }
 
     @SneakyThrows

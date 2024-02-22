@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v121.network.Network;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 
@@ -19,6 +21,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SeleniumService {
+
+    @Value("classpath:selenium_driver/chromedriver")
+    private Resource resource;
 
     public Optional<Response> findByWeb(String url, String partOfUrl) {
         try {
@@ -31,7 +36,7 @@ public class SeleniumService {
 
     @SneakyThrows
     private Response loadHtmlPageInner(String url, String partOfUrl) {
-        try (SeleniumWebDriver seleniumWebDriver = SeleniumWebDriver.of()) {
+        try (SeleniumWebDriver seleniumWebDriver = SeleniumWebDriver.of(resource)) {
             ChromeDriver driver = seleniumWebDriver.getDriver();
             driver.navigate().to(url);
 

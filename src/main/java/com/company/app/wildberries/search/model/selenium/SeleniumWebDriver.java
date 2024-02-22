@@ -1,4 +1,4 @@
-package com.company.app.wildberries.search.service;
+package com.company.app.wildberries.search.model.selenium;
 
 import java.io.File;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package com.company.app.wildberries.search.model.selenium;
+package com.company.app.common.selenium.model;
 
 import java.math.BigDecimal;
 
@@ -16,6 +16,7 @@ public class Response {
     private RequestId requestId;
     private String url;
     private String body;
+    private String partOfUrl;
 
     public boolean isResponseReady(RequestId currentRequestId) {
         if (requestId == null) {

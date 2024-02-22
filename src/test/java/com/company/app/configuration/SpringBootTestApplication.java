@@ -11,6 +11,8 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.config.TelegramBotApi;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
+import com.company.app.wildberries.common.price_history.domain.repository.PriceRepository;
+import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
 import com.company.app.wildberries.desire.domain.repository.DesireLotRepository;
 import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import com.company.app.wildberries.desire.scheduler.WildberriesDesireLotSchedulerConfig;
@@ -61,6 +63,10 @@ public abstract class SpringBootTestApplication {
     protected TimerRepository timerRepository;
     @Autowired
     protected OutboxRepository outboxRepository;
+    @Autowired
+    protected ProductRepository productRepository;
+    @Autowired
+    protected PriceRepository priceRepository;
 
     @PostConstruct
     void init() {
@@ -78,6 +84,8 @@ public abstract class SpringBootTestApplication {
         desireLotRepository.deleteAllInBatch();
         timerRepository.deleteAllInBatch();
         outboxRepository.deleteAllInBatch();
+        priceRepository.deleteAllInBatch();
+        productRepository.deleteAllInBatch();
     }
 
 }

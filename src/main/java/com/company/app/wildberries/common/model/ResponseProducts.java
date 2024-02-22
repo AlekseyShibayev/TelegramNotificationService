@@ -3,7 +3,7 @@ package com.company.app.wildberries.common.model;
 import java.util.List;
 
 import com.company.app.core.util.Strings;
-import com.company.app.wildberries.common.WildberriesUrlCreator;
+import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import com.company.app.wildberries.search.domain.dto.WildberriesLinkDto;
 import lombok.Getter;
 import lombok.Setter;

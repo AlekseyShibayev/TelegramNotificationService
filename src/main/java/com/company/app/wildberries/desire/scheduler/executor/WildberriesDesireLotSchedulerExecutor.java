@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.wildberries.common.WildberriesUrlCreator;
+import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import com.company.app.wildberries.desire.domain.entity.Desire;
 import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import com.company.app.wildberries.desire.service.WildberriesDesireLotService;

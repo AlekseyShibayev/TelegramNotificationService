@@ -1,4 +1,4 @@
-package com.company.app.wildberries.search.model.selenium;
+package com.company.app.common.selenium.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

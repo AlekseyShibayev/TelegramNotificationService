@@ -1,6 +1,6 @@
 package com.company.app.wildberries.desire.domain.dto;
 
-import com.company.app.wildberries.common.WildberriesUrlCreator;
+import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import com.company.app.wildberries.desire.domain.entity.Desire;
 import lombok.Getter;
 import lombok.Setter;

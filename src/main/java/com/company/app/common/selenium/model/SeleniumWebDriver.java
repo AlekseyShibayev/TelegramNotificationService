@@ -1,4 +1,4 @@
-package com.company.app.wildberries.search.model.selenium;
+package com.company.app.common.selenium.model;
 
 import java.io.File;
 import java.net.URL;
@@ -40,6 +40,7 @@ public class SeleniumWebDriver implements AutoCloseable {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--headless");
 
         ChromeDriver chromeDriver = new ChromeDriver(options);
         chromeDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));

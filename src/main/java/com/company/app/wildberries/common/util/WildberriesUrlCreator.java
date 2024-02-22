@@ -1,4 +1,4 @@
-package com.company.app.wildberries.common;
+package com.company.app.wildberries.common.util;
 
 import lombok.experimental.UtilityClass;
 

@@ -83,6 +83,12 @@ public class JsonMapper<T> {
         return copy.readValue(source, type);
     }
 
+    @SneakyThrows
+    public List<T> toJavaAsList(String source, Class<T> type, MapperSettings settings) {
+        ObjectMapper copy = copyAndConfigure(settings);
+        return copy.readValue(source, getCollectionType(type));
+    }
+
     private CollectionType getCollectionType(Class<T> type) {
         return mapper.getTypeFactory().constructCollectionType(List.class, type);
     }

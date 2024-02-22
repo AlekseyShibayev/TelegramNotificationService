@@ -7,7 +7,7 @@ import com.company.app.common.tool.GetRequestHandler;
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.common.tool.json.MapperSettings;
 import com.company.app.core.util.Strings;
-import com.company.app.wildberries.common.WildberriesUrlCreator;
+import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import com.company.app.wildberries.common.model.Response;
 import com.company.app.wildberries.common.model.ResponseProducts;
 import com.company.app.wildberries.desire.domain.entity.Desire;

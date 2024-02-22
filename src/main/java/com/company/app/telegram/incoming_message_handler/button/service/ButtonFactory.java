@@ -32,6 +32,7 @@ public class ButtonFactory {
     private static final InlineKeyboardButton ADMIN_WB_DL_MANUAL_REFRESH = new InlineKeyboardButton("wb desire lot manual refresh");
     private static final InlineKeyboardButton ADMIN_ER_BUTTON = new InlineKeyboardButton("er show last");
     private static final InlineKeyboardButton ADMIN_GET_LOG = new InlineKeyboardButton("admin get log");
+    private static final InlineKeyboardButton ADMIN_WB_SEARCH = new InlineKeyboardButton("wb search start");
 
 
     private final ChatRepository chatRepository;
@@ -88,6 +89,7 @@ public class ButtonFactory {
         ADMIN_WB_DL_MANUAL_REFRESH.setCallbackData("ADMIN_WB_DL_MANUAL_REFRESH");
         ADMIN_ER_BUTTON.setCallbackData("ADMIN_ER_BUTTON");
         ADMIN_GET_LOG.setCallbackData("ADMIN_GET_LOG");
+        ADMIN_WB_SEARCH.setCallbackData("ADMIN_WB_SEARCH");
 
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
 
@@ -95,6 +97,7 @@ public class ButtonFactory {
         rowsInLine.add(List.of(ADMIN_WB_DL_MANUAL_REFRESH));
         rowsInLine.add(List.of(ADMIN_ER_BUTTON));
         rowsInLine.add(List.of(ADMIN_GET_LOG));
+        rowsInLine.add(List.of(ADMIN_WB_SEARCH));
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         markupInline.setKeyboard(rowsInLine);

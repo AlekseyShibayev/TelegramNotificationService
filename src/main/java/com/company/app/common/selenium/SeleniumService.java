@@ -1,6 +1,5 @@
 package com.company.app.common.selenium;
 
-import com.company.app.common.selenium.configuration.SeleniumWebDriver;
 import com.company.app.common.selenium.model.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -20,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class SeleniumService {
 
-    private final SeleniumWebDriver seleniumWebDriver;
+    private final ChromeDriver chromeDriver;
 
     public Optional<Response> findByWeb(String url, String partOfUrl) {
         try {
@@ -33,7 +32,7 @@ public class SeleniumService {
 
     @SneakyThrows
     private Response loadHtmlPageInner(String url, String partOfUrl) {
-        seleniumWebDriver.getDriver().navigate().to(url);
+        chromeDriver.navigate().to(url);
 
         CompletableFuture<Response> future = new CompletableFuture<>();
         future.completeAsync(() -> async(partOfUrl));
@@ -45,7 +44,7 @@ public class SeleniumService {
         Response response = new Response()
                 .setPartOfUrl(partOfUrl);
 
-        try (DevTools devTools = seleniumWebDriver.getDriver().getDevTools()) {
+        try (DevTools devTools = chromeDriver.getDevTools()) {
             devTools.createSession();
             devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 

@@ -1,17 +1,10 @@
 package com.company.app.common.tool;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import com.company.app.core.util.Logs;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.stereotype.Service;
 
 
@@ -20,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SeleniumHtmlPageLoader {
 
-    private static final String FIRST_DRIVER_PATH = "selenium_driver/geckodriver";
+    private static final String FIRST_DRIVER_PATH = "selenium/geckodriver";
     private static final String SECOND_DRIVER_PATH = "/usr/local/bin/geckodriver";
 
     public Optional<String> loadHtmlPage(String url) {

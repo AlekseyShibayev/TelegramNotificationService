@@ -1,6 +1,7 @@
 package com.company.app.wildberries.common.price_history.domain.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
@@ -29,7 +30,7 @@ public class ProductService {
                 .setCost(Strings.cutEnd(vmPrice.getRub(), 2))
                 .setProduct(persistedProduct)
             )
-            .toList();
+            .collect(Collectors.toList());
 
         persistedProduct.setPrice(priceList);
         return productRepository.save(persistedProduct);

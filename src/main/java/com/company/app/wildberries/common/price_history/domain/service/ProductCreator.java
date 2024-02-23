@@ -3,6 +3,7 @@ package com.company.app.wildberries.common.price_history.domain.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.company.app.core.util.Collections;
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ProductService {
+public class ProductCreator {
 
     private final ProductRepository productRepository;
 
@@ -32,8 +33,12 @@ public class ProductService {
             )
             .collect(Collectors.toList());
 
-        persistedProduct.setPrice(priceList);
-        return productRepository.save(persistedProduct);
+        if (Collections.isNotEmpty(priceList)) {
+            persistedProduct.setPrice(priceList);
+            productRepository.save(persistedProduct);
+        }
+
+        return persistedProduct;
     }
 
 }

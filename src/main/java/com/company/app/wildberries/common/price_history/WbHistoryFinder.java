@@ -9,7 +9,7 @@ import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.common.tool.json.MapperSettings;
 import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
-import com.company.app.wildberries.common.price_history.domain.service.ProductService;
+import com.company.app.wildberries.common.price_history.domain.service.ProductCreator;
 import com.company.app.wildberries.common.price_history.model.VmPriceHistory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class WbHistoryFinder {
 
     private final SeleniumService seleniumService;
     private final JsonMapper<VmPriceHistory> priceHistoryJsonTool;
-    private final ProductService productService;
+    private final ProductCreator productCreator;
 
     public Product findHistoryBy(String article) {
         String url = WildberriesUrlCreator.getUrlForResponse(article);
@@ -33,7 +33,7 @@ public class WbHistoryFinder {
             .map(this::mapJsonToJava)
             .orElse(new ArrayList<>());
 
-        return productService.create(article, result);
+        return productCreator.create(article, result);
     }
 
     private List<VmPriceHistory> mapJsonToJava(Response response) {

@@ -85,6 +85,7 @@ public class SeleniumWebDriver {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--headless");
+
         options.addArguments("--silent");
         options.addArguments("--disable-logging");
         options.addArguments("--disable-dev-shm-usage");

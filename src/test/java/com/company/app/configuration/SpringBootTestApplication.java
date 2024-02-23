@@ -73,8 +73,6 @@ public abstract class SpringBootTestApplication {
      * @MockBean
      */
     @MockBean
-    protected SeleniumWebDriver seleniumWebDriver;
-    @MockBean
     protected TelegramBotApi telegramBotConfig;
 
     @PostConstruct

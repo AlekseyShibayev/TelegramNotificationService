@@ -32,7 +32,7 @@ public class SeleniumService {
 
     @SneakyThrows
     private Response loadHtmlPageInner(String url, String partOfUrl) {
-        seleniumWebDriver.getChromeDriver().navigate().to(url);
+        seleniumWebDriver.getDriver().navigate().to(url);
 
         CompletableFuture<Response> future = new CompletableFuture<>();
         future.completeAsync(() -> async(partOfUrl));
@@ -44,7 +44,7 @@ public class SeleniumService {
         Response response = new Response()
                 .setPartOfUrl(partOfUrl);
 
-        try (DevTools devTools = seleniumWebDriver.getChromeDriver().getDevTools()) {
+        try (DevTools devTools = seleniumWebDriver.getDriver().getDevTools()) {
             devTools.createSession();
             devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 

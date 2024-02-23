@@ -1,7 +1,7 @@
 package com.company.app.wildberries.common.price_history;
 
 import com.company.app.common.entity_finder.model.PersistenceContext;
-import com.company.app.configuration.SeleniumWebDriverTestConfiguration;
+import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.core.util.Collections;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 
-class WbHistoryFinderTest extends SeleniumWebDriverTestConfiguration {
+class WbHistoryFinderTest extends SpringBootTestApplication {
 
     private final static String ARTICLE = "180189153";
 

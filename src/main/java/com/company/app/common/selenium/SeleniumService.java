@@ -1,10 +1,10 @@
 package com.company.app.common.selenium;
 
+import com.company.app.common.selenium.service.SeleniumWebDriver;
 import com.company.app.common.selenium.model.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v121.network.Network;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class SeleniumService {
 
-    private final ChromeDriver chromeDriver;
+    private final SeleniumWebDriver seleniumWebDriver;
 
     public Optional<Response> findByWeb(String url, String partOfUrl) {
         try {
@@ -32,7 +32,7 @@ public class SeleniumService {
 
     @SneakyThrows
     private Response loadHtmlPageInner(String url, String partOfUrl) {
-        chromeDriver.navigate().to(url);
+        seleniumWebDriver.getChromeDriver().navigate().to(url);
 
         CompletableFuture<Response> future = new CompletableFuture<>();
         future.completeAsync(() -> async(partOfUrl));
@@ -44,7 +44,7 @@ public class SeleniumService {
         Response response = new Response()
                 .setPartOfUrl(partOfUrl);
 
-        try (DevTools devTools = chromeDriver.getDevTools()) {
+        try (DevTools devTools = seleniumWebDriver.getChromeDriver().getDevTools()) {
             devTools.createSession();
             devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 

@@ -1,10 +1,8 @@
 package com.company.app.configuration;
 
-import javax.annotation.PostConstruct;
-
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
-import com.company.app.common.selenium.configuration.SeleniumWebDriverConfiguration;
+import com.company.app.common.selenium.service.SeleniumWebDriver;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.tool.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
@@ -17,34 +15,27 @@ import com.company.app.wildberries.common.price_history.domain.repository.Produc
 import com.company.app.wildberries.desire.domain.repository.DesireLotRepository;
 import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import com.company.app.wildberries.desire.scheduler.WildberriesDesireLotSchedulerConfig;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.system.OutputCaptureExtension;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.Resource;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.net.URL;
+import javax.annotation.PostConstruct;
 
 
 @Slf4j
 @ExtendWith(OutputCaptureExtension.class)
 @TestPropertySource("/test.properties")
 @SpringBootTest(
-    classes = {SeleniumWebDriverTestConfiguration.class, DbTestConfiguration.class}
+    classes = {DbTestConfiguration.class}
     , webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @Testcontainers(disabledWithoutDocker = false)
@@ -55,12 +46,13 @@ import java.net.URL;
 @MockBean(TelegramFacade.class)
 public abstract class SpringBootTestApplication {
 
-    @MockBean
-    protected TelegramBotApi telegramBotConfig;
     @Autowired
     protected TransactionTemplate transactionTemplate;
     @Autowired
     protected EntityFinder entityFinder;
+    /**
+     * @Repository
+     */
     @Autowired
     protected ChatRepository chatRepository;
     @Autowired
@@ -77,6 +69,13 @@ public abstract class SpringBootTestApplication {
     protected ProductRepository productRepository;
     @Autowired
     protected PriceRepository priceRepository;
+    /**
+     * @MockBean
+     */
+    @MockBean
+    protected SeleniumWebDriver seleniumWebDriver;
+    @MockBean
+    protected TelegramBotApi telegramBotConfig;
 
     @PostConstruct
     void init() {
@@ -85,7 +84,7 @@ public abstract class SpringBootTestApplication {
 
     @BeforeEach
     void doBeforeEach() {
-
+//        Mockito.when(chromeDriver.navigate()).t
     }
 
     @AfterEach

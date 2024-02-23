@@ -1,15 +1,17 @@
-package com.company.app.common.selenium.configuration;
+package com.company.app.common.selenium.service;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,12 +19,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.logging.Level;
 import java.util.stream.Stream;
 
 @Slf4j
-@Configuration
-public class SeleniumWebDriverConfiguration {
+@Service
+@RequiredArgsConstructor
+public class SeleniumWebDriver {
 
     public static final String DRIVER_PATH = "webdriver.chrome.driver";
     private static final String PACKAGE_NAME = "driver";
@@ -32,23 +34,27 @@ public class SeleniumWebDriverConfiguration {
     @Value("classpath:selenium/chromedriver")
     private Resource resource;
 
-    @Bean
+    @Getter
+    private ChromeDriver chromeDriver;
+
+    @PostConstruct
     @SneakyThrows
-    public ChromeDriver chromeDriver() {
+    public void init() {
         regDriver();
-        return createChromeDriver();
+        chromeDriver = createChromeDriver();
     }
 
     public static ChromeDriver createChromeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+//        options.addArguments(" --window-size=1920,1080");
         options.addArguments("--headless");
 
-        options.addArguments("--silent");
-        options.addArguments("--disable-logging");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--log-level=3");
-        java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
+//        options.addArguments("--silent");
+//        options.addArguments("--disable-logging");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--log-level=3");
+//        java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
 
         var chromeDriver = new ChromeDriver(options);
         chromeDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));

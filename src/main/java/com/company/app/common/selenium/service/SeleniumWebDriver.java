@@ -18,6 +18,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 
 @Slf4j
@@ -33,10 +35,17 @@ public class SeleniumWebDriver {
     @PostConstruct
     @SneakyThrows
     public void init() {
-        FileUtils.deleteDirectory(new File("selenium"));
-
-        load("https://storage.googleapis.com/chrome-for-testing-public/122.0.6261.69/linux64/chromedriver-linux64.zip");
-        load("https://storage.googleapis.com/chrome-for-testing-public/122.0.6261.69/linux64/chrome-linux64.zip");
+//        File file = new File("selenium/chrome/chrome");
+//        if (Files.notExists(Paths.get("selenium/chrome/chrome")) {
+//
+//
+//
+//        }
+//
+//        FileUtils.deleteDirectory(new File("selenium"));
+//
+//        load("https://storage.googleapis.com/chrome-for-testing-public/122.0.6261.69/linux64/chromedriver-linux64.zip");
+//        load("https://storage.googleapis.com/chrome-for-testing-public/122.0.6261.69/linux64/chrome-linux64.zip");
 
         this.driver = createChromeDriver();
     }
@@ -56,15 +65,18 @@ public class SeleniumWebDriver {
     }
 
     private ChromeDriver createChromeDriver() {
-        File chromedriverFile = new File("selenium/122.0.6261.69/chromedriver-linux64/chromedriver");
+        File chromedriverFile = new File("selenium/chromedriver");
         System.setProperty(DRIVER_PATH, chromedriverFile.getAbsolutePath());
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 //        options.addArguments(" --window-size=1920,1080");
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
 
-        options.setBinary("selenium/122.0.6261.69/chrome-linux64/chrome");
+        if (Files.exists(Paths.get("selenium/chrome/chrome"))) {
+            options.setBinary("selenium/chrome/chrome");
+        }
+
 //        options.addArguments("--silent");
 //        options.addArguments("--disable-logging");
 //        options.addArguments("--disable-dev-shm-usage");

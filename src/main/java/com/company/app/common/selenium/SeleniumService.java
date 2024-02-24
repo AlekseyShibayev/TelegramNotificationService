@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v121.network.Network;
+import org.openqa.selenium.devtools.v120.network.Network;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

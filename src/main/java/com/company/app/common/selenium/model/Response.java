@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.openqa.selenium.devtools.v121.network.model.RequestId;
+import org.openqa.selenium.devtools.v120.network.model.RequestId;
 
 
 @Getter

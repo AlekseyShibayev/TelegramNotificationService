@@ -8,8 +8,8 @@ import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.common.tool.json.MapperSettings;
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries.common.util.WildberriesUrlCreator;
-import com.company.app.wildberries.common.model.Response;
-import com.company.app.wildberries.common.model.ResponseProducts;
+import com.company.app.wildberries.common.model.VmResponse;
+import com.company.app.wildberries.common.model.VmProduct;
 import com.company.app.wildberries.desire.domain.entity.Desire;
 import com.company.app.wildberries.desire.domain.entity.DesireLot;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import static java.util.stream.Collectors.joining;
 public class WildberriesDesireLotHttpRepository {
 
     private final GetRequestHandler getRequestHandler;
-    private final JsonMapper<Response> jsonTool;
+    private final JsonMapper<VmResponse> jsonTool;
 
     public List<DesireLot> findAllByHttp(List<Desire> desireList) {
         String articles = desireList.stream()
@@ -36,16 +36,16 @@ public class WildberriesDesireLotHttpRepository {
         String urlForPriceSearch = WildberriesUrlCreator.getUrlForPriceSearch(articles);
         String jsonResponse = getRequestHandler.loadHtmlPage(urlForPriceSearch);
 
-        Response response = jsonTool.toJavaAsObject(jsonResponse, Response.class, new MapperSettings().setFailOnUnknownProperties(false));
+        VmResponse response = jsonTool.toJavaAsObject(jsonResponse, VmResponse.class, new MapperSettings().setFailOnUnknownProperties(false));
 
-        List<ResponseProducts> products = response.getData().getProducts();
+        List<VmProduct> products = response.getData().getProducts();
 
         return products.stream()
             .map(this::toDesireLot)
             .toList();
     }
 
-    private DesireLot toDesireLot(ResponseProducts responseProducts) {
+    private DesireLot toDesireLot(VmProduct responseProducts) {
         String price = Strings.cutEnd(String.valueOf(responseProducts.getSalePriceU()), 2);
         return new DesireLot()
             .setArticle(String.valueOf(responseProducts.getId()))

@@ -1,7 +1,6 @@
 package com.company.app.wildberries.common.model;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponseData {
+public class VmPrice {
 
-    List<ResponseProducts> products;
+    @JsonSetter("RUB")
+    String rub;
 
 }

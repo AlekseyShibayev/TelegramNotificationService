@@ -23,6 +23,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -40,7 +41,6 @@ import javax.annotation.PostConstruct;
 )
 @Testcontainers(disabledWithoutDocker = false)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@MockBean(CaptchaFighter.class)
 @MockBean(WildberriesDesireLotSchedulerConfig.class)
 @MockBean(ExchangeRateSchedulerConfig.class)
 @MockBean(TelegramFacade.class)
@@ -74,6 +74,11 @@ public abstract class SpringBootTestApplication {
      */
     @MockBean
     protected TelegramBotApi telegramBotConfig;
+    /**
+     * @SpyBean
+     */
+    @SpyBean
+    protected CaptchaFighter captchaFighter;
 
     @PostConstruct
     void init() {

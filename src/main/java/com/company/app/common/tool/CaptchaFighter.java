@@ -15,6 +15,9 @@ public class CaptchaFighter {
 
     private static final Random RANDOM = new Random();
 
+    /**
+     * sleep random mc [of-to]
+     */
     @SneakyThrows
     public void fight(int of, int to) {
         int sleepTime = of + getRandomInt(to - of);

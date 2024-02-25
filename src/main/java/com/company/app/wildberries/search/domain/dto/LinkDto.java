@@ -1,18 +1,16 @@
 package com.company.app.wildberries.search.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class WildberriesLinkDto {
+@Accessors(chain = true)
+@EqualsAndHashCode
+public class LinkDto {
 
     private String price;
     private String link;

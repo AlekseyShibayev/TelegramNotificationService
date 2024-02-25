@@ -1,4 +1,4 @@
-package com.company.app.wildberries.search.service.data.util;
+package com.company.app.wildberries.search.util;
 
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;

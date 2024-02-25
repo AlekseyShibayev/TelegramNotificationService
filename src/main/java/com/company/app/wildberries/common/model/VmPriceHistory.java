@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PriceHistory {
+public class VmPriceHistory {
 
     String dt;
-    Price price;
+    VmPrice price;
 
 }

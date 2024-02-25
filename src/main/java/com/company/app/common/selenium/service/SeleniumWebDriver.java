@@ -39,7 +39,7 @@ public class SeleniumWebDriver {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 //        options.addArguments(" --window-size=1920,1080");
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
 
         options.setBinary(browserPath);
 

@@ -3,8 +3,8 @@ package com.company.app.wildberries.search.service.filter;
 import java.util.List;
 import java.util.Optional;
 
-import com.company.app.wildberries.common.model.ResponseProducts;
-import com.company.app.wildberries.common.model.Size;
+import com.company.app.wildberries.common.model.VmProduct;
+import com.company.app.wildberries.common.model.VmSize;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,36 +12,36 @@ import org.junit.jupiter.api.Test;
 
 class WildberriesSearcherContainsSizeFilterTest {
 
-    private WildberriesSearcherContainsSizeFilter filter;
+    private ContainsSizeWbFilter filter;
 
     @BeforeEach
     public void init() {
-        filter = new WildberriesSearcherContainsSizeFilter();
+        filter = new ContainsSizeWbFilter();
     }
 
     @Test
     void getUserSize_positive_test() {
-        ResponseProducts responseProducts = createResponseProducts();
+        VmProduct responseProducts = createResponseProducts();
 
-        Optional<Size> userSize = filter.getUserSize(responseProducts, "50;52");
+        Optional<VmSize> userSize = filter.getUserSize(responseProducts, "50;52");
 
         Assertions.assertTrue(userSize.isPresent());
     }
 
     @Test
     void getUserSize_negative_test() {
-        ResponseProducts responseProducts = createResponseProducts();
+        VmProduct responseProducts = createResponseProducts();
 
-        Optional<Size> userSize = filter.getUserSize(responseProducts, "52;54");
+        Optional<VmSize> userSize = filter.getUserSize(responseProducts, "52;54");
 
         Assertions.assertTrue(userSize.isEmpty());
     }
 
-    private ResponseProducts createResponseProducts() {
-        return new ResponseProducts()
-            .setSizes(List.of(Size.builder().name("46").build()
-                , Size.builder().name("48").build()
-                , Size.builder().name("50").build()
+    private VmProduct createResponseProducts() {
+        return new VmProduct()
+            .setSizes(List.of(new VmSize().setName("46")
+                , new VmSize().setName("48")
+                , new VmSize().setName("50")
             ));
     }
 

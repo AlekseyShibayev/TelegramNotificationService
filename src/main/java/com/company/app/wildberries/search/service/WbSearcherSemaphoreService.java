@@ -26,7 +26,7 @@ public class WbSearcherSemaphoreService {
     private Semaphore semaphore;
 
     private final SearchDataRepository searchDataRepository;
-    private final WbSearcher wildberriesSearcher;
+    private final WbSearcher wbSearcher;
     private final TelegramController telegramController;
 
     @PostConstruct
@@ -60,7 +60,7 @@ public class WbSearcherSemaphoreService {
             executorService.submit(new WbSearchTask()
                     .setSearcherContext(searcherContext)
                     .setTelegramController(telegramController)
-                    .setWbSearcher(wildberriesSearcher)
+                    .setWbSearcher(wbSearcher)
                     .setWbCallback(this::callback));
 
             return new WbSearchResult()

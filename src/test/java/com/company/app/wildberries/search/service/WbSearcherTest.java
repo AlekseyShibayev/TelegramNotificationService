@@ -23,7 +23,7 @@ class WbSearcherTest extends SpringBootTestApplication {
     private WbSearcherApi wbSearcherApi;
 
     @Test
-    void search_test() {
+    void search_success_test() {
         Mockito.doCallRealMethod().when(captchaFighter).fight(Mockito.anyInt(), Mockito.anyInt());
 
         VmProduct testVmProduct = new VmProduct()

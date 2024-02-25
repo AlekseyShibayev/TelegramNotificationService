@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -30,8 +31,9 @@ public class WbSearcherApi {
         while (true) {
             log.debug("try to see [{}] page", i);
             String pageUrl = String.format(url, i);
-            String htmlResponse = getRequestHandler.loadHtmlPage(pageUrl);
-            VmResponse response = responseJsonTool.toJavaAsObject(htmlResponse,
+            Optional<String> htmlResponse = getRequestHandler.loadHtmlPage(pageUrl);
+
+            VmResponse response = responseJsonTool.toJavaAsObject(htmlResponse.get(),
                     VmResponse.class,
                     new MapperSettings().setFailOnUnknownProperties(false));
 

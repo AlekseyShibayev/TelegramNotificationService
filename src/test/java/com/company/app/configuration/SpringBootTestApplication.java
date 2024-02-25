@@ -2,7 +2,6 @@ package com.company.app.configuration;
 
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
-import com.company.app.common.selenium.service.SeleniumWebDriver;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.tool.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;

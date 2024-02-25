@@ -1,23 +1,16 @@
 package com.company.app.wildberries.search.service.filter;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.company.app.wildberries.common.model.VmProduct;
 import com.company.app.wildberries.common.model.VmSize;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Optional;
 
-class WildberriesSearcherContainsSizeFilterTest {
+class ContainsSizeWbFilterTest {
 
-    private ContainsSizeWbFilter filter;
-
-    @BeforeEach
-    public void init() {
-        filter = new ContainsSizeWbFilter();
-    }
+    private ContainsSizeWbFilter filter = new ContainsSizeWbFilter();
 
     @Test
     void getUserSize_positive_test() {
@@ -39,10 +32,10 @@ class WildberriesSearcherContainsSizeFilterTest {
 
     private VmProduct createResponseProducts() {
         return new VmProduct()
-            .setSizes(List.of(new VmSize().setName("46")
-                , new VmSize().setName("48")
-                , new VmSize().setName("50")
-            ));
+                .setSizes(List.of(new VmSize().setName("46")
+                        , new VmSize().setName("48")
+                        , new VmSize().setName("50")
+                ));
     }
 
 }

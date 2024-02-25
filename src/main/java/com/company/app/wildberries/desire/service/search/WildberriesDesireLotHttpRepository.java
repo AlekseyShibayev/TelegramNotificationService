@@ -34,7 +34,7 @@ public class WildberriesDesireLotHttpRepository {
             .collect(joining(";"));
 
         String urlForPriceSearch = WildberriesUrlCreator.getUrlForPriceSearch(articles);
-        String jsonResponse = getRequestHandler.loadHtmlPage(urlForPriceSearch);
+        String jsonResponse = getRequestHandler.loadHtmlPage(urlForPriceSearch).get();
 
         VmResponse response = jsonTool.toJavaAsObject(jsonResponse, VmResponse.class, new MapperSettings().setFailOnUnknownProperties(false));
 

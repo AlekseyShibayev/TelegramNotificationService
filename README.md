@@ -46,3 +46,17 @@
 2. Прочие:
   - посмотреть io.micrometer.core.annotation.Timed io.micrometer.core.aop.TimedAspect
   - найти или сделать Dockerfile openjre_alpine-musl, выкинув не нужные пакеты из jre, ожидаемый вес < 80 mb [habr](https://habr.com/ru/companies/piter/articles/692992/)
+
+## Selenium
+Project use selenium web driver for parsing web.
+Set-up properties in application-properties:
+selenium.driver.path=
+selenium.browser.path=
+
+For example in aarch64 or amd64 linux you can install by commands:
+sudo apt install chromium
+sudo apt-get install -y chromium-chromedriver
+
+And check that the versions are the same:
+chromium --version
+chromedriver --version

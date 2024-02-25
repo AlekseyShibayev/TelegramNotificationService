@@ -21,10 +21,12 @@ public class DataBaseGarbageCollectorScheduler {
     @Scheduled(cron = "${garbage.clean.scheduler}")
     @SchedulerLock(name = "garbage.clean.scheduler")
     public void cleanAll() {
+        log.info("cleanAll start");
         for (DataBaseGarbageCollector dataBaseGarbageCollector : collectorList) {
             transactionTemplate.executeWithoutResult(transactionStatus ->
                 dataBaseGarbageCollector.clean());
         }
+        log.info("cleanAll end");
     }
 
 }

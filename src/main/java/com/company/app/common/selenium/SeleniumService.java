@@ -1,14 +1,14 @@
 package com.company.app.common.selenium;
 
+import com.company.app.common.selenium.model.Response;
 import com.company.app.common.selenium.model.SeleniumWebDriver;
 import com.company.app.common.selenium.service.SeleniumWebDriverCreator;
-import com.company.app.common.selenium.model.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v120.network.Network;
+import org.openqa.selenium.devtools.v120.network.model.RequestId;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -52,21 +52,22 @@ public class SeleniumService {
             devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 
             devTools.addListener(Network.requestWillBeSent(), request -> {
-                if (request.getRequest().getUrl().contains(response.getPartOfUrl())) {
+                if (request.getRequest().getUrl().contains(partOfUrl)) {
                     response.setUrl(request.getRequest().getUrl());
                 }
             });
 
             devTools.addListener(Network.responseReceived(), responseReceived -> {
-                if (responseReceived.getResponse().getUrl().contains(response.getPartOfUrl())) {
+                if (responseReceived.getResponse().getUrl().contains(partOfUrl)) {
                     response.setRequestId(responseReceived.getRequestId());
                 }
             });
 
             devTools.addListener(Network.loadingFinished(), request -> {
-                if (response.isResponseReady(request.getRequestId())) {
-                    String body = devTools.send(Network.getResponseBody(response.getRequestId())).getBody();
-                    log.debug("try [{}] and body [{}]", response.getRequestId(), body);
+                RequestId requestId = request.getRequestId();
+
+                if (response.isReadyToGetBody(requestId)) {
+                    String body = devTools.send(Network.getResponseBody(requestId)).getBody();
                     response.setBody(body);
                 }
             });

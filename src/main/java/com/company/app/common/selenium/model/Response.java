@@ -1,37 +1,43 @@
 package com.company.app.common.selenium.model;
 
-import java.math.BigDecimal;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.openqa.selenium.devtools.v120.network.model.RequestId;
 
+import java.util.concurrent.atomic.AtomicReference;
 
-@Getter
-@Setter
+
 @Accessors(chain = true)
 public class Response {
 
-    private RequestId requestId;
+    private AtomicReference<RequestId> requestIdAtomicReference = new AtomicReference<>();
+    private AtomicReference<String> bodyAtomicReference = new AtomicReference<>();
+
+    @Getter
+    @Setter
     private String url;
-    private String body;
+    @Getter
+    @Setter
     private String partOfUrl;
 
-    public boolean isResponseReady(RequestId currentRequestId) {
-        if (requestId == null) {
-            return false;
-        } else if (body != null) {
-            return false;
-        } else {
-            try {
-                BigDecimal bigDecimal1 = new BigDecimal(currentRequestId.toString());
-                BigDecimal bigDecimal2 = new BigDecimal(requestId.toString());
-                return bigDecimal1.compareTo(bigDecimal2) >= 0;
-            } catch (Exception e) {
-                return false;
-            }
-        }
+    public boolean isReadyToGetBody(RequestId requestId) {
+        RequestId innerRequestId = requestIdAtomicReference.get();
+        return innerRequestId != null && innerRequestId.toString().equals(requestId.toString());
+    }
+
+    public Response setRequestId(RequestId requestId) {
+        this.requestIdAtomicReference.set(requestId);
+        return this;
+    }
+
+    public String getBody() {
+        return this.bodyAtomicReference.get();
+    }
+
+    public Response setBody(String body) {
+        this.bodyAtomicReference.set(body);
+        return this;
     }
 
 }

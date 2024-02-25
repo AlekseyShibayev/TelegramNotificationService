@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.time.Duration;
 
 @Slf4j
@@ -22,22 +23,22 @@ public class SeleniumWebDriverCreator {
     @Value("${selenium.browser.path}")
     private String browserPath;
 
-    public SeleniumWebDriver createChromeDriver() {
+    private ChromeOptions options;
+
+    @PostConstruct
+    void init() {
         System.setProperty(DRIVER_PATH, driverPath);
 
-        ChromeOptions options = new ChromeOptions();
+        options = new ChromeOptions();
         options.setBinary(browserPath);
 
         options.addArguments("--remote-allow-origins=*");
 //        options.addArguments(" --window-size=1920,1080");
-//        options.addArguments("--headless");
+        options.addArguments("--headless");
+    }
 
-//        options.addArguments("--silent");
-//        options.addArguments("--disable-logging");
-//        options.addArguments("--disable-dev-shm-usage");
-//        options.addArguments("--log-level=0");
-//        java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
 
+    public SeleniumWebDriver createChromeDriver() {
         var chromeDriver = new ChromeDriver(options);
         chromeDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         chromeDriver.manage().deleteAllCookies();

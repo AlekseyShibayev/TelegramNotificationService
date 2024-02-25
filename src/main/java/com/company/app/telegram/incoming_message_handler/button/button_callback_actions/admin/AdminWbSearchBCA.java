@@ -1,13 +1,9 @@
-package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.all;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.admin;
 
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackActionContext;
-import com.company.app.wildberries.knowledge.controller.WildberriesSupplierController;
 import com.company.app.wildberries.knowledge.domain.entity.Supplier;
 import com.company.app.wildberries.search.WbSearcherFacade;
 import com.company.app.wildberries.search.model.WbSearchContext;
@@ -18,16 +14,18 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
-public class WildberriesSearcherButtonCallbackAction implements ButtonCallbackAction {
+public class AdminWbSearchBCA implements ButtonCallbackAction {
 
-    private static final String TYPE = "WB_SEARCH";
+    private static final String TYPE = "ADMIN_WB_SEARCH";
 
     private final TelegramFacade telegramFacade;
     private final WbSearcherFacade wildberriesSearcherFacade;
-    private final WildberriesSupplierController wildberriesSupplierController;
 
     @Override
     public String getType() {
@@ -49,15 +47,16 @@ public class WildberriesSearcherButtonCallbackAction implements ButtonCallbackAc
     private void tryStartSearch(Chat chat, String incomingMessage) {
         String supplierId = getSupplierId(incomingMessage);
 
-        WbSearchContext wildberriesSearcherContainer = new WbSearchContext()
+        WbSearchContext wbSearchContext = new WbSearchContext()
             .setChatName(chat.getChatName())
             .setBrand(supplierId);
 
-        WbSearchResult result = wildberriesSearcherFacade.search(wildberriesSearcherContainer);
+        WbSearchResult result = wildberriesSearcherFacade.search(wbSearchContext);
 
         if (result.isSuccess()) {
-            Supplier supplier = wildberriesSupplierController.getBySupplierId(supplierId).getBody();
-            String message = String.format("Поисковая задача успешно запущена. [%s]", supplier.getSupplierName());
+//            Supplier supplier = wildberriesSupplierController.getBySupplierId(supplierId).getBody();
+//            String message = String.format("Поисковая задача успешно запущена. [%s]", supplier.getSupplierName());
+            String message = String.format("Поисковая задача успешно запущена. [%s]", incomingMessage);
             telegramFacade.writeToTargetChat(chat.getChatName(), message);
         } else {
             telegramFacade.writeToTargetChat(chat.getChatName(), result.getMessage());
@@ -78,7 +77,10 @@ public class WildberriesSearcherButtonCallbackAction implements ButtonCallbackAc
     }
 
     private InlineKeyboardMarkup getButtons() {
-        List<Supplier> supplierList = wildberriesSupplierController.getAll().getBody();
+//        List<Supplier> supplierList = wildberriesSupplierController.getAll().getBody();
+        List<Supplier> supplierList = List.of(new Supplier().setSupplierId("921").setSupplierName("Tom Tailor")
+                , new Supplier().setSupplierId("12845").setSupplierName("Envy Lab"));
+
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         markupInline.setKeyboard(getRowsInLine(supplierList));
         return markupInline;

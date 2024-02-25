@@ -35,7 +35,7 @@ public class WbSearcherSemaphoreService {
         semaphore = new Semaphore(1);
     }
 
-    public WbSearchResult process(WbSearchContext context) {
+    public WbSearchResult tryStart(WbSearchContext context) {
         if (semaphore.tryAcquire()) {
             return startNewAsyncSearch(context);
         } else {

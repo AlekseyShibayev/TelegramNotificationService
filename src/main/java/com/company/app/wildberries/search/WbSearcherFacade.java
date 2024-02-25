@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class WbSearcherFacade {
 
-    private final WbSearcherSemaphoreService wildberriesSearcherHandler;
+    private final WbSearcherSemaphoreService wbSearcherSemaphoreService;
 
     @PerformanceLogAnnotation
     public WbSearchResult search(WbSearchContext context) {
-        return wildberriesSearcherHandler.process(context);
+        return wbSearcherSemaphoreService.tryStart(context);
     }
 
 }

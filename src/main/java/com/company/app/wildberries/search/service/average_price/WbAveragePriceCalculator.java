@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.OptionalDouble;
 
@@ -24,20 +25,28 @@ public class WbAveragePriceCalculator {
     public AveragePriceRegistry createAveragePriceRegistry(List<VmProduct> products) {
         AveragePriceRegistry registry = AveragePriceRegistry.of(products);
         for (VmProduct product : products) {
-            registry.put(product, getAveragePriceForOne(product));
+            BigDecimal averagePrice = getAveragePriceForOne(product);
+            registry.put(product, averagePrice);
             captchaFighter.fight(1000, 5000);
         }
         return registry;
     }
 
     private BigDecimal getAveragePriceForOne(VmProduct product) {
-        Integer id = product.getId();
-        Product entity = wbHistoryFinder.findHistoryBy(String.valueOf(id));
+        try {
+            Integer id = product.getId();
+            Product entity = wbHistoryFinder.findHistoryBy(String.valueOf(id));
 
-        OptionalDouble average = entity.getPrice().stream()
-                .mapToInt(price -> Integer.parseInt(price.getCost()))
-                .average();
-        return BigDecimal.valueOf(average.orElse(0.00));
+            OptionalDouble average = entity.getPrice().stream()
+                    .mapToInt(price -> Integer.parseInt(price.getCost()))
+                    .average();
+
+            BigDecimal bigDecimal = BigDecimal.valueOf(average.orElse(0.00));
+            return bigDecimal.setScale(2, RoundingMode.HALF_UP);
+        } catch (Exception e) {
+            log.error("for product with id [{}] can not find average price, because: [{}]", product.getId(), e.getMessage(), e);
+            return BigDecimal.ZERO;
+        }
     }
 
 }

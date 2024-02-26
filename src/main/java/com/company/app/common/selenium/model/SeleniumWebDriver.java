@@ -19,15 +19,7 @@ public class SeleniumWebDriver extends ChromeDriver implements AutoCloseable {
 
     @Override
     public void close() {
-        super.close();
+//        super.close();
     }
-
-//    public WebDriver.Navigation navigate() {
-//        return chromeDriver.navigate();
-//    }
-//
-//    public DevTools getDevTools() {
-//        return chromeDriver.getDevTools();
-//    }
 
 }

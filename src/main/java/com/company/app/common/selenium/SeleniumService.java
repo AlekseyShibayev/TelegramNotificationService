@@ -36,48 +36,48 @@ public class SeleniumService {
     private Response loadHtmlPageInner(String url, String partOfUrl) {
         try (SeleniumWebDriver driver = seleniumWebDriverRegistry.get()) {
             driver.navigate().to(url);
-            CompletableFuture<Response> future = new CompletableFuture<>();
-            future.completeAsync(() -> async(partOfUrl, driver));
-            return future.get(20, TimeUnit.SECONDS);
+
+            Response response = new Response()
+                    .setPartOfUrl(partOfUrl);
+
+            try (DevTools devTools = driver.getDevTools()) {
+                devTools.createSession();
+                devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+
+                CompletableFuture<Response> future = new CompletableFuture<>();
+                future.completeAsync(() -> async(partOfUrl, response, devTools));
+                return future.get(20, TimeUnit.SECONDS);
+            }
         }
     }
 
     @SneakyThrows
-    private Response async(String partOfUrl, SeleniumWebDriver driver) {
-        Response response = new Response()
-                .setPartOfUrl(partOfUrl);
-
-        try (DevTools devTools = driver.getDevTools()) {
-            devTools.createSession();
-            devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-
-            devTools.addListener(Network.requestWillBeSent(), request -> {
-                if (request.getRequest().getUrl().contains(partOfUrl)) {
-                    response.setUrl(request.getRequest().getUrl());
-                }
-            });
-
-            devTools.addListener(Network.responseReceived(), responseReceived -> {
-                if (responseReceived.getResponse().getUrl().contains(partOfUrl)) {
-                    response.setRequestId(responseReceived.getRequestId());
-                }
-            });
-
-            devTools.addListener(Network.loadingFinished(), request -> {
-                RequestId requestId = request.getRequestId();
-
-                if (response.isReadyToGetBody(requestId)) {
-                    String body = devTools.send(Network.getResponseBody(requestId)).getBody();
-                    response.setBody(body);
-                }
-            });
-
-            while (response.getBody() == null) {
-                Thread.sleep(1000);
+    private Response async(String partOfUrl, Response response, DevTools devTools) {
+        devTools.addListener(Network.requestWillBeSent(), request -> {
+            if (request.getRequest().getUrl().contains(partOfUrl)) {
+                response.setUrl(request.getRequest().getUrl());
             }
+        });
 
-            return response;
+        devTools.addListener(Network.responseReceived(), responseReceived -> {
+            if (responseReceived.getResponse().getUrl().contains(partOfUrl)) {
+                response.setRequestId(responseReceived.getRequestId());
+            }
+        });
+
+        devTools.addListener(Network.loadingFinished(), request -> {
+            RequestId requestId = request.getRequestId();
+
+            if (response.isReadyToGetBody(requestId)) {
+                String body = devTools.send(Network.getResponseBody(requestId)).getBody();
+                response.setBody(body);
+            }
+        });
+
+        while (response.getBody() == null) {
+            Thread.sleep(1000);
         }
+        return response;
     }
 
 }

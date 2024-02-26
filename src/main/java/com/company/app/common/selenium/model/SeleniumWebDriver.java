@@ -19,7 +19,7 @@ public class SeleniumWebDriver extends ChromeDriver implements AutoCloseable {
 
     @Override
     public void close() {
-//        super.close();
+        super.quit();
     }
 
 }

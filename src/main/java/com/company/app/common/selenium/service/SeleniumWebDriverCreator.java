@@ -45,8 +45,6 @@ public class SeleniumWebDriverCreator {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.manage().deleteAllCookies();
 
-        driver.navigate().to("https://www.google.com/");
-
         return driver;
     }
 

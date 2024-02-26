@@ -42,7 +42,7 @@ public class SeleniumWebDriverCreator {
         }
 
         var driver = new SeleniumWebDriver(options);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().deleteAllCookies();
 
         return driver;

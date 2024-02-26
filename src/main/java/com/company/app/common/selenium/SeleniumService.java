@@ -46,7 +46,7 @@ public class SeleniumService {
 
                 CompletableFuture<Response> future = new CompletableFuture<>();
                 future.completeAsync(() -> async(partOfUrl, response, devTools));
-                return future.get(20, TimeUnit.SECONDS);
+                return future.get(30, TimeUnit.SECONDS);
             }
         }
     }

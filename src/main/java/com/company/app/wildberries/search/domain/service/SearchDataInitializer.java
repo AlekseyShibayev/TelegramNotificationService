@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -25,8 +26,13 @@ public class SearchDataInitializer {
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() {
-        List<SearchData> list = jsonTool.toJavaAsList(resource, SearchData.class);
-        searchDataRepository.saveAll(list);
+        List<SearchData> allSearchDataList = jsonTool.toJavaAsList(resource, SearchData.class);
+
+        List<SearchData> newSearchDataList = allSearchDataList.stream()
+            .filter(searchData -> searchDataRepository.findByChatName(searchData.getChatName()).isEmpty())
+            .collect(Collectors.toList());
+
+        searchDataRepository.saveAll(newSearchDataList);
     }
 
 }

@@ -1,26 +1,33 @@
 package com.company.app.common.selenium.model;
 
 import lombok.RequiredArgsConstructor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 
 @RequiredArgsConstructor
-public class SeleniumWebDriver implements AutoCloseable {
+public class SeleniumWebDriver extends ChromeDriver implements AutoCloseable {
 
-    private final ChromeDriver chromeDriver;
+    public SeleniumWebDriver(ChromeOptions options) {
+        super(options);
+    }
+
+    @Override
+    public void setSessionId(String opaqueKey) {
+        super.setSessionId(opaqueKey);
+    }
 
     @Override
     public void close() {
-        chromeDriver.quit();
+        super.close();
     }
 
-    public WebDriver.Navigation navigate() {
-        return chromeDriver.navigate();
-    }
-
-    public DevTools getDevTools() {
-        return chromeDriver.getDevTools();
-    }
+//    public WebDriver.Navigation navigate() {
+//        return chromeDriver.navigate();
+//    }
+//
+//    public DevTools getDevTools() {
+//        return chromeDriver.getDevTools();
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.company.app.common.selenium.service;
 
 import com.company.app.common.selenium.model.SeleniumWebDriver;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,28 +23,34 @@ public class SeleniumWebDriverCreator {
     private String driverPath;
     @Value("${selenium.browser.path}")
     private String browserPath;
+    @Value("${selenium.option.headless}")
+    private boolean headless;
+    @Value("${selenium.option.incognito}")
+    private boolean incognito;
 
-    private ChromeOptions options;
-
-    @PostConstruct
-    void init() {
+    public SeleniumWebDriver createNew() {
         System.setProperty(DRIVER_PATH, driverPath);
 
-        options = new ChromeOptions();
+        var options = new ChromeOptions();
         options.setBinary(browserPath);
 
         options.addArguments("--remote-allow-origins=*");
-//        options.addArguments(" --window-size=1920,1080");
-        options.addArguments("--headless");
-    }
+        //        options.addArguments(" --window-size=1920,1080");
 
+        if (incognito) {
+            options.addArguments("--incognito");
+        }
+        if (headless) {
+            options.addArguments("--headless");
+        }
 
-    public SeleniumWebDriver createChromeDriver() {
-        var chromeDriver = new ChromeDriver(options);
-        chromeDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-        chromeDriver.manage().deleteAllCookies();
+        var driver = new SeleniumWebDriver(options);
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+        driver.manage().deleteAllCookies();
 
-        return new SeleniumWebDriver(chromeDriver);
+        driver.navigate().to("https://www.google.com/");
+
+        return driver;
     }
 
 }

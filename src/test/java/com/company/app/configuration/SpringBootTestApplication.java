@@ -1,7 +1,10 @@
 package com.company.app.configuration;
 
+import javax.annotation.PostConstruct;
+
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
+import com.company.app.common.selenium.service.SeleniumWebDriverRegistry;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.tool.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
@@ -16,7 +19,6 @@ import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import com.company.app.wildberries.desire.scheduler.WildberriesDesireLotSchedulerConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,6 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
-import javax.annotation.PostConstruct;
 
 
 @Slf4j
@@ -73,6 +73,8 @@ public abstract class SpringBootTestApplication {
      */
     @MockBean
     protected TelegramBotApi telegramBotConfig;
+    @MockBean
+    protected SeleniumWebDriverRegistry seleniumWebDriverRegistry;
     /**
      * @SpyBean
      */
@@ -82,11 +84,6 @@ public abstract class SpringBootTestApplication {
     @PostConstruct
     void init() {
         log.debug("**********     run spring boot test context     **********");
-    }
-
-    @BeforeEach
-    void doBeforeEach() {
-//        Mockito.when(chromeDriver.navigate()).t
     }
 
     @AfterEach

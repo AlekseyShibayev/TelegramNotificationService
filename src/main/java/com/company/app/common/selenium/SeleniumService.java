@@ -2,7 +2,7 @@ package com.company.app.common.selenium;
 
 import com.company.app.common.selenium.model.Response;
 import com.company.app.common.selenium.model.SeleniumWebDriver;
-import com.company.app.common.selenium.service.SeleniumWebDriverCreator;
+import com.company.app.common.selenium.service.SeleniumWebDriverRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class SeleniumService {
 
-    private final SeleniumWebDriverCreator seleniumWebDriverCreator;
+    private final SeleniumWebDriverRegistry seleniumWebDriverRegistry;
 
     public Optional<Response> findByWeb(String url, String partOfUrl) {
         try {
@@ -34,20 +34,20 @@ public class SeleniumService {
 
     @SneakyThrows
     private Response loadHtmlPageInner(String url, String partOfUrl) {
-        try (SeleniumWebDriver seleniumWebDriver = seleniumWebDriverCreator.createChromeDriver()) {
-            seleniumWebDriver.navigate().to(url);
+        try (SeleniumWebDriver driver = seleniumWebDriverRegistry.get()) {
+            driver.navigate().to(url);
             CompletableFuture<Response> future = new CompletableFuture<>();
-            future.completeAsync(() -> async(partOfUrl, seleniumWebDriver));
+            future.completeAsync(() -> async(partOfUrl, driver));
             return future.get(20, TimeUnit.SECONDS);
         }
     }
 
     @SneakyThrows
-    private Response async(String partOfUrl, SeleniumWebDriver seleniumWebDriver) {
+    private Response async(String partOfUrl, SeleniumWebDriver driver) {
         Response response = new Response()
                 .setPartOfUrl(partOfUrl);
 
-        try (DevTools devTools = seleniumWebDriver.getDevTools()) {
+        try (DevTools devTools = driver.getDevTools()) {
             devTools.createSession();
             devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 

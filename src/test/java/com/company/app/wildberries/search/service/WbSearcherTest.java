@@ -1,5 +1,6 @@
 package com.company.app.wildberries.search.service;
 
+import com.company.app.configuration.SeleniumConfiguration;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries.common.model.VmProduct;
@@ -15,7 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
-class WbSearcherTest extends SpringBootTestApplication {
+class WbSearcherTest extends SeleniumConfiguration {
 
     @Autowired
     private WbSearcher wbSearcher;

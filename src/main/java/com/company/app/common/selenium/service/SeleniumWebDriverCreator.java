@@ -3,6 +3,7 @@ package com.company.app.common.selenium.service;
 import com.company.app.common.selenium.model.SeleniumWebDriver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -40,10 +41,13 @@ public class SeleniumWebDriverCreator {
         if (headless) {
             options.addArguments("--headless");
         }
-
         var driver = new SeleniumWebDriver(options);
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofDays(1));
         driver.manage().deleteAllCookies();
+
+//        driver.navigate().to("https://www.google.com/");
+//        driver.switchTo().newWindow(WindowType.TAB);
 
         return driver;
     }

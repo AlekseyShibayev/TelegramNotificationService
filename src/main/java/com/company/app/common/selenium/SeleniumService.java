@@ -3,6 +3,7 @@ package com.company.app.common.selenium;
 import com.company.app.common.selenium.model.Response;
 import com.company.app.common.selenium.model.SeleniumWebDriver;
 import com.company.app.common.selenium.service.SeleniumWebDriverRegistry;
+import com.company.app.common.tool.CaptchaFighter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +12,7 @@ import org.openqa.selenium.devtools.v120.network.Network;
 import org.openqa.selenium.devtools.v120.network.model.RequestId;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -22,40 +23,56 @@ import java.util.concurrent.TimeUnit;
 public class SeleniumService {
 
     private final SeleniumWebDriverRegistry seleniumWebDriverRegistry;
+    private final CaptchaFighter captchaFighter;
 
-    public Optional<Response> findByWeb(String url, String partOfUrl) {
-        try {
-            return Optional.ofNullable(loadHtmlPageInner(url, partOfUrl));
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return Optional.empty();
+    public List<Response> findByWeb(Collection<String> urls, String partOfUrl) {
+        List<Response> result = new ArrayList<>();
+        int position = 1;
+
+        try (SeleniumWebDriver driver = seleniumWebDriverRegistry.get()) {
+            for (String url : urls) {
+
+                log.debug("try to load page [{}]/[{}]", position, urls.size());
+                try {
+                    Response response = loadHtmlPageInner(url, partOfUrl, driver);
+                    result.add(response);
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
+                } finally {
+                    captchaFighter.fight(1500, 5000);
+                    position++;
+                }
+
+            }
         }
+
+        return result;
     }
 
     @SneakyThrows
-    private Response loadHtmlPageInner(String url, String partOfUrl) {
-        try (SeleniumWebDriver driver = seleniumWebDriverRegistry.get()) {
+    private Response loadHtmlPageInner(String url, String partOfUrl, SeleniumWebDriver driver) {
             driver.navigate().to(url);
 
             Response response = new Response()
+                    .setUrlBefore(url)
                     .setPartOfUrl(partOfUrl);
 
             try (DevTools devTools = driver.getDevTools()) {
                 devTools.createSession();
                 devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+//            devTools.send(Network.clearBrowserCache());
 
                 CompletableFuture<Response> future = new CompletableFuture<>();
                 future.completeAsync(() -> async(partOfUrl, response, devTools));
-                return future.get(30, TimeUnit.SECONDS);
+                return future.get(20, TimeUnit.SECONDS);
             }
-        }
     }
 
     @SneakyThrows
     private Response async(String partOfUrl, Response response, DevTools devTools) {
         devTools.addListener(Network.requestWillBeSent(), request -> {
             if (request.getRequest().getUrl().contains(partOfUrl)) {
-                response.setUrl(request.getRequest().getUrl());
+                response.setFullUrl(request.getRequest().getUrl());
             }
         });
 

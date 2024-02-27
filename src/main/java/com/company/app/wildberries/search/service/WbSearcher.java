@@ -2,10 +2,11 @@ package com.company.app.wildberries.search.service;
 
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.wildberries.common.model.VmProduct;
+import com.company.app.wildberries.common.price_history.WbHistoryFinder;
+import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.search.domain.dto.LinkDto;
 import com.company.app.wildberries.search.model.WbSearchContext;
 import com.company.app.wildberries.search.service.average_price.AveragePriceRegistry;
-import com.company.app.wildberries.search.service.average_price.WbAveragePriceCalculator;
 import com.company.app.wildberries.search.service.filter.WbFilter;
 import com.company.app.wildberries.search.util.WbBrandUrlCreator;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -21,7 +23,7 @@ import java.util.List;
 public class WbSearcher {
 
     private final WbSearcherApi wbSearcherApi;
-    private final WbAveragePriceCalculator wbAveragePriceCalculator;
+    private final WbHistoryFinder wbHistoryFinder;
     private final List<WbFilter> wbFilterList;
     private final TelegramFacade telegramFacade;
 
@@ -43,23 +45,24 @@ public class WbSearcher {
         List<VmProduct> preFilteredProducts = products.stream()
                 .filter(responseProducts -> filterAll(responseProducts, context))
                 .toList();
-        log.debug("[{}]: После предварительной фильтрации осталось [{}] шт.", context.getChatName(), preFilteredProducts.size());
+        log.debug("[{}]: [{}] after pre filtering", context.getChatName(), preFilteredProducts.size());
 
-        AveragePriceRegistry averagePriceRegistry = wbAveragePriceCalculator.createAveragePriceRegistry(preFilteredProducts);
-        return preFilteredProducts.stream()
+        AveragePriceRegistry averagePriceRegistry = createAveragePriceRegistry(preFilteredProducts);
+        List<VmProduct> postFilteredProducts = preFilteredProducts.stream()
                 .filter(product -> averagePriceRegistry.isCurrentPriceLesserThanAveragePrice(product, context))
                 .toList();
+        log.debug("[{}]: [{}] after post filtering", context.getChatName(), postFilteredProducts.size());
+        return postFilteredProducts;
     }
 
     private boolean filterAll(VmProduct product, WbSearchContext context) {
-        for (WbFilter filter : wbFilterList) {
-            boolean result = filter.test(product, context);
-            if (!result) {
-                return false;
-            }
+        return wbFilterList.stream().allMatch(wbFilter -> wbFilter.test(product, context));
+    }
 
-        }
-        return true;
+    public AveragePriceRegistry createAveragePriceRegistry(List<VmProduct> products) {
+        List<String> articleList = products.stream().map(product -> String.valueOf(product.getId())).collect(Collectors.toList());
+        List<Product> persistProductList = wbHistoryFinder.findHistoryBy(articleList);
+        return AveragePriceRegistry.of(persistProductList);
     }
 
 }

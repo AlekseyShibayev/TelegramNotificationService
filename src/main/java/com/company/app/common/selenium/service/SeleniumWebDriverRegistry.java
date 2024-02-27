@@ -26,8 +26,9 @@ public class SeleniumWebDriverRegistry {
 
     public SeleniumWebDriver get() {
         return seleniumWebDriverCreator.createNew();
-
+//
 //        if (driver.getSessionId() == null) {
+//            log.debug("session id is null");
 //            driver.setSessionId(sessionId.toString());
 //        }
 //        return driver;

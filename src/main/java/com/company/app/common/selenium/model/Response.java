@@ -16,10 +16,13 @@ public class Response {
 
     @Getter
     @Setter
-    private String url;
+    private String urlBefore;
     @Getter
     @Setter
     private String partOfUrl;
+    @Getter
+    @Setter
+    private String fullUrl;
 
     public boolean isReadyToGetBody(RequestId requestId) {
         RequestId innerRequestId = requestIdAtomicReference.get();

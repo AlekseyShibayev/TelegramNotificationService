@@ -22,7 +22,7 @@ class WbHistoryFinderTest extends SeleniumConfiguration {
 
     @Test
     void can_extract_price_history_from_web() {
-        wbHistoryFinder.findHistoryBy(ARTICLE);
+        wbHistoryFinder.findHistoryBy(List.of(ARTICLE));
 
         List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
             .with(Product_.PRICE));

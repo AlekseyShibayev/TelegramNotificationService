@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ class WbSearcherTest extends SeleniumConfiguration {
         Mockito.doCallRealMethod().when(captchaFighter).fight(Mockito.anyInt(), Mockito.anyInt());
 
         VmProduct testVmProduct = new VmProduct()
-                .setId(9960002)
+                .setId(173718250)
                 .setName("Футболка")
                 .setSalePriceU(100)
                 .setRating(5)

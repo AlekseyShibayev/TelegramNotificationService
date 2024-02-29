@@ -9,17 +9,16 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.HttpResponseException;
 import org.springframework.stereotype.Service;
 
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class GetRequestHandler {
+public class HttpService {
 
     @SneakyThrows
-    public Optional<String> loadHtmlPage(String url) {
+    public Optional<String> get(String url) {
         log.debug("try to get response: [{}]", url);
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))

@@ -40,6 +40,9 @@ public class Product implements Serializable {
     @Column(name = "ARTICLE", nullable = false)
     private String article;
 
+    @Column(name = "HISTORY_PRICE_URL", nullable = false)
+    private String historyPriceUrl;
+
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Price> price = new ArrayList<>();
 

@@ -11,12 +11,14 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Product_ {
 
 	public static volatile SingularAttribute<Product, ZonedDateTime> updateDate;
+	public static volatile SingularAttribute<Product, String> historyPriceUrl;
 	public static volatile ListAttribute<Product, Price> price;
 	public static volatile SingularAttribute<Product, Long> id;
 	public static volatile SingularAttribute<Product, String> article;
 	public static volatile SingularAttribute<Product, ZonedDateTime> createDate;
 
 	public static final String UPDATE_DATE = "updateDate";
+	public static final String HISTORY_PRICE_URL = "historyPriceUrl";
 	public static final String PRICE = "price";
 	public static final String ID = "id";
 	public static final String ARTICLE = "article";

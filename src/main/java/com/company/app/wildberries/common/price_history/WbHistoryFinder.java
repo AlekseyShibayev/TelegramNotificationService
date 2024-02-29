@@ -4,13 +4,23 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.company.app.common.entity_finder.EntityFinder;
+import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.selenium.SeleniumService;
+import com.company.app.common.selenium.model.Request;
 import com.company.app.common.selenium.model.Response;
+import com.company.app.common.tool.CaptchaFighter;
+import com.company.app.common.tool.HttpService;
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.common.tool.json.MapperSettings;
+import com.company.app.core.util.Collections;
+import com.company.app.core.util.Strings;
+import com.company.app.wildberries.common.price_history.domain.entity.Price;
+import com.company.app.wildberries.common.price_history.domain.entity.Product_;
+import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
+import com.company.app.wildberries.common.price_history.domain.specification.ProductSpecification;
 import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
-import com.company.app.wildberries.common.price_history.domain.service.ProductCreator;
 import com.company.app.wildberries.common.price_history.model.VmPriceHistory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,33 +37,89 @@ public class WbHistoryFinder {
 
     private final SeleniumService seleniumService;
     private final JsonMapper<VmPriceHistory> priceHistoryJsonTool;
-    private final ProductCreator productCreator;
+    private final ProductRepository productRepository;
+    private final HttpService httpService;
+    private final EntityFinder entityFinder;
+    private final CaptchaFighter captchaFighter;
 
     public List<Product> findHistoryBy(Collection<String> articleList) {
-        var urlVsArticle = articleList.stream()
-                .collect(Collectors.toMap(WildberriesUrlCreator::getUrlForResponse, article -> article));
+        List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
+            .setSpecification(ProductSpecification.articleIn(articleList))
+            .with(Product_.PRICE));
 
-        var responseList = seleniumService.findByWeb(urlVsArticle.keySet(), PART_OF_URL);
-        var responseWithBodyList = responseList.stream().filter(response -> StringUtils.isNotEmpty(response.getBody())).collect(Collectors.toList());
+        Map<String, Product> articleVsProduct = all.stream()
+            .collect(Collectors.toMap(Product::getArticle, Function.identity()));
 
-        log.debug("finish load from web [{}] articles, find [{}], can not load [{}]",
-                articleList.size(), responseWithBodyList.size(), articleList.size() - responseWithBodyList.size());
+        List<Request> requests = articleList.stream()
+            .filter(article -> isNeedLoadPriceHistoryUrl(articleVsProduct, article))
+            .map(WbHistoryFinder::mapArticleToRequest)
+            .collect(Collectors.toList());
+        List<Response> responseList = seleniumService.findByWeb(requests);
+        List<Product> newProducts = responseList.stream().map(response -> productRepository.save(mapResponseToProduct(response))).collect(Collectors.toList());
 
-        return responseWithBodyList.stream()
-                .map(response -> createProduct(urlVsArticle, response))
-                .collect(Collectors.toList());
+        List<Product> needLoadPriceHistory = all.stream().filter(WbHistoryFinder::isNeedLoadPriceHistory).collect(Collectors.toList());
+        needLoadPriceHistory.addAll(newProducts);
+
+        for (Product product : needLoadPriceHistory) {
+            httpService.get(product.getHistoryPriceUrl())
+                .ifPresent(json -> addPriceToProduct(product, json));
+            captchaFighter.fight(1500, 5000);
+        }
+
+        all.addAll(newProducts);
+        return all;
     }
 
-    private Product createProduct(Map<String, String> urlVsArticle, Response response) {
-        List<VmPriceHistory> vmPriceHistoryList = mapJsonToJava(response);
-        String urlBefore = response.getUrlBefore();
-        String article = urlVsArticle.get(urlBefore);
-        return productCreator.create(article, vmPriceHistoryList);
+    private static boolean isNeedLoadPriceHistory(Product product) {
+        List<Price> price = product.getPrice();
+        if (Collections.isEmpty(price)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    private List<VmPriceHistory> mapJsonToJava(Response response) {
-        return priceHistoryJsonTool.toJavaAsList(response.getBody(),
-            VmPriceHistory.class,
+    private static Request mapArticleToRequest(String article) {
+        return new Request()
+            .setEntityView(article)
+            .setPartOfUrl(PART_OF_URL)
+            .setUrl(WildberriesUrlCreator.getUrlForResponse(article));
+    }
+
+    private static Product mapResponseToProduct(Response response) {
+        Request request = response.getRequest();
+        String historyPriceUrl = response.getFullUrlAtomicReference().get();
+        return new Product()
+            .setArticle(request.getEntityView())
+            .setHistoryPriceUrl(historyPriceUrl);
+    }
+
+    private static boolean isNeedLoadPriceHistoryUrl(Map<String, Product> articleVsProduct, String article) {
+        if (articleVsProduct.containsKey(article) && StringUtils.isNotEmpty(articleVsProduct.get(article).getHistoryPriceUrl())) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void addPriceToProduct(Product product, String json) {
+        List<VmPriceHistory> vmPriceHistories = mapJsonToJava(json);
+        List<Price> priceList = vmPriceHistories.stream()
+            .map(VmPriceHistory::getPrice)
+            .map(vmPrice -> new Price()
+                .setCost(Strings.cutEnd(vmPrice.getRub(), 2))
+                .setProduct(product)
+            )
+            .collect(Collectors.toList());
+
+        if (Collections.isNotEmpty(priceList)) {
+            product.setPrice(priceList);
+            productRepository.save(product);
+        }
+    }
+
+    private List<VmPriceHistory> mapJsonToJava(String json) {
+        return priceHistoryJsonTool.toJavaAsList(json,VmPriceHistory.class,
             new MapperSettings().setFailOnUnknownProperties(false));
     }
 

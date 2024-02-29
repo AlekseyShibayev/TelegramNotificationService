@@ -3,7 +3,7 @@ package com.company.app.wildberries.desire.service.search;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.company.app.common.tool.GetRequestHandler;
+import com.company.app.common.tool.HttpService;
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.common.tool.json.MapperSettings;
 import com.company.app.core.util.Strings;
@@ -23,7 +23,7 @@ import static java.util.stream.Collectors.joining;
 @RequiredArgsConstructor
 public class WildberriesDesireLotHttpRepository {
 
-    private final GetRequestHandler getRequestHandler;
+    private final HttpService getRequestHandler;
     private final JsonMapper<VmResponse> jsonTool;
 
     public List<DesireLot> findAllByHttp(List<Desire> desireList) {
@@ -34,7 +34,7 @@ public class WildberriesDesireLotHttpRepository {
             .collect(joining(";"));
 
         String urlForPriceSearch = WildberriesUrlCreator.getUrlForPriceSearch(articles);
-        String jsonResponse = getRequestHandler.loadHtmlPage(urlForPriceSearch).get();
+        String jsonResponse = getRequestHandler.get(urlForPriceSearch).get();
 
         VmResponse response = jsonTool.toJavaAsObject(jsonResponse, VmResponse.class, new MapperSettings().setFailOnUnknownProperties(false));
 

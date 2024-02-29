@@ -53,8 +53,10 @@ public class AveragePriceRegistry {
         try {
             BigDecimal averagePrice = articleVsAveragePrice.get(product.getId());
             BigDecimal currentPrice = mapToCurrentPrice(product);
+            log.debug("article [{}]: current price [{}], average price [{}], greed index [{}]", product.getId(), currentPrice, averagePrice, context.getGreedIndex());
             currentPrice = currentPrice.multiply(new BigDecimal(context.getGreedIndex()));
             int i = currentPrice.compareTo(averagePrice);
+            log.debug("article [{}]:  [{}] < [{}]", product.getId(), currentPrice, averagePrice);
             return i < 0;
         } catch (Exception e) {
             log.error("[%s] Проблема с [%s], причина: %s".formatted(context.getChatName(), product.getId(), e.getMessage()), e);
@@ -65,7 +67,7 @@ public class AveragePriceRegistry {
     private BigDecimal mapToCurrentPrice(VmProduct product) {
         Integer salePriceU = product.getSalePriceU();
         String currentPrice = Strings.cutEnd(String.valueOf(salePriceU), 2);
-        return new BigDecimal(currentPrice);
+        return new BigDecimal(currentPrice).setScale(2, RoundingMode.HALF_UP);
     }
 
 }

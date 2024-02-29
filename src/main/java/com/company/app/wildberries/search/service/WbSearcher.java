@@ -34,11 +34,10 @@ public class WbSearcher {
 
         List<VmProduct> filteredProducts = filter(products, context);
 
-        return filteredProducts.stream()
-                .map(VmProduct::toLinkDto)
-                .distinct()
-                .peek(message -> telegramFacade.writeToTargetChat(context.getChatName(), message))
-                .toList();
+        List<LinkDto> linkDtoList = filteredProducts.stream().map(VmProduct::toLinkDto).distinct().toList();
+
+        linkDtoList.forEach(linkDto -> telegramFacade.writeToTargetChat(context.getChatName(), linkDto.toMessage()));
+        return linkDtoList;
     }
 
     private List<VmProduct> filter(List<VmProduct> products, WbSearchContext context) {

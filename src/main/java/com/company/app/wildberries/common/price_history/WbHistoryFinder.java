@@ -53,9 +53,13 @@ public class WbHistoryFinder {
         List<Request> requests = articleList.stream()
             .filter(article -> isNeedLoadPriceHistoryUrl(articleVsProduct, article))
             .map(WbHistoryFinder::mapArticleToRequest)
-            .collect(Collectors.toList());
+            .collect(Collectors.toCollection(ArrayList::new));
+
         List<Response> responseList = seleniumService.findByWeb(requests);
-        List<Product> newProducts = responseList.stream().map(response -> productRepository.save(mapResponseToProduct(response))).collect(Collectors.toList());
+
+        List<Product> newProducts = responseList.stream()
+            .map(response -> productRepository.save(mapResponseToProduct(response)))
+            .collect(Collectors.toCollection(ArrayList::new));
 
         List<Product> needLoadPriceHistory = all.stream().filter(WbHistoryFinder::isNeedLoadPriceHistory).collect(Collectors.toList());
         needLoadPriceHistory.addAll(newProducts);
@@ -72,7 +76,7 @@ public class WbHistoryFinder {
 
     private static boolean isNeedLoadPriceHistory(Product product) {
         List<Price> price = product.getPrice();
-        if (Collections.isEmpty(price)) {
+        if (Collections.isEmpty(price)) { // TODO: add check for amount and update time
             return true;
         } else {
             return false;
@@ -88,7 +92,7 @@ public class WbHistoryFinder {
 
     private static Product mapResponseToProduct(Response response) {
         Request request = response.getRequest();
-        String historyPriceUrl = response.getFullUrlAtomicReference().get();
+        String historyPriceUrl = response.getFullUrl();
         return new Product()
             .setArticle(request.getEntityView())
             .setHistoryPriceUrl(historyPriceUrl);

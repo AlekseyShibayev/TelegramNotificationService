@@ -8,6 +8,7 @@ import com.company.app.common.tool.CaptchaFighter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.loader.plan.build.internal.returns.AbstractAnyReference;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v120.network.Network;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 @Slf4j
@@ -68,16 +70,20 @@ public class SeleniumService {
 
     @SneakyThrows
     private Response async(Response response, String partOfUrl, DevTools devTools) {
+        AtomicReference<String> atomicReference = new AtomicReference<>();
+
         devTools.addListener(Network.requestWillBeSent(), request -> {
             String url = request.getRequest().getUrl();
             if (url.contains(partOfUrl)) {
-                response.getFullUrlAtomicReference().set(request.getRequest().getUrl());
+                atomicReference.set(url);
             }
         });
 
-        while (response.getFullUrlAtomicReference().get() == null) {
+        while (atomicReference.get() == null) {
             Thread.sleep(1000);
         }
+
+        response.setFullUrl(atomicReference.get());
         return response;
     }
 

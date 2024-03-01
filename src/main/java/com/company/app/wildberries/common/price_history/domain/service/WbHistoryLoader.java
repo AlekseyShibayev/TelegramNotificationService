@@ -37,6 +37,7 @@ public class WbHistoryLoader {
             log.debug("try to load history [{}]/[{}], for article [{}]", counter, needLoadPriceHistory.size(), product.getArticle());
             httpService.get(product.getHistoryPriceUrl())
                 .ifPresent(json -> addPriceToProduct(product, json));
+            counter++;
             captchaFighter.fight(1500, 5000);
         }
     }

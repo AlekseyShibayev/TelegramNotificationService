@@ -32,7 +32,9 @@ public class WbHistoryLoader {
     private final CaptchaFighter captchaFighter;
 
     public void loadPriceHistory(List<Product> needLoadPriceHistory) {
+        int counter = 1;
         for (Product product : needLoadPriceHistory) {
+            log.debug("try to load history [{}]/[{}], for article [{}]", counter, needLoadPriceHistory.size(), product.getArticle());
             httpService.get(product.getHistoryPriceUrl())
                 .ifPresent(json -> addPriceToProduct(product, json));
             captchaFighter.fight(1500, 5000);

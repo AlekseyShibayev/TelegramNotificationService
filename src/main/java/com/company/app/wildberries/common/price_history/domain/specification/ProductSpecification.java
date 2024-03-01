@@ -7,9 +7,13 @@ import com.company.app.wildberries.common.price_history.domain.entity.Product_;
 import org.springframework.data.jpa.domain.Specification;
 
 
-public class ProductSpecification {
+public interface ProductSpecification {
 
-    public static Specification<Product> articleIn(Collection<String> articles) {
+    static Specification<Product> articleIs(String article) {
+        return (r, cq, cb) -> cb.equal(r.get(Product_.ARTICLE), article);
+    }
+
+    static Specification<Product> articleIn(Collection<String> articles) {
         return (r, cq, cb) -> r.get(Product_.ARTICLE).in(articles);
     }
 

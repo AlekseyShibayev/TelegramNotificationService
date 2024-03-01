@@ -40,7 +40,7 @@ public class Product implements Serializable {
     @Column(name = "ARTICLE", nullable = false)
     private String article;
 
-    @Column(name = "HISTORY_PRICE_URL", nullable = false)
+    @Column(name = "HISTORY_PRICE_URL")
     private String historyPriceUrl;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

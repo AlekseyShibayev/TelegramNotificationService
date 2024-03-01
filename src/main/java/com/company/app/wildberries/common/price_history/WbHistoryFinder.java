@@ -1,6 +1,9 @@
 package com.company.app.wildberries.common.price_history;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -9,19 +12,14 @@ import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.selenium.SeleniumService;
 import com.company.app.common.selenium.model.Request;
 import com.company.app.common.selenium.model.Response;
-import com.company.app.common.tool.CaptchaFighter;
-import com.company.app.common.tool.HttpService;
-import com.company.app.common.tool.json.JsonMapper;
-import com.company.app.common.tool.json.MapperSettings;
 import com.company.app.core.util.Collections;
-import com.company.app.core.util.Strings;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
+import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
 import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
+import com.company.app.wildberries.common.price_history.domain.service.WbHistoryLoader;
 import com.company.app.wildberries.common.price_history.domain.specification.ProductSpecification;
 import com.company.app.wildberries.common.util.WildberriesUrlCreator;
-import com.company.app.wildberries.common.price_history.domain.entity.Product;
-import com.company.app.wildberries.common.price_history.model.VmPriceHistory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -36,11 +34,9 @@ public class WbHistoryFinder {
     private static final String PART_OF_URL = "price-history.json";
 
     private final SeleniumService seleniumService;
-    private final JsonMapper<VmPriceHistory> priceHistoryJsonTool;
     private final ProductRepository productRepository;
-    private final HttpService httpService;
     private final EntityFinder entityFinder;
-    private final CaptchaFighter captchaFighter;
+    private final WbHistoryLoader wbHistoryLoader;
 
     public List<Product> findHistoryBy(Collection<String> articleList) {
         List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
@@ -64,11 +60,7 @@ public class WbHistoryFinder {
         List<Product> needLoadPriceHistory = all.stream().filter(WbHistoryFinder::isNeedLoadPriceHistory).collect(Collectors.toList());
         needLoadPriceHistory.addAll(newProducts);
 
-        for (Product product : needLoadPriceHistory) {
-            httpService.get(product.getHistoryPriceUrl())
-                .ifPresent(json -> addPriceToProduct(product, json));
-            captchaFighter.fight(1500, 5000);
-        }
+        wbHistoryLoader.loadPriceHistory(needLoadPriceHistory);
 
         all.addAll(newProducts);
         return all;
@@ -104,27 +96,6 @@ public class WbHistoryFinder {
         } else {
             return true;
         }
-    }
-
-    private void addPriceToProduct(Product product, String json) {
-        List<VmPriceHistory> vmPriceHistories = mapJsonToJava(json);
-        List<Price> priceList = vmPriceHistories.stream()
-            .map(VmPriceHistory::getPrice)
-            .map(vmPrice -> new Price()
-                .setCost(Strings.cutEnd(vmPrice.getRub(), 2))
-                .setProduct(product)
-            )
-            .collect(Collectors.toList());
-
-        if (Collections.isNotEmpty(priceList)) {
-            product.setPrice(priceList);
-            productRepository.save(product);
-        }
-    }
-
-    private List<VmPriceHistory> mapJsonToJava(String json) {
-        return priceHistoryJsonTool.toJavaAsList(json,VmPriceHistory.class,
-            new MapperSettings().setFailOnUnknownProperties(false));
     }
 
 }

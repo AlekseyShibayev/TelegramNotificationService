@@ -1,8 +1,9 @@
 package com.company.app.wildberries.common.price_history;
 
+import java.util.List;
+
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.configuration.SeleniumConfiguration;
-import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.core.util.Collections;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
@@ -10,8 +11,6 @@ import com.company.app.wildberries.common.price_history.domain.specification.Pro
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 
 class WbHistoryFinderTest extends SeleniumConfiguration {

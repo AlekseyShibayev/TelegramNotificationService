@@ -1,5 +1,6 @@
 package com.company.app.wildberries.common.price_history;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -57,7 +58,7 @@ public class WbHistoryFinder {
             .map(response -> productRepository.save(mapResponseToProduct(response)))
             .collect(Collectors.toCollection(ArrayList::new));
 
-        List<Product> needLoadPriceHistory = all.stream().filter(WbHistoryFinder::isNeedLoadPriceHistory).collect(Collectors.toList());
+        List<Product> needLoadPriceHistory = all.stream().filter(this::isNeedLoadPriceHistory).collect(Collectors.toList());
         needLoadPriceHistory.addAll(newProducts);
 
         wbHistoryLoader.loadPriceHistory(needLoadPriceHistory);
@@ -66,12 +67,14 @@ public class WbHistoryFinder {
         return all;
     }
 
-    private static boolean isNeedLoadPriceHistory(Product product) {
-        List<Price> price = product.getPrice();
-        if (Collections.isEmpty(price)) { // TODO: add check for amount and update time
+    boolean isNeedLoadPriceHistory(Product product) {
+        List<Price> priceList = product.getPrice();
+        if (Collections.isEmpty(priceList)) {
             return true;
         } else {
-            return false;
+            Price price = priceList.get(0);
+            ZonedDateTime createDate = price.getCreateDate();
+            return createDate.plusDays(3).isBefore(ZonedDateTime.now());
         }
     }
 

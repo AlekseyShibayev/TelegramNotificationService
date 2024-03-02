@@ -1,6 +1,7 @@
 package com.company.app.configuration;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 
 import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
@@ -47,6 +48,8 @@ public abstract class SpringBootTestApplication {
 
     @Autowired
     protected TransactionTemplate transactionTemplate;
+    @Autowired
+    protected EntityManager entityManager;
     @Autowired
     protected EntityFinder entityFinder;
     /**

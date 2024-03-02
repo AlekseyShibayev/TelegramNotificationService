@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.company.app.telegram.controller.TelegramController;
-import com.company.app.telegram.domain.dto.TargetMessage;
+import com.company.app.telegram.TelegramFacade;
 import com.company.app.wildberries.search.domain.dto.LinkDto;
 import com.company.app.wildberries.search.service.WbSearcher;
 import lombok.Getter;
@@ -22,7 +21,7 @@ public class WbSearchTask implements Runnable {
 
     private WbSearchContext searcherContext;
     private WbSearcher wbSearcher;
-    private TelegramController telegramController;
+    private TelegramFacade telegramFacade;
     private WbCallback wbCallback;
 
     @Override
@@ -44,11 +43,7 @@ public class WbSearchTask implements Runnable {
             log.debug("[{}]: [{}].", searcherContext.getChatName(), endMessage);
             result.forEach(dto -> log.debug("[{}]: [{}].", searcherContext.getChatName(), dto.toMessage()));
         }
-
-        telegramController.say(TargetMessage.builder()
-            .chatName(searcherContext.getChatName())
-            .message(endMessage)
-            .build());
+        telegramFacade.writeToTargetChat(searcherContext.getChatName(), endMessage);
     }
 
     private List<LinkDto> getAllProducts() {

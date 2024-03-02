@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
-import com.company.app.telegram.controller.TelegramController;
+import com.company.app.telegram.TelegramFacade;
 import com.company.app.wildberries.search.domain.entity.SearchData;
 import com.company.app.wildberries.search.domain.repository.SearchDataRepository;
 import com.company.app.wildberries.search.model.WbSearchContext;
@@ -27,7 +27,7 @@ public class WbSearcherSemaphoreService {
 
     private final SearchDataRepository searchDataRepository;
     private final WbSearcher wbSearcher;
-    private final TelegramController telegramController;
+    private final TelegramFacade telegramFacade;
 
     @PostConstruct
     private void init() {
@@ -59,7 +59,7 @@ public class WbSearcherSemaphoreService {
             log.debug("Запускаю поиск для [{}].", context);
             executorService.submit(new WbSearchTask()
                 .setSearcherContext(searcherContext)
-                .setTelegramController(telegramController)
+                .setTelegramFacade(telegramFacade)
                 .setWbSearcher(wbSearcher)
                 .setWbCallback(this::callback));
 

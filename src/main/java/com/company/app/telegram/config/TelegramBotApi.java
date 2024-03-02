@@ -2,7 +2,7 @@ package com.company.app.telegram.config;
 
 import java.io.Serializable;
 
-import com.company.app.telegram.incoming_message_handler.IncomingMessageHandler;
+import com.company.app.telegram.integration.in.IncomingMessageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

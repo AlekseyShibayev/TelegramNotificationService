@@ -5,7 +5,7 @@ import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
-import com.company.app.telegram.incoming_message_handler.button.task_executor.IncomingMessageTaskExecutor;
+import com.company.app.telegram.integration.in.button.task_executor.IncomingMessageTaskExecutor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

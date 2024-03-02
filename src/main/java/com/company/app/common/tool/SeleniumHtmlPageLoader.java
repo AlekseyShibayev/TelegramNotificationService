@@ -2,7 +2,6 @@ package com.company.app.common.tool;
 
 import java.util.Optional;
 
-import com.company.app.core.util.Logs;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class SeleniumHtmlPageLoader {
         try {
             return Optional.ofNullable((url));
         } catch (Exception e) {
-            Logs.doExceptionLog(log, e, "can't load html from [%s]".formatted(url));
+            log.error("can't load html from [{}], because: [{}]", url, e.getMessage(), e);
             return Optional.empty();
         }
     }

@@ -3,6 +3,7 @@ package com.company.app.wildberries.common.price_history.domain.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.company.app.common.Lists;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.tool.HttpService;
 import com.company.app.configuration.SpringBootTestApplication;
@@ -27,30 +28,31 @@ class WbHistoryLoaderTest extends SpringBootTestApplication {
 
     @Test
     void can_load_price_history_and_change_old_history_for_new_history() {
-        Product saved = productRepository.save(new Product()
-            .setArticle("180189153"));
+        Product product = transactionTemplate.execute(transactionStatus -> {
+            Product saved = productRepository.save(new Product()
+                .setArticle("180189153"));
 
-        saved.setPrice(List.of(priceRepository.save(new Price().setCost("200").setProduct(saved))
-            , priceRepository.save(new Price().setCost("300").setProduct(saved))));
-        productRepository.save(saved);
+            saved.setPrice(Lists.of(priceRepository.save(new Price().setCost("200").setProduct(saved))
+                , priceRepository.save(new Price().setCost("300").setProduct(saved))));
+            return productRepository.save(saved);
+        });
 
         String json = """
         [{"dt":1708214400,"price":{"RUB":631900}}]""";
         Mockito.when(httpService.get(Mockito.any())).thenReturn(Optional.of(json));
 
         transactionTemplate.executeWithoutResult(transactionStatus ->
-            wbHistoryLoader.loadPriceHistory(List.of(saved))
+            wbHistoryLoader.loadPriceHistory(List.of(product))
         );
 
         List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
-            .setSpecification(ProductSpecification.articleIs("180189153"))
             .with(Product_.PRICE));
 
         Assertions.assertEquals(1, all.size());
-        Product product = all.get(0);
-        Assertions.assertEquals("180189153", product.getArticle());
-        Assertions.assertEquals(1, product.getPrice().size());
-        Assertions.assertEquals("6319", product.getPrice().get(0).getCost());
+        Product extracted = all.get(0);
+        Assertions.assertEquals("180189153", extracted.getArticle());
+        Assertions.assertEquals(1, extracted.getPrice().size());
+        Assertions.assertEquals("6319", extracted.getPrice().get(0).getCost());
     }
 
 }

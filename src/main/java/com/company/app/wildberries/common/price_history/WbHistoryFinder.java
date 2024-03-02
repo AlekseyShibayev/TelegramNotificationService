@@ -18,6 +18,7 @@ import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
 import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
+import com.company.app.wildberries.common.price_history.domain.service.WbHistoryChecker;
 import com.company.app.wildberries.common.price_history.domain.service.WbHistoryLoader;
 import com.company.app.wildberries.common.price_history.domain.specification.ProductSpecification;
 import com.company.app.wildberries.common.util.WildberriesUrlCreator;
@@ -38,6 +39,7 @@ public class WbHistoryFinder {
     private final ProductRepository productRepository;
     private final EntityFinder entityFinder;
     private final WbHistoryLoader wbHistoryLoader;
+    private final WbHistoryChecker wbHistoryChecker;
 
     public List<Product> findHistoryBy(Collection<String> articleList) {
         List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)

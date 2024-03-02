@@ -1,4 +1,4 @@
-package com.company.app.wildberries.common.price_history.domain.service;
+package com.company.app.wildberries.common.price_history.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class WbHistoryLoader {
     }
 
     private List<VmPriceHistory> mapJsonToJava(String json) {
-        return priceHistoryJsonTool.toJavaAsList(json,VmPriceHistory.class,
+        return priceHistoryJsonTool.toJavaAsList(json, VmPriceHistory.class,
             new MapperSettings().setFailOnUnknownProperties(false));
     }
 

@@ -1,7 +1,8 @@
 package com.company.app.wildberries.search.service;
 
+import java.util.List;
+
 import com.company.app.configuration.SeleniumConfiguration;
-import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries.common.model.VmProduct;
 import com.company.app.wildberries.common.model.VmSize;
@@ -9,13 +10,10 @@ import com.company.app.wildberries.search.domain.dto.LinkDto;
 import com.company.app.wildberries.search.model.WbSearchContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import java.util.List;
 
 class WbSearcherTest extends SeleniumConfiguration {
 
@@ -29,23 +27,23 @@ class WbSearcherTest extends SeleniumConfiguration {
         Mockito.doCallRealMethod().when(captchaFighter).fight(Mockito.anyInt(), Mockito.anyInt());
 
         VmProduct testVmProduct = new VmProduct()
-                .setId(173718250)
-                .setName("Футболка")
-                .setSalePriceU(100)
-                .setRating(5)
-                .setFeedbacks(69679)
-                .setSizes(List.of(new VmSize().setName("50")));
+            .setId(173718250)
+            .setName("Футболка")
+            .setSalePriceU(100)
+            .setRating(5)
+            .setFeedbacks(69679)
+            .setSizes(List.of(new VmSize().setName("50")));
         Mockito.when(wbSearcherApi.findProductsByWeb(Mockito.anyString())).thenReturn(List.of(testVmProduct));
 
         Chat owner = chatRepository.findOwner();
 
         WbSearchContext context = new WbSearchContext()
-                .setChatName(owner.getChatName())
-                .setGender("male")
-                .setFootSize("45")
-                .setDressSize("50")
-                .setBrand("12845") //  Envy Lab
-                .setGreedIndex("0.50");
+            .setChatName(owner.getChatName())
+            .setGender("male")
+            .setFootSize("45")
+            .setDressSize("50")
+            .setBrand("12845") //  Envy Lab
+            .setGreedIndex("0.50");
 
         List<LinkDto> result = wbSearcher.search(context);
 

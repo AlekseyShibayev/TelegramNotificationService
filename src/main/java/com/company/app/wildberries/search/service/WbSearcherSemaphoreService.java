@@ -1,5 +1,11 @@
 package com.company.app.wildberries.search.service;
 
+import javax.annotation.PostConstruct;
+import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.wildberries.search.domain.entity.SearchData;
 import com.company.app.wildberries.search.domain.repository.SearchDataRepository;
@@ -9,12 +15,6 @@ import com.company.app.wildberries.search.model.WbSearchTask;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.util.Optional;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
 
 
 @Slf4j
@@ -40,8 +40,8 @@ public class WbSearcherSemaphoreService {
             return startNewAsyncSearch(context);
         } else {
             return new WbSearchResult()
-                    .setSuccess(false)
-                    .setMessage("Занято! Вы что 5 лет в разработке и ни разу не использовали семафор??? (c)");
+                .setSuccess(false)
+                .setMessage("Занято! Вы что 5 лет в разработке и ни разу не использовали семафор??? (c)");
         }
     }
 
@@ -51,20 +51,20 @@ public class WbSearcherSemaphoreService {
         if (optional.isEmpty()) {
             callback();
             return new WbSearchResult()
-                    .setSuccess(false)
-                    .setMessage("Нет информации о поиске, обратитесь к админу.");
+                .setSuccess(false)
+                .setMessage("Нет информации о поиске, обратитесь к админу.");
 
         } else {
             WbSearchContext searcherContext = WbSearchContext.of(context, optional.get());
             log.debug("Запускаю поиск для [{}].", context);
             executorService.submit(new WbSearchTask()
-                    .setSearcherContext(searcherContext)
-                    .setTelegramController(telegramController)
-                    .setWbSearcher(wbSearcher)
-                    .setWbCallback(this::callback));
+                .setSearcherContext(searcherContext)
+                .setTelegramController(telegramController)
+                .setWbSearcher(wbSearcher)
+                .setWbCallback(this::callback));
 
             return new WbSearchResult()
-                    .setSuccess(true);
+                .setSuccess(true);
         }
     }
 

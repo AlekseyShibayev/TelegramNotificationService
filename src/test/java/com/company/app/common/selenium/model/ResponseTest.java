@@ -1,10 +1,5 @@
 package com.company.app.common.selenium.model;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.devtools.v120.network.model.RequestId;
-
-
 class ResponseTest {
 //
 //    @Test

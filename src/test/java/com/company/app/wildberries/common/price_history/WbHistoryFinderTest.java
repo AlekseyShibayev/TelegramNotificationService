@@ -24,7 +24,7 @@ class WbHistoryFinderTest extends SeleniumConfiguration {
         wbHistoryFinder.findHistoryBy(Lists.of("180189153", "171785533"));
 
         List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
-                .setSpecification(ProductSpecification.articleIn(List.of("180189153")))
+            .setSpecification(ProductSpecification.articleIn(List.of("180189153")))
             .with(Product_.PRICE));
 
         Assertions.assertEquals(1, all.size());

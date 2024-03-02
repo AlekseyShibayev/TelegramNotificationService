@@ -7,11 +7,10 @@ import com.company.app.common.Lists;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.tool.HttpService;
 import com.company.app.configuration.SpringBootTestApplication;
-import com.company.app.core.util.Collections;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
-import com.company.app.wildberries.common.price_history.domain.specification.ProductSpecification;
+import com.company.app.wildberries.common.price_history.service.WbHistoryLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,7 +37,7 @@ class WbHistoryLoaderTest extends SpringBootTestApplication {
         });
 
         String json = """
-        [{"dt":1708214400,"price":{"RUB":631900}}]""";
+                      [{"dt":1708214400,"price":{"RUB":631900}}]""";
         Mockito.when(httpService.get(Mockito.any())).thenReturn(Optional.of(json));
 
         transactionTemplate.executeWithoutResult(transactionStatus ->

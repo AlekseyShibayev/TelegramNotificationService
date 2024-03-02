@@ -3,10 +3,8 @@ package com.company.app.common.selenium.service;
 import com.company.app.common.selenium.model.SeleniumWebDriver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.remote.SessionId;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 
 @Slf4j
 @Service

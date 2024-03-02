@@ -1,5 +1,9 @@
 package com.company.app.wildberries.search.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.company.app.telegram.controller.TelegramController;
 import com.company.app.telegram.domain.dto.TargetMessage;
 import com.company.app.wildberries.search.domain.dto.LinkDto;
@@ -8,10 +12,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 @Slf4j
@@ -46,18 +46,18 @@ public class WbSearchTask implements Runnable {
         }
 
         telegramController.say(TargetMessage.builder()
-                .chatName(searcherContext.getChatName())
-                .message(endMessage)
-                .build());
+            .chatName(searcherContext.getChatName())
+            .message(endMessage)
+            .build());
     }
 
     private List<LinkDto> getAllProducts() {
         List<LinkDto> result = new ArrayList<>();
         Arrays.stream(searcherContext.getBrand().split(";"))
-                .forEach(supplier -> {
-                    searcherContext.setBrand(supplier);
-                    result.addAll(wbSearcher.search(this.searcherContext));
-                });
+            .forEach(supplier -> {
+                searcherContext.setBrand(supplier);
+                result.addAll(wbSearcher.search(this.searcherContext));
+            });
         return result;
     }
 

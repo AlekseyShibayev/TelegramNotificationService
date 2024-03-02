@@ -1,5 +1,8 @@
 package com.company.app.wildberries.search.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.wildberries.common.model.VmProduct;
 import com.company.app.wildberries.common.price_history.WbHistoryFinder;
@@ -12,9 +15,6 @@ import com.company.app.wildberries.search.util.WbBrandUrlCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -42,14 +42,14 @@ public class WbSearcher {
 
     private List<VmProduct> filter(List<VmProduct> products, WbSearchContext context) {
         List<VmProduct> preFilteredProducts = products.stream()
-                .filter(responseProducts -> filterAll(responseProducts, context))
-                .toList();
+            .filter(responseProducts -> filterAll(responseProducts, context))
+            .toList();
         log.debug("[{}]: [{}] after pre filtering", context.getChatName(), preFilteredProducts.size());
 
         AveragePriceRegistry averagePriceRegistry = createAveragePriceRegistry(preFilteredProducts);
         List<VmProduct> postFilteredProducts = preFilteredProducts.stream()
-                .filter(product -> averagePriceRegistry.isCurrentPriceLesserThanAveragePrice(product, context))
-                .toList();
+            .filter(product -> averagePriceRegistry.isCurrentPriceLesserThanAveragePrice(product, context))
+            .toList();
         log.debug("[{}]: [{}] after post filtering", context.getChatName(), postFilteredProducts.size());
         return postFilteredProducts;
     }

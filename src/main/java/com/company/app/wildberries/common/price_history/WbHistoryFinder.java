@@ -1,6 +1,5 @@
 package com.company.app.wildberries.common.price_history;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,14 +12,12 @@ import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.selenium.SeleniumService;
 import com.company.app.common.selenium.model.Request;
 import com.company.app.common.selenium.model.Response;
-import com.company.app.core.util.Collections;
-import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
 import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
-import com.company.app.wildberries.common.price_history.domain.service.WbHistoryChecker;
-import com.company.app.wildberries.common.price_history.domain.service.WbHistoryLoader;
 import com.company.app.wildberries.common.price_history.domain.specification.ProductSpecification;
+import com.company.app.wildberries.common.price_history.service.WbHistoryChecker;
+import com.company.app.wildberries.common.price_history.service.WbHistoryLoader;
 import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,24 +57,13 @@ public class WbHistoryFinder {
             .map(response -> productRepository.save(mapResponseToProduct(response)))
             .collect(Collectors.toCollection(ArrayList::new));
 
-        List<Product> needLoadPriceHistory = all.stream().filter(this::isNeedLoadPriceHistory).collect(Collectors.toList());
+        List<Product> needLoadPriceHistory = all.stream().filter(wbHistoryChecker::isNeedLoadPriceHistory).collect(Collectors.toList());
         needLoadPriceHistory.addAll(newProducts);
 
         wbHistoryLoader.loadPriceHistory(needLoadPriceHistory);
 
         all.addAll(newProducts);
         return all;
-    }
-
-    boolean isNeedLoadPriceHistory(Product product) {
-        List<Price> priceList = product.getPrice();
-        if (Collections.isEmpty(priceList)) {
-            return true;
-        } else {
-            Price price = priceList.get(0);
-            ZonedDateTime createDate = price.getCreateDate();
-            return createDate.plusDays(3).isBefore(ZonedDateTime.now());
-        }
     }
 
     private static Request mapArticleToRequest(String article) {

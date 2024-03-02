@@ -1,14 +1,14 @@
 package com.company.app.common.selenium.service;
 
+import java.time.Duration;
+
 import com.company.app.common.selenium.model.SeleniumWebDriver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 
 @Slf4j
 @Service

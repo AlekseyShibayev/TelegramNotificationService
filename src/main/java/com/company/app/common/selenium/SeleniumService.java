@@ -1,5 +1,12 @@
 package com.company.app.common.selenium;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.company.app.common.selenium.model.Request;
 import com.company.app.common.selenium.model.Response;
 import com.company.app.common.selenium.model.SeleniumWebDriver;
@@ -8,15 +15,9 @@ import com.company.app.common.tool.CaptchaFighter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.loader.plan.build.internal.returns.AbstractAnyReference;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v120.network.Network;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 @Slf4j
@@ -54,18 +55,18 @@ public class SeleniumService {
 
     @SneakyThrows
     private Response loadHtmlPageInner(String url, String partOfUrl, SeleniumWebDriver driver) {
-            driver.navigate().to(url);
+        driver.navigate().to(url);
 
-            Response response = new Response();
+        Response response = new Response();
 
-            try (DevTools devTools = driver.getDevTools()) {
-                devTools.createSession();
-                devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+        try (DevTools devTools = driver.getDevTools()) {
+            devTools.createSession();
+            devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 
-                CompletableFuture<Response> future = new CompletableFuture<>();
-                future.completeAsync(() -> async(response, partOfUrl, devTools));
-                return future.get(20, TimeUnit.SECONDS);
-            }
+            CompletableFuture<Response> future = new CompletableFuture<>();
+            future.completeAsync(() -> async(response, partOfUrl, devTools));
+            return future.get(20, TimeUnit.SECONDS);
+        }
     }
 
     @SneakyThrows

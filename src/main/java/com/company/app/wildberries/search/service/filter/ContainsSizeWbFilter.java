@@ -1,15 +1,15 @@
 package com.company.app.wildberries.search.service.filter;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries.common.model.VmProduct;
 import com.company.app.wildberries.common.model.VmSize;
 import com.company.app.wildberries.search.model.WbSearchContext;
 import com.google.common.collect.Sets;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 
 @Service
@@ -24,8 +24,8 @@ public class ContainsSizeWbFilter implements WbFilter {
         List<VmSize> productSizes = product.getSizes();
         Set<String> userSizesSet = Sets.newHashSet(userSizes.split(Strings.DEFAULT_DELIMITER));
         return productSizes.stream()
-                .filter(size -> userSizesSet.contains(size.getName()))
-                .findAny();
+            .filter(size -> userSizesSet.contains(size.getName()))
+            .findAny();
     }
 
 }

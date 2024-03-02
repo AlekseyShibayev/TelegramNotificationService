@@ -1,6 +1,7 @@
 package com.company.app.wildberries.common.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 

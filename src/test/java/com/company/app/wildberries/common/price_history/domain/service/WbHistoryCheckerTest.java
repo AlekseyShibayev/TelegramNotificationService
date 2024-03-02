@@ -9,6 +9,7 @@ import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
 import com.company.app.wildberries.common.price_history.domain.specification.ProductSpecification;
+import com.company.app.wildberries.common.price_history.service.WbHistoryChecker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

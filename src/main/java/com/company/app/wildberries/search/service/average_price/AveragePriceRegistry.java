@@ -1,5 +1,12 @@
 package com.company.app.wildberries.search.service.average_price;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.OptionalDouble;
+
 import com.company.app.core.util.Strings;
 import com.company.app.wildberries.common.model.VmProduct;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
@@ -9,12 +16,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.OptionalDouble;
 
 @Slf4j
 @Accessors(chain = true)
@@ -38,8 +39,8 @@ public class AveragePriceRegistry {
     private static BigDecimal getAveragePriceForOne(Product product) {
         try {
             OptionalDouble average = product.getPrice().stream()
-                    .mapToInt(price -> Integer.parseInt(price.getCost()))
-                    .average();
+                .mapToInt(price -> Integer.parseInt(price.getCost()))
+                .average();
 
             BigDecimal bigDecimal = BigDecimal.valueOf(average.orElse(0.00));
             return bigDecimal.setScale(2, RoundingMode.HALF_UP);
@@ -53,7 +54,11 @@ public class AveragePriceRegistry {
         try {
             BigDecimal averagePrice = articleVsAveragePrice.get(product.getId());
             BigDecimal currentPrice = mapToCurrentPrice(product);
-            log.debug("article [{}]: current price [{}], average price [{}], greed index [{}]", product.getId(), currentPrice, averagePrice, context.getGreedIndex());
+            log.debug("article [{}]: current price [{}], average price [{}], greed index [{}]",
+                product.getId(),
+                currentPrice,
+                averagePrice,
+                context.getGreedIndex());
             currentPrice = currentPrice.multiply(new BigDecimal(context.getGreedIndex()));
             int i = currentPrice.compareTo(averagePrice);
             log.debug("article [{}]:  [{}] < [{}]", product.getId(), currentPrice, averagePrice);

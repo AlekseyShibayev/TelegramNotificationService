@@ -1,5 +1,8 @@
 package com.company.app.wildberries.search.domain.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.wildberries.search.domain.entity.SearchData;
 import com.company.app.wildberries.search.domain.repository.SearchDataRepository;
@@ -9,9 +12,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service

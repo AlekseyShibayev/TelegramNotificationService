@@ -7,9 +7,9 @@ import com.company.app.common.tool.HttpService;
 import com.company.app.common.tool.json.JsonMapper;
 import com.company.app.common.tool.json.MapperSettings;
 import com.company.app.core.util.Strings;
-import com.company.app.wildberries.common.util.WildberriesUrlCreator;
-import com.company.app.wildberries.common.model.VmResponse;
 import com.company.app.wildberries.common.model.VmProduct;
+import com.company.app.wildberries.common.model.VmResponse;
+import com.company.app.wildberries.common.util.WildberriesUrlCreator;
 import com.company.app.wildberries.desire.domain.entity.Desire;
 import com.company.app.wildberries.desire.domain.entity.DesireLot;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,9 @@ public class WildberriesDesireLotHttpRepository {
         String urlForPriceSearch = WildberriesUrlCreator.getUrlForPriceSearch(articles);
         String jsonResponse = getRequestHandler.get(urlForPriceSearch).get();
 
-        VmResponse response = jsonTool.toJavaAsObject(jsonResponse, VmResponse.class, new MapperSettings().setFailOnUnknownProperties(false));
+        VmResponse response = jsonTool.toJavaAsObject(jsonResponse,
+            VmResponse.class,
+            new MapperSettings().setFailOnUnknownProperties(false));
 
         List<VmProduct> products = response.getData().getProducts();
 

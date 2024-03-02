@@ -1,5 +1,8 @@
 package com.company.app.telegram.incoming_message_handler.button.button_callback_actions.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.incoming_message_handler.button.model.ButtonCallbackAction;
@@ -13,9 +16,6 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
@@ -79,7 +79,7 @@ public class AdminWbSearchBCA implements ButtonCallbackAction {
     private InlineKeyboardMarkup getButtons() {
 //        List<Supplier> supplierList = wildberriesSupplierController.getAll().getBody();
         List<Supplier> supplierList = List.of(new Supplier().setSupplierId("921").setSupplierName("Tom Tailor")
-                , new Supplier().setSupplierId("12845").setSupplierName("Envy Lab"));
+            , new Supplier().setSupplierId("12845").setSupplierName("Envy Lab"));
 
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         markupInline.setKeyboard(getRowsInLine(supplierList));

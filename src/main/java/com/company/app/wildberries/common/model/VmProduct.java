@@ -24,8 +24,8 @@ public class VmProduct {
 
     public LinkDto toLinkDto() {
         return new LinkDto()
-                .setPrice(Strings.cutEnd(this.salePriceU.toString(), 2))
-                .setLink(WildberriesUrlCreator.getUrlForResponse(this.id.toString()));
+            .setPrice(Strings.cutEnd(this.salePriceU.toString(), 2))
+            .setLink(WildberriesUrlCreator.getUrlForResponse(this.id.toString()));
     }
 
 }

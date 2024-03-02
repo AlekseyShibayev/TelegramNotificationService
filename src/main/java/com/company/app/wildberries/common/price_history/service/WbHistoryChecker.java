@@ -1,4 +1,4 @@
-package com.company.app.wildberries.common.price_history.domain.service;
+package com.company.app.wildberries.common.price_history.service;
 
 import java.time.ZonedDateTime;
 import java.util.List;

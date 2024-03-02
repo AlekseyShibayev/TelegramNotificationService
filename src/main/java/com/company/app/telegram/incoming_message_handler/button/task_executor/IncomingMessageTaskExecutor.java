@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import com.company.app.core.exception.DeveloperMistakeException;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.enums.ModeType;
@@ -44,7 +43,7 @@ public class IncomingMessageTaskExecutor {
                 telegramFacade.writeToTargetChat(chatName,
                     "Добавлено желание: артикль %s, цена %s".formatted(desire.getArticle(), desire.getPrice())));
         } else {
-            throw new DeveloperMistakeException("unsupported mode type: [%s]".formatted(modeType));
+            throw new UnsupportedOperationException("unsupported mode type: [%s]".formatted(modeType));
         }
     }
 

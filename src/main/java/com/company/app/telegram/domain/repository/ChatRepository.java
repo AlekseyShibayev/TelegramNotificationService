@@ -1,8 +1,8 @@
 package com.company.app.telegram.domain.repository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
-import com.company.app.core.exception.DeveloperMistakeException;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.enums.Role;
 import com.company.app.telegram.domain.spec.ChatSpecification;
@@ -14,7 +14,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long>, JpaSpecificat
 
     default Chat findOwner() {
         return this.findOne(ChatSpecification.roleIs(Role.OWNER))
-            .orElseThrow(() -> new DeveloperMistakeException("Owner must be"));
+            .orElseThrow(() -> new EntityNotFoundException("Owner must be"));
     }
 
     Optional<Chat> findByChatName(String chatName);

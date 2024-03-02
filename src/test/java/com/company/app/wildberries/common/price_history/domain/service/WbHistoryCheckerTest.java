@@ -2,9 +2,9 @@ package com.company.app.wildberries.common.price_history.domain.service;
 
 import java.util.Optional;
 
-import com.company.app.common.Lists;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.configuration.SpringBootTestApplication;
+import com.company.app.core.util.Collections;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
@@ -27,7 +27,7 @@ class WbHistoryCheckerTest extends SpringBootTestApplication {
             Price price = priceRepository.save(new Price()
                 .setProduct(product)
                 .setCost("1"));
-            productRepository.save(product.setPrice(Lists.of(price)));
+            productRepository.save(product.setPrice(Collections.list(price)));
         });
 
         Optional<Product> first = entityFinder.findFirst(new PersistenceContext<>(Product.class)
@@ -43,7 +43,7 @@ class WbHistoryCheckerTest extends SpringBootTestApplication {
             Price price = priceRepository.save(new Price()
                 .setProduct(product)
                 .setCost("1"));
-            productRepository.save(product.setPrice(Lists.of(price)));
+            productRepository.save(product.setPrice(Collections.list(price)));
         });
         moveAllToPast();
         Optional<Product> first = entityFinder.findFirst(new PersistenceContext<>(Product.class)

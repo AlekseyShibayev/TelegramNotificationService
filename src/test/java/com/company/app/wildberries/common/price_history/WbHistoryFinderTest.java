@@ -2,7 +2,6 @@ package com.company.app.wildberries.common.price_history;
 
 import java.util.List;
 
-import com.company.app.common.Lists;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.configuration.SeleniumConfiguration;
 import com.company.app.core.util.Collections;
@@ -21,7 +20,7 @@ class WbHistoryFinderTest extends SeleniumConfiguration {
 
     @Test
     void can_extract_price_history_from_web() {
-        wbHistoryFinder.findHistoryBy(Lists.of("180189153", "171785533"));
+        wbHistoryFinder.findHistoryBy(Collections.list("180189153", "171785533"));
 
         List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
             .setSpecification(ProductSpecification.articleIn(List.of("180189153")))

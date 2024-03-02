@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.company.app.common.outbox.domain.enums.Target;
-import com.company.app.core.exception.DeveloperMistakeException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 
@@ -22,7 +22,7 @@ public class OutboxExecutorsRegistry {
     void init() {
         for (OutboxExecutor outboxExecutor : list) {
             if (map.containsKey(outboxExecutor.getType())) {
-                throw new DeveloperMistakeException("check for unique type, current type: [%s]".formatted(outboxExecutor.getType()));
+                throw new DuplicateKeyException("check for unique type, current type: [%s]".formatted(outboxExecutor.getType()));
             } else {
                 map.put(outboxExecutor.getType(), outboxExecutor);
             }
@@ -34,7 +34,7 @@ public class OutboxExecutorsRegistry {
         if (outboxExecutor != null) {
             return outboxExecutor;
         } else {
-            throw new DeveloperMistakeException("unsupported type: [%s]".formatted(target));
+            throw new UnsupportedOperationException("unsupported type: [%s]".formatted(target));
         }
     }
 

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.company.app.core.exception.DeveloperMistakeException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 
@@ -21,7 +21,7 @@ public class ButtonCallbackActionRegistry {
     void init() {
         for (ButtonCallbackAction binder : list) {
             if (map.containsKey(binder.getType())) {
-                throw new DeveloperMistakeException("check for unique type, current type: [%s]".formatted(binder.getType()));
+                throw new DuplicateKeyException("check for unique type, current type: [%s]".formatted(binder.getType()));
             } else {
                 map.put(binder.getType(), binder);
             }
@@ -33,7 +33,7 @@ public class ButtonCallbackActionRegistry {
         if (binder != null) {
             return binder;
         } else {
-            throw new DeveloperMistakeException("unsupported type: [%s]".formatted(binderType));
+            throw new UnsupportedOperationException("unsupported type: [%s]".formatted(binderType));
         }
     }
 

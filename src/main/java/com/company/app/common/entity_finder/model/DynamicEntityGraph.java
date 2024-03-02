@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.company.app.core.exception.DeveloperMistakeException;
 import com.company.app.core.util.Collections;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +38,7 @@ public class DynamicEntityGraph {
      */
     private EntityGraphNode createNode(String... path) {
         if (path.length < 1) {
-            throw new DeveloperMistakeException("for entity graph need minimum one parameter");
+            throw new IllegalArgumentException("for entity graph need minimum one parameter");
         }
         List<EntityGraphNode> tempNodeList = mapToTempNodeList(path);
         bindNodes(tempNodeList);

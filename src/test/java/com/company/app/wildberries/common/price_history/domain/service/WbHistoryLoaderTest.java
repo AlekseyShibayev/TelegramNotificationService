@@ -3,10 +3,10 @@ package com.company.app.wildberries.common.price_history.domain.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.company.app.common.Lists;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.tool.HttpService;
 import com.company.app.configuration.SpringBootTestApplication;
+import com.company.app.core.util.Collections;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
@@ -31,7 +31,7 @@ class WbHistoryLoaderTest extends SpringBootTestApplication {
             Product saved = productRepository.save(new Product()
                 .setArticle("180189153"));
 
-            saved.setPrice(Lists.of(priceRepository.save(new Price().setCost("200").setProduct(saved))
+            saved.setPrice(Collections.list(priceRepository.save(new Price().setCost("200").setProduct(saved))
                 , priceRepository.save(new Price().setCost("300").setProduct(saved))));
             return productRepository.save(saved);
         });

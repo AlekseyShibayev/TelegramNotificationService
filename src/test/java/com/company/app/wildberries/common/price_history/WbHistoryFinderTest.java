@@ -23,7 +23,7 @@ class WbHistoryFinderTest extends SeleniumConfiguration {
 
     @Test
     void can_extract_price_history_from_web() {
-        wbHistoryFinder.findHistoryBy(ArrayLists.of("180189153", "171785533"));
+        wbHistoryFinder.findHistoryBy(ArrayLists.create("180189153", "171785533"));
 
         List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
                 .setSpecification(ProductSpecification.articleIn(List.of("180189153")))
@@ -42,7 +42,7 @@ class WbHistoryFinderTest extends SeleniumConfiguration {
             Price price = priceRepository.save(new Price()
                 .setProduct(product)
                 .setCost("1"));
-            productRepository.save(product.setPrice(ArrayLists.of(price)));
+            productRepository.save(product.setPrice(ArrayLists.create(price)));
         });
 
         Optional<Product> first = entityFinder.findFirst(new PersistenceContext<>(Product.class)
@@ -58,7 +58,7 @@ class WbHistoryFinderTest extends SeleniumConfiguration {
             Price price = priceRepository.save(new Price()
                 .setProduct(product)
                 .setCost("1"));
-            productRepository.save(product.setPrice(ArrayLists.of(price)));
+            productRepository.save(product.setPrice(ArrayLists.create(price)));
         });
         moveAllToPast();
         Optional<Product> first = entityFinder.findFirst(new PersistenceContext<>(Product.class)

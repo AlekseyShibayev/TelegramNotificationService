@@ -6,14 +6,13 @@ import java.util.List;
 import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.enrich_inpl.Enrich;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.enrich_inpl.HabrUserEnrich;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestPrototypeCreator;
 import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestPrototypeFactoryFinisher;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +32,7 @@ public class HabrBuilderPrototype {
     @Autowired
     private TestPrototypeFactoryFinisher testPrototypeFactoryFinisher;
     @Autowired
-    private ApplicationContext applicationContext;
+    private TestPrototypeCreator testPrototypeCreator;
 
     /**
      * terminal operations
@@ -57,9 +56,7 @@ public class HabrBuilderPrototype {
     }
 
     public HabrBuilderPrototype withHabrUser(String name) {
-        HabrUserEnrich habrUserEnrich = this.applicationContext.getBean("habrUserEnrich", HabrUserEnrich.class);
-        habrUserEnrich.setName(name);
-        enrichesChain.add(habrUserEnrich);
+        enrichesChain.add(testPrototypeCreator.withHabrUser(name));
         return this;
     }
 

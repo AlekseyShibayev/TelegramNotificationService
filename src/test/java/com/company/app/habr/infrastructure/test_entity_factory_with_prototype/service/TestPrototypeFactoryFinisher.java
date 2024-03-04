@@ -20,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TestPrototypeFactoryFinisher {
 
-   private final SimpleCreator simpleCreator;
-   private final HabrRepository habrRepository;
+    private final SimpleCreator simpleCreator;
+    private final HabrRepository habrRepository;
 
     @Transactional
     public List<Habr> create(HabrBuilderPrototype context) {

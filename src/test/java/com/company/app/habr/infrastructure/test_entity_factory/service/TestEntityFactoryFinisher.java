@@ -14,13 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class TestEntityFactoryFinisher {
 
-   private final SimpleCreator simpleCreator;
-   private final HabrRepository habrRepository;
+    private final SimpleCreator simpleCreator;
+    private final HabrRepository habrRepository;
 
     @Transactional
     public List<Habr> create(HabrBuilderContext context) {

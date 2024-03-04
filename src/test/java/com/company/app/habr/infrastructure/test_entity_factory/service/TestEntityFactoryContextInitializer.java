@@ -5,6 +5,7 @@ import com.company.app.habr.infrastructure.test_entity_factory.model.HabrBuilder
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @RequiredArgsConstructor
 public class TestEntityFactoryContextInitializer {

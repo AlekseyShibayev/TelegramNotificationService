@@ -78,7 +78,7 @@ class HabrTest extends SpringBootTestApplication {
     @Test
     void step_3_testEntityFactory_test_with_impl_as_impl_factory_method() {
         Habr habr = testEntityFactory.habrBy(Status.ON)
-            .with( HabrUserEnrich.of(NAME))
+            .with(HabrUserEnrich.of(NAME))
             .createOne();
 
         Assertions.assertEquals(habr.getStatus().name(), Status.ON.name());

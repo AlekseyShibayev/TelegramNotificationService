@@ -34,6 +34,9 @@ public class HabrUser implements Serializable {
     @Column(name = "ID", nullable = false)
     private Long id;
 
+    @Column(name = "NAME", nullable = false)
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "HABR_ID", nullable = false)
     private Habr habr;

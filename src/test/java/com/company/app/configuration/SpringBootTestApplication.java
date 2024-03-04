@@ -91,11 +91,11 @@ public abstract class SpringBootTestApplication {
     }
 
     @BeforeEach
-    void doBeforeEach() {
+    protected void doBeforeEach() {
     }
 
     @AfterEach
-    void doAfterEach() {
+    protected void doAfterEach() {
         desireRepository.deleteAllInBatch();
         desireLotRepository.deleteAllInBatch();
         timerRepository.deleteAllInBatch();

@@ -10,11 +10,13 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class HabrUser_ {
 
 	public static volatile SingularAttribute<HabrUser, ZonedDateTime> updateDate;
+	public static volatile SingularAttribute<HabrUser, String> name;
 	public static volatile SingularAttribute<HabrUser, Habr> habr;
 	public static volatile SingularAttribute<HabrUser, Long> id;
 	public static volatile SingularAttribute<HabrUser, ZonedDateTime> createDate;
 
 	public static final String UPDATE_DATE = "updateDate";
+	public static final String NAME = "name";
 	public static final String HABR = "habr";
 	public static final String ID = "id";
 	public static final String CREATE_DATE = "createDate";

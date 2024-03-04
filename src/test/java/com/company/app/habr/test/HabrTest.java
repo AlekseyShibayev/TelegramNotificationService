@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class HabrTest extends SpringBootTestApplication {
 
     private static final String NAME = "name";
+    private static final String NAME2 = "name2";
 
     @Autowired
     private SimpleCreator simpleCreator;
@@ -109,6 +110,26 @@ class HabrTest extends SpringBootTestApplication {
         Assertions.assertEquals(1, habr.getHabrUsers().size());
         Assertions.assertEquals(NAME, habr.getHabrUsers().get(0).getName());
         Assertions.assertNotNull(habr.getHabrUsers().get(0).getId());
+    }
+
+    @Test
+    void step_6_testPrototypeFactoryFacade_test() {
+        Habr on = testPrototypeFactoryFacade.habrBy(Status.ON)
+            .withHabrUser(NAME)
+            .createOne();
+        Habr off = testPrototypeFactoryFacade.habrBy(Status.OFF)
+            .withHabrUser(NAME2)
+            .createOne();
+
+        Assertions.assertEquals(on.getStatus().name(), Status.ON.name());
+        Assertions.assertEquals(1, on.getHabrUsers().size());
+        Assertions.assertEquals(NAME, on.getHabrUsers().get(0).getName());
+        Assertions.assertNotNull(on.getHabrUsers().get(0).getId());
+
+        Assertions.assertEquals(off.getStatus().name(), Status.OFF.name());
+        Assertions.assertEquals(1, off.getHabrUsers().size());
+        Assertions.assertEquals(NAME2, off.getHabrUsers().get(0).getName());
+        Assertions.assertNotNull(off.getHabrUsers().get(0).getId());
     }
 
 }

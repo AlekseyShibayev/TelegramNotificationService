@@ -4,7 +4,6 @@ import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.entity.HabrUser;
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.domain.repository.HabrUserRepository;
-import com.company.app.habr.infrastructure.test_entity_factory.model.Enrich;
 import com.company.app.habr.infrastructure.test_entity_factory.model.HabrBuilderContext;
 import com.company.app.habr.infrastructure.test_entity_factory.service.TestEntityFactoryBeansBag;
 import lombok.AccessLevel;

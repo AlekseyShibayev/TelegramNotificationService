@@ -7,7 +7,7 @@ import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
-import com.company.app.habr.infrastructure.test_entity_factory.model.Enrich;
+import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.Enrich;
 import com.company.app.habr.infrastructure.test_entity_factory.model.HabrBuilderContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

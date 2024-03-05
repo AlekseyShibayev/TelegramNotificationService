@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.company.app.habr.domain.entity.Habr;
+import com.company.app.habr.domain.entity.HabrUser;
 import com.company.app.habr.domain.enums.Status;
+import com.company.app.habr.domain.repository.HabrRepository;
+import com.company.app.habr.domain.repository.HabrUserRepository;
 import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.Enrich;
-import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.HabrUserEnrich;
 import com.company.app.habr.infrastructure.test_entity_factory.service.TestEntityFactoryBeansBag;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,7 +49,16 @@ public class HabrBuilderContext {
     }
 
     public HabrBuilderContext withHabrUser(String name) {
-        enrichesChain.add(HabrUserEnrich.of(name));
+        enrichesChain.add(habrBuilderContext -> {
+            TestEntityFactoryBeansBag beansBag = habrBuilderContext.getBeansBag();
+            HabrUserRepository habrUserRepository = beansBag.getHabrUserRepository();
+            HabrRepository habrRepository = beansBag.getHabrRepository();
+
+            HabrUser user = new HabrUser().setHabr(habr).setName(name);
+            habrUserRepository.save(user);
+            habr.getHabrUsers().add(user);
+            habrRepository.save(habr);
+        });
         return this;
     }
 

@@ -8,7 +8,6 @@ import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.domain.repository.HabrUserRepository;
 import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
 import com.company.app.habr.infrastructure.test_entity_factory.TestEntityFactory;
-import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.HabrUserEnrich;
 import com.company.app.habr.infrastructure.test_entity_factory.service.TestEntityFactoryBeansBag;
 import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.TestPrototypeFactoryFacade;
 import org.junit.jupiter.api.AfterEach;
@@ -68,18 +67,6 @@ class HabrTest extends SpringBootTestApplication {
                 minimumPosibleHabr.getHabrUsers().add(user);
                 habrRepository.save(minimumPosibleHabr);
             })
-            .createOne();
-
-        Assertions.assertEquals(habr.getStatus().name(), Status.ON.name());
-        Assertions.assertEquals(1, habr.getHabrUsers().size());
-        Assertions.assertEquals(NAME, habr.getHabrUsers().get(0).getName());
-        Assertions.assertNotNull(habr.getHabrUsers().get(0).getId());
-    }
-
-    @Test
-    void step_3_testEntityFactory_test_with_impl_as_impl_factory_method() {
-        Habr habr = testEntityFactory.habrBy(Status.ON)
-            .with(HabrUserEnrich.of(NAME))
             .createOne();
 
         Assertions.assertEquals(habr.getStatus().name(), Status.ON.name());

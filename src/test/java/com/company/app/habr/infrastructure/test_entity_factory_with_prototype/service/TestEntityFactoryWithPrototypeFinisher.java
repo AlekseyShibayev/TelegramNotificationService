@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TestPrototypeFactoryFinisher {
+public class TestEntityFactoryWithPrototypeFinisher {
 
     private final SimpleCreator simpleCreator;
     private final HabrRepository habrRepository;
@@ -37,8 +37,8 @@ public class TestPrototypeFactoryFinisher {
         Status status = context.getStatus();
         Habr minimumPosibleHabr = simpleCreator.createMinimumPosibleHabr(status);
 
-        List<EnrichCallback> enrichCallbacks = context.getEnrichesChain();
-        enrichCallbacks.forEach(enrich -> enrich.accept(minimumPosibleHabr));
+        List<EnrichCallback> chain = context.getChain();
+        chain.forEach(enrich -> enrich.accept(minimumPosibleHabr));
 
         return habrRepository.save(minimumPosibleHabr);
     }

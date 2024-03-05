@@ -103,14 +103,14 @@ class HabrTest extends SpringBootTestApplication {
     void step_6_testPrototypeFactoryFacade_test() {
         Habr on = testEntityFactoryWithPrototype.habrBy(Status.ON)
             .withHabrUser(NAME)
+            .withHabrUser(NAME2)
             .createOne();
         Habr off = testEntityFactoryWithPrototype.habrBy(Status.OFF)
             .withHabrUser(NAME2)
             .createOne();
 
         Assertions.assertEquals(on.getStatus().name(), Status.ON.name());
-        Assertions.assertEquals(1, on.getHabrUsers().size());
-        Assertions.assertEquals(NAME, on.getHabrUsers().get(0).getName());
+        Assertions.assertEquals(2, on.getHabrUsers().size());
         Assertions.assertNotNull(on.getHabrUsers().get(0).getId());
 
         Assertions.assertEquals(off.getStatus().name(), Status.OFF.name());

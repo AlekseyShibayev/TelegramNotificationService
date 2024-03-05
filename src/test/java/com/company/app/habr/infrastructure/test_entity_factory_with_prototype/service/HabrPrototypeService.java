@@ -1,4 +1,4 @@
-package com.company.app.habr.infrastructure.test_entity_factory_with_prototype.inpl;
+package com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service;
 
 import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.entity.HabrUser;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class HabrUserEnricher {
+public class HabrPrototypeService {
 
     private final HabrRepository habrRepository;
     private final HabrUserRepository habrUserRepository;

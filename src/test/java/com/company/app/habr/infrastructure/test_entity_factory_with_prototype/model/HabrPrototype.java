@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.enums.Status;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.inpl.HabrUserEnricher;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestPrototypeFactoryFinisher;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.HabrPrototypeService;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestEntityFactoryWithPrototypeFinisher;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -24,14 +24,14 @@ import org.springframework.stereotype.Service;
 public class HabrPrototype {
 
     private Status status;
-    private List<EnrichCallback> enrichesChain = new ArrayList<>();
+    private List<EnrichCallback> chain = new ArrayList<>();
     private Habr habr;
     private int amount;
 
     @Autowired
-    private TestPrototypeFactoryFinisher testPrototypeFactoryFinisher;
+    private TestEntityFactoryWithPrototypeFinisher testPrototypeFactoryFinisher;
     @Autowired
-    private HabrUserEnricher habrUserEnricher;
+    private HabrPrototypeService habrPrototypeService;
 
     /**
      * terminal operations
@@ -50,12 +50,12 @@ public class HabrPrototype {
      * intermediate operations
      */
     public HabrPrototype with(EnrichCallback enrich) {
-        enrichesChain.add(enrich);
+        chain.add(enrich);
         return this;
     }
 
     public HabrPrototype withHabrUser(String name) {
-        enrichesChain.add(habr -> habrUserEnricher.enrichHabrByHabrUserName(habr, name));
+        chain.add(habr -> habrPrototypeService.enrichHabrByHabrUserName(habr, name));
         return this;
     }
 

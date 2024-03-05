@@ -15,14 +15,14 @@ public abstract class SeleniumConfiguration extends SpringBootTestApplication {
     private SeleniumWebDriver driver;
 
     @BeforeEach
-    void doBeforeEach() {
+    void doBeforeEach_() {
         driver = seleniumWebDriverCreator.createNew();
         Mockito.when(seleniumWebDriverRegistry.get()).thenReturn(driver);
         super.doBeforeEach();
     }
 
     @AfterEach
-    void doAfterEach() {
+    void doAfterEach_() {
         driver.quit();
         super.doAfterEach();
     }

@@ -8,7 +8,6 @@ import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.Enrich;
 import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.HabrUserEnrich;
 import com.company.app.habr.infrastructure.test_entity_factory.service.TestEntityFactoryBeansBag;
-import com.company.app.habr.infrastructure.test_entity_factory.service.TestEntityFactoryFinisher;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -24,7 +23,6 @@ public class HabrBuilderContext {
     private Habr habr;
     private int amount;
 
-    private TestEntityFactoryFinisher testEntityFactoryFinisher;
     private TestEntityFactoryBeansBag beansBag;
 
     /**
@@ -32,12 +30,12 @@ public class HabrBuilderContext {
      */
     public Habr createOne() {
         this.amount = 1;
-        return testEntityFactoryFinisher.create(this).get(0);
+        return beansBag.getTestEntityFactoryFinisher().create(this).get(0);
     }
 
     public List<Habr> createMany(int amount) {
         this.amount = amount;
-        return testEntityFactoryFinisher.create(this);
+        return beansBag.getTestEntityFactoryFinisher().create(this);
     }
 
     /**

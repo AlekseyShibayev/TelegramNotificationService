@@ -1,12 +1,11 @@
-package com.company.app.habr.infrastructure.test_entity_factory_with_prototype.prototype;
+package com.company.app.habr.infrastructure.test_entity_factory_with_prototype.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.enums.Status;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.enrich_inpl.Enrich;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestPrototypeCreator;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.inpl.HabrUserEnricher;
 import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.service.TestPrototypeFactoryFinisher;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,17 +21,17 @@ import org.springframework.stereotype.Service;
 @Accessors(chain = true)
 @Service
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class HabrBuilderPrototype {
+public class HabrPrototype {
 
     private Status status;
-    private List<Enrich> enrichesChain = new ArrayList<>();
+    private List<EnrichCallback> enrichesChain = new ArrayList<>();
     private Habr habr;
     private int amount;
 
     @Autowired
     private TestPrototypeFactoryFinisher testPrototypeFactoryFinisher;
     @Autowired
-    private TestPrototypeCreator testPrototypeCreator;
+    private HabrUserEnricher habrUserEnricher;
 
     /**
      * terminal operations
@@ -50,13 +49,13 @@ public class HabrBuilderPrototype {
     /**
      * intermediate operations
      */
-    public HabrBuilderPrototype with(Enrich enrich) {
+    public HabrPrototype with(EnrichCallback enrich) {
         enrichesChain.add(enrich);
         return this;
     }
 
-    public HabrBuilderPrototype withHabrUser(String name) {
-        enrichesChain.add(testPrototypeCreator.withHabrUser(name));
+    public HabrPrototype withHabrUser(String name) {
+        enrichesChain.add(habr -> habrUserEnricher.enrichHabrByHabrUserName(habr, name));
         return this;
     }
 

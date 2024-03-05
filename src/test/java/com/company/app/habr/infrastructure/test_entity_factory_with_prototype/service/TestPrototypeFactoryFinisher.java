@@ -7,8 +7,8 @@ import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.enrich_inpl.Enrich;
-import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.prototype.HabrBuilderPrototype;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.model.EnrichCallback;
+import com.company.app.habr.infrastructure.test_entity_factory_with_prototype.model.HabrPrototype;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class TestPrototypeFactoryFinisher {
     private final HabrRepository habrRepository;
 
     @Transactional
-    public List<Habr> create(HabrBuilderPrototype context) {
+    public List<Habr> create(HabrPrototype context) {
         List<Habr> result = new ArrayList<>();
         for (int i = 0; i < context.getAmount(); i++) {
             result.add(createOne(context));
@@ -33,12 +33,12 @@ public class TestPrototypeFactoryFinisher {
         return result;
     }
 
-    private Habr createOne(HabrBuilderPrototype context) {
+    private Habr createOne(HabrPrototype context) {
         Status status = context.getStatus();
         Habr minimumPosibleHabr = simpleCreator.createMinimumPosibleHabr(status);
 
-        List<Enrich> enrichesChain = context.getEnrichesChain();
-        enrichesChain.forEach(enrich -> enrich.accept(minimumPosibleHabr));
+        List<EnrichCallback> enrichCallbacks = context.getEnrichesChain();
+        enrichCallbacks.forEach(enrich -> enrich.accept(minimumPosibleHabr));
 
         return habrRepository.save(minimumPosibleHabr);
     }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TestEntityFactory {
+public class TestEntityFactoryWithBeansBag {
 
     private final TestEntityFactoryBeansBag testEntityFactorySpringBeanBag;
 

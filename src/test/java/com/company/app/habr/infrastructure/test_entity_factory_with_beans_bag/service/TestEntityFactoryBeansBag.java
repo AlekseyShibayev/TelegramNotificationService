@@ -1,4 +1,4 @@
-package com.company.app.habr.infrastructure.test_entity_factory.service;
+package com.company.app.habr.infrastructure.test_entity_factory_with_beans_bag.service;
 
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.domain.repository.HabrUserRepository;

@@ -1,4 +1,4 @@
-package com.company.app.habr.infrastructure.test_entity_factory.model;
+package com.company.app.habr.infrastructure.test_entity_factory_with_beans_bag.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import com.company.app.habr.domain.entity.HabrUser;
 import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.domain.repository.HabrUserRepository;
-import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.Enrich;
-import com.company.app.habr.infrastructure.test_entity_factory.service.TestEntityFactoryBeansBag;
+import com.company.app.habr.infrastructure.test_entity_factory_with_beans_bag.enrich_inpl.Enrich;
+import com.company.app.habr.infrastructure.test_entity_factory_with_beans_bag.service.TestEntityFactoryBeansBag;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

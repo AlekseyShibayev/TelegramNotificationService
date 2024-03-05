@@ -1,4 +1,4 @@
-package com.company.app.habr.infrastructure.test_entity_factory.service;
+package com.company.app.habr.infrastructure.test_entity_factory_with_beans_bag.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import com.company.app.habr.domain.entity.Habr;
 import com.company.app.habr.domain.enums.Status;
 import com.company.app.habr.domain.repository.HabrRepository;
 import com.company.app.habr.infrastructure.simple_creator.SimpleCreator;
-import com.company.app.habr.infrastructure.test_entity_factory.enrich_inpl.Enrich;
-import com.company.app.habr.infrastructure.test_entity_factory.model.HabrBuilderContext;
+import com.company.app.habr.infrastructure.test_entity_factory_with_beans_bag.enrich_inpl.Enrich;
+import com.company.app.habr.infrastructure.test_entity_factory_with_beans_bag.model.HabrBuilderContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

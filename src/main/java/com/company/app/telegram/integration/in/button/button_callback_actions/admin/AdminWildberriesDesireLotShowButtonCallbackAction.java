@@ -2,7 +2,6 @@ package com.company.app.telegram.integration.in.button.button_callback_actions.a
 
 import java.util.List;
 
-import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
 import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.telegram.TelegramFacade;

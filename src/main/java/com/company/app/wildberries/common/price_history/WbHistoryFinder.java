@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.selenium.SeleniumService;
 import com.company.app.common.selenium.model.Request;
 import com.company.app.common.selenium.model.Response;

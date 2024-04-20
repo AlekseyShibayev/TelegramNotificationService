@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.timer.domain.entity.Timer;
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;

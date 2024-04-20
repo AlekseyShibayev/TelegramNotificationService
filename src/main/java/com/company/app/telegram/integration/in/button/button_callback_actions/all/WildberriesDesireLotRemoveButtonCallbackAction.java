@@ -6,9 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.core.util.Strings;
+import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
@@ -66,7 +67,7 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
     }
 
     private void showButtons(Chat chat) {
-        List<Desire> desires = entityFinder.findAll(new PersistenceContext<>(Desire.class)
+        List<Desire> desires = entityFinder.findAllAsList(new CommonQuery<>(Desire.class)
             .setSpecification(DesireSpecification.chatNameIs(chat.getChatName()))
             .with(Desire_.DESIRE_LOT));
 

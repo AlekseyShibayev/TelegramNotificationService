@@ -7,11 +7,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.selenium.SeleniumService;
 import com.company.app.common.selenium.model.Request;
 import com.company.app.common.selenium.model.Response;
+import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
 import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
@@ -39,7 +40,7 @@ public class WbHistoryFinder {
     private final WbHistoryChecker wbHistoryChecker;
 
     public List<Product> findHistoryBy(Collection<String> articleList) {
-        List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
+        List<Product> all = entityFinder.findAllAsList(new CommonQuery<>(Product.class)
             .setSpecification(ProductSpecification.articleIn(articleList))
             .with(Product_.PRICE));
 

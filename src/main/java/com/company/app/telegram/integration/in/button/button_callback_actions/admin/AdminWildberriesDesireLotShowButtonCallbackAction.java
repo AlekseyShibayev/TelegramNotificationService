@@ -2,8 +2,9 @@ package com.company.app.telegram.integration.in.button.button_callback_actions.a
 
 import java.util.List;
 
-import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
+import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
@@ -35,7 +36,7 @@ public class AdminWildberriesDesireLotShowButtonCallbackAction implements Button
     public void doAction(ButtonCallbackActionContext context) {
         Chat chat = context.getChat();
 
-        List<Desire> desireList = entityFinder.findAll(new PersistenceContext<>(Desire.class)
+        List<Desire> desireList = entityFinder.findAllAsList(new CommonQuery<>(Desire.class)
             .with(Desire_.DESIRE_LOT));
 
         for (Desire desire : desireList) {

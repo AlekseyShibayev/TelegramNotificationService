@@ -3,12 +3,12 @@ package com.company.app.configuration;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 
-import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
 import com.company.app.common.selenium.service.SeleniumWebDriverRegistry;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.tool.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
+import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.config.TelegramBotApi;
 import com.company.app.telegram.domain.repository.ChatRepository;

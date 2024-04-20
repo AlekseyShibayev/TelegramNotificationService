@@ -7,13 +7,14 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.company.app.common.entity_finder.EntityFinder;
 import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.timer.domain.entity.Timer;
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.timer.scheduler.executor.TimerExecutor;
+import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Chat_;
@@ -79,7 +80,7 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
             .map(Timer::getEntityView)
             .collect(Collectors.toSet());
 
-        List<Chat> chatList = entityFinder.findAll(new PersistenceContext<>(Chat.class)
+        List<Chat> chatList = entityFinder.findAllAsList(new CommonQuery<>(Chat.class)
             .setSpecification(ChatSpecification.chatNameIn(chatNames))
             .with(Chat_.MODE)
         );

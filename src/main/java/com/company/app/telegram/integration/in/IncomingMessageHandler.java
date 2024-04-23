@@ -1,5 +1,6 @@
 package com.company.app.telegram.integration.in;
 
+import com.company.app.infrastructure.log.performance.aop.PerformanceLog;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
@@ -35,6 +36,7 @@ public class IncomingMessageHandler {
     private final IncomingMessageTaskRepository incomingMessageTaskRepository;
     private final ButtonFactory buttonFactory;
 
+    @PerformanceLog
     @Transactional
     public void take(Update update) {
         if (isIncomingMessage(update)) {

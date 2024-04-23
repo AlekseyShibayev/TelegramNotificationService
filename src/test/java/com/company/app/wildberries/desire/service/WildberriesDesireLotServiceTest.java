@@ -2,8 +2,8 @@ package com.company.app.wildberries.desire.service;
 
 import java.math.BigDecimal;
 
-import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.configuration.SpringBootTestApplication;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.wildberries.desire.domain.entity.Desire;
 import com.company.app.wildberries.desire.domain.entity.Desire_;
@@ -29,9 +29,9 @@ class WildberriesDesireLotServiceTest extends SpringBootTestApplication {
 
         wildberriesDesireLotService.search();
 
-        Desire extractedDesire = entityFinder.findFirst(new PersistenceContext<>(Desire.class)
+        Desire extractedDesire = entityFinder.findAllAsList(new CommonQuery<>(Desire.class)
             .setSpecification(DesireSpecification.chatNameIs(desire.getChatName()))
-            .with(Desire_.DESIRE_LOT)).get();
+            .with(Desire_.DESIRE_LOT)).get(0);
 
         Assertions.assertEquals(desire.getArticle(), extractedDesire.getDesireLot().getArticle());
         Assertions.assertNotNull(extractedDesire.getDesireLot().getPrice());

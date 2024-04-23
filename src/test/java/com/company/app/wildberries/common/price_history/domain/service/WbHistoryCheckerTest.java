@@ -2,9 +2,9 @@ package com.company.app.wildberries.common.price_history.domain.service;
 
 import java.util.Optional;
 
-import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.core.util.Collections;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
@@ -30,10 +30,10 @@ class WbHistoryCheckerTest extends SpringBootTestApplication {
             productRepository.save(product.setPrice(Collections.list(price)));
         });
 
-        Optional<Product> first = entityFinder.findFirst(new PersistenceContext<>(Product.class)
+        Product first = entityFinder.findAllAsList(new CommonQuery<>(Product.class)
             .setSpecification(ProductSpecification.articleIs("123"))
-            .with(Product_.PRICE));
-        Assertions.assertFalse(wbHistoryChecker.isNeedLoadPriceHistory(first.get()));
+            .with(Product_.PRICE)).get(0);
+        Assertions.assertFalse(wbHistoryChecker.isNeedLoadPriceHistory(first));
     }
 
     @Test
@@ -46,10 +46,10 @@ class WbHistoryCheckerTest extends SpringBootTestApplication {
             productRepository.save(product.setPrice(Collections.list(price)));
         });
         moveAllToPast();
-        Optional<Product> first = entityFinder.findFirst(new PersistenceContext<>(Product.class)
+        Product first = entityFinder.findAllAsList(new CommonQuery<>(Product.class)
             .setSpecification(ProductSpecification.articleIs("123"))
-            .with(Product_.PRICE));
-        Assertions.assertTrue(wbHistoryChecker.isNeedLoadPriceHistory(first.get()));
+            .with(Product_.PRICE)).get(0);
+        Assertions.assertTrue(wbHistoryChecker.isNeedLoadPriceHistory(first));
     }
 
     private void moveAllToPast() {

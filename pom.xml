@@ -168,10 +168,15 @@
         <!--     <version>${mapstruct.version}</version> -->
         <!-- </dependency> -->
 
-        <dependency>
+		<dependency>
 			<groupId>com.company.app</groupId>
 			<artifactId>telegram-bot-spring-boot-starter</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.company.app</groupId>
+			<artifactId>performance-log-starter</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 
 	</dependencies>

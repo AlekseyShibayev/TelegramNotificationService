@@ -3,10 +3,11 @@ package com.company.app.wildberries.common.price_history.domain.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.tool.HttpService;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.core.util.Collections;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
+import com.company.app.infrastructure.jpa.entityfinder.model.PersistenceContext;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;
@@ -44,7 +45,7 @@ class WbHistoryLoaderTest extends SpringBootTestApplication {
             wbHistoryLoader.loadPriceHistory(List.of(product))
         );
 
-        List<Product> all = entityFinder.findAll(new PersistenceContext<>(Product.class)
+        List<Product> all = entityFinder.findAllAsList(new CommonQuery<>(Product.class)
             .with(Product_.PRICE));
 
         Assertions.assertEquals(1, all.size());

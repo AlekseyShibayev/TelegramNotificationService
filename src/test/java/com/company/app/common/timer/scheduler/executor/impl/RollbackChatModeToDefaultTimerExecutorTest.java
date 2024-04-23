@@ -1,11 +1,12 @@
 package com.company.app.common.timer.scheduler.executor.impl;
 
-import com.company.app.common.entity_finder.model.PersistenceContext;
 import com.company.app.common.timer.TimerFacade;
 import com.company.app.common.timer.domain.entity.Timer;
 import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
 import com.company.app.configuration.SpringBootTestApplication;
+import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
+import com.company.app.infrastructure.jpa.entityfinder.model.PersistenceContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Chat_;
 import com.company.app.telegram.domain.entity.Mode;
@@ -36,9 +37,9 @@ class RollbackChatModeToDefaultTimerExecutorTest extends SpringBootTestApplicati
 
         rollbackChatModeToDefaultTimerExecutor.execute();
 
-        Chat extractedChat = entityFinder.findFirst(new PersistenceContext<>(Chat.class)
+        Chat extractedChat = entityFinder.findAllAsList(new CommonQuery<>(Chat.class)
             .setSpecification(ChatSpecification.chatNameIs(owner.getChatName()))
-            .with(Chat_.MODE)).get();
+            .with(Chat_.MODE)).get(0);
 
         Assertions.assertEquals(extractedChat.getMode().getType(), ModeType.DEFAULT.name());
 

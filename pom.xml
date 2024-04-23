@@ -175,8 +175,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.company.app</groupId>
-			<artifactId>performance-log-starter</artifactId>
-			<version>0.0.1</version>
+			<artifactId>performance-tools-starter</artifactId>
+			<version>0.0.2</version>
 		</dependency>
 
 	</dependencies>

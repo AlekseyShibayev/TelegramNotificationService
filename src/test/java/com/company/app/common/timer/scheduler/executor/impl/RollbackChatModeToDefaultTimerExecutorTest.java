@@ -6,7 +6,6 @@ import com.company.app.common.timer.domain.enums.ActionType;
 import com.company.app.common.timer.domain.enums.StatusType;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
-import com.company.app.infrastructure.jpa.entityfinder.model.PersistenceContext;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.entity.Chat_;
 import com.company.app.telegram.domain.entity.Mode;

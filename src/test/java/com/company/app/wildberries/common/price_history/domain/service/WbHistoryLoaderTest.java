@@ -7,7 +7,6 @@ import com.company.app.common.tool.HttpService;
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.core.util.Collections;
 import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
-import com.company.app.infrastructure.jpa.entityfinder.model.PersistenceContext;
 import com.company.app.wildberries.common.price_history.domain.entity.Price;
 import com.company.app.wildberries.common.price_history.domain.entity.Product;
 import com.company.app.wildberries.common.price_history.domain.entity.Product_;

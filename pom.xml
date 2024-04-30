@@ -175,9 +175,14 @@
 		</dependency>
 		<dependency>
 			<groupId>com.company.app</groupId>
-			<artifactId>performance-tools-starter</artifactId>
-			<version>0.0.2</version>
+			<artifactId>performance-log-starter</artifactId>
+			<version>0.0.3</version>
 		</dependency>
+        <dependency>
+            <groupId>com.company.app</groupId>
+            <artifactId>performance-repair-starter</artifactId>
+            <version>0.0.3</version>
+        </dependency>
 
 	</dependencies>
 

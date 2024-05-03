@@ -1,4 +1,4 @@
-package com.company.app.telegram.incoming_message_handler.message_executor;
+package com.company.app.telegram.integration.in.button.task_executor.impl;
 
 import com.company.app.configuration.SpringBootTestApplication;
 import com.company.app.telegram.domain.entity.Chat;
@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-class IncomingMessageTaskExecutorTest extends SpringBootTestApplication {
+class AddDesireTaskExecutorTest extends SpringBootTestApplication {
 
     @Autowired
     private IncomingMessageTaskExecutor incomingMessageTaskExecutor;
@@ -23,22 +22,22 @@ class IncomingMessageTaskExecutorTest extends SpringBootTestApplication {
         Chat owner = chatRepository.findOwner();
 
         IncomingMessageTask incomingMessageTask1 = new IncomingMessageTask()
-            .setChatName(owner.getChatName())
-            .setModeType(ModeType.ADD_DESIRE.name())
-            .setMessage("""
+                .setChatName(owner.getChatName())
+                .setModeType(ModeType.ADD_DESIRE.name())
+                .setMessage("""
                         Шоколад "Темный (70%)" 1кг Для кулинарии Yummy mood
                         https://wildberries.ru/catalog/13341986/detail.aspx
                         """);
         incomingMessageTaskRepository.save(incomingMessageTask1);
 
         IncomingMessageTask incomingMessageTask2 = new IncomingMessageTask()
-            .setChatName(owner.getChatName())
-            .setModeType(ModeType.ADD_DESIRE.name())
-            .setMessage("300");
+                .setChatName(owner.getChatName())
+                .setModeType(ModeType.ADD_DESIRE.name())
+                .setMessage("300");
         incomingMessageTaskRepository.save(incomingMessageTask2);
 
         transactionTemplate.executeWithoutResult(transactionStatus ->
-            incomingMessageTaskExecutor.processIncomingMessageTask(owner.getChatName(), ModeType.ADD_DESIRE.name()));
+                incomingMessageTaskExecutor.processIncomingMessageTask(owner.getChatName(), ModeType.ADD_DESIRE));
 
         Assertions.assertEquals(0, incomingMessageTaskRepository.findAll().size());
     }

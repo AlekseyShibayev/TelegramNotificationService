@@ -1,10 +1,9 @@
-package com.company.app.telegram.integration.in.button.task_executor;
+package com.company.app.telegram.integration.in.button.task_executor.impl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
-class IncomingMessageTaskExecutorUnitTest {
+class AddDesireTaskExecutorUnitTest {
 
     @Test
     void convertToArticle() {
@@ -13,7 +12,7 @@ class IncomingMessageTaskExecutorUnitTest {
                         https://wildberries.ru/catalog/13341986/detail.aspx
                         """;
 
-        String after = IncomingMessageTaskExecutor.convertToArticle(before);
+        String after = AddDesireTaskExecutor.convertToArticle(before);
 
         Assertions.assertEquals("13341986", after);
     }

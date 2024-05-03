@@ -64,7 +64,8 @@ public class WbSearcherSemaphoreService {
                 .setWbCallback(this::callback));
 
             return new WbSearchResult()
-                .setSuccess(true);
+                .setSuccess(true)
+                .setMessage("greed index: %s".formatted(searcherContext.getGreedIndex()));
         }
     }
 

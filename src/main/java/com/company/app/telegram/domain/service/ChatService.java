@@ -64,11 +64,9 @@ public class ChatService {
             } else if (modeType.equals(DEFAULT)) {
                 timerFacade.stop(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
                 updateChatMode(chat, ModeType.DEFAULT);
-            } else if (modeType.equals(ModeType.ADD_DESIRE)) {
-                timerFacade.start(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
-                updateChatMode(chat, ModeType.ADD_DESIRE);
             } else {
-                log.error("can not update chat with name [{}] by mode [{}], not support yet", chat.getChatName(), modeType);
+                timerFacade.start(chat.getChatName(), ActionType.ROLLBACK_CHAT_MODE_TO_DEFAULT);
+                updateChatMode(chat, modeType);
             }
         }
 

@@ -56,7 +56,7 @@ public class AdminWbSearchBCA implements ButtonCallbackAction {
         if (result.isSuccess()) {
 //            Supplier supplier = wildberriesSupplierController.getBySupplierId(supplierId).getBody();
 //            String message = String.format("Поисковая задача успешно запущена. [%s]", supplier.getSupplierName());
-            String message = String.format("Поисковая задача успешно запущена. [%s]", incomingMessage);
+            String message = String.format("Поисковая задача успешно запущена. [%s]", result.getMessage());
             telegramFacade.writeToTargetChat(chat.getChatName(), message);
         } else {
             telegramFacade.writeToTargetChat(chat.getChatName(), result.getMessage());

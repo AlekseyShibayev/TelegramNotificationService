@@ -13,14 +13,8 @@ import com.company.app.telegram.integration.in.button.task_executor.IncomingMess
 import com.company.app.wildberries.search.domain.dto.SearchDataDto;
 import com.company.app.wildberries.search.domain.repository.SearchDataRepository;
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
@@ -74,7 +68,7 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
 
         String callbackData = TYPE + ButtonCallbackAction.BINDER_DELIMITER + "greedIndex";
         String text = "Введите индекс жадности и нажмите кнопку:";
-        SendMessage sendMessage = simpleSendMessageCreator.create(chat.getChatName(), "Ok", callbackData, text);
+        SendMessage sendMessage = simpleSendMessageCreator.createButtonWithCallback(chat.getChatName(), "Ok", callbackData, text);
         telegramFacade.writeToTargetChat(sendMessage);
     }
 
@@ -90,7 +84,7 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
     private void showButtons(Chat chat) {
         String callbackData = TYPE + ButtonCallbackAction.BINDER_DELIMITER + "update";
         String text ="Выберите действие:";
-        SendMessage sendMessage = simpleSendMessageCreator.create(chat.getChatName(), "Изменить", callbackData, text);
+        SendMessage sendMessage = simpleSendMessageCreator.createButtonWithCallback(chat.getChatName(), "Изменить", callbackData, text);
         telegramFacade.writeToTargetChat(sendMessage);
     }
 

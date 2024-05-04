@@ -25,7 +25,7 @@ public class AdminWbSearchBCA implements ButtonCallbackAction {
     private static final String TYPE = "ADMIN_WB_SEARCH";
 
     private final TelegramFacade telegramFacade;
-    private final WbSearcherFacade wildberriesSearcherFacade;
+    private final WbSearcherFacade wbSearcherFacade;
 
     @Override
     public String getType() {
@@ -51,7 +51,7 @@ public class AdminWbSearchBCA implements ButtonCallbackAction {
             .setChatName(chat.getChatName())
             .setBrand(supplierId);
 
-        WbSearchResult result = wildberriesSearcherFacade.search(wbSearchContext);
+        WbSearchResult result = wbSearcherFacade.search(wbSearchContext);
 
         if (result.isSuccess()) {
 //            Supplier supplier = wildberriesSupplierController.getBySupplierId(supplierId).getBody();

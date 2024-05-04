@@ -55,7 +55,7 @@ public class WildberriesDesireLotAddButtonCallbackAction implements ButtonCallba
     private void showButtons(Chat chat) {
         String callbackData = TYPE + ButtonCallbackAction.BINDER_DELIMITER + "add";
         String text = "Добавляйте желания, парами сообщений, сперва ссылку на товар, потом цену. По окончании нажмите кнопку:";
-        SendMessage sendMessage = simpleSendMessageCreator.create(chat.getChatName(), "Я всё", callbackData, text);
+        SendMessage sendMessage = simpleSendMessageCreator.createButtonWithCallback(chat.getChatName(), "Я всё", callbackData, text);
 
         telegramFacade.writeToTargetChat(sendMessage);
     }

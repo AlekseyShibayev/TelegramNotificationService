@@ -14,7 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 @RequiredArgsConstructor
 public class SimpleSendMessageCreator {
 
-    public SendMessage create(String chatName, String buttonText, String callbackData, String text) {
+    public SendMessage createButtonWithCallback(String chatName, String buttonText, String callbackData, String text) {
         InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton(buttonText);
         inlineKeyboardButton.setCallbackData(callbackData);
 

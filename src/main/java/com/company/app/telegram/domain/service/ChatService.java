@@ -1,5 +1,6 @@
 package com.company.app.telegram.domain.service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 import com.company.app.common.timer.TimerFacade;
@@ -48,16 +49,14 @@ public class ChatService {
     }
 
     public void updateChat(UpdateChat updateChat) {
-        Optional<Chat> optional = chatRepository.findByChatName(updateChat.getChatName());
-        if (optional.isEmpty()) {
-            return;
-        }
+        Long chatId = updateChat.getChatId();
+        validate(chatId);
 
-        Chat chat = optional.get();
+        Chat chat = chatRepository.findById(chatId)
+            .orElseThrow(() -> new EntityNotFoundException("not found chat with id: %s".formatted(chatId)));
 
-        if (updateChat.getMode() != null) {
-            String mode = updateChat.getMode();
-            ModeType modeType = ModeType.valueOf(mode);
+        if (updateChat.getModeType() != null) {
+            ModeType modeType = updateChat.getModeType();
 
             if (modeType.typeOf(chat)) {
                 log.debug("chat with name [{}] already in mode [{}]", chat.getChatName(), modeType);
@@ -70,6 +69,12 @@ public class ChatService {
             }
         }
 
+    }
+
+    private void validate(Long chatId) {
+        if (chatId == null) {
+            throw new IllegalArgumentException("chat id must be not null");
+        }
     }
 
     public void updateChatMode(Chat chat, ModeType modeType) {

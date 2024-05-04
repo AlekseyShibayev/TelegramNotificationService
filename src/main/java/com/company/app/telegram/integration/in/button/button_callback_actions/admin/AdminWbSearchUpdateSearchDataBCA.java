@@ -61,17 +61,16 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
 
     private void doForGreedIndex(Chat chat) {
         chatService.updateChat(new UpdateChat()
-                .setChatName(chat.getChatName())
-                .setMode(ModeType.DEFAULT.name()));
+                .setChatId(chat.getId())
+                .setModeType(ModeType.DEFAULT));
 
         incomingMessageTaskExecutor.processIncomingMessageTask(chat.getChatName(), ModeType.UPDATE_SEARCH_DATA);
     }
 
     private void doForUpdate(Chat chat) {
         chatService.updateChat(new UpdateChat()
-                .setChatName(chat.getChatName())
-                .setMode(ModeType.UPDATE_SEARCH_DATA.name()));
-
+                .setChatId(chat.getId())
+                .setModeType(ModeType.UPDATE_SEARCH_DATA));
 
         String callbackData = TYPE + ButtonCallbackAction.BINDER_DELIMITER + "greedIndex";
         String text = "Введите индекс жадности и нажмите кнопку:";

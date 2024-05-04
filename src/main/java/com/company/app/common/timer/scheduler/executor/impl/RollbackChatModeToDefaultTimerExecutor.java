@@ -20,6 +20,7 @@ import com.company.app.telegram.domain.entity.Chat_;
 import com.company.app.telegram.domain.entity.IncomingMessageTask;
 import com.company.app.telegram.domain.entity.Mode;
 import com.company.app.telegram.domain.enums.ModeType;
+import com.company.app.telegram.domain.model.UpdateChat;
 import com.company.app.telegram.domain.repository.IncomingMessageTaskRepository;
 import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.domain.spec.ChatSpecification;
@@ -102,7 +103,9 @@ public class RollbackChatModeToDefaultTimerExecutor implements TimerExecutor {
         Mode mode = chat.getMode();
 
         if (!mode.getType().equals(ModeType.DEFAULT.name())) {
-            chatService.updateChatMode(chat, ModeType.DEFAULT);
+            chatService.updateChat(new UpdateChat()
+                .setChatId(chat.getId())
+                .setModeType(ModeType.DEFAULT));
 
             List<IncomingMessageTask> tasks = incomingMessageTaskRepository.findAll(IncomingMessageTaskSpecification.chatNameIs(chatName)
                 .and(IncomingMessageTaskSpecification.modeTypeIs(ModeType.ADD_DESIRE.name())));

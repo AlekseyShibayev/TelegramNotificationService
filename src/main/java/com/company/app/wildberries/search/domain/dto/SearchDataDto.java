@@ -16,12 +16,6 @@ public class SearchDataDto {
 
     private String greedIndex;
 
-    public static SearchDataDto of(SearchData searchData) {
-        SearchDataDto dto = new SearchDataDto();
-        BeanUtils.copyProperties(searchData, dto);
-        return dto;
-    }
-
     public static SearchDataDto empty() {
         return new SearchDataDto();
     }

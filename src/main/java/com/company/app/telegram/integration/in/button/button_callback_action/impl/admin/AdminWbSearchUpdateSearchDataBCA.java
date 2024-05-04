@@ -11,7 +11,10 @@ import com.company.app.telegram.integration.in.button.button_callback_action.mod
 import com.company.app.telegram.integration.in.button.service.SimpleSendMessageCreator;
 import com.company.app.telegram.integration.in.button.task_executor.IncomingMessageTaskExecutor;
 import com.company.app.wildberries.search.domain.dto.SearchDataDto;
+import com.company.app.wildberries.search.domain.entity.SearchData;
+import com.company.app.wildberries.search.domain.mapper.SearchDataDtoMapper;
 import com.company.app.wildberries.search.domain.repository.SearchDataRepository;
+import com.company.app.wildberries.search.domain.service.SearchDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -28,6 +31,8 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
     private final IncomingMessageTaskExecutor incomingMessageTaskExecutor;
     private final ChatService chatService;
     private final SimpleSendMessageCreator simpleSendMessageCreator;
+    private final SearchDataDtoMapper searchDataDtoMapper;
+    private final SearchDataService searchDataService;
 
     @Override
     public String getType() {
@@ -73,9 +78,8 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
     }
 
     private void showCurrentSearchData(Chat chat) {
-        SearchDataDto dto = searchDataRepository.findByChatName(chat.getChatName())
-                .map(SearchDataDto::of)
-                .orElse(SearchDataDto.empty());
+        SearchData searchData = searchDataService.get(chat.getChatName());
+        SearchDataDto dto = searchDataDtoMapper.mapToSearchDataDto(searchData);
 
         telegramFacade.writeToTargetChat(chat.getChatName(), dto);
         showButtons(chat);

@@ -7,6 +7,7 @@ import com.company.app.telegram.domain.spec.IncomingMessageTaskSpecification;
 import com.company.app.wildberries.search.domain.dto.SearchDataDto;
 import com.company.app.wildberries.search.domain.dto.SearchDataUpdate;
 import com.company.app.wildberries.search.domain.entity.SearchData;
+import com.company.app.wildberries.search.domain.mapper.SearchDataDtoMapper;
 import com.company.app.wildberries.search.domain.service.SearchDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ public class UpdateSearchDataTaskExecutor {
     private final IncomingMessageTaskRepository incomingMessageTaskRepository;
     private final SearchDataService searchDataService;
     private final TelegramFacade telegramFacade;
+    private final SearchDataDtoMapper searchDataDtoMapper;
 
     public void execute(String chatName, String modeType) {
         List<IncomingMessageTask> tasks = getIncomingMessageTasks(chatName, modeType);
@@ -35,7 +37,8 @@ public class UpdateSearchDataTaskExecutor {
 
         incomingMessageTaskRepository.deleteAll(tasks);
 
-        telegramFacade.writeToTargetChat(chatName, SearchDataDto.of(searchData));
+        SearchDataDto dto = searchDataDtoMapper.mapToSearchDataDto(searchData);
+        telegramFacade.writeToTargetChat(chatName, dto);
     }
 
     private List<IncomingMessageTask> getIncomingMessageTasks(String chatName, String modeType) {

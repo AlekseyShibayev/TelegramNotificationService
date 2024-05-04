@@ -16,7 +16,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface SearchDataDtoMapper {
 
-    @BeanMapping(ignoreByDefault = true)
+//    @BeanMapping(ignoreByDefault = true)
     SearchDataDto mapToSearchDataDto(SearchData searchData);
 
 }

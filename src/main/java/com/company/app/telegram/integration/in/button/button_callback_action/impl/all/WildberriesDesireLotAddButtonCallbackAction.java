@@ -1,12 +1,12 @@
-package com.company.app.telegram.integration.in.button.button_callback_actions.all;
+package com.company.app.telegram.integration.in.button.button_callback_action.impl.all;
 
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.model.UpdateChat;
 import com.company.app.telegram.domain.service.ChatService;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import com.company.app.telegram.integration.in.button.service.SimpleSendMessageCreator;
 import com.company.app.telegram.integration.in.button.task_executor.IncomingMessageTaskExecutor;
 import lombok.RequiredArgsConstructor;

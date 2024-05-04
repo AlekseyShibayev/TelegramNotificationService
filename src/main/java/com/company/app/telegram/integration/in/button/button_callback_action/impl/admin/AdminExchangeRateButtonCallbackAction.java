@@ -1,9 +1,9 @@
-package com.company.app.telegram.integration.in.button.button_callback_actions.admin;
+package com.company.app.telegram.integration.in.button.button_callback_action.impl.admin;
 
 import com.company.app.exchange_rate.domain.repository.ExchangeRepository;
 import com.company.app.telegram.TelegramFacade;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

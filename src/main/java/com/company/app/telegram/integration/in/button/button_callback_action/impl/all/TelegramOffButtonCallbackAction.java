@@ -1,8 +1,8 @@
-package com.company.app.telegram.integration.in.button.button_callback_actions.all;
+package com.company.app.telegram.integration.in.button.button_callback_action.impl.all;
 
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import com.company.app.telegram.integration.in.service.ChatActivationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

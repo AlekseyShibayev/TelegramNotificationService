@@ -1,4 +1,4 @@
-package com.company.app.telegram.integration.in.button.button_callback_actions.all;
+package com.company.app.telegram.integration.in.button.button_callback_action.impl.all;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
 import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import com.company.app.wildberries.desire.domain.entity.Desire;
 import com.company.app.wildberries.desire.domain.entity.DesireLot;
 import com.company.app.wildberries.desire.domain.entity.Desire_;

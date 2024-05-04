@@ -14,7 +14,7 @@ import com.company.app.telegram.domain.enums.ModeType;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
 import com.company.app.telegram.domain.repository.SubscriptionRepository;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;

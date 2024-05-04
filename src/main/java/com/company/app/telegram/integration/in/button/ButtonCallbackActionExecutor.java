@@ -3,9 +3,9 @@ package com.company.app.telegram.integration.in.button;
 import java.util.Arrays;
 
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionRegistry;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackActionRegistry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ButtonCallbackActionExecutor {
 
-    private final ButtonCallbackActionRegistry registry;
+    private final ButtonCallbackActionRegistry buttonCallbackActionRegistry;
 
     public void execute(Chat chat, String text) {
         String type = Arrays.stream(text.split(ButtonCallbackAction.BINDER_DELIMITER)).findFirst()
@@ -27,8 +27,8 @@ public class ButtonCallbackActionExecutor {
             .setChat(chat)
             .setMessage(text);
 
-        ButtonCallbackAction binder = registry.get(type);
-        binder.doAction(context);
+        ButtonCallbackAction buttonCallbackActionImplementation = buttonCallbackActionRegistry.get(type);
+        buttonCallbackActionImplementation.doAction(context);
     }
 
 }

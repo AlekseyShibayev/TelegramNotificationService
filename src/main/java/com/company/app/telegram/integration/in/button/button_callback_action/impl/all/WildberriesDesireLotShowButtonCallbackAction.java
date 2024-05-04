@@ -1,12 +1,12 @@
-package com.company.app.telegram.integration.in.button.button_callback_actions.all;
+package com.company.app.telegram.integration.in.button.button_callback_action.impl.all;
 
 import java.util.List;
 
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import com.company.app.wildberries.desire.WildberriesDesireFacade;
 import com.company.app.wildberries.desire.domain.dto.FulfilledDesire;
 import lombok.RequiredArgsConstructor;

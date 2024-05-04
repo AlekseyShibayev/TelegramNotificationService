@@ -1,12 +1,12 @@
-package com.company.app.telegram.integration.in.button.button_callback_actions.admin;
+package com.company.app.telegram.integration.in.button.button_callback_action.impl.admin;
 
 import java.io.InputStream;
 
 import com.company.app.common.tool.LogService;
 import com.company.app.telegram.config.TelegramBotApi;
 import com.company.app.telegram.domain.entity.Chat;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
-import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
+import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
+import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

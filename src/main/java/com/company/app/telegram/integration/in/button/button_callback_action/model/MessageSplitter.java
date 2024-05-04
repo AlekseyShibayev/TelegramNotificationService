@@ -1,4 +1,4 @@
-package com.company.app.telegram.integration.in.button.model;
+package com.company.app.telegram.integration.in.button.button_callback_action.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.company.app.telegram.integration.in.button.model.ButtonCallbackAction.BINDER_DELIMITER;
+import static com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction.BINDER_DELIMITER;
 
 @Getter
 @Setter

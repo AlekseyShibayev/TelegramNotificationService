@@ -1,4 +1,4 @@
-package com.company.app.telegram.integration.in.button.model;
+package com.company.app.telegram.integration.in.button.button_callback_action;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;

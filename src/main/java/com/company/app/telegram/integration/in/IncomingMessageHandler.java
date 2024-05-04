@@ -22,7 +22,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 /**
  * Responsibility:
- * Process incoming messages, which send to telegram bot by user.
+ * Process incoming message, which one was sending by user to telegram bot.
  */
 @Service
 @RequiredArgsConstructor

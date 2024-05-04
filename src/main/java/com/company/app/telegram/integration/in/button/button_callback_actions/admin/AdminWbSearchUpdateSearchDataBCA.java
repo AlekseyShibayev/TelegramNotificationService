@@ -8,10 +8,12 @@ import com.company.app.telegram.domain.service.ChatService;
 import com.company.app.telegram.integration.in.button.model.ButtonCallbackAction;
 import com.company.app.telegram.integration.in.button.model.ButtonCallbackActionContext;
 import com.company.app.telegram.integration.in.button.model.MessageSplitter;
+import com.company.app.telegram.integration.in.button.service.SimpleSendMessageCreator;
 import com.company.app.telegram.integration.in.button.task_executor.IncomingMessageTaskExecutor;
 import com.company.app.wildberries.search.domain.dto.SearchDataDto;
 import com.company.app.wildberries.search.domain.repository.SearchDataRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -31,6 +33,7 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
     private final TelegramFacade telegramFacade;
     private final IncomingMessageTaskExecutor incomingMessageTaskExecutor;
     private final ChatService chatService;
+    private final SimpleSendMessageCreator simpleSendMessageCreator;
 
     @Override
     public String getType() {
@@ -69,19 +72,10 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
                 .setChatName(chat.getChatName())
                 .setMode(ModeType.UPDATE_SEARCH_DATA.name()));
 
-        InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton("Ок");
-        inlineKeyboardButton.setCallbackData(TYPE + ButtonCallbackAction.BINDER_DELIMITER + "greedIndex");
 
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        rowsInLine.add(List.of(inlineKeyboardButton));
-
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        markupInline.setKeyboard(rowsInLine);
-
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chat.getChatName());
-        sendMessage.setText("Введите индекс жадности и нажмите кнопку:");
-        sendMessage.setReplyMarkup(markupInline);
+        String callbackData = TYPE + ButtonCallbackAction.BINDER_DELIMITER + "greedIndex";
+        String text = "Введите индекс жадности и нажмите кнопку:";
+        SendMessage sendMessage = simpleSendMessageCreator.create(chat.getChatName(), "Ok", callbackData, text);
         telegramFacade.writeToTargetChat(sendMessage);
     }
 
@@ -95,19 +89,9 @@ public class AdminWbSearchUpdateSearchDataBCA implements ButtonCallbackAction {
     }
 
     private void showButtons(Chat chat) {
-        InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton("Изменить");
-        inlineKeyboardButton.setCallbackData(TYPE + ButtonCallbackAction.BINDER_DELIMITER + "update");
-
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        rowsInLine.add(List.of(inlineKeyboardButton));
-
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-        markupInline.setKeyboard(rowsInLine);
-
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chat.getChatName());
-        sendMessage.setText("Выберите действие:");
-        sendMessage.setReplyMarkup(markupInline);
+        String callbackData = TYPE + ButtonCallbackAction.BINDER_DELIMITER + "update";
+        String text ="Выберите действие:";
+        SendMessage sendMessage = simpleSendMessageCreator.create(chat.getChatName(), "Изменить", callbackData, text);
         telegramFacade.writeToTargetChat(sendMessage);
     }
 

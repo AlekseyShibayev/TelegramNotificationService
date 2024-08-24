@@ -18,6 +18,7 @@ public class OutboxDataBaseGarbageCollector implements DataBaseGarbageCollector 
     @Override
     public void clean() {
         outboxRepository.deleteAllByStatus(Status.SENT.name());
+        outboxRepository.deleteAllByStatus(Status.FAIL.name());
     }
 
 }

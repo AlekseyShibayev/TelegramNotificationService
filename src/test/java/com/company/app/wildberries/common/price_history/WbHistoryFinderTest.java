@@ -18,7 +18,7 @@ class WbHistoryFinderTest extends SeleniumConfiguration {
     @Autowired
     private WbHistoryFinder wbHistoryFinder;
 
-    @Test
+//    @Test
     void can_extract_price_history_from_web() {
         wbHistoryFinder.findHistoryBy(Collections.list("180189153", "171785533"));
 

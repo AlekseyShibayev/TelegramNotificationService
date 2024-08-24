@@ -8,9 +8,9 @@ import com.company.app.common.outbox.domain.enums.Target;
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
 import com.company.app.common.outbox.scheduler.executor.OutboxExecutor;
 import com.company.app.telegram.config.TelegramBotApi;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,18 +36,37 @@ public class TelegramOutboxExecutor implements OutboxExecutor {
     @Override
     public void execute() {
         List<Outbox> all = outboxRepository.findAllByTargetAndStatus(TYPE, Status.NEW);
-        for (Outbox outbox : all) {
-            forOne(outbox);
-        }
+        all.forEach(this::forOne);
     }
 
-    @SneakyThrows
     private void forOne(Outbox outbox) {
-        SendMessage sendMessage = new ObjectMapper().readValue(outbox.getWhat(), SendMessage.class);
-        telegramBotApi.write(sendMessage);
+        boolean success = sendToTelegram(outbox);
 
-        outbox.setStatus(Status.SENT);
+        if (success) {
+            outbox.setStatus(Status.SENT);
+        } else {
+            outbox.setStatus(Status.FAIL);
+        }
+
         outboxRepository.save(outbox);
+    }
+
+    private boolean sendToTelegram(Outbox outbox) {
+        SendMessage sendMessage;
+        try {
+            sendMessage = new ObjectMapper().readValue(outbox.getWhat(), SendMessage.class);
+        } catch (JsonProcessingException e) {
+            log.error("Can not create message to telegram: [{}].", e.getMessage(), e);
+            return false;
+        }
+
+        try {
+            telegramBotApi.write(sendMessage);
+            return true;
+        } catch (Exception e) {
+            log.error("Can not send message to telegram for chat [{}] with message [{}].", sendMessage.getChatId(), sendMessage.getText());
+            return false;
+        }
     }
 
 }

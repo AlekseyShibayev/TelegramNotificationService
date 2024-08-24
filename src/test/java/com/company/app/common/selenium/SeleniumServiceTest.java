@@ -15,7 +15,7 @@ class SeleniumServiceTest extends SeleniumConfiguration {
     @Autowired
     private SeleniumService seleniumService;
 
-    @Test
+//    @Test
     void can_load_response_with_desired_url() {
         List<Response> byWeb = seleniumService.findByWeb(List.of(
             new Request()

@@ -64,7 +64,8 @@ public class TelegramOutboxExecutor implements OutboxExecutor {
             telegramBotApi.write(sendMessage);
             return true;
         } catch (Exception e) {
-            log.error("Can not send message to telegram for chat [{}] with message [{}].", sendMessage.getChatId(), sendMessage.getText());
+            log.error("Can not send message to telegram for chat [{}] with message [{}], because: [{}].",
+                    sendMessage.getChatId(), sendMessage.getText(), e.getMessage(), e);
             return false;
         }
     }

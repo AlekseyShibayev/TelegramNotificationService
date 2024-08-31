@@ -9,6 +9,7 @@ import com.company.app.wildberries.desire.domain.entity.Desire;
 import com.company.app.wildberries.desire.domain.entity.Desire_;
 import com.company.app.wildberries.desire.domain.specification.DesireSpecification;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -17,13 +18,13 @@ class WildberriesDesireLotServiceTest extends SpringBootTestApplication {
     @Autowired
     private WildberriesDesireLotService wildberriesDesireLotService;
 
-    //    @Test todo fix that
+    @Test
     void search_success_test() {
         Chat owner = chatRepository.findOwner();
 
         Desire desire = new Desire()
             .setChatName(owner.getChatName())
-            .setArticle("43409221")
+            .setArticle("234188662")
             .setPrice(new BigDecimal("699"));
         desireRepository.save(desire);
 

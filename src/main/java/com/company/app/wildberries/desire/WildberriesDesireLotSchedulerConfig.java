@@ -1,4 +1,4 @@
-package com.company.app.wildberries.desire.scheduler;
+package com.company.app.wildberries.desire;
 
 import com.company.app.wildberries.desire.scheduler.executor.WildberriesDesireLotSchedulerExecutor;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 @ConditionalOnProperty(prefix = "wildberries.desire-lot", name = "enable", havingValue = "true")
 public class WildberriesDesireLotSchedulerConfig {
 
-    private final WildberriesDesireLotSchedulerExecutor wildberriesDesireLotSchedulerExecutor;
+    private final WildberriesDesireSearcher wildberriesDesireSearcher;
 
     @EventListener({ContextRefreshedEvent.class})
     @Scheduled(cron = "${wildberries.desire-lot.search-delay}")
     public void doDesireLotSearch() {
-        wildberriesDesireLotSchedulerExecutor.doDesireLotSearch();
+        wildberriesDesireSearcher.search();
     }
 
 }

@@ -12,6 +12,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class VmData {
 
-    List<VmProduct> products;
+    private List<VmProduct> products;
 
 }

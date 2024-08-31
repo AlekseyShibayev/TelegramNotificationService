@@ -17,7 +17,7 @@ import com.company.app.wildberries.common.price_history.domain.repository.PriceR
 import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
 import com.company.app.wildberries.desire.domain.repository.DesireLotRepository;
 import com.company.app.wildberries.desire.domain.repository.DesireRepository;
-import com.company.app.wildberries.desire.scheduler.WildberriesDesireLotSchedulerConfig;
+import com.company.app.wildberries.desire.WildberriesDesireLotSchedulerConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -4,6 +4,7 @@ import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
 import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
+import com.company.app.wildberries.desire.WildberriesDesireSearcher;
 import com.company.app.wildberries.desire.service.WildberriesDesireLotService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,7 @@ public class AdminWildberriesDesireLotManualRefreshButtonCallbackAction implemen
     private static final String TYPE = "ADMIN_WB_DL_MANUAL_REFRESH";
 
     private final TelegramFacade telegramFacade;
-    private final WildberriesDesireLotService wildberriesDesireLotService;
+    private final WildberriesDesireSearcher wildberriesDesireSearcher;
 
     @Override
     public String getType() {
@@ -29,7 +30,7 @@ public class AdminWildberriesDesireLotManualRefreshButtonCallbackAction implemen
     public void doAction(ButtonCallbackActionContext context) {
         Chat chat = context.getChat();
 
-        wildberriesDesireLotService.search();
+        wildberriesDesireSearcher.search();
         telegramFacade.writeToTargetChat(chat.getChatName(), "success");
     }
 

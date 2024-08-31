@@ -1,5 +1,6 @@
 package com.company.app.wildberries.common.model;
 
+import com.company.app.wildberries.common.model.v2.VmPrice;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -10,6 +11,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class VmSize {
 
-    String name;
+    private String name;
+    private VmPrice price;
 
 }

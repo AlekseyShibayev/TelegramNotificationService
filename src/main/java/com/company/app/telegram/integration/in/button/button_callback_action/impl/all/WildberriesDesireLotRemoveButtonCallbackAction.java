@@ -1,11 +1,5 @@
 package com.company.app.telegram.integration.in.button.button_callback_action.impl.all;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 import com.company.app.core.util.Strings;
 import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
 import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
@@ -14,8 +8,6 @@ import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
 import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import com.company.app.wildberries.desire.domain.entity.Desire;
-import com.company.app.wildberries.desire.domain.entity.DesireLot;
-import com.company.app.wildberries.desire.domain.entity.Desire_;
 import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import com.company.app.wildberries.desire.domain.specification.DesireSpecification;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +17,12 @@ import org.springframework.util.CollectionUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -66,9 +64,10 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
     }
 
     private void showButtons(Chat chat) {
-        List<Desire> desires = entityFinder.findAllAsList(new CommonQuery<>(Desire.class)
-            .setSpecification(DesireSpecification.chatNameIs(chat.getChatName()))
-            .with(Desire_.DESIRE_LOT));
+        var query = new CommonQuery<>(Desire.class)
+                .setSpecification(DesireSpecification.chatNameIs(chat.getChatName()));
+
+        List<Desire> desires = entityFinder.findAllAsList(query);
 
         if (CollectionUtils.isEmpty(desires)) {
             telegramFacade.writeToTargetChat(chat.getChatName(), "Список желаний пуст");
@@ -88,8 +87,7 @@ public class WildberriesDesireLotRemoveButtonCallbackAction implements ButtonCal
         for (Desire desire : extractedDesires) {
             String article = desire.getArticle();
             BigDecimal desirePrice = desire.getPrice();
-            DesireLot desireLot = desire.getDesireLot();
-            String description = desireLot == null ? "Описания ещё нет" : desireLot.getDescription();
+            String description = desire.getDescription_();
             String string = article + " " + Strings.cutEnd(desirePrice.toString(), 3) + " " + description;
 
             InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton(string);

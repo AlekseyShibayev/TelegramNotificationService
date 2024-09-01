@@ -1,6 +1,6 @@
-package com.company.app.wildberries.desire.service;
+package com.company.app.wildberries.common.util;
 
-import com.company.app.wildberries.desire.PriceMatcher;
+import com.company.app.wildberries.common.util.PriceMatcher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

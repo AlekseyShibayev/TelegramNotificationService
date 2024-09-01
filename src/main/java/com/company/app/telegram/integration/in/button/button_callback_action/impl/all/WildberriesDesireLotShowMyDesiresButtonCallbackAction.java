@@ -1,17 +1,16 @@
 package com.company.app.telegram.integration.in.button.button_callback_action.impl.all;
 
-import java.util.List;
-
 import com.company.app.core.util.Collections;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
 import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
 import com.company.app.wildberries.desire.domain.entity.Desire;
-import com.company.app.wildberries.desire.domain.entity.DesireLot;
 import com.company.app.wildberries.desire.domain.repository.DesireRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -34,19 +33,14 @@ public class WildberriesDesireLotShowMyDesiresButtonCallbackAction implements Bu
         List<Desire> allByChatName = desireRepository.findAllByChatName(chat.getChatName());
 
         if (Collections.isEmpty(allByChatName)) {
-            telegramFacade.writeToTargetChat(chat.getChatName(), "Пусто");
+            telegramFacade.writeToTargetChat(chat.getChatName(), "Список желаний пуст");
         } else {
             allByChatName.forEach(desire -> telegramFacade.writeToTargetChat(desire.getChatName(), asString(desire)));
         }
     }
 
     private static String asString(Desire desire) {
-        DesireLot desireLot = desire.getDesireLot();
-        if (desireLot != null) {
-            return desire.getArticle() + " " + desire.getPrice() + " " + desireLot.getDescription();
-        } else {
-            return desire.getArticle() + " " + desire.getPrice() + " Описания ещё нет";
-        }
+        return desire.getArticle() + " " + desire.getPrice() + " " + desire.getDescription_();
     }
 
 }

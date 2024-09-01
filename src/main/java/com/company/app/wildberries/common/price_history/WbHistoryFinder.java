@@ -70,7 +70,7 @@ public class WbHistoryFinder {
         return new Request()
             .setEntityView(article)
             .setPartOfUrl(PART_OF_URL)
-            .setUrl(WildberriesUrlCreator.getUrlForResponse(article));
+            .setUrl(WildberriesUrlCreator.getProductUrl(article));
     }
 
     private static Product mapResponseToProduct(Response response) {

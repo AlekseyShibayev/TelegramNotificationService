@@ -1,16 +1,10 @@
 package com.company.app.telegram.integration.in.button.button_callback_action.impl.admin;
 
-import java.util.List;
-
 import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
-import com.company.app.infrastructure.jpa.entityfinder.model.CommonQuery;
 import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.domain.entity.Chat;
 import com.company.app.telegram.integration.in.button.button_callback_action.ButtonCallbackAction;
 import com.company.app.telegram.integration.in.button.button_callback_action.model.ButtonCallbackActionContext;
-import com.company.app.wildberries.desire.domain.entity.Desire;
-import com.company.app.wildberries.desire.domain.entity.DesireLot;
-import com.company.app.wildberries.desire.domain.entity.Desire_;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,15 +29,17 @@ public class AdminWildberriesDesireLotShowButtonCallbackAction implements Button
     public void doAction(ButtonCallbackActionContext context) {
         Chat chat = context.getChat();
 
-        List<Desire> desireList = entityFinder.findAllAsList(new CommonQuery<>(Desire.class)
-            .with(Desire_.DESIRE_LOT));
+        telegramFacade.writeToTargetChat(chat.getChatName(), "временно не работает");
 
-        for (Desire desire : desireList) {
-            DesireLot desireLot = desire.getDesireLot();
-            String message = desire.getChatName() + " " + desire.getArticle() + " " + desire.getPrice() + " " + desireLot.getPrice() + " "
-                + desireLot.getDescription();
-            telegramFacade.writeToTargetChat(chat.getChatName(), message);
-        }
+//        List<Desire> desireList = entityFinder.findAllAsList(new CommonQuery<>(Desire.class)
+//            .with(Desire_.DESIRE_LOT));
+//
+//        for (Desire desire : desireList) {
+//            DesireLot desireLot = desire.getDesireLot();
+//            String message = desire.getChatName() + " " + desire.getArticle() + " " + desire.getPrice() + " " + desireLot.getPrice() + " "
+//                + desireLot.getDescription();
+//            telegramFacade.writeToTargetChat(chat.getChatName(), message);
+//        }
 
     }
 

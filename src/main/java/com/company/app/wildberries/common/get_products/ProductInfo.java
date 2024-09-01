@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class ProductInfoDto {
+public class ProductInfo {
 
     private String article;
     private String description;

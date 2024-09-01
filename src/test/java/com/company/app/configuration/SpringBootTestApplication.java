@@ -4,12 +4,12 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 
 import com.company.app.common.outbox.domain.repository.OutboxRepository;
+import com.company.app.common.outbox.scheduler.OutboxSchedulerConfig;
 import com.company.app.common.selenium.service.SeleniumWebDriverRegistry;
 import com.company.app.common.timer.domain.repository.TimerRepository;
 import com.company.app.common.tool.CaptchaFighter;
 import com.company.app.exchange_rate.scheduler.ExchangeRateSchedulerConfig;
 import com.company.app.infrastructure.jpa.entityfinder.EntityFinder;
-import com.company.app.telegram.TelegramFacade;
 import com.company.app.telegram.config.TelegramBotApi;
 import com.company.app.telegram.domain.repository.ChatRepository;
 import com.company.app.telegram.domain.repository.ModeRepository;
@@ -17,7 +17,7 @@ import com.company.app.wildberries.common.price_history.domain.repository.PriceR
 import com.company.app.wildberries.common.price_history.domain.repository.ProductRepository;
 import com.company.app.wildberries.desire.domain.repository.DesireLotRepository;
 import com.company.app.wildberries.desire.domain.repository.DesireRepository;
-import com.company.app.wildberries.desire.WildberriesDesireLotSchedulerConfig;
+import com.company.app.wildberries.desire.WildberriesDesireScheduler;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,9 +42,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 )
 @Testcontainers(disabledWithoutDocker = false)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@MockBean(WildberriesDesireLotSchedulerConfig.class)
+@MockBean(WildberriesDesireScheduler.class)
 @MockBean(ExchangeRateSchedulerConfig.class)
-@MockBean(TelegramFacade.class)
+@MockBean(OutboxSchedulerConfig.class)
 public abstract class SpringBootTestApplication {
 
     @Autowired
@@ -76,7 +76,7 @@ public abstract class SpringBootTestApplication {
      * @MockBean
      */
     @MockBean
-    protected TelegramBotApi telegramBotConfig;
+    protected TelegramBotApi telegramBotApi;
     @MockBean
     protected SeleniumWebDriverRegistry seleniumWebDriverRegistry;
     /**

@@ -20,7 +20,7 @@ public class FulfilledDesire {
         return new FulfilledDesire()
             .setChatName(desire.getChatName())
             .setArticle(desire.getArticle())
-            .setUrl(WildberriesUrlCreator.getUrlForResponse(desire.getArticle()));
+            .setUrl(WildberriesUrlCreator.getProductUrl(desire.getArticle()));
     }
 
 }

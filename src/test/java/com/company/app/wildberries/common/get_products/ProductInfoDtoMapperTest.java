@@ -19,21 +19,21 @@ class ProductInfoDtoMapperTest extends SpringBootTestApplication {
     @Autowired
     private JsonMapper<VmResponse> jsonMapper;
     @Autowired
-    private ProductInfoDtoMapper productInfoDtoMapper;
+    private ProductInfoMapper productInfoDtoMapper;
 
     @Test
     void success_mapping_test() {
         var response = jsonMapper.toJavaAsObject(JSON_RESPONSE_EXAMPLE, VmResponse.class, new MapperSettings().setFailOnUnknownProperties(false));
 
-        List<ProductInfoDto> list = response.getData().getProducts()
+        List<ProductInfo> list = response.getData().getProducts()
                 .stream()
                 .map(product -> productInfoDtoMapper.map(product))
                 .toList();
 
-        Map<String, ProductInfoDto> map = list.stream().collect(Collectors.toMap(ProductInfoDto::getArticle, Function.identity()));
+        Map<String, ProductInfo> map = list.stream().collect(Collectors.toMap(ProductInfo::getArticle, Function.identity()));
 
-        Assertions.assertEquals(new BigDecimal("123700"), map.get("216505461").getPrice());
-        Assertions.assertEquals(new BigDecimal("164900"), map.get("122477595").getPrice());
+        Assertions.assertEquals(new BigDecimal("1237"), map.get("216505461").getPrice());
+        Assertions.assertEquals(new BigDecimal("1649"), map.get("122477595").getPrice());
         Assertions.assertEquals(BigDecimal.ZERO, map.get("161070370").getPrice());
     }
 

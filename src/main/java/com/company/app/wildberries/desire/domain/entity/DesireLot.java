@@ -23,6 +23,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Accessors(chain = true)
 @Entity
 @Table(name = "DESIRE_LOT")
+@Deprecated
 public class DesireLot {
 
     @Id

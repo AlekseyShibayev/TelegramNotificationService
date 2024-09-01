@@ -33,11 +33,18 @@ public class Desire {
     @Column(name = "ARTICLE")
     private String article;
 
+    @Column(name = "DESCRIPTION")
+    private String description;
+
     @Column(name = "PRICE")
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DESIRE_LOT_ID")
     private DesireLot desireLot;
+
+    public String getDescription_() {
+        return this.description == null ? "Описания ещё нет" : this.description;
+    }
 
 }
